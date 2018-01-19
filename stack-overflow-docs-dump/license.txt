@@ -1,0 +1,18 @@
+All content contributed to Stack Exchange sites is cc-wiki licensed, intended to be shared and remixed. We even provide all our data for non-beta sites as a convenient data dump, seeded by us.
+
+http://creativecommons.org/licenses/by-sa/3.0/
+
+But our cc-wiki licensing, while intentionally permissive, does *require attribution*:
+
+> Attribution — You must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work).
+
+So let us clarify what we mean by attribution. If you republish this content, we *require* that you:
+
+ 1. Visually indicate that the content is from Stack Overflow Documentation. It doesn’t have to be obnoxious; a discreet text blurb is fine.
+ 2. Hyperlink directly to the Stack Overflow Documentation archive located at archive.org.
+ 3. Indicate topic and example IDs where the content came from.
+ 4. List the contributors (found in contributors.json) with a link to their profile page (e.g., https://stackoverflow.com/users/12345/username).
+
+This is about the spirit of fair attribution. Attribution to the website, and more importantly, to the individuals who so generously contributed their time to create that content in the first place!
+
+Anyway, we hope that clears up any confusion — feel free to remix and reuse to your heart’s content, as long as a good faith effort is made to attribute the content!
