@@ -1,14 +1,12 @@
 package main
 
-import (
-	"fmt"
-)
-
 /*
 Possible domains:
-    progbook.io/cookbook/net-framework/
+	progbook.io/cookbook/net-framework/
+	programming-book.io/
+	programmingbook.io
 */
 
 func main() {
-	fmt.Printf("Hello")
+	printDocTagsMust()
 }

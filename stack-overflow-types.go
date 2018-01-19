@@ -1,5 +1,14 @@
 package main
 
+import (
+	"encoding/json"
+	"fmt"
+	"path"
+	"sort"
+
+	"github.com/kjk/u"
+)
+
 /*
 Dates are in format:
 /Date(1447119317900-0500)/
@@ -10,6 +19,12 @@ contributordeletionreasons.json
 	- Id
 	- Name
 	- Description
+
+{
+	"Id": 1,
+	"Name": "Upgrade",
+	"Description": "Contribution is ending because the user is now a Major contributor"
+}
 */
 
 // ContributroDeleteRasons represents data in contributordeletionreasons.json
@@ -21,14 +36,22 @@ type ContributroDeleteRasons struct {
 
 /*
 contributors.json
-   - Id
-   - DocTopicId
-   - DocExampleId
-   - UserId
-   - DocContributorTypeId
-   - CreationDate
-   - DeletionDate
-   - DocContributorDeletionReasonId
+	- Id
+	- DocTopicId
+	- DocExampleId
+	- UserId
+	- DocContributorTypeId
+	- CreationDate
+	- DeletionDate
+	- DocContributorDeletionReasonId
+
+{
+	"Id": 1,
+	"DocTopicId": 1,
+	"UserId": 80572,
+	"DocContributorTypeId": 2,
+	"CreationDate": "\/Date(1446697142040-0500)\/"
+}
 */
 
 // Contributors represents data in contributors.json
@@ -45,9 +68,19 @@ type Contributors struct {
 
 /*
 contributortypes.json
-   - Id
-   - Name
-   - Description
+	- Id
+	- Name
+	- Description
+{
+	"Id": 1,
+	"Name": "Minor",
+	"Description": "Has contributed in a small amount."
+},
+{
+	"Id": 2,
+	"Name": "Major",
+	"Description": "Has contributed a lot."
+}
 */
 
 // ContributorTypes represents data in contributortypes.json
@@ -78,12 +111,37 @@ doctags.json
 
 // DocTag represents data in doctags.json
 type DocTag struct {
-	Id                   int
-	Tag                  string
-	Title                string
-	CreationDate         string
+	Id    int
+	Tag   string
+	Title string
+	//CreationDate         string
 	HelloWorldDocTopicId int
 	TopicCount           int
+}
+
+func loadDocTags(path string) ([]DocTag, error) {
+	d, err := readGzipped(path)
+	if err != nil {
+		return nil, err
+	}
+	var res []DocTag
+	err = json.Unmarshal(d, &res)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
+func printDocTagsMust() {
+	path := path.Join("stack-overflow-docs-dump", "doctags.json.gz")
+	docTags, err := loadDocTags(path)
+	u.PanicIfErr(err)
+	sort.Slice(docTags, func(i, j int) bool {
+		return docTags[i].TopicCount < docTags[j].TopicCount
+	})
+	for _, dc := range docTags {
+		fmt.Printf("%s: %s, %d\n", dc.Title, dc.Tag, dc.TopicCount)
+	}
 }
 
 /*
