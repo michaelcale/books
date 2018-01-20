@@ -19,6 +19,7 @@ var (
 	gTopics         []Topic
 	gExamples       []Example
 	gTopicHistories []TopicHistory
+	currDefaultLang string
 )
 
 func printDocTagsMust() {
@@ -151,6 +152,16 @@ func serField(k, v string) string {
 	return fmt.Sprintf("%s:\n%s\n---\n", k, v)
 }
 
+func serFieldMd(k, v string) string {
+	v = strings.TrimSpace(v)
+	if len(v) == 0 {
+		return ""
+	}
+	d, err := mdFmt([]byte(v), currDefaultLang)
+	u.PanicIfErr(err)
+	return serField(k, string(d))
+}
+
 func shortenVersion(s string) string {
 	if s == "[]" {
 		return ""
@@ -162,10 +173,10 @@ func writeIndexTxtMust(path string, topic *Topic) {
 	s := serField("Title", topic.Title)
 	s += serField("Versions", shortenVersion(topic.VersionsJson))
 	s += serField("HtmlVersions", topic.HelloWorldVersionsHtml)
-	s += serField("Introduction", topic.IntroductionMarkdown)
-	s += serField("Syntax", topic.SyntaxMarkdown)
-	s += serField("Parameters", topic.ParametersMarkdown)
-	s += serField("Remarks", topic.RemarksMarkdown)
+	s += serFieldMd("Introduction", topic.IntroductionMarkdown)
+	s += serFieldMd("Syntax", topic.SyntaxMarkdown)
+	s += serFieldMd("Parameters", topic.ParametersMarkdown)
+	s += serFieldMd("Remarks", topic.RemarksMarkdown)
 
 	err := ioutil.WriteFile(path, []byte(s), 0644)
 	u.PanicIfErr(err)
@@ -174,15 +185,15 @@ func writeIndexTxtMust(path string, topic *Topic) {
 
 func writeSectionMust(path string, example *Example) {
 	s := serField("Title", example.Title)
-	s += "---\n"
-	s += example.BodyMarkdown
+	s += serFieldMd("Body", example.BodyMarkdown)
 
 	err := ioutil.WriteFile(path, []byte(s), 0644)
 	u.PanicIfErr(err)
 	fmt.Printf("Wrote %s, %d bytes\n", path, len(s))
 }
 
-func genBook(title string) {
+func genBook(title string, defaultLang string) {
+	currDefaultLang = defaultLang
 	bookDir := makeURLSafe(title)
 	docTag := findDocTagByTitleMust(gDocTags, title)
 	//fmt.Printf("%s: docID: %d\n", title, docTag.Id)
@@ -274,6 +285,6 @@ func main() {
 	//printDocTagsMust()
 	timeStart := time.Now()
 	loadAll()
-	genBook("jQuery")
+	genBook("jQuery", "javascript")
 	fmt.Printf("Took %s\n", time.Since(timeStart))
 }
