@@ -81,6 +81,7 @@ func (mr *markdownRenderer) BlockCode(out *bytes.Buffer, text []byte, lang strin
 
 	out.WriteString("```\n")
 }
+
 func (mr *markdownRenderer) BlockQuote(out *bytes.Buffer, text []byte) {
 	doubleSpace(out)
 	lines := bytes.Split(text, []byte("\n"))
@@ -96,41 +97,48 @@ func (mr *markdownRenderer) BlockQuote(out *bytes.Buffer, text []byte) {
 		out.WriteString("\n")
 	}
 }
+
 func (mr *markdownRenderer) BlockHtml(out *bytes.Buffer, text []byte) {
 	doubleSpace(out)
 	out.Write(text)
 	out.WriteByte('\n')
 }
+
 func (mr *markdownRenderer) TitleBlock(out *bytes.Buffer, text []byte) {
 }
+
 func (mr *markdownRenderer) Header(out *bytes.Buffer, text func() bool, level int, id string) {
 	marker := out.Len()
 	doubleSpace(out)
 
-	if level >= 3 {
+	if true || level >= 3 {
 		fmt.Fprint(out, strings.Repeat("#", level), " ")
 	}
 
-	textMarker := out.Len()
+	//textMarker := out.Len()
 	if !text() {
 		out.Truncate(marker)
 		return
 	}
 
-	switch level {
-	case 1:
-		len := mr.stringWidth(out.String()[textMarker:])
-		fmt.Fprint(out, "\n", strings.Repeat("=", len))
-	case 2:
-		len := mr.stringWidth(out.String()[textMarker:])
-		fmt.Fprint(out, "\n", strings.Repeat("-", len))
-	}
+	/*
+		switch level {
+		case 1:
+			len := mr.stringWidth(out.String()[textMarker:])
+			fmt.Fprint(out, "\n", strings.Repeat("=", len))
+		case 2:
+			len := mr.stringWidth(out.String()[textMarker:])
+			fmt.Fprint(out, "\n", strings.Repeat("-", len))
+		}
+	*/
 	out.WriteString("\n")
 }
+
 func (mr *markdownRenderer) HRule(out *bytes.Buffer) {
 	doubleSpace(out)
 	out.WriteString("---\n")
 }
+
 func (mr *markdownRenderer) List(out *bytes.Buffer, text func() bool, flags int) {
 	marker := out.Len()
 	doubleSpace(out)
@@ -145,6 +153,7 @@ func (mr *markdownRenderer) List(out *bytes.Buffer, text func() bool, flags int)
 		return
 	}
 }
+
 func (mr *markdownRenderer) ListItem(out *bytes.Buffer, text []byte, flags int) {
 	if flags&blackfriday.LIST_TYPE_ORDERED != 0 {
 		fmt.Fprintf(out, "%d.", mr.orderedListCounter[mr.listDepth])
@@ -162,6 +171,7 @@ func (mr *markdownRenderer) ListItem(out *bytes.Buffer, text []byte, flags int) 
 		mr.paragraph[mr.listDepth] = false
 	}
 }
+
 func (mr *markdownRenderer) Paragraph(out *bytes.Buffer, text func() bool) {
 	marker := out.Len()
 	doubleSpace(out)
@@ -243,14 +253,17 @@ func (mr *markdownRenderer) Table(out *bytes.Buffer, header []byte, body []byte,
 	mr.columnWidths = nil
 	mr.cells = nil
 }
+
 func (mr *markdownRenderer) TableRow(out *bytes.Buffer, text []byte) {
 }
+
 func (mr *markdownRenderer) TableHeaderCell(out *bytes.Buffer, text []byte, align int) {
 	mr.columnAligns = append(mr.columnAligns, align)
 	columnWidth := mr.stringWidth(string(text))
 	mr.columnWidths = append(mr.columnWidths, columnWidth)
 	mr.headers = append(mr.headers, string(text))
 }
+
 func (mr *markdownRenderer) TableCell(out *bytes.Buffer, text []byte, align int) {
 	columnWidth := mr.stringWidth(string(text))
 	column := len(mr.cells) % len(mr.headers)
@@ -263,6 +276,7 @@ func (mr *markdownRenderer) TableCell(out *bytes.Buffer, text []byte, align int)
 func (mr *markdownRenderer) Footnotes(out *bytes.Buffer, text func() bool) {
 	out.WriteString("<Footnotes: Not implemented.>") // TODO
 }
+
 func (mr *markdownRenderer) FootnoteItem(out *bytes.Buffer, name, text []byte, flags int) {
 	out.WriteString("<FootnoteItem: Not implemented.>") // TODO
 }
@@ -271,16 +285,19 @@ func (mr *markdownRenderer) FootnoteItem(out *bytes.Buffer, name, text []byte, f
 func (mr *markdownRenderer) AutoLink(out *bytes.Buffer, link []byte, kind int) {
 	out.Write(escape(link))
 }
+
 func (mr *markdownRenderer) CodeSpan(out *bytes.Buffer, text []byte) {
 	out.WriteByte('`')
 	out.Write(text)
 	out.WriteByte('`')
 }
+
 func (mr *markdownRenderer) DoubleEmphasis(out *bytes.Buffer, text []byte) {
 	out.WriteString("**")
 	out.Write(text)
 	out.WriteString("**")
 }
+
 func (mr *markdownRenderer) Emphasis(out *bytes.Buffer, text []byte) {
 	if len(text) == 0 {
 		return
@@ -383,6 +400,7 @@ func needsEscaping(text []byte, lastNormalText string) bool {
 func (mr *markdownRenderer) Entity(out *bytes.Buffer, entity []byte) {
 	out.Write(entity)
 }
+
 func (mr *markdownRenderer) NormalText(out *bytes.Buffer, text []byte) {
 	normalText := string(text)
 	if needsEscaping(text, mr.lastNormalText) {
@@ -407,6 +425,7 @@ func (mr *markdownRenderer) NormalText(out *bytes.Buffer, text []byte) {
 
 // Header and footer.
 func (mr *markdownRenderer) DocumentHeader(out *bytes.Buffer) {}
+
 func (mr *markdownRenderer) DocumentFooter(out *bytes.Buffer) {}
 
 func (mr *markdownRenderer) GetFlags() int { return 0 }

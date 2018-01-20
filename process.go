@@ -14,6 +14,10 @@ import (
 	"github.com/kjk/u"
 )
 
+const (
+	recSep = "==="
+)
+
 var (
 	gDocTags        []DocTag
 	gTopics         []Topic
@@ -149,7 +153,7 @@ func serField(k, v string) string {
 	if serFitsOneLine(v) {
 		return fmt.Sprintf("%s: %s\n", k, v)
 	}
-	return fmt.Sprintf("%s:\n%s\n---\n", k, v)
+	return fmt.Sprintf("%s:\n%s\n%s\n", k, v, recSep)
 }
 
 func serFieldMd(k, v string) string {
