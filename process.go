@@ -88,29 +88,6 @@ func getTopicsByDocTagID(docTagID int) []*Topic {
 	return res
 }
 
-func printIfNotEmpty(name, s string) {
-	if len(s) == 0 {
-		return
-	}
-	fmt.Printf("%s:\n%s\n\n", name, s)
-}
-
-func printTopic(t *Topic) {
-	printIfNotEmpty("versions", t.VersionsJson)
-	printIfNotEmpty("introduction", t.IntroductionMarkdown)
-	printIfNotEmpty("parameters", t.ParametersMarkdown)
-	printIfNotEmpty("remarks", t.RemarksMarkdown)
-	printIfNotEmpty("syntax", t.SyntaxMarkdown)
-}
-
-/*
-DocTopicHistoryTypeId int
-DocTagId              int
-DocTopicId            int
-DocExampleId          int
-*/
-
-// TODO: speed up
 func getExampleByID(id int) *Example {
 	for i, e := range gExamples {
 		if e.Id == id {
@@ -248,7 +225,55 @@ func genBook(title string) {
 	fmt.Printf("%d chapters, %d sections\n", nChapters, nSections)
 }
 
+var books = []string{
+	".NET Framework",
+	"algorithm",
+	"Android",
+	"Angular 2",
+	"AngularJS",
+	"Bash",
+	"C Language",
+	"C++",
+	"C# Language",
+	"CSS",
+	"Entity Framework Core",
+	"excel-vba",
+	"Git",
+	"Haskell Language",
+	"HTML",
+	"html5-canvas",
+	"iOS",
+	"Java Language",
+	"JavaScript",
+	"jQuery",
+	"latex",
+	"GNU/Linux",
+	"MATLAB Language",
+	"Microsoft SQL Server",
+	"MongoDB",
+	"MySQL",
+	"Node.js",
+	"Objective-C Language",
+	"Oracle Database",
+	"Perl Language",
+	"PHP",
+	"postgresql",
+	"PowerShell",
+	"Python Language",
+	"R Language",
+	"Ruby on Rails",
+	"Ruby Language",
+	"SQL",
+	"Swift Language",
+	"TypeScript",
+	"VBA",
+	"Visual Basic .NET Language",
+}
+
 func main() {
+	//printDocTagsMust()
+	timeStart := time.Now()
 	loadAll()
 	genBook("jQuery")
+	fmt.Printf("Took %s\n", time.Since(timeStart))
 }
