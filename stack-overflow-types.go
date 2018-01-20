@@ -185,8 +185,8 @@ type Example struct {
 	Title      string
 	//CreationDate     string
 	//LastEditDate     string
-	Score            int
-	ContributorCount int
+	Score int
+	//ContributorCount int
 	//BodyHtml         string
 	IsPinned     bool
 	BodyMarkdown string
@@ -237,6 +237,12 @@ type TopicHistory struct {
 	//CreationUserDisplayName string
 	Comment string
 	Text    string
+}
+
+func loadTopicHistories(path string) ([]TopicHistory, error) {
+	var res []TopicHistory
+	err := jsonDecodeGzipped(path, &res)
+	return res, err
 }
 
 /*
