@@ -2,6 +2,7 @@ package main
 
 import (
 	"compress/gzip"
+	"encoding/json"
 	"io"
 	"io/ioutil"
 	"os"
@@ -50,4 +51,14 @@ func readGzipped(path string) ([]byte, error) {
 		return nil, err
 	}
 	return d, nil
+}
+
+func jsonDecodeGzipped(path string, v interface{}) error {
+	r, err := openGzipped(path)
+	if err != nil {
+		return err
+	}
+	defer r.Close()
+	dec := json.NewDecoder(r)
+	return dec.Decode(v)
 }

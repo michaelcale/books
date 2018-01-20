@@ -1,14 +1,5 @@
 package main
 
-import (
-	"encoding/json"
-	"fmt"
-	"path"
-	"sort"
-
-	"github.com/kjk/u"
-)
-
 /*
 Dates are in format:
 /Date(1447119317900-0500)/
@@ -120,28 +111,9 @@ type DocTag struct {
 }
 
 func loadDocTags(path string) ([]DocTag, error) {
-	d, err := readGzipped(path)
-	if err != nil {
-		return nil, err
-	}
 	var res []DocTag
-	err = json.Unmarshal(d, &res)
-	if err != nil {
-		return nil, err
-	}
-	return res, nil
-}
-
-func printDocTagsMust() {
-	path := path.Join("stack-overflow-docs-dump", "doctags.json.gz")
-	docTags, err := loadDocTags(path)
-	u.PanicIfErr(err)
-	sort.Slice(docTags, func(i, j int) bool {
-		return docTags[i].TopicCount < docTags[j].TopicCount
-	})
-	for _, dc := range docTags {
-		fmt.Printf("%s: %s, %d\n", dc.Title, dc.Tag, dc.TopicCount)
-	}
+	err := jsonDecodeGzipped(path, &res)
+	return res, err
 }
 
 /*
@@ -208,16 +180,22 @@ examples.json
 
 // Example represents data in examples.json
 type Example struct {
-	Id               int
-	DocTopicId       int
-	Title            string
-	CreationDate     string
-	LastEditDate     string
+	Id         int
+	DocTopicId int
+	Title      string
+	//CreationDate     string
+	//LastEditDate     string
 	Score            int
 	ContributorCount int
-	BodyHtml         string
-	IsPinned         bool
-	BodyMarkdown     string
+	//BodyHtml         string
+	IsPinned     bool
+	BodyMarkdown string
+}
+
+func loadExamples(path string) ([]Example, error) {
+	var res []Example
+	err := jsonDecodeGzipped(path, &res)
+	return res, err
 }
 
 /*
@@ -248,17 +226,17 @@ topichistories.json
 
 // TopicHistory represents data in topichistories.json
 type TopicHistory struct {
-	Id                      int
-	DocTopicHistoryTypeId   int
-	DocTagId                int
-	DocTopicId              int
-	DocExampleId            int
-	CreationDate            string
-	RevisionNumber          int
-	CreationUserId          int
-	CreationUserDisplayName string
-	Comment                 string
-	Text                    string
+	Id                    int
+	DocTopicHistoryTypeId int
+	DocTagId              int
+	DocTopicId            int
+	DocExampleId          int
+	//CreationDate            string
+	RevisionNumber int
+	//CreationUserId          int
+	//CreationUserDisplayName string
+	Comment string
+	Text    string
 }
 
 /*
@@ -331,26 +309,32 @@ topics.json
 
 // Topic represents data in topics.json
 type Topic struct {
-	Id                      int
-	DocTagId                int
-	IsHelloWorldTopic       bool
-	Title                   string
-	CreationDate            string
-	ViewCount               int
-	LastEditDate            string
-	ContributorCount        int
-	IntroductionHtml        string
-	SyntaxHtml              string
-	ParametersHtml          string
-	RemarksHtml             string
-	HelloWorldVersionsHtml  string
-	VersionsJson            string
-	ExampleCount            int
-	ExampleScore            int
-	LastEditUserId          int
-	LastEditUserDisplayName string
-	IntroductionMarkdown    string
-	SyntaxMarkdown          string
-	ParametersMarkdown      string
-	RemarksMarkdown         string
+	Id                int
+	DocTagId          int
+	IsHelloWorldTopic bool
+	Title             string
+	//CreationDate      string
+	//ViewCount int
+	//LastEditDate      string
+	//ContributorCount int
+	//IntroductionHtml        string
+	//SyntaxHtml              string
+	//ParametersHtml          string
+	//RemarksHtml             string
+	//HelloWorldVersionsHtml  string
+	VersionsJson string
+	ExampleCount int
+	ExampleScore int
+	//LastEditUserId          int
+	//LastEditUserDisplayName string
+	IntroductionMarkdown string
+	SyntaxMarkdown       string
+	ParametersMarkdown   string
+	RemarksMarkdown      string
+}
+
+func loadTopics(path string) ([]Topic, error) {
+	var res []Topic
+	err := jsonDecodeGzipped(path, &res)
+	return res, err
 }
