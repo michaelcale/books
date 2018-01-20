@@ -327,10 +327,10 @@ type Topic struct {
 	//SyntaxHtml              string
 	//ParametersHtml          string
 	//RemarksHtml             string
-	//HelloWorldVersionsHtml  string
-	VersionsJson string
-	ExampleCount int
-	ExampleScore int
+	HelloWorldVersionsHtml string
+	VersionsJson           string
+	ExampleCount           int
+	ExampleScore           int
 	//LastEditUserId          int
 	//LastEditUserDisplayName string
 	IntroductionMarkdown string

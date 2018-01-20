@@ -149,7 +149,7 @@ func sortExamples(a []*Example) {
 		if a[j].IsPinned {
 			return false
 		}
-		return a[i].Score < a[j].Score
+		return a[i].Score > a[j].Score
 	})
 }
 
@@ -182,8 +182,9 @@ func shortenVersion(s string) string {
 }
 
 func writeIndexTxtMust(path string, topic *Topic) {
-	s := ""
+	s := serField("Title", topic.Title)
 	s += serField("Versions", shortenVersion(topic.VersionsJson))
+	s += serField("HtmlVersions", topic.HelloWorldVersionsHtml)
 	s += serField("Introduction", topic.IntroductionMarkdown)
 	s += serField("Syntax", topic.SyntaxMarkdown)
 	s += serField("Parameters", topic.ParametersMarkdown)
@@ -195,8 +196,7 @@ func writeIndexTxtMust(path string, topic *Topic) {
 }
 
 func writeSectionMust(path string, example *Example) {
-	s := ""
-	s += serField("Title", example.Title)
+	s := serField("Title", example.Title)
 	s += "---\n"
 	s += example.BodyMarkdown
 
