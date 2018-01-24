@@ -13,22 +13,25 @@
 <body>
     <h1><a href="/">Books</a> / {{.TitleLong}}</h1>
 
+    <div class="hcenter">Chapters</div>
     <div class="chapters-toc">
         {{range .Chapters}}
         <div class="chapters-toc-item">{{.No}}. <a href="{{.URL}}">{{.Title}}</a></div>
         {{end}}
     </div>
 
-    <ul>
+    <div class="hcenter">Table Of Contents</div>
+
+    <div>
         {{range .Chapters}}
-        <li><a href="{{.URL}}">{{.Title}}</a></li>
-        <ul>
+        <div>{{.No}} <a href="{{.URL}}">{{.Title}}</a></div>
+        <div>
             {{range .Sections}}
-            <li><a href="{{.URL}}">{{.Title}}</a></li>
+            <div class="toc-section">{{.No}}. <a href="{{.URL}}">{{.Title}}</a></div>
             {{end}}
-        </ul>
+        </div>
         {{end}}
-    </ul>
+    </div>
 
     <div class="bottom-right">
         <a href="https://github.com/kjk/programming-books" target="_blank">GitHub</a>
