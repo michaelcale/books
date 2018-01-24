@@ -22,26 +22,67 @@ type KV struct {
 
 // Section represents a part of a chapter
 type Section struct {
-	FilePath     string // path of the file from which we've read the section
-	Title        string
-	BodyMarkdown string
-	data         []KV
+	chapter        *Chapter
+	SourceFilePath string // path of the file from which we've read the section
+	Title          string // used in book_index.tmpl.html
+	TitleSafe      string
+	BodyMarkdown   string
+	data           []KV
+}
+
+// URL returns url of .html file with this section
+func (s *Section) URL() string {
+	chap := s.chapter
+	book := chap.book
+	bookTitle := book.TitleSafe
+	chapTitle := chap.TitleSafe
+	sectionTitle := s.TitleSafe
+	return fmt.Sprintf("/book/%s/%s/%s.html", bookTitle, chapTitle, sectionTitle)
+}
+
+func (s *Section) destFilePath() string {
+	chap := s.chapter
+	book := chap.book
+	bookTitle := book.TitleSafe
+	chapTitle := chap.TitleSafe
+	sectionTitle := s.TitleSafe + ".html"
+	return filepath.Join("book_html", bookTitle, chapTitle, sectionTitle)
 }
 
 // Chapter represents a book chapter
 type Chapter struct {
-	BookDir    string
+	book       *Book
 	ChapterDir string
 	IndexKV    []KV   // content of index.txt file
-	Title      string // extracted from IndexKV
+	Title      string // extracted from IndexKV, used in book_index.tmpl.html
+	TitleSafe  string
 	Sections   []*Section
+}
+
+// URL is used in book_index.tmpl.html
+func (c *Chapter) URL() string {
+	book := c.book
+	bookTitle := book.TitleSafe
+	chapTitle := c.TitleSafe
+	return fmt.Sprintf("/book/%s/%s/index.html", bookTitle, chapTitle)
+}
+
+func (c *Chapter) destFilePath() string {
+	book := c.book
+	bookTitle := book.TitleSafe
+	chapTitle := c.TitleSafe
+	return filepath.Join("book_html", bookTitle, chapTitle, "index.html")
 }
 
 // Book represents a book
 type Book struct {
-	URL      string // used in index.tmpl.html
-	Title    string // used in index.tmpl.html
-	Chapters []*Chapter
+	URL       string // used in index.tmpl.html
+	Title     string // used in index.tmpl.html
+	TitleLong string // used in book_index.tmpl.html
+	TitleSafe string
+	Chapters  []*Chapter
+	SourceDir string // dir where source markdown files are
+	DestDir   string // dif where destitation html files are
 }
 
 func getV(a []KV, k string) (string, error) {
@@ -153,13 +194,14 @@ func parseSection(path string) (*Section, error) {
 		return nil, err
 	}
 	res := &Section{
-		FilePath: path,
-		data:     kv,
+		SourceFilePath: path,
+		data:           kv,
 	}
 	res.Title, err = getV(kv, "Title")
 	if err != nil {
 		return nil, err
 	}
+	res.TitleSafe = makeURLSafe(res.Title)
 	res.BodyMarkdown, err = getV(kv, "Body")
 	if err != nil {
 		dumpKV(kv)
@@ -170,13 +212,15 @@ func parseSection(path string) (*Section, error) {
 }
 
 func parseChapter(chapter *Chapter) error {
-	dir := filepath.Join(chapter.BookDir, chapter.ChapterDir)
+	dir := filepath.Join(chapter.book.SourceDir, chapter.ChapterDir)
 	path := filepath.Join(dir, "index.txt")
 	indexKV, err := parseKVFile(path)
 	if err != nil {
 		return err
 	}
 	chapter.IndexKV = indexKV
+	chapter.Title, err = getV(indexKV, "Title")
+	chapter.TitleSafe = makeURLSafe(chapter.Title)
 	fileInfos, err := ioutil.ReadDir(dir)
 	for _, fi := range fileInfos {
 		if fi.IsDir() || !fi.Mode().IsRegular() {
@@ -191,19 +235,24 @@ func parseChapter(chapter *Chapter) error {
 		if err != nil {
 			return err
 		}
+		section.chapter = chapter
 		chapter.Sections = append(chapter.Sections, section)
 	}
 	return nil
 }
 
-func genBook(bookName string) (*Book, error) {
-	bookDirName := makeURLSafe(bookName)
+func parseBook(bookName string) (*Book, error) {
+	bookNameSafe := makeURLSafe(bookName)
+	dir := filepath.Join("book", bookNameSafe)
 	book := &Book{
-		Title: bookName,
-		URL:   fmt.Sprintf("/book/%s/", bookDirName),
+		Title:     bookName,
+		TitleLong: fmt.Sprintf("Essential %s", bookName),
+		TitleSafe: bookNameSafe,
+		SourceDir: dir,
+		DestDir:   filepath.Join("book_html", "book", bookNameSafe),
+		URL:       fmt.Sprintf("/book/%s/", bookNameSafe),
 	}
-	bookDir := filepath.Join("book", bookDirName)
-	fileInfos, err := ioutil.ReadDir(bookDir)
+	fileInfos, err := ioutil.ReadDir(dir)
 	if err != nil {
 		return nil, err
 	}
@@ -211,7 +260,7 @@ func genBook(bookName string) (*Book, error) {
 	for _, fi := range fileInfos {
 		if fi.IsDir() {
 			ch := &Chapter{
-				BookDir:    bookDir,
+				book:       book,
 				ChapterDir: fi.Name(),
 			}
 			err = parseChapter(ch)
@@ -236,7 +285,7 @@ func main() {
 	var books []*Book
 	for _, bookName := range bookDirs {
 		timeStart := time.Now()
-		book, err := genBook(bookName)
+		book, err := parseBook(bookName)
 		if err != nil {
 			fmt.Printf("Error '%s' parsing book '%s'\n", err, bookName)
 			return
@@ -245,4 +294,7 @@ func main() {
 		fmt.Printf("Generating book '%s' took %s\n", bookName, time.Since(timeStart))
 	}
 	genIndex(books)
+	for _, book := range books {
+		genBook(book)
+	}
 }

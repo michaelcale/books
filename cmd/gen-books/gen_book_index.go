@@ -10,8 +10,9 @@ import (
 )
 
 var (
-	indexTmpl   *template.Template
-	chapterTmpl *template.Template
+	indexTmpl     *template.Template
+	chapterTmpl   *template.Template
+	bookIndexTmpl *template.Template
 )
 
 func tmplPath(name string) string {
@@ -37,6 +38,8 @@ func loadTemplateMust(name string) *template.Template {
 		ref = &indexTmpl
 	case "chapter.tmpl.html":
 		ref = &chapterTmpl
+	case "book_index.tmpl.html":
+		ref = &bookIndexTmpl
 	default:
 		log.Fatalf("unknown template '%s'\n", name)
 	}
@@ -52,21 +55,22 @@ func execTemplateToFileMust(name string, data interface{}, path string) {
 	u.PanicIfErr(err)
 }
 
-// IndexTmplBook represents a book for index template
-type IndexTmplBook struct {
-	URL   string
-	Title string
-}
-
-// IndexTmplModel represents data for index template
-type IndexTmplModel struct {
-	Books []*Book
-}
-
 func genIndex(books []*Book) {
-	d := IndexTmplModel{
+	d := struct {
+		Books []*Book
+	}{
 		Books: books,
 	}
 	path := filepath.Join("book_html", "index.html")
 	execTemplateToFileMust("index.tmpl.html", d, path)
+}
+
+func genBook(book *Book) {
+	err := os.MkdirAll(book.DestDir, 0755)
+	u.PanicIfErr(err)
+
+	// generate index.html for the book
+	path := filepath.Join(book.DestDir, "index.html")
+	execTemplateToFileMust("book_index.tmpl.html", book, path)
+
 }

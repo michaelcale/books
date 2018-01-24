@@ -6,15 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="referrer" content="always">
 
-    <title>Essential Programming Books</title>
+    <title>{{.TitleLong}}</title>
     <link href="/main.css" rel="stylesheet">
 </head>
 
 <body>
-    <div>Books:</div>
+    <h1>{{.TitleLong}}</h1>
     <ul>
-        {{range .Books}}
-        <li><a href="{{.URL}}">{{.Title}}</a></li>
+        {{range .Chapters}}
+        <li>{{.Title}}</li>
+        <ul>
+            {{range .Sections}}
+            <li><a href="{{.URL}}">{{.Title}}</a></li>
+            {{end}}
+        </ul>
         {{end}}
     </ul>
 </body>
