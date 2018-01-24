@@ -45,7 +45,7 @@ func genBookTOCJSONData(book *Book) ([]byte, error) {
 		}
 		bookTOC.Chapters = append(bookTOC.Chapters, chtoc)
 	}
-	return json.MarshalIndent(&book, "", "  ")
+	return json.MarshalIndent(&bookTOC, "", "  ")
 }
 
 func genBookTOCJSONMust(book *Book) {

@@ -3,8 +3,13 @@ body {
     font-family: 'Open Sans', sans;
     /* github font */
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-size: 16px;
+    font-size: 14px;
     color: rgb(35, 35, 35);
+}
+
+/* h1 by default is 2em, we want something smaller */
+h1 {
+    font-size: 1.5em;
 }
 
 a {
