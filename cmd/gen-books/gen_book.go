@@ -78,6 +78,10 @@ func genIndex(books []*Book) {
 }
 
 func genBookSection(section *Section) {
+	if section.BodyHTML == "" {
+		html := markdownToHTML([]byte(section.BodyMarkdown))
+		section.BodyHTML = template.HTML(html)
+	}
 	path := section.destFilePath()
 	execTemplateToFileMust("section.tmpl.html", section, path)
 }
@@ -86,13 +90,24 @@ func genBookChapter(chapter *Chapter) {
 	for _, section := range chapter.Sections {
 		genBookSection(section)
 	}
+
+	path := chapter.destFilePath()
+	execTemplateToFileMust("chapter.tmpl.html", chapter, path)
+
+}
+
+func setCurrentChapter(chapters []*Chapter, current int) {
+	for i, chapter := range chapters {
+		chapter.IsCurrent = current == i
+	}
 }
 
 func genBook(book *Book) {
 	// generate index.html for the book
 	path := filepath.Join(book.DestDir, "index.html")
 	execTemplateToFileMust("book_index.tmpl.html", book, path)
-	for _, chapter := range book.Chapters {
+	for i, chapter := range book.Chapters {
+		setCurrentChapter(book.Chapters, i)
 		genBookChapter(chapter)
 	}
 	genBookTOCJSONMust(book)

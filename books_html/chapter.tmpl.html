@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="always">
+
+    <title>{{.Title}}</title>
+    <link href="/main.css" rel="stylesheet">
+</head>
+
+<body>
+    <h1>
+        <a href="/">Books</a> /
+        <a href="{{.Book.URL}}">{{.Book.TitleLong}}</a> / {{.Title}}</h1>
+
+    {{if .HTMLVersions}}
+    <div>
+        {{.HTMLVersions}}
+    </div>
+    {{end}}
+
+    <div class="chapter-toc">
+        {{range .Sections}}
+        <div>{{.No}}. <a href="{{.URL}}">{{.Title}}</a>
+        </div>
+        {{end}}
+    </div>
+
+    <hr class="toc-sep">
+
+    <div class="hcenter">{{.Book.TitleLong}}</div>
+
+    <div class="chapters-toc">
+        {{range .Book.Chapters}}
+            {{if .IsCurrent}}
+                <div class="chapters-toc-item">
+                    {{.No}}. {{.Title}}
+                </div>
+            {{else}}
+                <div class="chapters-toc-item">
+                    {{.No}}. <a href="{{.URL}}">{{.Title}}</a>
+                </div>
+            {{end}}
+        {{end}}
+    </div>
+
+    <div class="bottom-right">
+        <a href="https://github.com/kjk/programming-books" target="_blank">GitHub</a>
+    </div>
+
+</body>
+
+</html>

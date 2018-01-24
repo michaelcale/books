@@ -16,6 +16,14 @@ type KV struct {
 	v string
 }
 
+// SectionRef describes a sibling section
+type SectionRef struct {
+	IsCurrent bool
+	Title     string
+	URL       string
+	No        int
+}
+
 // Section represents a part of a chapter
 type Section struct {
 	Chapter        *Chapter
@@ -24,6 +32,8 @@ type Section struct {
 	TitleSafe      string
 	BodyMarkdown   string
 	BodyHTML       template.HTML
+	No             int
+	SectionRefs    []SectionRef
 	data           []KV
 }
 
@@ -59,6 +69,17 @@ type Chapter struct {
 	Title      string // extracted from IndexKV, used in book_index.tmpl.html
 	TitleSafe  string
 	Sections   []*Section
+	No         int
+	IsCurrent  bool
+}
+
+// HTMLVersions returns html version of versions
+func (c *Chapter) HTMLVersions() template.HTML {
+	s, err := getV(c.IndexKV, "HtmlVersions")
+	if err != nil {
+		s = ""
+	}
+	return template.HTML(s)
 }
 
 // URL is used in book_index.tmpl.html
@@ -213,6 +234,31 @@ func parseSection(path string) (*Section, error) {
 	return res, nil
 }
 
+func refSectionSetCurrent(refs []SectionRef, activeNo int) []SectionRef {
+	var res []SectionRef
+	for i, ref := range refs {
+		ref.IsCurrent = (i == activeNo)
+		res = append(res, ref)
+	}
+	return res
+}
+
+func buildSectionRefs(sections []*Section) {
+	var refs []SectionRef
+	for i, section := range sections {
+		ref := SectionRef{
+			IsCurrent: false,
+			Title:     section.Title,
+			URL:       section.URL(),
+			No:        i + 1,
+		}
+		refs = append(refs, ref)
+	}
+	for i, section := range sections {
+		section.SectionRefs = refSectionSetCurrent(refs, i)
+	}
+}
+
 func parseChapter(chapter *Chapter) error {
 	dir := filepath.Join(chapter.Book.SourceDir, chapter.ChapterDir)
 	path := filepath.Join(dir, "index.txt")
@@ -224,6 +270,7 @@ func parseChapter(chapter *Chapter) error {
 	chapter.Title, err = getV(indexKV, "Title")
 	chapter.TitleSafe = makeURLSafe(chapter.Title)
 	fileInfos, err := ioutil.ReadDir(dir)
+	var sections []*Section
 	for _, fi := range fileInfos {
 		if fi.IsDir() || !fi.Mode().IsRegular() {
 			continue
@@ -238,8 +285,11 @@ func parseChapter(chapter *Chapter) error {
 			return err
 		}
 		section.Chapter = chapter
-		chapter.Sections = append(chapter.Sections, section)
+		section.No = len(sections) + 1
+		sections = append(sections, section)
 	}
+	buildSectionRefs(sections)
+	chapter.Sections = sections
 	return nil
 }
 
@@ -270,6 +320,7 @@ func parseBook(bookName string) (*Book, error) {
 				return nil, err
 			}
 			chapters = append(chapters, ch)
+			ch.No = len(chapters)
 			continue
 		}
 		return nil, fmt.Errorf("Unexpected file at top-level: '%s'", fi.Name())

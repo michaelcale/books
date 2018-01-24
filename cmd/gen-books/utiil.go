@@ -1,6 +1,11 @@
 package main
 
-import "strings"
+import (
+	"bytes"
+	"strings"
+
+	"github.com/kjk/u"
+)
 
 // https://stackoverflow.com/questions/695438/safe-characters-for-friendly-url
 func charIsURLSafe(c byte) bool {
@@ -53,4 +58,20 @@ func makeURLSafe(s string) string {
 	s = strings.ToLower(s)
 	s = shortenConsequitve(s, "-")
 	return s
+}
+
+func normalizeNewlines(d []byte) []byte {
+	// replace CR LF (windows) with LF (unix)
+	d = bytes.Replace(d, []byte{13, 10}, []byte{10}, -1)
+	// replace CF (mac) with LF (unix)
+	d = bytes.Replace(d, []byte{13}, []byte{10}, -1)
+	return d
+}
+
+// return first line of d and the rest
+func bytesRemoveFirstLine(d []byte) (string, []byte) {
+	idx := bytes.IndexByte(d, 10)
+	u.PanicIf(-1 == idx)
+	l := d[:idx]
+	return string(l), d[idx+1:]
 }

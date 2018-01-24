@@ -11,12 +11,31 @@
 </head>
 
 <body>
-    <h1><a href="/">Books</a> / <a href="{{.Book.URL}}">{{.Book.TitleLong}}</a> / {{.Chapter.Title}}</h1>
-    <div class="section_title">
-        {{.Title}}
+    <h1><a href="/">Books</a> / <a href="{{.Book.URL}}">{{.Book.TitleLong}}</a> / <a href="{{.Chapter.URL}}">{{.Chapter.Title}}</a> / {{.Title}}</h1>
+
+    <div class="section">
+        {{ .BodyHTML }}
     </div>
 
-    <pre class="section">{{.BodyMarkdown}}</pre>
+    <hr class="toc-sep">
+
+    <div class="section-chapter-toc">
+        <a href="{{.Chapter.URL}}">{{.Chapter.Title}}</a> / <b>{{.Title}}</b>
+
+        <div class="section-sections-toc">
+        {{range .SectionRefs}}
+            {{if .IsCurrent}}
+                <div>{{.No}}. {{.Title}}</div>
+            {{else}}
+                <div>{{.No}}. <a href="{{.URL}}">{{.Title}}</a></div>
+            {{end}}
+        {{end}}
+        </div>
+    </div>
+
+    <div class="bottom-right">
+        <a href="https://github.com/kjk/programming-books" target="_blank">GitHub</a>
+    </div>
 
 </body>
 </html>

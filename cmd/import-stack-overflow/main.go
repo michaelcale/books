@@ -24,6 +24,10 @@ var (
 	gExamples       []Example
 	gTopicHistories []TopicHistory
 	currDefaultLang string
+
+	// if true, we cleanup markdown => markdown
+	// unfortunately it seems to introduce glitches (e.g. in jQuery book)
+	reformatMarkdown = false
 )
 
 func printDocTagsMust() {
@@ -161,9 +165,12 @@ func serFieldMd(k, v string) string {
 	if len(v) == 0 {
 		return ""
 	}
-	d, err := mdFmt([]byte(v), currDefaultLang)
-	u.PanicIfErr(err)
-	return serField(k, string(d))
+	if reformatMarkdown {
+		d, err := mdFmt([]byte(v), currDefaultLang)
+		u.PanicIfErr(err)
+		return serField(k, string(d))
+	}
+	return serField(k, v)
 }
 
 func shortenVersion(s string) string {
