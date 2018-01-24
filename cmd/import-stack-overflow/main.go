@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
-	"os"
 	"path"
 	"path/filepath"
 	"sort"
@@ -15,11 +14,13 @@ import (
 	"github.com/kjk/u"
 )
 
-var booksToImport = []string{
+var booksToImport2 = []string{
 	"C# Language",
 }
 
-var booksToImport2 = []string{
+var booksToImport = []string{
+	// Books in http://books.goalkicker.com/:
+
 	".NET Framework",
 	"algorithm",
 	"Android",
@@ -62,6 +63,9 @@ var booksToImport2 = []string{
 	"TypeScript",
 	"VBA",
 	"Visual Basic .NET Language",
+
+	// other books
+	"Go",
 }
 
 var (
@@ -246,6 +250,7 @@ func writeIndexTxtMust(path string, topic *Topic) {
 	s += serFieldMd("Parameters", topic.ParametersMarkdown)
 	s += serFieldMd("Remarks", topic.RemarksMarkdown)
 
+	createDirForFileMust(path)
 	err := ioutil.WriteFile(path, []byte(s), 0644)
 	u.PanicIfErr(err)
 	if verbose {
@@ -257,6 +262,7 @@ func writeSectionMust(path string, example *Example) {
 	s := serField("Title", example.Title)
 	s += serFieldMd("Body", example.BodyMarkdown)
 
+	createDirForFileMust(path)
 	err := ioutil.WriteFile(path, []byte(s), 0644)
 	u.PanicIfErr(err)
 	if verbose {
@@ -286,8 +292,6 @@ func genBook(title string, defaultLang string) {
 
 		dirChapter := fmt.Sprintf("%03d-%s", chapter, mdutil.MakeURLSafe(t.Title))
 		dirPath := filepath.Join("books", bookDir, dirChapter)
-		err := os.MkdirAll(dirPath, 0755)
-		u.PanicIfErr(err)
 		chapterIndexPath := filepath.Join(dirPath, "index.txt")
 		writeIndexTxtMust(chapterIndexPath, t)
 		//fmt.Printf("%s\n", dirChapter)

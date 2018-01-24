@@ -3,8 +3,8 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 function exitIfFailed { if ($LASTEXITCODE -ne 0) { exit } }
 
-Remove-Item -Force -ErrorAction SilentlyContinue ./books
-Remove-Item -Force -ErrorAction SilentlyContinue ./books_html/book
+Remove-Item -Force -Recurse -ErrorAction SilentlyContinue ./books
+Remove-Item -Force -Recurse -ErrorAction SilentlyContinue ./books_html/book
 
 # import from so
 Remove-Item -Force -ErrorAction SilentlyContinue ./cmd/import-stack-overflow/import-stack-overflow

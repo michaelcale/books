@@ -6,6 +6,9 @@ import (
 	"io"
 	"io/ioutil"
 	"os"
+	"path/filepath"
+
+	"github.com/kjk/u"
 )
 
 // GzippedReadCloser is a io.ReadCloser for a gzip file
@@ -61,4 +64,10 @@ func jsonDecodeGzipped(path string, v interface{}) error {
 	defer r.Close()
 	dec := json.NewDecoder(r)
 	return dec.Decode(v)
+}
+
+func createDirForFileMust(path string) {
+	dir := filepath.Dir(path)
+	err := os.MkdirAll(dir, 0755)
+	u.PanicIfErr(err)
 }

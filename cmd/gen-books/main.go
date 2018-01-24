@@ -16,8 +16,8 @@ var bookDirs = []string{
 	"C++",
 	"C# Language",
 	"CSS",
-
 	"jQuery",
+	"Go",
 }
 
 func main() {

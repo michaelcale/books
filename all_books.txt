@@ -1051,15 +1051,12 @@ yii2: yii2, 21
 Flask: flask, 21
 javafx: javafx, 21
 symfony2: symfony2, 21
-uwp: uwp, 22
 groovy: groovy, 23
 Entity Framework: entity-framework, 23
 Xamarin.iOS: xamarin.ios, 23
-wpf: wpf, 23
 clojure: clojure, 23
 Qt: qt, 24
 ActionScript 3: actionscript-3, 25
-Regular Expressions: regex, 25
 netsuite: netsuite, 25
 asp.net-core: asp.net-core, 25
 acumatica: acumatica, 25
@@ -1069,18 +1066,12 @@ codeigniter: codeigniter, 30
 common-lisp: common-lisp, 31
 ASP.NET: asp.net, 31
 asp.net-mvc: asp.net-mvc, 32
-F#: f#, 33
 magento: magento, 33
 twitter-bootstrap: twitter-bootstrap, 36
 unity3d: unity3d, 40
 pandas: pandas, 41
 Xamarin.Forms: xamarin.forms, 43
 cobol: cobol, 52
-vim: vim, 53
-Django: django, 53
-Scala Language: scala, 62
-Laravel: laravel, 64
-WordPress: wordpress, 72
 
 Myabe add:
 Go: go, 75
@@ -1103,6 +1094,15 @@ dart: dart, 17
 plsql: plsql, 14
 redis: redis, 14
 xpath: xpath, 12
+vim: vim, 53
+Django: django, 53
+Scala Language: scala, 62
+Laravel: laravel, 64
+WordPress: wordpress, 72
+F#: f#, 33
+Regular Expressions: regex, 25
+uwp: uwp, 22
+wpf: wpf, 23
 
 Books in http://books.goalkicker.com/:
 .NET Framework: .net, 59
