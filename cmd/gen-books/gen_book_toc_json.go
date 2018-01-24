@@ -20,11 +20,11 @@ type BookTOC struct {
 	Chapters []BookChapterTOC `json:"chapters"`
 }
 
-func genBookTOCJSON(bookName string, chapters []*Chapter) ([]byte, error) {
-	book := BookTOC{
-		Name: bookName,
+func genBookTOCJSON(book *Book) ([]byte, error) {
+	bookTOC := BookTOC{
+		Name: book.Title,
 	}
-	for _, ch := range chapters {
+	for _, ch := range book.Chapters {
 		var sections []BookSectionTOC
 		for _, sec := range ch.Sections {
 			sectoc := BookSectionTOC{
@@ -36,7 +36,7 @@ func genBookTOCJSON(bookName string, chapters []*Chapter) ([]byte, error) {
 			Title:    ch.Title,
 			Sections: sections,
 		}
-		book.Chapters = append(book.Chapters, chtoc)
+		bookTOC.Chapters = append(bookTOC.Chapters, chtoc)
 	}
 	return json.MarshalIndent(&book, "", "  ")
 }

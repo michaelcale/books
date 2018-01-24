@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-var books = []string{
+var bookDirs = []string{
 	"jQuery",
 }
 
@@ -35,6 +35,13 @@ type Chapter struct {
 	IndexKV    []KV   // content of index.txt file
 	Title      string // extracted from IndexKV
 	Sections   []*Section
+}
+
+// Book represents a book
+type Book struct {
+	URL      string // used in index.tmpl.html
+	Title    string // used in index.tmpl.html
+	Chapters []*Chapter
 }
 
 func getV(a []KV, k string) (string, error) {
@@ -189,11 +196,16 @@ func parseChapter(chapter *Chapter) error {
 	return nil
 }
 
-func genBook(bookName string) error {
-	bookDir := filepath.Join("book", makeURLSafe(bookName))
+func genBook(bookName string) (*Book, error) {
+	bookDirName := makeURLSafe(bookName)
+	book := &Book{
+		Title: bookName,
+		URL:   fmt.Sprintf("/book/%s/", bookDirName),
+	}
+	bookDir := filepath.Join("book", bookDirName)
 	fileInfos, err := ioutil.ReadDir(bookDir)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	var chapters []*Chapter
 	for _, fi := range fileInfos {
@@ -204,29 +216,33 @@ func genBook(bookName string) error {
 			}
 			err = parseChapter(ch)
 			if err != nil {
-				return err
+				return nil, err
 			}
 			chapters = append(chapters, ch)
 			continue
 		}
-		return fmt.Errorf("Unexpected file at top-level: '%s'", fi.Name())
+		return nil, fmt.Errorf("Unexpected file at top-level: '%s'", fi.Name())
 	}
 	nSections := 0
 	for _, ch := range chapters {
 		nSections += len(ch.Sections)
 	}
 	fmt.Printf("Book '%s' %d chapters, %d sections\n", bookName, len(chapters), nSections)
-	return nil
+	book.Chapters = chapters
+	return book, nil
 }
 
 func main() {
-	for _, bookName := range books {
+	var books []*Book
+	for _, bookName := range bookDirs {
 		timeStart := time.Now()
-		err := genBook(bookName)
+		book, err := genBook(bookName)
 		if err != nil {
 			fmt.Printf("Error '%s' parsing book '%s'\n", err, bookName)
 			return
 		}
+		books = append(books, book)
 		fmt.Printf("Generating book '%s' took %s\n", bookName, time.Since(timeStart))
 	}
+	genIndex(books)
 }
