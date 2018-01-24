@@ -53,7 +53,7 @@ func (s *Section) destFilePath() string {
 	bookTitle := book.TitleSafe
 	chapTitle := chap.TitleSafe
 	sectionTitle := s.TitleSafe + ".html"
-	return filepath.Join("books_html", bookTitle, chapTitle, sectionTitle)
+	return filepath.Join("books_html", "book", bookTitle, chapTitle, sectionTitle)
 }
 
 // Chapter represents a book chapter
@@ -78,7 +78,7 @@ func (c *Chapter) destFilePath() string {
 	book := c.Book
 	bookTitle := book.TitleSafe
 	chapTitle := c.TitleSafe
-	return filepath.Join("books_html", bookTitle, chapTitle, "index.html")
+	return filepath.Join("books_html", "book", bookTitle, chapTitle, "index.html")
 }
 
 // Book represents a book

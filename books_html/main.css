@@ -80,3 +80,11 @@ div.activity code {
 .activity div.details a.black:hover {
     color: #4183c4;
 }
+
+.section {
+    background-color: lightcyan;
+}
+
+.section_title {
+    font-weight: bold;
+}
