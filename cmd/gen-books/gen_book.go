@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"log"
 	"os"
@@ -11,12 +12,19 @@ import (
 
 var (
 	indexTmpl     *template.Template
-	chapterTmpl   *template.Template
 	bookIndexTmpl *template.Template
+	chapterTmpl   *template.Template
+	sectionTmpl   *template.Template
 )
 
+func createDirForFileMust(path string) {
+	dir := filepath.Dir(path)
+	err := os.MkdirAll(dir, 0755)
+	u.PanicIfErr(err)
+}
+
 func tmplPath(name string) string {
-	return filepath.Join("book_html", name)
+	return filepath.Join("books_html", name)
 }
 
 func loadTemplateHelperMust(name string, ref **template.Template) *template.Template {
@@ -36,10 +44,12 @@ func loadTemplateMust(name string) *template.Template {
 	switch name {
 	case "index.tmpl.html":
 		ref = &indexTmpl
-	case "chapter.tmpl.html":
-		ref = &chapterTmpl
 	case "book_index.tmpl.html":
 		ref = &bookIndexTmpl
+	case "chapter.tmpl.html":
+		ref = &chapterTmpl
+	case "section.tmpl.html":
+		ref = &sectionTmpl
 	default:
 		log.Fatalf("unknown template '%s'\n", name)
 	}
@@ -47,6 +57,8 @@ func loadTemplateMust(name string) *template.Template {
 }
 
 func execTemplateToFileMust(name string, data interface{}, path string) {
+	fmt.Printf("%s\n", path)
+	createDirForFileMust(path)
 	tmpl := loadTemplateMust(name)
 	f, err := os.Create(path)
 	u.PanicIfErr(err)
@@ -61,16 +73,26 @@ func genIndex(books []*Book) {
 	}{
 		Books: books,
 	}
-	path := filepath.Join("book_html", "index.html")
+	path := filepath.Join("books_html", "index.html")
 	execTemplateToFileMust("index.tmpl.html", d, path)
 }
 
-func genBook(book *Book) {
-	err := os.MkdirAll(book.DestDir, 0755)
-	u.PanicIfErr(err)
+func genBookSection(section *Section) {
+	path := section.destFilePath()
+	execTemplateToFileMust("section.tmpl.html", section, path)
+}
 
+func genBookChapter(chapter *Chapter) {
+	for _, section := range chapter.Sections {
+		genBookSection(section)
+	}
+}
+
+func genBook(book *Book) {
 	// generate index.html for the book
 	path := filepath.Join(book.DestDir, "index.html")
 	execTemplateToFileMust("book_index.tmpl.html", book, path)
-
+	for _, chapter := range book.Chapters {
+		genBookChapter(chapter)
+	}
 }
