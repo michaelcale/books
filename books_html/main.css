@@ -12,6 +12,18 @@ h1 {
     font-size: 1.3em;
 }
 
+.light {
+    color: gray;
+}
+
+.book-name {
+    padding-right: 32px;
+}
+
+table.book-list th {
+    padding-right: 16px;
+}
+
 .section blockquote {
     border-left: 2px solid rgb(74, 117, 236);
     padding-left: 8px;

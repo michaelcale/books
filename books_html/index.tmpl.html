@@ -12,11 +12,25 @@
 
 <body>
     <h1 class="hcenter">Essential Programming Books</h1>
-    <ul>
-        {{range .Books}}
-        <li><a href="{{.URL}}">{{.Title}}</a></li>
-        {{end}}
-    </ul>
+
+    <table class="book-list">
+        <thead>
+        <tr class="header">
+            <th class="book-name">Book</th>
+            <th>Chapters</th>
+            <th>Articles</th>
+        </tr>
+        </thead>
+        <tbody>
+            {{range .Books}}
+            <tr>
+                <td class="book-name"><a href="{{.URL}}">{{.Title}}</a></td>
+                <td class="light">{{ .ChaptersCount }}</td>
+                <td class="light">{{ .SectionsCount}}</td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
 
     <div class="bottom-right">
         <a href="https://github.com/kjk/programming-books" target="_blank">GitHub</a>
