@@ -95,4 +95,5 @@ func genBook(book *Book) {
 	for _, chapter := range book.Chapters {
 		genBookChapter(chapter)
 	}
+	genBookTOCJSONMust(book)
 }

@@ -1,6 +1,13 @@
 package main
 
-import "encoding/json"
+import (
+	"encoding/json"
+	"fmt"
+	"io/ioutil"
+	"path/filepath"
+
+	"github.com/kjk/u"
+)
 
 // BookSectionTOC represents a section in a book TOC
 type BookSectionTOC struct {
@@ -20,7 +27,7 @@ type BookTOC struct {
 	Chapters []BookChapterTOC `json:"chapters"`
 }
 
-func genBookTOCJSON(book *Book) ([]byte, error) {
+func genBookTOCJSONData(book *Book) ([]byte, error) {
 	bookTOC := BookTOC{
 		Name: book.Title,
 	}
@@ -39,4 +46,14 @@ func genBookTOCJSON(book *Book) ([]byte, error) {
 		bookTOC.Chapters = append(bookTOC.Chapters, chtoc)
 	}
 	return json.MarshalIndent(&book, "", "  ")
+}
+
+func genBookTOCJSONMust(book *Book) {
+	d, err := genBookTOCJSONData(book)
+	u.PanicIfErr(err)
+	path := filepath.Join("books_html", "book", book.TitleSafe, "toc.json")
+	u.CreateDirForFile(path)
+	err = ioutil.WriteFile(path, d, 0644)
+	u.PanicIfErr(err)
+	fmt.Printf("%s\n", path)
 }
