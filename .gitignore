@@ -1,3 +1,4 @@
 books/
 books_html/book/
 books_html/index.html
+cmd/gen-books/gen-books

@@ -7,10 +7,8 @@ import (
 	"io/ioutil"
 	"path/filepath"
 	"strings"
-)
 
-const (
-	recSep = "|======"
+	"github.com/kjk/programming-books/pkg/mdutil"
 )
 
 // KV represents a key/value pair
@@ -141,13 +139,13 @@ func readFileAsLines(path string) ([]string, error) {
 func extractMultiLineValue(lines []string) ([]string, string, error) {
 	for i, line := range lines {
 		line = strings.TrimSpace(line)
-		if line == recSep {
+		if line == mdutil.KVRecordSeparator {
 			rest := lines[i+1:]
 			s := strings.Join(lines[:i], "\n")
 			return rest, s, nil
 		}
 	}
-	return nil, "", fmt.Errorf("didn't find end of value line ('%s')", recSep)
+	return nil, "", fmt.Errorf("didn't find end of value line ('%s')", mdutil.KVRecordSeparator)
 }
 
 // if error is io.EOF, we successfully finished parsing
@@ -172,7 +170,7 @@ func parseNextKV(lines []string) ([]string, KV, error) {
 		kv.k, kv.v = parts[0], parts[1]
 		return lines, kv, nil
 	}
-	// this is a multi-line value that ends with recSep
+	// this is a multi-line value that ends with mdutil.KVRecordSeparator
 	kv.k = strings.TrimSuffix(s, ":")
 	var err error
 	lines, kv.v, err = extractMultiLineValue(lines)
@@ -241,7 +239,7 @@ func parseSection(path string) (*Section, error) {
 	if res.Title == defTitle {
 		fmt.Printf("parseSection: no title for %s\n", path)
 	}
-	res.TitleSafe = makeURLSafe(res.Title)
+	res.TitleSafe = mdutil.MakeURLSafe(res.Title)
 	res.BodyMarkdown, err = getV(kv, "Body")
 	if err != nil {
 		dumpKV(kv)
@@ -285,7 +283,7 @@ func parseChapter(chapter *Chapter) error {
 	}
 	chapter.IndexKV = indexKV
 	chapter.Title, err = getV(indexKV, "Title")
-	chapter.TitleSafe = makeURLSafe(chapter.Title)
+	chapter.TitleSafe = mdutil.MakeURLSafe(chapter.Title)
 	fileInfos, err := ioutil.ReadDir(dir)
 	var sections []*Section
 	for _, fi := range fileInfos {
@@ -311,7 +309,7 @@ func parseChapter(chapter *Chapter) error {
 }
 
 func parseBook(bookName string) (*Book, error) {
-	bookNameSafe := makeURLSafe(bookName)
+	bookNameSafe := mdutil.MakeURLSafe(bookName)
 	dir := filepath.Join("books", bookNameSafe)
 	book := &Book{
 		Title:     bookName,

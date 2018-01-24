@@ -11,11 +11,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/kjk/programming-books/pkg/mdutil"
 	"github.com/kjk/u"
-)
-
-const (
-	recSep = "|======"
 )
 
 var (
@@ -163,7 +160,7 @@ func serField(k, v string) string {
 	if serFitsOneLine(v) {
 		return fmt.Sprintf("%s: %s\n", k, v)
 	}
-	return fmt.Sprintf("%s:\n%s\n%s\n", k, v, recSep)
+	return fmt.Sprintf("%s:\n%s\n%s\n", k, v, mdutil.KVRecordSeparator)
 }
 
 func serFieldMd(k, v string) string {
@@ -217,7 +214,7 @@ func printEmptyExamples() {
 
 func genBook(title string, defaultLang string) {
 	currDefaultLang = defaultLang
-	bookDir := makeURLSafe(title)
+	bookDir := mdutil.MakeURLSafe(title)
 	docTag := findDocTagByTitleMust(gDocTags, title)
 	//fmt.Printf("%s: docID: %d\n", title, docTag.Id)
 	topics := getTopicsByDocTagID(docTag.Id)
@@ -228,7 +225,7 @@ func genBook(title string, defaultLang string) {
 		examples := getExamplesForTopic(docTag.Id, t.Id)
 		sortExamples(examples)
 
-		dirChapter := fmt.Sprintf("%03d-%s", chapter, makeURLSafe(t.Title))
+		dirChapter := fmt.Sprintf("%03d-%s", chapter, mdutil.MakeURLSafe(t.Title))
 		dirPath := filepath.Join("books", bookDir, dirChapter)
 		err := os.MkdirAll(dirPath, 0755)
 		u.PanicIfErr(err)
@@ -245,7 +242,7 @@ func genBook(title string, defaultLang string) {
 				emptyExamplexs = append(emptyExamplexs, ex)
 				continue
 			}
-			fileName := fmt.Sprintf("%03d-%s.md", section, makeURLSafe(ex.Title))
+			fileName := fmt.Sprintf("%03d-%s.md", section, mdutil.MakeURLSafe(ex.Title))
 			path := filepath.Join(dirPath, fileName)
 			writeSectionMust(path, ex)
 			//fmt.Printf("  %s %s '%s'\n", ex.Title, pinnedStr, fileName)
