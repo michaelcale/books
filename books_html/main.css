@@ -184,6 +184,19 @@ hr.toc-sep {
     grid-gap: 4px 4px;
 }
 
+.top-right {
+    font-size: 0.8em;
+    position: fixed;
+    right: 4px;
+    top: 22px;
+    padding: 4px 8px;
+    border: 1px solid #666;
+}
+
+.top-right:hover {
+    background-color: #f1f1f1;
+}
+
 .bottom-right {
     font-size: 0.8em;
     position: fixed;
