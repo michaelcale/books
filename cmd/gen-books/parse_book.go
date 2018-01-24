@@ -107,6 +107,26 @@ type Book struct {
 	Chapters  []*Chapter
 	SourceDir string // dir where source markdown files are
 	DestDir   string // dif where destitation html files are
+
+	cachedSectionsCount int
+}
+
+// SectionsCount returns total number of sections
+func (b *Book) SectionsCount() int {
+	if b.cachedSectionsCount != 0 {
+		return b.cachedSectionsCount
+	}
+	nSections := 0
+	for _, ch := range b.Chapters {
+		nSections += len(ch.Sections)
+	}
+	b.cachedSectionsCount = nSections
+	return nSections
+}
+
+// ChaptersCount returns number of chapters
+func (b *Book) ChaptersCount() int {
+	return len(b.Chapters)
 }
 
 func getV(a []KV, k string) (string, error) {
@@ -340,11 +360,7 @@ func parseBook(bookName string) (*Book, error) {
 		}
 		return nil, fmt.Errorf("Unexpected file at top-level: '%s'", fi.Name())
 	}
-	nSections := 0
-	for _, ch := range chapters {
-		nSections += len(ch.Sections)
-	}
-	fmt.Printf("Book '%s' %d chapters, %d sections\n", bookName, len(chapters), nSections)
 	book.Chapters = chapters
+	fmt.Printf("Book '%s' %d chapters, %d sections\n", bookName, len(chapters), book.SectionsCount())
 	return book, nil
 }

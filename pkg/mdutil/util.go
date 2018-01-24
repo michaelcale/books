@@ -39,6 +39,10 @@ func shortenConsequitve(s string, c string) string {
 
 // MakeURLSafe converts arbitrary string into a string that can be used as a file name or url
 func MakeURLSafe(s string) string {
+
+	// special consideration for "c#" etc.
+	s = strings.Replace(s, "#", "sharp", -1)
+
 	n := len(s)
 	d := make([]byte, 0, n)
 

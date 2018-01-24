@@ -56,8 +56,7 @@ func loadTemplateMust(name string) *template.Template {
 	return loadTemplateHelperMust(name, ref)
 }
 
-func execTemplateToFileMust(name string, data interface{}, path string) {
-	fmt.Printf("%s\n", path)
+func execTemplateToFileSilentMust(name string, data interface{}, path string) {
 	createDirForFileMust(path)
 	tmpl := loadTemplateMust(name)
 	f, err := os.Create(path)
@@ -65,6 +64,11 @@ func execTemplateToFileMust(name string, data interface{}, path string) {
 	defer f.Close()
 	err = tmpl.Execute(f, data)
 	u.PanicIfErr(err)
+}
+
+func execTemplateToFileMust(name string, data interface{}, path string) {
+	fmt.Printf("%s\n", path)
+	execTemplateToFileSilentMust(name, data, path)
 }
 
 func genIndex(books []*Book) {
@@ -83,7 +87,7 @@ func genBookSection(section *Section) {
 		section.BodyHTML = template.HTML(html)
 	}
 	path := section.destFilePath()
-	execTemplateToFileMust("section.tmpl.html", section, path)
+	execTemplateToFileSilentMust("section.tmpl.html", section, path)
 }
 
 func genBookChapter(chapter *Chapter) {
@@ -92,7 +96,7 @@ func genBookChapter(chapter *Chapter) {
 	}
 
 	path := chapter.destFilePath()
-	execTemplateToFileMust("chapter.tmpl.html", chapter, path)
+	execTemplateToFileSilentMust("chapter.tmpl.html", chapter, path)
 
 }
 
@@ -105,7 +109,7 @@ func setCurrentChapter(chapters []*Chapter, current int) {
 func genBook(book *Book) {
 	// generate index.html for the book
 	path := filepath.Join(book.DestDir, "index.html")
-	execTemplateToFileMust("book_index.tmpl.html", book, path)
+	execTemplateToFileSilentMust("book_index.tmpl.html", book, path)
 	for i, chapter := range book.Chapters {
 		setCurrentChapter(book.Chapters, i)
 		genBookChapter(chapter)

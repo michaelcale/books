@@ -21,6 +21,7 @@ var bookDirs = []string{
 }
 
 func main() {
+	timeStart := time.Now()
 	var books []*Book
 	for _, bookName := range bookDirs {
 		timeStart := time.Now()
@@ -35,5 +36,8 @@ func main() {
 	genIndex(books)
 	for _, book := range books {
 		genBook(book)
+		fmt.Printf("Generated %s, %d chapters, %d sections\n", book.Title, len(book.Chapters), book.SectionsCount())
 	}
+
+	fmt.Printf("Finished in %s\n", time.Since(timeStart))
 }
