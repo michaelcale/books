@@ -25,9 +25,9 @@
         <div class="section-sections-toc">
         {{range .SectionRefs}}
             {{if .IsCurrent}}
-                <div>{{.No}}. {{.Title}}</div>
+                <div><span class="chap-no">{{.No}}.</span> <span class="is-current">{{.Title}}</span></div>
             {{else}}
-                <div>{{.No}}. <a href="{{.URL}}">{{.Title}}</a></div>
+                <div><span class="chap-no">{{.No}}.</span> <a href="{{.URL}}">{{.Title}}</a></div>
             {{end}}
         {{end}}
         </div>

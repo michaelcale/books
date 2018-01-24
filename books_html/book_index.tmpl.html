@@ -16,7 +16,7 @@
     <div class="toc-header">Chapters</div>
     <div class="chapters-toc">
         {{range .Chapters}}
-        <div class="chapters-toc-item">{{.No}}. <a href="{{.URL}}">{{.Title}}</a></div>
+        <div class="chapters-toc-item"><span class="chap-no">{{.No}}.</span> <a href="{{.URL}}">{{.Title}}</a></div>
         {{end}}
     </div>
 
@@ -24,10 +24,10 @@
 
     <div>
         {{range .Chapters}}
-        <div>{{.No}}. <a href="{{.URL}}">{{.Title}}</a></div>
+        <div><span class="chap-no">{{.No}}.</span> <a href="{{.URL}}">{{.Title}}</a></div>
         <div>
             {{range .Sections}}
-            <div class="toc-section">{{.No}}. <a href="{{.URL}}">{{.Title}}</a></div>
+            <div class="toc-section"><span class="chap-no">{{.No}}.</span> <a href="{{.URL}}">{{.Title}}</a></div>
             {{end}}
         </div>
         {{end}}

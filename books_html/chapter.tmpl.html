@@ -23,7 +23,7 @@
 
     <div class="chapter-toc">
         {{range .Sections}}
-        <div>{{.No}}. <a href="{{.URL}}">{{.Title}}</a>
+        <div><span class="chap-no">{{.No}}.</span> <a href="{{.URL}}">{{.Title}}</a>
         </div>
         {{end}}
     </div>
@@ -36,11 +36,11 @@
         {{range .Book.Chapters}}
             {{if .IsCurrent}}
                 <div class="chapters-toc-item">
-                    {{.No}}. {{.Title}}
+                     <span class="chap-no">{{.No}}.</span> <span class="is-current">{{.Title}}</span>
                 </div>
             {{else}}
                 <div class="chapters-toc-item">
-                    {{.No}}. <a href="{{.URL}}">{{.Title}}</a>
+                    <span class="chap-no">{{.No}}.</span> <a href="{{.URL}}">{{.Title}}</a>
                 </div>
             {{end}}
         {{end}}

@@ -7,11 +7,11 @@ import (
 
 var bookDirs = []string{
 	".NET Framework",
-	"algorithm",
-	"Android",
-	"Angular 2",
-	"AngularJS",
-	"Bash",
+	//"algorithm",
+	//"Android",
+	//"Angular 2",
+	//"AngularJS",
+	//"Bash",
 	"C Language",
 	"C++",
 	"C# Language",

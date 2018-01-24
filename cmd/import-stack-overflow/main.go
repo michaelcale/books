@@ -15,6 +15,55 @@ import (
 	"github.com/kjk/u"
 )
 
+var booksToImport = []string{
+	"C# Language",
+}
+
+var booksToImport2 = []string{
+	".NET Framework",
+	"algorithm",
+	"Android",
+	"Angular 2",
+	"AngularJS",
+	"Bash",
+	"C Language",
+	"C++",
+	"C# Language",
+	"CSS",
+	"Entity Framework Core",
+	"excel-vba",
+	"Git",
+	"Haskell Language",
+	"HTML",
+	"html5-canvas",
+	"iOS",
+	"Java Language",
+	"JavaScript",
+	"jQuery",
+	"latex",
+	"GNU/Linux",
+	"MATLAB Language",
+	"Microsoft SQL Server",
+	"MongoDB",
+	"MySQL",
+	"Node.js",
+	"Objective-C Language",
+	"Oracle Database",
+	"Perl Language",
+	"PHP",
+	"postgresql",
+	"PowerShell",
+	"Python Language",
+	"R Language",
+	"Ruby on Rails",
+	"Ruby Language",
+	"SQL",
+	"Swift Language",
+	"TypeScript",
+	"VBA",
+	"Visual Basic .NET Language",
+}
+
 var (
 	gDocTags        []DocTag
 	gTopics         []Topic
@@ -27,6 +76,8 @@ var (
 	reformatMarkdown = false
 
 	emptyExamplexs []*Example
+	// if true, prints more information
+	verbose = false
 )
 
 func printDocTagsMust() {
@@ -152,9 +203,13 @@ func serFitsOneLine(s string) bool {
 	return true
 }
 
+func isEmptyString(s string) bool {
+	s = strings.TrimSpace(s)
+	return len(s) == 0
+}
+
 func serField(k, v string) string {
-	v = strings.TrimSpace(v)
-	if len(v) == 0 {
+	if isEmptyString(v) {
 		return ""
 	}
 	if serFitsOneLine(v) {
@@ -164,8 +219,7 @@ func serField(k, v string) string {
 }
 
 func serFieldMd(k, v string) string {
-	v = strings.TrimSpace(v)
-	if len(v) == 0 {
+	if isEmptyString(v) {
 		return ""
 	}
 	if reformatMarkdown {
@@ -194,7 +248,9 @@ func writeIndexTxtMust(path string, topic *Topic) {
 
 	err := ioutil.WriteFile(path, []byte(s), 0644)
 	u.PanicIfErr(err)
-	fmt.Printf("Wrote %s, %d bytes\n", path, len(s))
+	if verbose {
+		fmt.Printf("Wrote %s, %d bytes\n", path, len(s))
+	}
 }
 
 func writeSectionMust(path string, example *Example) {
@@ -203,7 +259,9 @@ func writeSectionMust(path string, example *Example) {
 
 	err := ioutil.WriteFile(path, []byte(s), 0644)
 	u.PanicIfErr(err)
-	fmt.Printf("Wrote %s, %d bytes\n", path, len(s))
+	if verbose {
+		fmt.Printf("Wrote %s, %d bytes\n", path, len(s))
+	}
 }
 
 func printEmptyExamples() {
@@ -213,6 +271,7 @@ func printEmptyExamples() {
 }
 
 func genBook(title string, defaultLang string) {
+	timeStart := time.Now()
 	currDefaultLang = defaultLang
 	bookDir := mdutil.MakeURLSafe(title)
 	docTag := findDocTagByTitleMust(gDocTags, title)
@@ -237,7 +296,7 @@ func genBook(title string, defaultLang string) {
 
 		section := 10
 		for _, ex := range examples {
-			s := strings.TrimSpace(ex.BodyMarkdown)
+			s := ex.BodyMarkdown
 			if len(s) == 0 {
 				emptyExamplexs = append(emptyExamplexs, ex)
 				continue
@@ -252,62 +311,16 @@ func genBook(title string, defaultLang string) {
 		}
 		nSections += len(examples)
 	}
-	fmt.Printf("%d chapters, %d sections\n", nChapters, nSections)
-}
-
-var books = []string{
-	".NET Framework",
-	"algorithm",
-	"Android",
-	"Angular 2",
-	"AngularJS",
-	"Bash",
-	"C Language",
-	"C++",
-	"C# Language",
-	"CSS",
-	"Entity Framework Core",
-	"excel-vba",
-	"Git",
-	"Haskell Language",
-	"HTML",
-	"html5-canvas",
-	"iOS",
-	"Java Language",
-	"JavaScript",
-	"jQuery",
-	"latex",
-	"GNU/Linux",
-	"MATLAB Language",
-	"Microsoft SQL Server",
-	"MongoDB",
-	"MySQL",
-	"Node.js",
-	"Objective-C Language",
-	"Oracle Database",
-	"Perl Language",
-	"PHP",
-	"postgresql",
-	"PowerShell",
-	"Python Language",
-	"R Language",
-	"Ruby on Rails",
-	"Ruby Language",
-	"SQL",
-	"Swift Language",
-	"TypeScript",
-	"VBA",
-	"Visual Basic .NET Language",
+	fmt.Printf("Imported %s (%d chapters, %d sections) in %s\n", title, nChapters, nSections, time.Since(timeStart))
 }
 
 func main() {
 	//printDocTagsMust()
 	timeStart := time.Now()
 	loadAll()
-	for _, book := range books[:10] {
-		genBook(book, "")
+	for _, bookTitle := range booksToImport {
+		genBook(bookTitle, "")
 	}
-	genBook("jQuery", "javascript")
 	fmt.Printf("Took %s\n", time.Since(timeStart))
-	printEmptyExamples()
+	//printEmptyExamples()
 }

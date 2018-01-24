@@ -114,5 +114,5 @@ func genBook(book *Book) {
 		setCurrentChapter(book.Chapters, i)
 		genBookChapter(chapter)
 	}
-	genBookTOCJSONMust(book)
+	//genBookTOCJSONMust(book)
 }
