@@ -187,13 +187,13 @@ type Example struct {
 	//LastEditDate     string
 	Score int
 	//ContributorCount int
-	//BodyHtml         string
+	BodyHtml     string
 	IsPinned     bool
 	BodyMarkdown string
 }
 
-func loadExamples(path string) ([]Example, error) {
-	var res []Example
+func loadExamples(path string) ([]*Example, error) {
+	var res []*Example
 	err := jsonDecodeGzipped(path, &res)
 	return res, err
 }

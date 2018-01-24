@@ -15,19 +15,21 @@ import (
 )
 
 const (
-	recSep = "==="
+	recSep = "|======"
 )
 
 var (
 	gDocTags        []DocTag
 	gTopics         []Topic
-	gExamples       []Example
+	gExamples       []*Example
 	gTopicHistories []TopicHistory
 	currDefaultLang string
 
 	// if true, we cleanup markdown => markdown
 	// unfortunately it seems to introduce glitches (e.g. in jQuery book)
 	reformatMarkdown = false
+
+	emptyExamplexs []*Example
 )
 
 func printDocTagsMust() {
@@ -61,7 +63,7 @@ func loadTopicHistoriesMust() []TopicHistory {
 	return topicHistories
 }
 
-func loadExamplesMust() []Example {
+func loadExamplesMust() []*Example {
 	path := path.Join("stack-overflow-docs-dump", "examples.json.gz")
 	examples, err := loadExamples(path)
 	u.PanicIfErr(err)
@@ -100,7 +102,7 @@ func getTopicsByDocTagID(docTagID int) []*Topic {
 func getExampleByID(id int) *Example {
 	for i, e := range gExamples {
 		if e.Id == id {
-			return &gExamples[i]
+			return gExamples[i]
 		}
 	}
 	return nil
@@ -144,6 +146,10 @@ func serFitsOneLine(s string) bool {
 		return false
 	}
 	if strings.Contains(s, "\n") {
+		return false
+	}
+	// to avoid ambiguity when parsing serialize values with ':" on separate lines
+	if strings.Contains(s, ":") {
 		return false
 	}
 	return true
@@ -203,6 +209,12 @@ func writeSectionMust(path string, example *Example) {
 	fmt.Printf("Wrote %s, %d bytes\n", path, len(s))
 }
 
+func printEmptyExamples() {
+	for _, ex := range emptyExamplexs {
+		fmt.Printf("empty example: %s, len(BodyHtml): %d\n", ex.Title, len(ex.BodyHtml))
+	}
+}
+
 func genBook(title string, defaultLang string) {
 	currDefaultLang = defaultLang
 	bookDir := makeURLSafe(title)
@@ -228,12 +240,11 @@ func genBook(title string, defaultLang string) {
 
 		section := 10
 		for _, ex := range examples {
-			/*
-				pinnedStr := ""
-				if ex.IsPinned {
-					pinnedStr = "pinned"
-				}
-			*/
+			s := strings.TrimSpace(ex.BodyMarkdown)
+			if len(s) == 0 {
+				emptyExamplexs = append(emptyExamplexs, ex)
+				continue
+			}
 			fileName := fmt.Sprintf("%03d-%s.md", section, makeURLSafe(ex.Title))
 			path := filepath.Join(dirPath, fileName)
 			writeSectionMust(path, ex)
@@ -301,4 +312,5 @@ func main() {
 	}
 	genBook("jQuery", "javascript")
 	fmt.Printf("Took %s\n", time.Since(timeStart))
+	printEmptyExamples()
 }

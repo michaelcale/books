@@ -1,13 +1,16 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 	"html/template"
 	"io"
 	"io/ioutil"
 	"path/filepath"
 	"strings"
+)
+
+const (
+	recSep = "|======"
 )
 
 // KV represents a key/value pair
@@ -117,6 +120,14 @@ func getV(a []KV, k string) (string, error) {
 	return "", fmt.Errorf("key '%s' not found", k)
 }
 
+func getVSilent(a []KV, k string, def string) string {
+	s, err := getV(a, k)
+	if err != nil {
+		return def
+	}
+	return s
+}
+
 func readFileAsLines(path string) ([]string, error) {
 	d, err := ioutil.ReadFile(path)
 	if err != nil {
@@ -130,13 +141,13 @@ func readFileAsLines(path string) ([]string, error) {
 func extractMultiLineValue(lines []string) ([]string, string, error) {
 	for i, line := range lines {
 		line = strings.TrimSpace(line)
-		if line == "===" {
+		if line == recSep {
 			rest := lines[i+1:]
 			s := strings.Join(lines[:i], "\n")
 			return rest, s, nil
 		}
 	}
-	return nil, "", errors.New("didn't find end of value line ('===')")
+	return nil, "", fmt.Errorf("didn't find end of value line ('%s')", recSep)
 }
 
 // if error is io.EOF, we successfully finished parsing
@@ -151,6 +162,7 @@ func parseNextKV(lines []string) ([]string, KV, error) {
 	}
 	s := strings.TrimSpace(lines[0])
 	lines = lines[1:]
+
 	if !strings.HasSuffix(s, ":") {
 		// this is singlie line "k: v"
 		parts := strings.SplitN(s, ":", 2)
@@ -160,7 +172,7 @@ func parseNextKV(lines []string) ([]string, KV, error) {
 		kv.k, kv.v = parts[0], parts[1]
 		return lines, kv, nil
 	}
-	// this is a multi-line value that ends with '==='
+	// this is a multi-line value that ends with recSep
 	kv.k = strings.TrimSuffix(s, ":")
 	var err error
 	lines, kv.v, err = extractMultiLineValue(lines)
@@ -211,18 +223,23 @@ func dumpKV(a []KV) {
 	}
 }
 
+var (
+	defTitle = "No Title"
+)
+
 func parseSection(path string) (*Section, error) {
 	kv, err := parseKVFile(path)
 	if err != nil {
+		fmt.Printf("Error parsing KV file: '%s'\n", path)
 		return nil, err
 	}
 	res := &Section{
 		SourceFilePath: path,
 		data:           kv,
 	}
-	res.Title, err = getV(kv, "Title")
-	if err != nil {
-		return nil, err
+	res.Title = getVSilent(kv, "Title", defTitle)
+	if res.Title == defTitle {
+		fmt.Printf("parseSection: no title for %s\n", path)
 	}
 	res.TitleSafe = makeURLSafe(res.Title)
 	res.BodyMarkdown, err = getV(kv, "Body")

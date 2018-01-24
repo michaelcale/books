@@ -3,8 +3,6 @@ package main
 import (
 	"bytes"
 	"strings"
-
-	"github.com/kjk/u"
 )
 
 // https://stackoverflow.com/questions/695438/safe-characters-for-friendly-url
@@ -71,7 +69,10 @@ func normalizeNewlines(d []byte) []byte {
 // return first line of d and the rest
 func bytesRemoveFirstLine(d []byte) (string, []byte) {
 	idx := bytes.IndexByte(d, 10)
-	u.PanicIf(-1 == idx)
+	//u.PanicIf(-1 == idx)
+	if -1 == idx {
+		return string(d), nil
+	}
 	l := d[:idx]
 	return string(l), d[idx+1:]
 }
