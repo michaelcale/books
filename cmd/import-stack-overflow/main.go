@@ -216,8 +216,8 @@ func genBook(title string, defaultLang string) {
 		examples := getExamplesForTopic(docTag.Id, t.Id)
 		sortExamples(examples)
 
-		dirChapter := fmt.Sprintf("%3d-%s", chapter, makeURLSafe(t.Title))
-		dirPath := filepath.Join("book", bookDir, dirChapter)
+		dirChapter := fmt.Sprintf("%03d-%s", chapter, makeURLSafe(t.Title))
+		dirPath := filepath.Join("books", bookDir, dirChapter)
 		err := os.MkdirAll(dirPath, 0755)
 		u.PanicIfErr(err)
 		chapterIndexPath := filepath.Join(dirPath, "index.txt")
@@ -234,11 +234,11 @@ func genBook(title string, defaultLang string) {
 					pinnedStr = "pinned"
 				}
 			*/
-			fileName := fmt.Sprintf("%3d-%s.md", section, makeURLSafe(ex.Title))
+			fileName := fmt.Sprintf("%03d-%s.md", section, makeURLSafe(ex.Title))
 			path := filepath.Join(dirPath, fileName)
 			writeSectionMust(path, ex)
 			//fmt.Printf("  %s %s '%s'\n", ex.Title, pinnedStr, fileName)
-			//fmt.Printf("  %3d-%s\n", section, fileName)
+			//fmt.Printf("  %03d-%s\n", section, fileName)
 			//fmt.Printf("  %s\n", fileName)
 			section += 10
 		}
@@ -296,6 +296,9 @@ func main() {
 	//printDocTagsMust()
 	timeStart := time.Now()
 	loadAll()
+	for _, book := range books[:10] {
+		genBook(book, "")
+	}
 	genBook("jQuery", "javascript")
 	fmt.Printf("Took %s\n", time.Since(timeStart))
 }

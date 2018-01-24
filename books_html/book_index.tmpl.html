@@ -13,18 +13,18 @@
 <body>
     <h1><a href="/">Books</a> / {{.TitleLong}}</h1>
 
-    <div class="hcenter">Chapters</div>
+    <div class="toc-header">Chapters</div>
     <div class="chapters-toc">
         {{range .Chapters}}
         <div class="chapters-toc-item">{{.No}}. <a href="{{.URL}}">{{.Title}}</a></div>
         {{end}}
     </div>
 
-    <div class="hcenter">Table Of Contents</div>
+    <div class="toc-header">Table Of Contents</div>
 
     <div>
         {{range .Chapters}}
-        <div>{{.No}} <a href="{{.URL}}">{{.Title}}</a></div>
+        <div>{{.No}}. <a href="{{.URL}}">{{.Title}}</a></div>
         <div>
             {{range .Sections}}
             <div class="toc-section">{{.No}}. <a href="{{.URL}}">{{.Title}}</a></div>

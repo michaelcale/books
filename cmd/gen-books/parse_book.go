@@ -295,7 +295,7 @@ func parseChapter(chapter *Chapter) error {
 
 func parseBook(bookName string) (*Book, error) {
 	bookNameSafe := makeURLSafe(bookName)
-	dir := filepath.Join("book", bookNameSafe)
+	dir := filepath.Join("books", bookNameSafe)
 	book := &Book{
 		Title:     bookName,
 		TitleLong: fmt.Sprintf("Essential %s", bookName),
