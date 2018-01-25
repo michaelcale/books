@@ -190,6 +190,16 @@ hr.toc-sep {
     grid-gap: 4px 4px;
 }
 
+/* dim toc on a book chapter page, to de-emphasize it visually, until user
+   hovers over the element */
+.chapter-toc-wrapper {
+    filter: opacity(0.6);
+}
+
+.chapter-toc-wrapper:hover {
+    filter: opacity(1);
+}
+
 .top-right {
     font-size: 0.8em;
     position: fixed;

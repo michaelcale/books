@@ -59,22 +59,23 @@
 
     <hr class="toc-sep">
 
-    <div class="toc-header">{{.Book.TitleLong}}</div>
+    <div class="chapter-toc-wrapper">
+        <div class="toc-header">{{.Book.TitleLong}}</div>
 
-    <div class="chapters-toc">
-        {{range .Book.Chapters}}
-            {{if .IsCurrent}}
-                <div class="chapters-toc-item">
-                     <span class="chap-no">{{.No}}.</span> <span class="is-current">{{.Title}}</span>
-                </div>
-            {{else}}
-                <div class="chapters-toc-item">
-                    <span class="chap-no">{{.No}}.</span> <a href="{{.URL}}">{{.Title}}</a>
-                </div>
+        <div class="chapters-toc">
+            {{range .Book.Chapters}}
+                {{if .IsCurrent}}
+                    <div class="chapters-toc-item">
+                            <span class="chap-no">{{.No}}.</span> <span class="is-current">{{.Title}}</span>
+                    </div>
+                {{else}}
+                    <div class="chapters-toc-item">
+                        <span class="chap-no">{{.No}}.</span> <a href="{{.URL}}">{{.Title}}</a>
+                    </div>
+                {{end}}
             {{end}}
-        {{end}}
+        </div>
     </div>
-
 
     <div class="top-right">
         <a href="{{.GitHubURL}}" target="_blank">{{.GitHubText}}</a>
