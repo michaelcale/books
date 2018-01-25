@@ -6,9 +6,11 @@ import (
 	"io"
 	"io/ioutil"
 	"path/filepath"
+	"strconv"
 	"strings"
 
 	"github.com/kjk/programming-books/pkg/mdutil"
+	"github.com/kjk/u"
 )
 
 // KV represents a key/value pair
@@ -120,15 +122,46 @@ func (c *Chapter) destFilePath() string {
 	return filepath.Join("books_html", "book", bookTitle, chapTitle, "index.html")
 }
 
+// IntroductionHTML retruns html version of Introduction:
+func (c *Chapter) IntroductionHTML() template.HTML {
+	s, err := getV(c.IndexKV, "Introduction")
+	if err != nil {
+		return template.HTML("")
+	}
+	html := markdownToHTML([]byte(s))
+	return template.HTML(html)
+}
+
+// SyntaxHTML retruns html version of Syntax:
+func (c *Chapter) SyntaxHTML() template.HTML {
+	s, err := getV(c.IndexKV, "Syntax")
+	if err != nil {
+		return template.HTML("")
+	}
+	html := markdownToHTML([]byte(s))
+	return template.HTML(html)
+}
+
+// RemarksHTML retruns html version of Remarks:
+func (c *Chapter) RemarksHTML() template.HTML {
+	s, err := getV(c.IndexKV, "Remarks")
+	if err != nil {
+		return template.HTML("")
+	}
+	html := markdownToHTML([]byte(s))
+	return template.HTML(html)
+}
+
 // Book represents a book
 type Book struct {
-	URL       string // used in index.tmpl.html
-	Title     string // used in index.tmpl.html
-	TitleLong string // used in book_index.tmpl.html
-	TitleSafe string
-	Chapters  []*Chapter
-	SourceDir string // dir where source markdown files are
-	DestDir   string // dif where destitation html files are
+	URL            string // used in index.tmpl.html
+	Title          string // used in index.tmpl.html
+	TitleLong      string // used in book_index.tmpl.html
+	TitleSafe      string
+	Chapters       []*Chapter
+	SourceDir      string // dir where source markdown files are
+	DestDir        string // dif where destitation html files are
+	SoContributors []int
 
 	cachedSectionsCount int
 }
@@ -176,16 +209,6 @@ func getVSilent(a []KV, k string, def string) string {
 		return def
 	}
 	return s
-}
-
-func readFileAsLines(path string) ([]string, error) {
-	d, err := ioutil.ReadFile(path)
-	if err != nil {
-		return nil, err
-	}
-	s := string(d)
-	res := strings.Split(s, "\n")
-	return res, nil
 }
 
 func extractMultiLineValue(lines []string) ([]string, string, error) {
@@ -243,7 +266,7 @@ value
 ===\n
 */
 func parseKVFile(path string) ([]KV, error) {
-	lines, err := readFileAsLines(path)
+	lines, err := mdutil.ReadFileAsLines(path)
 	var res []KV
 	var kv KV
 	for {
@@ -364,6 +387,55 @@ func parseChapter(chapter *Chapter) error {
 	return nil
 }
 
+func soContributorURL(userID int) string {
+	return fmt.Sprintf("https://stackoverflow.com/users/%d/", userID)
+}
+
+func loadSoContributorsMust(book *Book, path string) {
+	lines, err := mdutil.ReadFileAsLines(path)
+	u.PanicIfErr(err)
+	var ids []int
+	for _, line := range lines {
+		id, err := strconv.Atoi(line)
+		u.PanicIfErr(err)
+		ids = append(ids, id)
+	}
+	book.SoContributors = ids
+}
+
+// TODO: add github contributors
+func genContributorsMarkdown(soUserIDs []int) string {
+	if len(soUserIDs) == 0 {
+		return ""
+	}
+	lines := []string{
+		"Contributors from Stack Overflow:",
+	}
+	for _, userID := range soUserIDs {
+		s := fmt.Sprintf("* [%d](%s)", userID, soContributorURL(userID))
+		lines = append(lines, s)
+	}
+	return strings.Join(lines, "\n")
+}
+
+func genContributorsChapter(book *Book) *Chapter {
+	md := genContributorsMarkdown(book.SoContributors)
+	var indexKV []KV
+	kv := KV{
+		k: "Introduction",
+		v: md,
+	}
+	indexKV = append(indexKV, kv)
+	ch := &Chapter{
+		Book:      book,
+		IndexKV:   indexKV,
+		Title:     "Contributors",
+		TitleSafe: mdutil.MakeURLSafe("Contributors"),
+		No:        999,
+	}
+	return ch
+}
+
 func parseBook(bookName string) (*Book, error) {
 	bookNameSafe := mdutil.MakeURLSafe(bookName)
 	dir := filepath.Join("books", bookNameSafe)
@@ -394,8 +466,17 @@ func parseBook(bookName string) (*Book, error) {
 			ch.No = len(chapters)
 			continue
 		}
+
+		if fi.Name() == "so_contributors.txt" {
+			path := filepath.Join(dir, fi.Name())
+			loadSoContributorsMust(book, path)
+			continue
+		}
 		return nil, fmt.Errorf("Unexpected file at top-level: '%s'", fi.Name())
 	}
+	ch := genContributorsChapter(book)
+	ch.No = len(chapters) + 1
+	chapters = append(chapters, ch)
 	book.Chapters = chapters
 	fmt.Printf("Book '%s' %d chapters, %d sections\n", bookName, len(chapters), book.SectionsCount())
 	return book, nil

@@ -45,8 +45,8 @@ contributors.json
 }
 */
 
-// Contributors represents data in contributors.json
-type Contributors struct {
+// Contributor represents data in contributors.json
+type Contributor struct {
 	Id                             int
 	DocTopicId                     int
 	DocExampleId                   int
@@ -55,6 +55,12 @@ type Contributors struct {
 	CreationDate                   string
 	DeletionDate                   string
 	DocContributorDeletionReasonId int
+}
+
+func loadContibutors(path string) ([]*Contributor, error) {
+	var res []*Contributor
+	err := jsonDecodeGzipped(path, &res)
+	return res, err
 }
 
 /*

@@ -21,6 +21,7 @@ var (
 	gTopics         []Topic
 	gExamples       []*Example
 	gTopicHistories []TopicHistory
+	gContributors   []*Contributor
 	currDefaultLang string
 
 	// if true, we cleanup markdown => markdown
@@ -44,14 +45,19 @@ func mdFmt(src []byte, defaultLang string) ([]byte, error) {
 	return mdutil.Process(src, opts)
 }
 
-func calcExampleCount(docTag *DocTag) {
-	docID := docTag.Id
+func getTopicsByDocID(docID int) map[int]bool {
 	topics := make(map[int]bool)
 	for _, topic := range gTopics {
 		if topic.DocTagId == docID {
 			topics[topic.Id] = true
 		}
 	}
+	return topics
+}
+
+func calcExampleCount(docTag *DocTag) {
+	docID := docTag.Id
+	topics := getTopicsByDocID(docID)
 	n := 0
 	for _, ex := range gExamples {
 		if topics[ex.DocTopicId] {
@@ -96,6 +102,13 @@ func loadTopicHistoriesMust() []TopicHistory {
 	return topicHistories
 }
 
+func loadContributorsMust() []*Contributor {
+	path := path.Join("stack-overflow-docs-dump", "contributors.json.gz")
+	contributors, err := loadContibutors(path)
+	u.PanicIfErr(err)
+	return contributors
+}
+
 func loadExamplesMust() []*Example {
 	path := path.Join("stack-overflow-docs-dump", "examples.json.gz")
 	examples, err := loadExamples(path)
@@ -119,6 +132,7 @@ func loadAll() {
 	gTopics = loadTopicsMust()
 	gExamples = loadExamplesMust()
 	gTopicHistories = loadTopicHistoriesMust()
+	gContributors = loadContributorsMust()
 	fmt.Printf("loadAll took %s\n", time.Since(timeStart))
 }
 
@@ -185,7 +199,7 @@ func serFitsOneLine(s string) bool {
 	if strings.Contains(s, ":") {
 		return false
 	}
-	return true
+	return false
 }
 
 func isEmptyString(s string) bool {
@@ -214,7 +228,16 @@ func serFieldMarkdown(k, v string) string {
 		u.PanicIfErr(err)
 		return serField(k, string(d))
 	}
-	return serField(k, v)
+	u.PanicIf(strings.Contains(v, mdutil.KVRecordSeparator), "v contains KVRecordSeparator")
+	return fmt.Sprintf("%s:\n%s\n%s\n", k, v, mdutil.KVRecordSeparator)
+}
+
+func serFieldLong(k, v string) string {
+	if isEmptyString(v) {
+		return ""
+	}
+	u.PanicIf(strings.Contains(v, mdutil.KVRecordSeparator), "v contains KVRecordSeparator")
+	return fmt.Sprintf("%s:\n%s\n%s\n", k, v, mdutil.KVRecordSeparator)
 }
 
 func shortenVersion(s string) string {
@@ -227,29 +250,29 @@ func shortenVersion(s string) string {
 func writeIndexTxtMust(path string, topic *Topic) {
 	s := serField("Title", topic.Title)
 	versions := shortenVersion(topic.VersionsJson)
-	s += serField("Versions", versions)
+	s += serFieldMarkdown("Versions", versions)
 	if isEmptyString(versions) {
-		s += serField("VersionsHtml", topic.HelloWorldVersionsHtml)
+		s += serFieldLong("VersionsHtml", topic.HelloWorldVersionsHtml)
 	}
 
 	s += serFieldMarkdown("Introduction", topic.IntroductionMarkdown)
 	if isEmptyString(topic.IntroductionMarkdown) {
-		s += serField("IntroductionHtml", topic.IntroductionHtml)
+		s += serFieldLong("IntroductionHtml", topic.IntroductionHtml)
 	}
 
 	s += serFieldMarkdown("Syntax", topic.SyntaxMarkdown)
 	if isEmptyString(topic.SyntaxMarkdown) {
-		s += serField("SyntaxHtml", topic.SyntaxHtml)
+		s += serFieldLong("SyntaxHtml", topic.SyntaxHtml)
 	}
 
 	s += serFieldMarkdown("Parameters", topic.ParametersMarkdown)
 	if isEmptyString(topic.ParametersMarkdown) {
-		s += serField("ParametersHtml", topic.ParametersHtml)
+		s += serFieldLong("ParametersHtml", topic.ParametersHtml)
 	}
 
 	s += serFieldMarkdown("Remarks", topic.RemarksMarkdown)
 	if isEmptyString(topic.RemarksMarkdown) {
-		s += serField("RemarksHtml", topic.RemarksHtml)
+		s += serFieldLong("RemarksHtml", topic.RemarksHtml)
 	}
 
 	createDirForFileMust(path)
@@ -265,7 +288,7 @@ func writeSectionMust(path string, example *Example) {
 	s += serField("Score", strconv.Itoa(example.Score))
 	s += serFieldMarkdown("Body", example.BodyMarkdown)
 	if isEmptyString(example.BodyMarkdown) {
-		s += serField("BodyHtml", example.BodyHtml)
+		s += serFieldLong("BodyHtml", example.BodyHtml)
 	}
 
 	createDirForFileMust(path)
@@ -280,6 +303,36 @@ func printEmptyExamples() {
 	for _, ex := range emptyExamplexs {
 		fmt.Printf("empty example: %s, len(BodyHtml): %d\n", ex.Title, len(ex.BodyHtml))
 	}
+}
+
+func getContributors(docID int) []int {
+	topics := getTopicsByDocID(docID)
+	contributors := make(map[int]bool)
+	for _, c := range gContributors {
+		topicID := c.DocTopicId
+		if _, ok := topics[topicID]; ok {
+			contributors[c.UserId] = true
+		}
+	}
+	var res []int
+	for id := range contributors {
+		res = append(res, id)
+	}
+	return res
+}
+
+func genContributors(bookDstDir string, docID int) {
+	contributors := getContributors(docID)
+	var a []string
+	for _, id := range contributors {
+		a = append(a, strconv.Itoa(id))
+	}
+	s := strings.Join(a, "\n")
+	path := filepath.Join(bookDstDir, "so_contributors.txt")
+	createDirForFileMust(path)
+	err := ioutil.WriteFile(path, []byte(s), 0644)
+	u.PanicIfErr(err)
+	//fmt.Printf("Wrote %s\n", path)
 }
 
 func genBook(book *mdutil.Book, defaultLang string) {
@@ -322,6 +375,8 @@ func genBook(book *mdutil.Book, defaultLang string) {
 		}
 		nSections += len(examples)
 	}
+	genContributors(filepath.Join("books", bookDstDir), docTag.Id)
+
 	fmt.Printf("Imported %s (%d chapters, %d sections) in %s\n", name, nChapters, nSections, time.Since(timeStart))
 }
 

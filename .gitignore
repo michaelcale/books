@@ -3,3 +3,4 @@ books_html/book/
 books_html/index.html
 books_html/about.html
 cmd/gen-books/gen-books
+cmd/import-stack-overflow/import-stack-overflow

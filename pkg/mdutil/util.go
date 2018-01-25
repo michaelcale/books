@@ -1,6 +1,9 @@
 package mdutil
 
-import "strings"
+import (
+	"io/ioutil"
+	"strings"
+)
 
 const (
 	// KVRecordSeparator is a (hopefully) unique string that separates records in Key/Value file
@@ -63,4 +66,15 @@ func MakeURLSafe(s string) string {
 	s = strings.ToLower(s)
 	s = shortenConsequitve(s, "-")
 	return s
+}
+
+// ReadFileAsLines reads a file as lines
+func ReadFileAsLines(path string) ([]string, error) {
+	d, err := ioutil.ReadFile(path)
+	if err != nil {
+		return nil, err
+	}
+	s := string(d)
+	res := strings.Split(s, "\n")
+	return res, nil
 }

@@ -96,6 +96,7 @@ func genAbout() {
 }
 
 func genBookSection(section *Section) {
+	// TODO: move as a method on Section
 	if section.BodyHTML == "" {
 		html := markdownToHTML([]byte(section.BodyMarkdown))
 		section.BodyHTML = template.HTML(html)

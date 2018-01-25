@@ -16,8 +16,30 @@
         <a href="{{.Book.URL}}">{{.Book.Title}}</a> / {{.Title}}</h1>
 
     {{if .VersionsHTML}}
+    <div><b>Versions:</b></div>
     <div>
         {{.VersionsHTML}}
+    </div>
+    {{end}}
+
+    {{if .IntroductionHTML}}
+    <div><b>Introduction:</b></div>
+    <div>
+        {{.IntroductionHTML}}
+    </div>
+    {{end}}
+
+    {{if .SyntaxHTML}}
+    <div><b>Syntax:</b></div>
+    <div>
+        {{.SyntaxHTML}}
+     </div>
+     {{end}}
+
+    {{if .RemarksHTML}}
+    <div><b>Remarks:</b></div>
+     <div>
+        {{.RemarksHTML}}
     </div>
     {{end}}
 
