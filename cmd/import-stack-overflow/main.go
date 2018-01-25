@@ -290,7 +290,7 @@ func genBook(title string, defaultLang string) {
 		examples := getExamplesForTopic(docTag.Id, t.Id)
 		sortExamples(examples)
 
-		dirChapter := fmt.Sprintf("%03d-%s", chapter, mdutil.MakeURLSafe(t.Title))
+		dirChapter := fmt.Sprintf("%04d-%s", chapter, mdutil.MakeURLSafe(t.Title))
 		dirPath := filepath.Join("books", bookDir, dirChapter)
 		chapterIndexPath := filepath.Join(dirPath, "index.txt")
 		writeIndexTxtMust(chapterIndexPath, t)

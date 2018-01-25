@@ -16,6 +16,8 @@ var (
 	chapterTmpl   *template.Template
 	sectionTmpl   *template.Template
 	aboutTmpl     *template.Template
+
+	gitHubBaseURL = "https://github.com/kjk/programming-books"
 )
 
 func createDirForFileMust(path string) {
@@ -76,9 +78,13 @@ func execTemplateToFileMust(name string, data interface{}, path string) {
 
 func genIndex(books []*Book) {
 	d := struct {
-		Books []*Book
+		Books      []*Book
+		GitHubText string
+		GitHubURL  string
 	}{
-		Books: books,
+		Books:      books,
+		GitHubText: "GitHub",
+		GitHubURL:  gitHubBaseURL,
 	}
 	path := filepath.Join("books_html", "index.html")
 	execTemplateToFileMust("index.tmpl.html", d, path)

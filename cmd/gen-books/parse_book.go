@@ -43,6 +43,18 @@ func (s *Section) Book() *Book {
 	return s.Chapter.Book
 }
 
+// GitHubText returns text we display in GitHub box
+func (s *Section) GitHubText() string {
+	return "Edit on GitHub"
+}
+
+// GitHubURL returns url to GitHub repo
+func (s *Section) GitHubURL() string {
+	uri := s.Chapter.GitHubURL() + "/" + filepath.Base(s.SourceFilePath)
+	uri = strings.Replace(uri, "/tree/", "/blob/", -1)
+	return uri
+}
+
 // URL returns url of .html file with this section
 func (s *Section) URL() string {
 	chap := s.Chapter
@@ -72,6 +84,16 @@ type Chapter struct {
 	Sections   []*Section
 	No         int
 	IsCurrent  bool
+}
+
+// GitHubText returns text we display in GitHub box
+func (c *Chapter) GitHubText() string {
+	return "Edit on GitHub"
+}
+
+// GitHubURL returns url to GitHub repo
+func (c *Chapter) GitHubURL() string {
+	return c.Book.GitHubURL() + "/" + c.ChapterDir
 }
 
 // HTMLVersions returns html version of versions
@@ -109,6 +131,16 @@ type Book struct {
 	DestDir   string // dif where destitation html files are
 
 	cachedSectionsCount int
+}
+
+// GitHubText returns text we show in GitHub link
+func (b *Book) GitHubText() string {
+	return "Edit on GitHub"
+}
+
+// GitHubURL returns link to GitHub for this book
+func (b *Book) GitHubURL() string {
+	return gitHubBaseURL + "/tree/master/books/" + filepath.Base(b.DestDir)
 }
 
 // SectionsCount returns total number of sections
