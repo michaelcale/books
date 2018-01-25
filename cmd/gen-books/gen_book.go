@@ -15,6 +15,7 @@ var (
 	bookIndexTmpl *template.Template
 	chapterTmpl   *template.Template
 	sectionTmpl   *template.Template
+	aboutTmpl     *template.Template
 )
 
 func createDirForFileMust(path string) {
@@ -50,6 +51,8 @@ func loadTemplateMust(name string) *template.Template {
 		ref = &chapterTmpl
 	case "section.tmpl.html":
 		ref = &sectionTmpl
+	case "about.tmpl.html":
+		ref = &aboutTmpl
 	default:
 		log.Fatalf("unknown template '%s'\n", name)
 	}
@@ -79,6 +82,11 @@ func genIndex(books []*Book) {
 	}
 	path := filepath.Join("books_html", "index.html")
 	execTemplateToFileMust("index.tmpl.html", d, path)
+}
+
+func genAbout() {
+	path := filepath.Join("books_html", "about.html")
+	execTemplateToFileMust("about.tmpl.html", nil, path)
 }
 
 func genBookSection(section *Section) {

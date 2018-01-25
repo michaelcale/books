@@ -2,3 +2,4 @@ localhost:8080
 root books_html
 errors stdout
 log stdout
+ext .html

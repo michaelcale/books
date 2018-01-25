@@ -34,6 +34,7 @@ func main() {
 		fmt.Printf("Generating book '%s' took %s\n", bookName, time.Since(timeStart))
 	}
 	genIndex(books)
+	genAbout()
 	for _, book := range books {
 		genBook(book)
 		fmt.Printf("Generated %s, %d chapters, %d sections\n", book.Title, len(book.Chapters), book.SectionsCount())
