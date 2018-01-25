@@ -188,6 +188,7 @@ func sortExamples(a []*Example) {
 	})
 }
 
+// can we serialize a given value on a single line or must use multiple lines?
 func serFitsOneLine(s string) bool {
 	if len(s) > 80 {
 		return false
@@ -199,7 +200,7 @@ func serFitsOneLine(s string) bool {
 	if strings.Contains(s, ":") {
 		return false
 	}
-	return false
+	return true
 }
 
 func isEmptyString(s string) bool {
