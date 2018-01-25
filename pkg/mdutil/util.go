@@ -4,7 +4,7 @@ import "strings"
 
 const (
 	// KVRecordSeparator is a (hopefully) unique string that separates records in Key/Value file
-	KVRecordSeparator = "|======"
+	KVRecordSeparator = "|======|"
 )
 
 // https://stackoverflow.com/questions/695438/safe-characters-for-friendly-url

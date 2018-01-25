@@ -108,6 +108,7 @@ type DocTag struct {
 	//CreationDate         string
 	HelloWorldDocTopicId int
 	TopicCount           int
+	ExampleCount         int
 }
 
 func loadDocTags(path string) ([]DocTag, error) {

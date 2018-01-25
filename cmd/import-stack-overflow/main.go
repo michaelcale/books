@@ -16,60 +16,6 @@ import (
 	blackfriday "gopkg.in/russross/blackfriday.v2"
 )
 
-var booksToImport2 = []string{
-	"C# Language",
-}
-
-var booksToImport = []string{
-	// Books in http://books.goalkicker.com/:
-
-	".NET Framework",
-	"algorithm",
-	"Android",
-	"Angular 2",
-	"AngularJS",
-	"Bash",
-	"C Language",
-	"C++",
-	"C# Language",
-	"CSS",
-	"Entity Framework Core",
-	"excel-vba",
-	"Git",
-	"Haskell Language",
-	"HTML",
-	"html5-canvas",
-	"iOS",
-	"Java Language",
-	"JavaScript",
-	"jQuery",
-	"latex",
-	"GNU/Linux",
-	"MATLAB Language",
-	"Microsoft SQL Server",
-	"MongoDB",
-	"MySQL",
-	"Node.js",
-	"Objective-C Language",
-	"Oracle Database",
-	"Perl Language",
-	"PHP",
-	"postgresql",
-	"PowerShell",
-	"Python Language",
-	"R Language",
-	"Ruby on Rails",
-	"Ruby Language",
-	"SQL",
-	"Swift Language",
-	"TypeScript",
-	"VBA",
-	"Visual Basic .NET Language",
-
-	// other books
-	"Go",
-}
-
 var (
 	gDocTags        []DocTag
 	gTopics         []Topic
@@ -84,6 +30,8 @@ var (
 	emptyExamplexs []*Example
 	// if true, prints more information
 	verbose = false
+
+	booksToImport = mdutil.BooksToProcess
 )
 
 func mdToHTML(d []byte) []byte {
@@ -96,13 +44,34 @@ func mdFmt(src []byte, defaultLang string) ([]byte, error) {
 	return mdutil.Process(src, opts)
 }
 
+func calcExampleCount(docTag *DocTag) {
+	docID := docTag.Id
+	topics := make(map[int]bool)
+	for _, topic := range gTopics {
+		if topic.DocTagId == docID {
+			topics[topic.Id] = true
+		}
+	}
+	n := 0
+	for _, ex := range gExamples {
+		if topics[ex.DocTopicId] {
+			n++
+		}
+	}
+	docTag.ExampleCount = n
+}
+
 func printDocTagsMust() {
-	docTags := loadDocTagsMust()
-	sort.Slice(docTags, func(i, j int) bool {
-		return docTags[i].TopicCount < docTags[j].TopicCount
+	loadAll()
+	for i := range gDocTags {
+		docTag := &gDocTags[i]
+		calcExampleCount(docTag)
+	}
+	sort.Slice(gDocTags, func(i, j int) bool {
+		return gDocTags[i].ExampleCount < gDocTags[j].ExampleCount
 	})
-	for _, dc := range docTags {
-		fmt.Printf("%s: %s, %d\n", dc.Title, dc.Tag, dc.TopicCount)
+	for _, dc := range gDocTags {
+		fmt.Printf(`{ "%s", "", false, %d, %d },%s`, dc.Title, dc.ExampleCount, dc.TopicCount, "\n")
 	}
 }
 
@@ -313,11 +282,13 @@ func printEmptyExamples() {
 	}
 }
 
-func genBook(title string, defaultLang string) {
+func genBook(book *mdutil.Book, defaultLang string) {
 	timeStart := time.Now()
+	name := book.Name
+	newName := book.NewName()
 	currDefaultLang = defaultLang
-	bookDir := mdutil.MakeURLSafe(title)
-	docTag := findDocTagByTitleMust(gDocTags, title)
+	bookDstDir := mdutil.MakeURLSafe(newName)
+	docTag := findDocTagByTitleMust(gDocTags, name)
 	//fmt.Printf("%s: docID: %d\n", title, docTag.Id)
 	topics := getTopicsByDocTagID(docTag.Id)
 	nChapters := len(topics)
@@ -328,7 +299,7 @@ func genBook(title string, defaultLang string) {
 		sortExamples(examples)
 
 		dirChapter := fmt.Sprintf("%04d-%s", chapter, mdutil.MakeURLSafe(t.Title))
-		dirPath := filepath.Join("books", bookDir, dirChapter)
+		dirPath := filepath.Join("books", bookDstDir, dirChapter)
 		chapterIndexPath := filepath.Join(dirPath, "index.txt")
 		writeIndexTxtMust(chapterIndexPath, t)
 		//fmt.Printf("%s\n", dirChapter)
@@ -351,15 +322,21 @@ func genBook(title string, defaultLang string) {
 		}
 		nSections += len(examples)
 	}
-	fmt.Printf("Imported %s (%d chapters, %d sections) in %s\n", title, nChapters, nSections, time.Since(timeStart))
+	fmt.Printf("Imported %s (%d chapters, %d sections) in %s\n", name, nChapters, nSections, time.Since(timeStart))
 }
 
 func main() {
-	//printDocTagsMust()
+	if false {
+		printDocTagsMust()
+		return
+	}
 	timeStart := time.Now()
 	loadAll()
-	for _, bookTitle := range booksToImport {
-		genBook(bookTitle, "")
+	for _, bookInfo := range booksToImport {
+		if !bookInfo.Import {
+			continue
+		}
+		genBook(bookInfo, "")
 	}
 	fmt.Printf("Took %s\n", time.Since(timeStart))
 	printEmptyExamples()

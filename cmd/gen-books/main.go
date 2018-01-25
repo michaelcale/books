@@ -3,41 +3,34 @@ package main
 import (
 	"fmt"
 	"runtime"
+	"sort"
 	"sync"
 	"time"
+
+	"github.com/kjk/programming-books/pkg/mdutil"
 )
 
-var bookDirs = []string{
-	".NET Framework",
-	//"algorithm",
-	"Android",
-	//"Angular 2",
-	//"AngularJS",
-	"Bash",
-	"C Language",
-	"C++",
-	"C# Language",
-	"CSS",
-	"jQuery",
-	"Go",
-	"PowerShell",
-	"postgresql",
-	"Swift Language",
-	"TypeScript",
-	"Node.js",
-	"Git",
-	"HTML",
-	"html5-canvas",
-	"MySQL",
-	"Python Language",
-	"Ruby Language",
+func getBooksToImport() []*mdutil.Book {
+	var res []*mdutil.Book
+	for _, bookInfo := range mdutil.BooksToProcess {
+		if !bookInfo.Import {
+			continue
+		}
+		res = append(res, bookInfo)
+	}
+	sort.Slice(res, func(i, j int) bool {
+		return res[i].NewName() < res[j].NewName()
+	})
+	return res
 }
 
 func main() {
 	timeStart := time.Now()
 	var books []*Book
-	for _, bookName := range bookDirs {
+	booksToImport := getBooksToImport()
+	for _, bookInfo := range booksToImport {
 		timeStart := time.Now()
+		bookName := bookInfo.NewName()
 		book, err := parseBook(bookName)
 		if err != nil {
 			fmt.Printf("Error '%s' parsing book '%s'\n", err, bookName)
