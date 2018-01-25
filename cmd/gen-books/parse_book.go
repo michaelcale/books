@@ -96,9 +96,9 @@ func (c *Chapter) GitHubURL() string {
 	return c.Book.GitHubURL() + "/" + c.ChapterDir
 }
 
-// HTMLVersions returns html version of versions
-func (c *Chapter) HTMLVersions() template.HTML {
-	s, err := getV(c.IndexKV, "HtmlVersions")
+// VersionsHTML returns html version of versions
+func (c *Chapter) VersionsHTML() template.HTML {
+	s, err := getV(c.IndexKV, "VersionsHtml")
 	if err != nil {
 		s = ""
 	}
@@ -293,12 +293,16 @@ func parseSection(path string) (*Section, error) {
 	}
 	res.TitleSafe = mdutil.MakeURLSafe(res.Title)
 	res.BodyMarkdown, err = getV(kv, "Body")
-	if err != nil {
-		dumpKV(kv)
-		err = fmt.Errorf("parseSection('%s'), err: '%s'", path, err)
-		return nil, err
+	if err == nil {
+		return res, nil
 	}
-	return res, nil
+	s, err := getV(kv, "BodyHtml")
+	res.BodyHTML = template.HTML(s)
+	if err == nil {
+		return res, nil
+	}
+	dumpKV(kv)
+	return nil, fmt.Errorf("parseSection('%s'), err: '%s'", path, err)
 }
 
 func refSectionSetCurrent(refs []SectionRef, activeNo int) []SectionRef {

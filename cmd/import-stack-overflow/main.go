@@ -7,6 +7,7 @@ import (
 	"path"
 	"path/filepath"
 	"sort"
+	"strconv"
 	"strings"
 	"time"
 
@@ -230,10 +231,12 @@ func serField(k, v string) string {
 	if serFitsOneLine(v) {
 		return fmt.Sprintf("%s: %s\n", k, v)
 	}
+	u.PanicIf(strings.Contains(v, mdutil.KVRecordSeparator), "v contains KVRecordSeparator")
+
 	return fmt.Sprintf("%s:\n%s\n%s\n", k, v, mdutil.KVRecordSeparator)
 }
 
-func serFieldMd(k, v string) string {
+func serFieldMarkdown(k, v string) string {
 	if isEmptyString(v) {
 		return ""
 	}
@@ -254,12 +257,31 @@ func shortenVersion(s string) string {
 
 func writeIndexTxtMust(path string, topic *Topic) {
 	s := serField("Title", topic.Title)
-	s += serField("Versions", shortenVersion(topic.VersionsJson))
-	s += serField("HtmlVersions", topic.HelloWorldVersionsHtml)
-	s += serFieldMd("Introduction", topic.IntroductionMarkdown)
-	s += serFieldMd("Syntax", topic.SyntaxMarkdown)
-	s += serFieldMd("Parameters", topic.ParametersMarkdown)
-	s += serFieldMd("Remarks", topic.RemarksMarkdown)
+	versions := shortenVersion(topic.VersionsJson)
+	s += serField("Versions", versions)
+	if isEmptyString(versions) {
+		s += serField("VersionsHtml", topic.HelloWorldVersionsHtml)
+	}
+
+	s += serFieldMarkdown("Introduction", topic.IntroductionMarkdown)
+	if isEmptyString(topic.IntroductionMarkdown) {
+		s += serField("IntroductionHtml", topic.IntroductionHtml)
+	}
+
+	s += serFieldMarkdown("Syntax", topic.SyntaxMarkdown)
+	if isEmptyString(topic.SyntaxMarkdown) {
+		s += serField("SyntaxHtml", topic.SyntaxHtml)
+	}
+
+	s += serFieldMarkdown("Parameters", topic.ParametersMarkdown)
+	if isEmptyString(topic.ParametersMarkdown) {
+		s += serField("ParametersHtml", topic.ParametersHtml)
+	}
+
+	s += serFieldMarkdown("Remarks", topic.RemarksMarkdown)
+	if isEmptyString(topic.RemarksMarkdown) {
+		s += serField("RemarksHtml", topic.RemarksHtml)
+	}
 
 	createDirForFileMust(path)
 	err := ioutil.WriteFile(path, []byte(s), 0644)
@@ -271,7 +293,11 @@ func writeIndexTxtMust(path string, topic *Topic) {
 
 func writeSectionMust(path string, example *Example) {
 	s := serField("Title", example.Title)
-	s += serFieldMd("Body", example.BodyMarkdown)
+	s += serField("Score", strconv.Itoa(example.Score))
+	s += serFieldMarkdown("Body", example.BodyMarkdown)
+	if isEmptyString(example.BodyMarkdown) {
+		s += serField("BodyHtml", example.BodyHtml)
+	}
 
 	createDirForFileMust(path)
 	err := ioutil.WriteFile(path, []byte(s), 0644)
@@ -311,8 +337,7 @@ func genBook(title string, defaultLang string) {
 
 		section := 10
 		for _, ex := range examples {
-			s := ex.BodyMarkdown
-			if len(s) == 0 {
+			if isEmptyString(ex.BodyMarkdown) && isEmptyString(ex.BodyHtml) {
 				emptyExamplexs = append(emptyExamplexs, ex)
 				continue
 			}
@@ -337,5 +362,5 @@ func main() {
 		genBook(bookTitle, "")
 	}
 	fmt.Printf("Took %s\n", time.Since(timeStart))
-	//printEmptyExamples()
+	printEmptyExamples()
 }

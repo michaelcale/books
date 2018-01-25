@@ -232,11 +232,11 @@ type TopicHistory struct {
 	DocTopicId            int
 	DocExampleId          int
 	//CreationDate            string
-	RevisionNumber int
-	//CreationUserId          int
-	//CreationUserDisplayName string
-	Comment string
-	Text    string
+	RevisionNumber          int
+	CreationUserId          int
+	CreationUserDisplayName string
+	Comment                 string
+	Text                    string
 }
 
 func loadTopicHistories(path string) ([]TopicHistory, error) {
@@ -323,10 +323,10 @@ type Topic struct {
 	//ViewCount int
 	//LastEditDate      string
 	//ContributorCount int
-	//IntroductionHtml        string
-	//SyntaxHtml              string
-	//ParametersHtml          string
-	//RemarksHtml             string
+	IntroductionHtml       string
+	SyntaxHtml             string
+	ParametersHtml         string
+	RemarksHtml            string
 	HelloWorldVersionsHtml string
 	VersionsJson           string
 	ExampleCount           int
