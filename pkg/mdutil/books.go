@@ -1236,7 +1236,7 @@ var booksSubset = []*Book{
 	{"yii2", "", false, 70, 21},
 	{"Qt", "", false, 70, 24},
 	{"selenium-webdriver", "", false, 70, 29},
-	{"jQuery", "", false, 72, 18},
+	{"jQuery", "", true, 72, 18},
 	{"Vue.js", "", true, 72, 26},
 	{"sharepoint", "", false, 73, 10},
 	{"Design patterns", "", false, 73, 32},
