@@ -22,6 +22,8 @@ h1 {
 
 .chap-no {
     color: lightslategray;
+    display: inline-block;
+    width: 2em;
 }
 
 .is-current {
@@ -55,7 +57,7 @@ table.book-list th {
 }
 
 .toc-section {
-    padding-left: 2em;
+    padding-left: 1em;
 }
 
 .toc-header {
