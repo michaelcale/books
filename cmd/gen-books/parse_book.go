@@ -152,6 +152,16 @@ func (c *Chapter) RemarksHTML() template.HTML {
 	return template.HTML(html)
 }
 
+// ContributorsHTML retruns html version of Contributors:
+func (c *Chapter) ContributorsHTML() template.HTML {
+	s, err := getV(c.IndexKV, "Contributors")
+	if err != nil {
+		return template.HTML("")
+	}
+	html := markdownToHTML([]byte(s))
+	return template.HTML(html)
+}
+
 // Book represents a book
 type Book struct {
 	URL            string // used in index.tmpl.html
@@ -422,7 +432,7 @@ func genContributorsChapter(book *Book) *Chapter {
 	md := genContributorsMarkdown(book.SoContributors)
 	var indexKV []KV
 	kv := KV{
-		k: "Introduction",
+		k: "Contributors",
 		v: md,
 	}
 	indexKV = append(indexKV, kv)

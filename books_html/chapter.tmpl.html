@@ -15,6 +15,13 @@
         <a href="/">Books</a> /
         <a href="{{.Book.URL}}">{{.Book.Title}}</a> / {{.Title}}</h1>
 
+    {{if .ContributorsHTML}}
+    <div><b>Contributors:</b></div>
+    <div>
+        {{.ContributorsHTML}}
+    </div>
+    {{end}}
+
     {{if .VersionsHTML}}
     <div><b>Versions:</b></div>
     <div>
