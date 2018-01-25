@@ -12,6 +12,7 @@ import (
 
 	"github.com/kjk/programming-books/pkg/mdutil"
 	"github.com/kjk/u"
+	blackfriday "gopkg.in/russross/blackfriday.v2"
 )
 
 var booksToImport2 = []string{
@@ -83,6 +84,16 @@ var (
 	// if true, prints more information
 	verbose = false
 )
+
+func mdToHTML(d []byte) []byte {
+	//r := blackfriday.NewHTMLRenderer()
+	return blackfriday.Run(d)
+}
+
+func mdFmt(src []byte, defaultLang string) ([]byte, error) {
+	opts := &mdutil.Options{DefaultLang: defaultLang}
+	return mdutil.Process(src, opts)
+}
 
 func printDocTagsMust() {
 	docTags := loadDocTagsMust()

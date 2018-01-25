@@ -111,7 +111,6 @@ func genBookChapter(chapter *Chapter) {
 
 	path := chapter.destFilePath()
 	execTemplateToFileSilentMust("chapter.tmpl.html", chapter, path)
-
 }
 
 func setCurrentChapter(chapters []*Chapter, current int) {
