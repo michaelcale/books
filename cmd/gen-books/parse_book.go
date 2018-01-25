@@ -50,7 +50,7 @@ func (s *Section) URL() string {
 	bookTitle := book.TitleSafe
 	chapTitle := chap.TitleSafe
 	sectionTitle := s.TitleSafe
-	return fmt.Sprintf("/book/%s/%s/%s.html", bookTitle, chapTitle, sectionTitle)
+	return fmt.Sprintf("/book/%s/%s/%s", bookTitle, chapTitle, sectionTitle)
 }
 
 func (s *Section) destFilePath() string {
@@ -88,7 +88,7 @@ func (c *Chapter) URL() string {
 	book := c.Book
 	bookTitle := book.TitleSafe
 	chapTitle := c.TitleSafe
-	return fmt.Sprintf("/book/%s/%s/index.html", bookTitle, chapTitle)
+	return fmt.Sprintf("/book/%s/%s/", bookTitle, chapTitle)
 }
 
 func (c *Chapter) destFilePath() string {
