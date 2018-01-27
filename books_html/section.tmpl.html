@@ -23,7 +23,7 @@
         <a href="{{.Chapter.URL}}">{{.Chapter.Title}}</a> / <b>{{.Title}}</b>
 
         <div class="section-sections-toc">
-        {{range .SectionRefs}}
+        {{range .Siblings}}
             {{if .IsCurrent}}
                 <div><span class="chap-no">{{.No}}.</span> <span class="is-current">{{.Title}}</span></div>
             {{else}}

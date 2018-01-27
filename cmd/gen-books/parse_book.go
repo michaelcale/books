@@ -13,15 +13,6 @@ import (
 	"github.com/kjk/u"
 )
 
-// SectionRef describes a Section information within a list of sections of a chapter
-type SectionRef struct {
-	IsCurrent bool
-	ID        string
-	Title     string
-	URL       string
-	No        int
-}
-
 // Section represents a part of a chapter
 type Section struct {
 	// stable, globally unique (across all bookd) id
@@ -36,10 +27,11 @@ type Section struct {
 	BodyMarkdown   string
 	// TODO: we should convert all HTML content to markdown
 	BodyHTML template.HTML
-	// TODO: SectionRef is almost the same as Section, so add IsCurrent to Section
-	// and convert SectionRefs to be SiblingSections []Section
-	SectionRefs []SectionRef
-	doc         kvstore.Doc
+
+	doc kvstore.Doc
+
+	Siblings  []Section
+	IsCurrent bool // only used when part of SiblingSections
 }
 
 // Book retuns book this section belongs to
@@ -262,8 +254,8 @@ func parseSection(path string) (*Section, error) {
 	return nil, fmt.Errorf("parseSection('%s'), err: '%s'", path, err)
 }
 
-func refSectionSetCurrent(refs []SectionRef, activeNo int) []SectionRef {
-	var res []SectionRef
+func sectionSiblingsSetCurrent(refs []Section, activeNo int) []Section {
+	var res []Section
 	for i, ref := range refs {
 		ref.IsCurrent = (i == activeNo)
 		res = append(res, ref)
@@ -271,19 +263,19 @@ func refSectionSetCurrent(refs []SectionRef, activeNo int) []SectionRef {
 	return res
 }
 
-func buildSectionRefs(sections []*Section) {
-	var refs []SectionRef
+func buildSectionSiblings(sections []*Section) {
+	// build a template
+	var siblings []Section
 	for i, section := range sections {
-		ref := SectionRef{
-			IsCurrent: false,
-			Title:     section.Title,
-			URL:       section.URL(),
-			No:        i + 1,
-		}
-		refs = append(refs, ref)
+		sibling := *section // making a copy, we can't touch the original
+		sibling.No = i + 1
+		siblings = append(siblings, sibling)
 	}
+	// for each section, copy a template and set IsCurrent for this section
 	for i, section := range sections {
-		section.SectionRefs = refSectionSetCurrent(refs, i)
+		copy := append([]Section(nil), siblings...)
+		copy[i].IsCurrent = true
+		section.Siblings = copy
 	}
 }
 
@@ -332,7 +324,7 @@ func parseChapter(chapter *Chapter) error {
 		section.No = len(sections) + 1
 		sections = append(sections, section)
 	}
-	buildSectionRefs(sections)
+	buildSectionSiblings(sections)
 	chapter.Sections = sections
 	return nil
 }
