@@ -73,7 +73,7 @@ func main() {
 			genBook(b)
 			<-sem
 			wg.Done()
-			fmt.Printf("Generated %s, %d chapters, %d sections\n", b.Title, len(b.Chapters), b.SectionsCount())
+			fmt.Printf("Generated %s, %d chapters, %d articles\n", b.Title, len(b.Chapters), b.ArticlesCount())
 		}(book)
 	}
 	wg.Wait()

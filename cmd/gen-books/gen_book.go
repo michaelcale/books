@@ -14,7 +14,7 @@ var (
 	indexTmpl     *template.Template
 	bookIndexTmpl *template.Template
 	chapterTmpl   *template.Template
-	sectionTmpl   *template.Template
+	articleTmpl   *template.Template
 	aboutTmpl     *template.Template
 
 	gitHubBaseURL = "https://github.com/kjk/programming-books"
@@ -51,8 +51,8 @@ func loadTemplateMust(name string) *template.Template {
 		ref = &bookIndexTmpl
 	case "chapter.tmpl.html":
 		ref = &chapterTmpl
-	case "section.tmpl.html":
-		ref = &sectionTmpl
+	case "article.tmpl.html":
+		ref = &articleTmpl
 	case "about.tmpl.html":
 		ref = &aboutTmpl
 	default:
@@ -95,20 +95,20 @@ func genAbout() {
 	execTemplateToFileMust("about.tmpl.html", nil, path)
 }
 
-func genBookSection(section *Section) {
-	// TODO: move as a method on Section
-	if section.BodyHTML == "" {
-		defLang := getDefaultLangForBook(section.Book().Title)
-		html := markdownToHTML([]byte(section.BodyMarkdown), defLang)
-		section.BodyHTML = template.HTML(html)
+func genBookArticle(article *Article) {
+	// TODO: move as a method on Article
+	if article.BodyHTML == "" {
+		defLang := getDefaultLangForBook(article.Book().Title)
+		html := markdownToHTML([]byte(article.BodyMarkdown), defLang)
+		article.BodyHTML = template.HTML(html)
 	}
-	path := section.destFilePath()
-	execTemplateToFileSilentMust("section.tmpl.html", section, path)
+	path := article.destFilePath()
+	execTemplateToFileSilentMust("article.tmpl.html", article, path)
 }
 
 func genBookChapter(chapter *Chapter) {
-	for _, section := range chapter.Sections {
-		genBookSection(section)
+	for _, article := range chapter.Articles {
+		genBookArticle(article)
 	}
 
 	path := chapter.destFilePath()

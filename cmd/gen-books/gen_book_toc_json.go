@@ -9,8 +9,8 @@ import (
 	"github.com/kjk/u"
 )
 
-// BookSectionTOC represents a section in a book TOC
-type BookSectionTOC struct {
+// BookArticleTOC represents an article in a book TOC
+type BookArticleTOC struct {
 	Title string `json:"title"`
 	// TODO: url?
 }
@@ -18,7 +18,7 @@ type BookSectionTOC struct {
 // BookChapterTOC represents chapter in book TOC
 type BookChapterTOC struct {
 	Title    string           `json:"title"`
-	Sections []BookSectionTOC `json:"sections"`
+	Articles []BookArticleTOC `json:"article"`
 }
 
 // BookTOC represents table of contents of a book
@@ -32,16 +32,16 @@ func genBookTOCJSONData(book *Book) ([]byte, error) {
 		Name: book.Title,
 	}
 	for _, ch := range book.Chapters {
-		var sections []BookSectionTOC
-		for _, sec := range ch.Sections {
-			sectoc := BookSectionTOC{
-				Title: sec.Title,
+		var articles []BookArticleTOC
+		for _, a := range ch.Articles {
+			sectoc := BookArticleTOC{
+				Title: a.Title,
 			}
-			sections = append(sections, sectoc)
+			articles = append(articles, sectoc)
 		}
 		chtoc := BookChapterTOC{
 			Title:    ch.Title,
-			Sections: sections,
+			Articles: articles,
 		}
 		bookTOC.Chapters = append(bookTOC.Chapters, chtoc)
 	}

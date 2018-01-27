@@ -50,13 +50,13 @@ table.book-list th {
     padding-right: 16px;
 }
 
-.section blockquote {
+.article blockquote {
     border-left: 2px solid rgb(74, 117, 236);
     padding-left: 8px;
     margin-left: 16px;
 }
 
-.toc-section {
+.toc-article {
     padding-left: 1em;
 }
 
@@ -144,15 +144,15 @@ div.activity code {
     color: #4183c4;
 }
 
-.section {
+.article {
     border: 1px solid ligthgray;
 }
 
-.section_title {
+.article_title {
     font-weight: bold;
 }
 
-.section code {
+.article code {
     background-color: #f8f8f8;
 }
 
@@ -168,11 +168,11 @@ hr.toc-sep {
     padding-top: 1em;
 }
 
-.section-chapter-toc {
+.article-chapter-toc {
     background-color: white;
 }
 
-.section-sections-toc {
+.article-article-toc {
     padding-top: 8px;
     padding-left: 8px;
 }

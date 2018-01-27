@@ -13,16 +13,16 @@
 <body>
     <h1><a href="/">Books</a> / <a href="{{.Book.URL}}">{{.Book.Title}}</a> / <a href="{{.Chapter.URL}}">{{.Chapter.Title}}</a> / {{.Title}}</h1>
 
-    <div class="section">
+    <div class="article">
         {{ .BodyHTML }}
     </div>
 
     <hr class="toc-sep">
 
-    <div class="section-chapter-toc">
+    <div class="article-chapter-toc">
         <a href="{{.Chapter.URL}}">{{.Chapter.Title}}</a> / <b>{{.Title}}</b>
 
-        <div class="section-sections-toc">
+        <div class="article-article-toc">
         {{range .Siblings}}
             {{if .IsCurrent}}
                 <div><span class="chap-no">{{.No}}.</span> <span class="is-current">{{.Title}}</span></div>

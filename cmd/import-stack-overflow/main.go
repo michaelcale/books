@@ -229,7 +229,7 @@ func writeIndexTxtMust(path string, topic *Topic) {
 	}
 }
 
-func writeSectionMust(path string, example *Example) {
+func writeArticleMust(path string, example *Example) {
 	s := kvstore.Serialize("Title", example.Title)
 	s += kvstore.Serialize("Id", strconv.Itoa(example.Id))
 	s += kvstore.Serialize("Score", strconv.Itoa(example.Score))
@@ -292,7 +292,7 @@ func genBook(book *common.Book, defaultLang string) {
 	//fmt.Printf("%s: docID: %d\n", title, docTag.Id)
 	topics := getTopicsByDocTagID(docTag.Id)
 	nChapters := len(topics)
-	nSections := 0
+	nArticles := 0
 	chapter := 10
 	for _, t := range topics {
 		examples := getExamplesForTopic(docTag.Id, t.Id)
@@ -306,25 +306,25 @@ func genBook(book *common.Book, defaultLang string) {
 		chapter += 10
 		//fmt.Printf("%s, %d examples (%d), %s\n", t.Title, t.ExampleCount, len(examples), fileName)
 
-		section := 10
+		articleNo := 10
 		for _, ex := range examples {
 			if isEmptyString(ex.BodyMarkdown) && isEmptyString(ex.BodyHtml) {
 				emptyExamplexs = append(emptyExamplexs, ex)
 				continue
 			}
-			fileName := fmt.Sprintf("%03d-%s.md", section, common.MakeURLSafe(ex.Title))
+			fileName := fmt.Sprintf("%03d-%s.md", articleNo, common.MakeURLSafe(ex.Title))
 			path := filepath.Join(dirPath, fileName)
-			writeSectionMust(path, ex)
+			writeArticleMust(path, ex)
 			//fmt.Printf("  %s %s '%s'\n", ex.Title, pinnedStr, fileName)
-			//fmt.Printf("  %03d-%s\n", section, fileName)
+			//fmt.Printf("  %03d-%s\n", articleNo, fileName)
 			//fmt.Printf("  %s\n", fileName)
-			section += 10
+			articleNo += 10
 		}
-		nSections += len(examples)
+		nArticles += len(examples)
 	}
 	genContributors(filepath.Join("books", bookDstDir), docTag.Id)
 
-	fmt.Printf("Imported %s (%d chapters, %d sections) in %s\n", name, nChapters, nSections, time.Since(timeStart))
+	fmt.Printf("Imported %s (%d chapters, %d articles) in %s\n", name, nChapters, nArticles, time.Since(timeStart))
 }
 
 func main() {
