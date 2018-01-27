@@ -1,4 +1,4 @@
-package mdutil
+package common
 
 // Book describes a book to import
 type Book struct {
@@ -1314,6 +1314,12 @@ var booksSubset = []*Book{
 	{"Android", "", false, 1021, 268},
 }
 
+// booksSubset defines books to import
+var booksSmall = []*Book{
+	{"Go", "", true, 262, 75},
+}
+
 // BooksToProcess represents books to import
 // or booksMost
-var BooksToProcess = booksSubset
+//var BooksToProcess = booksSubset
+var BooksToProcess = booksSmall

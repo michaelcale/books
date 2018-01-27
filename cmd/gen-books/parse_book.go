@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/kjk/programming-books/pkg/mdutil"
+	"github.com/kjk/programming-books/pkg/common"
 	"github.com/kjk/u"
 )
 
@@ -224,13 +224,13 @@ func getVSilent(a []KV, k string, def string) string {
 func extractMultiLineValue(lines []string) ([]string, string, error) {
 	for i, line := range lines {
 		line = strings.TrimSpace(line)
-		if line == mdutil.KVRecordSeparator {
+		if line == common.KVRecordSeparator {
 			rest := lines[i+1:]
 			s := strings.Join(lines[:i], "\n")
 			return rest, s, nil
 		}
 	}
-	return nil, "", fmt.Errorf("didn't find end of value line ('%s')", mdutil.KVRecordSeparator)
+	return nil, "", fmt.Errorf("didn't find end of value line ('%s')", common.KVRecordSeparator)
 }
 
 // if error is io.EOF, we successfully finished parsing
@@ -255,7 +255,7 @@ func parseNextKV(lines []string) ([]string, KV, error) {
 		kv.k, kv.v = parts[0], parts[1]
 		return lines, kv, nil
 	}
-	// this is a multi-line value that ends with mdutil.KVRecordSeparator
+	// this is a multi-line value that ends with common.KVRecordSeparator
 	kv.k = strings.TrimSuffix(s, ":")
 	var err error
 	lines, kv.v, err = extractMultiLineValue(lines)
@@ -276,7 +276,7 @@ value
 ===\n
 */
 func parseKVFile(path string) ([]KV, error) {
-	lines, err := mdutil.ReadFileAsLines(path)
+	lines, err := common.ReadFileAsLines(path)
 	var res []KV
 	var kv KV
 	for {
@@ -324,7 +324,7 @@ func parseSection(path string) (*Section, error) {
 	if res.Title == defTitle {
 		fmt.Printf("parseSection: no title for %s\n", path)
 	}
-	res.TitleSafe = mdutil.MakeURLSafe(res.Title)
+	res.TitleSafe = common.MakeURLSafe(res.Title)
 	res.BodyMarkdown, err = getV(kv, "Body")
 	if err == nil {
 		return res, nil
@@ -372,7 +372,7 @@ func parseChapter(chapter *Chapter) error {
 	}
 	chapter.IndexKV = indexKV
 	chapter.Title, err = getV(indexKV, "Title")
-	chapter.TitleSafe = mdutil.MakeURLSafe(chapter.Title)
+	chapter.TitleSafe = common.MakeURLSafe(chapter.Title)
 	fileInfos, err := ioutil.ReadDir(dir)
 	var sections []*Section
 	for _, fi := range fileInfos {
@@ -402,7 +402,7 @@ func soContributorURL(userID int) string {
 }
 
 func loadSoContributorsMust(book *Book, path string) {
-	lines, err := mdutil.ReadFileAsLines(path)
+	lines, err := common.ReadFileAsLines(path)
 	u.PanicIfErr(err)
 	var ids []int
 	for _, line := range lines {
@@ -440,14 +440,14 @@ func genContributorsChapter(book *Book) *Chapter {
 		Book:      book,
 		IndexKV:   indexKV,
 		Title:     "Contributors",
-		TitleSafe: mdutil.MakeURLSafe("Contributors"),
+		TitleSafe: common.MakeURLSafe("Contributors"),
 		No:        999,
 	}
 	return ch
 }
 
 func parseBook(bookName string) (*Book, error) {
-	bookNameSafe := mdutil.MakeURLSafe(bookName)
+	bookNameSafe := common.MakeURLSafe(bookName)
 	dir := filepath.Join("books", bookNameSafe)
 	book := &Book{
 		Title:     bookName,

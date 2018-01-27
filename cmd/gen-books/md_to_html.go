@@ -3,49 +3,33 @@ package main
 import (
 	"bytes"
 
+	"github.com/gomarkdown/markdown"
 	"github.com/microcosm-cc/bluemonday"
-	"github.com/russross/blackfriday"
 )
 
 var (
 	useChroma = true
 )
 
-func markdownToUnsafeHTML(text []byte) []byte {
-	// Those are blackfriday.MarkdownCommon() extensions
-	/*
-		extensions := 0 |
-			EXTENSION_NO_INTRA_EMPHASIS |
-			EXTENSION_TABLES |
-			EXTENSION_FENCED_CODE |
-			EXTENSION_AUTOLINK |
-			EXTENSION_STRIKETHROUGH |
-			EXTENSION_SPACE_HEADERS |
-			EXTENSION_HEADER_IDS |
-			EXTENSION_BACKSLASH_LINE_BREAK |
-			EXTENSION_DEFINITION_LISTS
-	*/
+func markdownToUnsafeHTML(md []byte) []byte {
+	extensions := markdown.NoIntraEmphasis |
+		markdown.Tables |
+		markdown.FencedCode |
+		markdown.Autolink |
+		markdown.Strikethrough |
+		markdown.SpaceHeadings |
+		markdown.NoEmptyLineBeforeBlock
+	parser := markdown.NewParserWithExtensions(extensions)
 
-	// https://github.com/shurcooL/github_flavored_markdown/blob/master/main.go#L82
-	extensions := 0 |
-		blackfriday.EXTENSION_NO_INTRA_EMPHASIS |
-		blackfriday.EXTENSION_TABLES |
-		blackfriday.EXTENSION_FENCED_CODE |
-		blackfriday.EXTENSION_AUTOLINK |
-		blackfriday.EXTENSION_STRIKETHROUGH |
-		blackfriday.EXTENSION_SPACE_HEADERS |
-		blackfriday.EXTENSION_NO_EMPTY_LINE_BEFORE_BLOCK
-
-	commonHTMLFlags := 0 |
-		blackfriday.HTML_USE_XHTML |
-		blackfriday.HTML_USE_SMARTYPANTS |
-		blackfriday.HTML_SMARTYPANTS_FRACTIONS |
-		blackfriday.HTML_SMARTYPANTS_DASHES |
-		blackfriday.HTML_SMARTYPANTS_LATEX_DASHES
-
-	renderer := blackfriday.HtmlRenderer(commonHTMLFlags, "", "")
-	opts := blackfriday.Options{Extensions: extensions}
-	return blackfriday.MarkdownOptions(text, renderer, opts)
+	htmlFlags := markdown.Smartypants |
+		markdown.SmartypantsFractions |
+		markdown.SmartypantsDashes |
+		markdown.SmartypantsLatexDashes
+	htmlParams := markdown.HTMLRendererParameters{
+		Flags: htmlFlags,
+	}
+	renderer := markdown.NewHTMLRenderer(htmlParams)
+	return markdown.ToHTML(md, parser, renderer)
 }
 
 func markdownToHTML(s []byte) string {

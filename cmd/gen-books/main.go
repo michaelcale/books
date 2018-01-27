@@ -7,12 +7,12 @@ import (
 	"sync"
 	"time"
 
-	"github.com/kjk/programming-books/pkg/mdutil"
+	"github.com/kjk/programming-books/pkg/common"
 )
 
-func getBooksToImport() []*mdutil.Book {
-	var res []*mdutil.Book
-	for _, bookInfo := range mdutil.BooksToProcess {
+func getBooksToImport() []*common.Book {
+	var res []*common.Book
+	for _, bookInfo := range common.BooksToProcess {
 		if !bookInfo.Import {
 			continue
 		}

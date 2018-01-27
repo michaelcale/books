@@ -1,4 +1,4 @@
-package mdutil
+package common
 
 import (
 	"io/ioutil"

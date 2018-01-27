@@ -11,9 +11,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/kjk/programming-books/pkg/mdutil"
+	"github.com/gomarkdown/markdown"
+	"github.com/kjk/programming-books/pkg/common"
 	"github.com/kjk/u"
-	blackfriday "gopkg.in/russross/blackfriday.v2"
 )
 
 var (
@@ -24,25 +24,15 @@ var (
 	gContributors   []*Contributor
 	currDefaultLang string
 
-	// if true, we cleanup markdown => markdown
-	// unfortunately it seems to introduce glitches (e.g. in jQuery book)
-	reformatMarkdown = false
-
 	emptyExamplexs []*Example
 	// if true, prints more information
 	verbose = false
 
-	booksToImport = mdutil.BooksToProcess
+	booksToImport = common.BooksToProcess
 )
 
 func mdToHTML(d []byte) []byte {
-	//r := blackfriday.NewHTMLRenderer()
-	return blackfriday.Run(d)
-}
-
-func mdFmt(src []byte, defaultLang string) ([]byte, error) {
-	opts := &mdutil.Options{DefaultLang: defaultLang}
-	return mdutil.Process(src, opts)
+	return markdown.ToHTML(d, nil, nil)
 }
 
 func getTopicsByDocID(docID int) map[int]bool {
@@ -215,30 +205,25 @@ func serField(k, v string) string {
 	if serFitsOneLine(v) {
 		return fmt.Sprintf("%s: %s\n", k, v)
 	}
-	u.PanicIf(strings.Contains(v, mdutil.KVRecordSeparator), "v contains KVRecordSeparator")
+	u.PanicIf(strings.Contains(v, common.KVRecordSeparator), "v contains KVRecordSeparator")
 
-	return fmt.Sprintf("%s:\n%s\n%s\n", k, v, mdutil.KVRecordSeparator)
+	return fmt.Sprintf("%s:\n%s\n%s\n", k, v, common.KVRecordSeparator)
 }
 
 func serFieldMarkdown(k, v string) string {
 	if isEmptyString(v) {
 		return ""
 	}
-	if reformatMarkdown {
-		d, err := mdFmt([]byte(v), currDefaultLang)
-		u.PanicIfErr(err)
-		return serField(k, string(d))
-	}
-	u.PanicIf(strings.Contains(v, mdutil.KVRecordSeparator), "v contains KVRecordSeparator")
-	return fmt.Sprintf("%s:\n%s\n%s\n", k, v, mdutil.KVRecordSeparator)
+	u.PanicIf(strings.Contains(v, common.KVRecordSeparator), "v contains KVRecordSeparator")
+	return fmt.Sprintf("%s:\n%s\n%s\n", k, v, common.KVRecordSeparator)
 }
 
 func serFieldLong(k, v string) string {
 	if isEmptyString(v) {
 		return ""
 	}
-	u.PanicIf(strings.Contains(v, mdutil.KVRecordSeparator), "v contains KVRecordSeparator")
-	return fmt.Sprintf("%s:\n%s\n%s\n", k, v, mdutil.KVRecordSeparator)
+	u.PanicIf(strings.Contains(v, common.KVRecordSeparator), "v contains KVRecordSeparator")
+	return fmt.Sprintf("%s:\n%s\n%s\n", k, v, common.KVRecordSeparator)
 }
 
 func shortenVersion(s string) string {
@@ -336,12 +321,12 @@ func genContributors(bookDstDir string, docID int) {
 	//fmt.Printf("Wrote %s\n", path)
 }
 
-func genBook(book *mdutil.Book, defaultLang string) {
+func genBook(book *common.Book, defaultLang string) {
 	timeStart := time.Now()
 	name := book.Name
 	newName := book.NewName()
 	currDefaultLang = defaultLang
-	bookDstDir := mdutil.MakeURLSafe(newName)
+	bookDstDir := common.MakeURLSafe(newName)
 	docTag := findDocTagByTitleMust(gDocTags, name)
 	//fmt.Printf("%s: docID: %d\n", title, docTag.Id)
 	topics := getTopicsByDocTagID(docTag.Id)
@@ -352,7 +337,7 @@ func genBook(book *mdutil.Book, defaultLang string) {
 		examples := getExamplesForTopic(docTag.Id, t.Id)
 		sortExamples(examples)
 
-		dirChapter := fmt.Sprintf("%04d-%s", chapter, mdutil.MakeURLSafe(t.Title))
+		dirChapter := fmt.Sprintf("%04d-%s", chapter, common.MakeURLSafe(t.Title))
 		dirPath := filepath.Join("books", bookDstDir, dirChapter)
 		chapterIndexPath := filepath.Join(dirPath, "index.txt")
 		writeIndexTxtMust(chapterIndexPath, t)
@@ -366,7 +351,7 @@ func genBook(book *mdutil.Book, defaultLang string) {
 				emptyExamplexs = append(emptyExamplexs, ex)
 				continue
 			}
-			fileName := fmt.Sprintf("%03d-%s.md", section, mdutil.MakeURLSafe(ex.Title))
+			fileName := fmt.Sprintf("%03d-%s.md", section, common.MakeURLSafe(ex.Title))
 			path := filepath.Join(dirPath, fileName)
 			writeSectionMust(path, ex)
 			//fmt.Printf("  %s %s '%s'\n", ex.Title, pinnedStr, fileName)
