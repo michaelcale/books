@@ -13,6 +13,7 @@ import (
 
 	"github.com/gomarkdown/markdown"
 	"github.com/kjk/programming-books/pkg/common"
+	"github.com/kjk/programming-books/pkg/kvstore"
 	"github.com/kjk/u"
 )
 
@@ -43,6 +44,11 @@ func getTopicsByDocID(docID int) map[int]bool {
 		}
 	}
 	return topics
+}
+
+func isEmptyString(s string) bool {
+	s = strings.TrimSpace(s)
+	return len(s) == 0
 }
 
 func calcExampleCount(docTag *DocTag) {
@@ -178,54 +184,6 @@ func sortExamples(a []*Example) {
 	})
 }
 
-// can we serialize a given value on a single line or must use multiple lines?
-func serFitsOneLine(s string) bool {
-	if len(s) > 80 {
-		return false
-	}
-	if strings.Contains(s, "\n") {
-		return false
-	}
-	// to avoid ambiguity when parsing serialize values with ':" on separate lines
-	if strings.Contains(s, ":") {
-		return false
-	}
-	return true
-}
-
-func isEmptyString(s string) bool {
-	s = strings.TrimSpace(s)
-	return len(s) == 0
-}
-
-func serField(k, v string) string {
-	if isEmptyString(v) {
-		return ""
-	}
-	if serFitsOneLine(v) {
-		return fmt.Sprintf("%s: %s\n", k, v)
-	}
-	u.PanicIf(strings.Contains(v, common.KVRecordSeparator), "v contains KVRecordSeparator")
-
-	return fmt.Sprintf("%s:\n%s\n%s\n", k, v, common.KVRecordSeparator)
-}
-
-func serFieldMarkdown(k, v string) string {
-	if isEmptyString(v) {
-		return ""
-	}
-	u.PanicIf(strings.Contains(v, common.KVRecordSeparator), "v contains KVRecordSeparator")
-	return fmt.Sprintf("%s:\n%s\n%s\n", k, v, common.KVRecordSeparator)
-}
-
-func serFieldLong(k, v string) string {
-	if isEmptyString(v) {
-		return ""
-	}
-	u.PanicIf(strings.Contains(v, common.KVRecordSeparator), "v contains KVRecordSeparator")
-	return fmt.Sprintf("%s:\n%s\n%s\n", k, v, common.KVRecordSeparator)
-}
-
 func shortenVersion(s string) string {
 	if s == "[]" {
 		return ""
@@ -234,31 +192,31 @@ func shortenVersion(s string) string {
 }
 
 func writeIndexTxtMust(path string, topic *Topic) {
-	s := serField("Title", topic.Title)
+	s := kvstore.Serialize("Title", topic.Title)
 	versions := shortenVersion(topic.VersionsJson)
-	s += serFieldMarkdown("Versions", versions)
+	s += kvstore.SerializeLong("Versions", versions)
 	if isEmptyString(versions) {
-		s += serFieldLong("VersionsHtml", topic.HelloWorldVersionsHtml)
+		s += kvstore.SerializeLong("VersionsHtml", topic.HelloWorldVersionsHtml)
 	}
 
-	s += serFieldMarkdown("Introduction", topic.IntroductionMarkdown)
+	s += kvstore.SerializeLong("Introduction", topic.IntroductionMarkdown)
 	if isEmptyString(topic.IntroductionMarkdown) {
-		s += serFieldLong("IntroductionHtml", topic.IntroductionHtml)
+		s += kvstore.SerializeLong("IntroductionHtml", topic.IntroductionHtml)
 	}
 
-	s += serFieldMarkdown("Syntax", topic.SyntaxMarkdown)
+	s += kvstore.SerializeLong("Syntax", topic.SyntaxMarkdown)
 	if isEmptyString(topic.SyntaxMarkdown) {
-		s += serFieldLong("SyntaxHtml", topic.SyntaxHtml)
+		s += kvstore.SerializeLong("SyntaxHtml", topic.SyntaxHtml)
 	}
 
-	s += serFieldMarkdown("Parameters", topic.ParametersMarkdown)
+	s += kvstore.SerializeLong("Parameters", topic.ParametersMarkdown)
 	if isEmptyString(topic.ParametersMarkdown) {
-		s += serFieldLong("ParametersHtml", topic.ParametersHtml)
+		s += kvstore.SerializeLong("ParametersHtml", topic.ParametersHtml)
 	}
 
-	s += serFieldMarkdown("Remarks", topic.RemarksMarkdown)
+	s += kvstore.SerializeLong("Remarks", topic.RemarksMarkdown)
 	if isEmptyString(topic.RemarksMarkdown) {
-		s += serFieldLong("RemarksHtml", topic.RemarksHtml)
+		s += kvstore.SerializeLong("RemarksHtml", topic.RemarksHtml)
 	}
 
 	createDirForFileMust(path)
@@ -270,11 +228,11 @@ func writeIndexTxtMust(path string, topic *Topic) {
 }
 
 func writeSectionMust(path string, example *Example) {
-	s := serField("Title", example.Title)
-	s += serField("Score", strconv.Itoa(example.Score))
-	s += serFieldMarkdown("Body", example.BodyMarkdown)
+	s := kvstore.Serialize("Title", example.Title)
+	s += kvstore.Serialize("Score", strconv.Itoa(example.Score))
+	s += kvstore.SerializeLong("Body", example.BodyMarkdown)
 	if isEmptyString(example.BodyMarkdown) {
-		s += serFieldLong("BodyHtml", example.BodyHtml)
+		s += kvstore.SerializeLong("BodyHtml", example.BodyHtml)
 	}
 
 	createDirForFileMust(path)

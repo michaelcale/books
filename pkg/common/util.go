@@ -5,11 +5,6 @@ import (
 	"strings"
 )
 
-const (
-	// KVRecordSeparator is a (hopefully) unique string that separates records in Key/Value file
-	KVRecordSeparator = "|======|"
-)
-
 // https://stackoverflow.com/questions/695438/safe-characters-for-friendly-url
 func charIsURLSafe(c byte) bool {
 	if c >= 'a' && c <= 'z' {
@@ -38,6 +33,16 @@ func shortenConsequitve(s string, c string) string {
 		s = s[1:]
 	}
 	return s
+}
+
+// ShortenString shortens to max 60 characters
+func ShortenString(s string) string {
+	parts := strings.SplitN(s, "\n", 2)
+	s = parts[0]
+	if len(s) < 60 {
+		return s
+	}
+	return s[:60] + "..."
 }
 
 // MakeURLSafe converts arbitrary string into a string that can be used as a file name or url
