@@ -28,8 +28,6 @@ type Section struct {
 	// TODO: we should convert all HTML content to markdown
 	BodyHTML template.HTML
 
-	doc kvstore.Doc
-
 	Siblings  []Section
 	IsCurrent bool // only used when part of SiblingSections
 }
@@ -226,7 +224,6 @@ func parseSection(path string) (*Section, error) {
 	}
 	section := &Section{
 		SourceFilePath: path,
-		doc:            doc,
 	}
 	section.ID, err = doc.GetValue("Id")
 	if err != nil {
@@ -250,6 +247,7 @@ func parseSection(path string) (*Section, error) {
 	if err == nil {
 		return section, nil
 	}
+	// on parsing error, dump the doc
 	dumpKV(doc)
 	return nil, fmt.Errorf("parseSection('%s'), err: '%s'", path, err)
 }
