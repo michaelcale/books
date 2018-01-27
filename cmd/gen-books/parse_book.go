@@ -31,7 +31,7 @@ type Section struct {
 	BodyHTML       template.HTML
 	No             int
 	SectionRefs    []SectionRef
-	data           []kvstore.KeyValue
+	doc            kvstore.Doc
 }
 
 // Book retuns book this section belongs to
@@ -74,8 +74,8 @@ func (s *Section) destFilePath() string {
 type Chapter struct {
 	Book       *Book
 	ChapterDir string
-	IndexKV    []kvstore.KeyValue // content of index.txt file
-	Title      string             // extracted from IndexKV, used in book_index.tmpl.html
+	IndexDoc   kvstore.Doc // content of index.txt file
+	Title      string      // extracted from IndexKV, used in book_index.tmpl.html
 	TitleSafe  string
 	Sections   []*Section
 	No         int
@@ -94,7 +94,7 @@ func (c *Chapter) GitHubURL() string {
 
 // VersionsHTML returns html version of versions
 func (c *Chapter) VersionsHTML() template.HTML {
-	s, err := kvstore.GetV(c.IndexKV, "VersionsHtml")
+	s, err := c.IndexDoc.GetV("VersionsHtml")
 	if err != nil {
 		s = ""
 	}
@@ -118,7 +118,7 @@ func (c *Chapter) destFilePath() string {
 
 // IntroductionHTML retruns html version of Introduction:
 func (c *Chapter) IntroductionHTML() template.HTML {
-	s, err := kvstore.GetV(c.IndexKV, "Introduction")
+	s, err := c.IndexDoc.GetV("Introduction")
 	if err != nil {
 		return template.HTML("")
 	}
@@ -128,7 +128,7 @@ func (c *Chapter) IntroductionHTML() template.HTML {
 
 // SyntaxHTML retruns html version of Syntax:
 func (c *Chapter) SyntaxHTML() template.HTML {
-	s, err := kvstore.GetV(c.IndexKV, "Syntax")
+	s, err := c.IndexDoc.GetV("Syntax")
 	if err != nil {
 		return template.HTML("")
 	}
@@ -138,7 +138,7 @@ func (c *Chapter) SyntaxHTML() template.HTML {
 
 // RemarksHTML retruns html version of Remarks:
 func (c *Chapter) RemarksHTML() template.HTML {
-	s, err := kvstore.GetV(c.IndexKV, "Remarks")
+	s, err := c.IndexDoc.GetV("Remarks")
 	if err != nil {
 		return template.HTML("")
 	}
@@ -148,7 +148,7 @@ func (c *Chapter) RemarksHTML() template.HTML {
 
 // ContributorsHTML retruns html version of Contributors:
 func (c *Chapter) ContributorsHTML() template.HTML {
-	s, err := kvstore.GetV(c.IndexKV, "Contributors")
+	s, err := c.IndexDoc.GetV("Contributors")
 	if err != nil {
 		return template.HTML("")
 	}
@@ -203,37 +203,37 @@ var (
 	defTitle = "No Title"
 )
 
-func dumpKV(a []kvstore.KeyValue) {
-	for _, kv := range a {
+func dumpKV(doc kvstore.Doc) {
+	for _, kv := range doc {
 		fmt.Printf("K: %s\nV: %s\n", kv.Key, common.ShortenString(kv.Value))
 	}
 }
 
 func parseSection(path string) (*Section, error) {
-	kv, err := kvstore.ParseKVFile(path)
+	doc, err := kvstore.ParseKVFile(path)
 	if err != nil {
 		fmt.Printf("Error parsing KV file: '%s'\n", path)
 		return nil, err
 	}
 	res := &Section{
 		SourceFilePath: path,
-		data:           kv,
+		doc:            doc,
 	}
-	res.Title = kvstore.GetVSilent(kv, "Title", defTitle)
+	res.Title = doc.GetVSilent("Title", defTitle)
 	if res.Title == defTitle {
 		fmt.Printf("parseSection: no title for %s\n", path)
 	}
 	res.TitleSafe = common.MakeURLSafe(res.Title)
-	res.BodyMarkdown, err = kvstore.GetV(kv, "Body")
+	res.BodyMarkdown, err = doc.GetV("Body")
 	if err == nil {
 		return res, nil
 	}
-	s, err := kvstore.GetV(kv, "BodyHtml")
+	s, err := doc.GetV("BodyHtml")
 	res.BodyHTML = template.HTML(s)
 	if err == nil {
 		return res, nil
 	}
-	dumpKV(kv)
+	dumpKV(doc)
 	return nil, fmt.Errorf("parseSection('%s'), err: '%s'", path, err)
 }
 
@@ -265,12 +265,12 @@ func buildSectionRefs(sections []*Section) {
 func parseChapter(chapter *Chapter) error {
 	dir := filepath.Join(chapter.Book.SourceDir, chapter.ChapterDir)
 	path := filepath.Join(dir, "index.txt")
-	indexKV, err := kvstore.ParseKVFile(path)
+	doc, err := kvstore.ParseKVFile(path)
 	if err != nil {
 		return err
 	}
-	chapter.IndexKV = indexKV
-	chapter.Title, err = kvstore.GetV(indexKV, "Title")
+	chapter.IndexDoc = doc
+	chapter.Title, err = doc.GetV("Title")
 	chapter.TitleSafe = common.MakeURLSafe(chapter.Title)
 	fileInfos, err := ioutil.ReadDir(dir)
 	var sections []*Section
@@ -329,15 +329,15 @@ func genContributorsMarkdown(soUserIDs []int) string {
 
 func genContributorsChapter(book *Book) *Chapter {
 	md := genContributorsMarkdown(book.SoContributors)
-	var indexKV []kvstore.KeyValue
+	var doc kvstore.Doc
 	kv := kvstore.KeyValue{
 		Key:   "Contributors",
 		Value: md,
 	}
-	indexKV = append(indexKV, kv)
+	doc = append(doc, kv)
 	ch := &Chapter{
 		Book:      book,
-		IndexKV:   indexKV,
+		IndexDoc:  doc,
 		Title:     "Contributors",
 		TitleSafe: common.MakeURLSafe("Contributors"),
 		No:        999,

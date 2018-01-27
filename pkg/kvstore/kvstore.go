@@ -20,9 +20,12 @@ type KeyValue struct {
 	Value string
 }
 
+// Doc is a series of KeyValue pairs
+type Doc []KeyValue
+
 // GetV finds value by key, returns an error if didn't find
-func GetV(a []KeyValue, key string) (string, error) {
-	for _, kv := range a {
+func (d Doc) GetV(key string) (string, error) {
+	for _, kv := range d {
 		if kv.Key == key {
 			return kv.Value, nil
 		}
@@ -31,8 +34,8 @@ func GetV(a []KeyValue, key string) (string, error) {
 }
 
 // GetVSilent finds value by key. Returns def string if didn't find
-func GetVSilent(a []KeyValue, key string, defValue string) string {
-	for _, kv := range a {
+func (d Doc) GetVSilent(key string, defValue string) string {
+	for _, kv := range d {
 		if kv.Key == key {
 			return kv.Value
 		}
@@ -94,7 +97,7 @@ key:
 value
 ===\n
 */
-func ParseKVFile(path string) ([]KeyValue, error) {
+func ParseKVFile(path string) (Doc, error) {
 	lines, err := common.ReadFileAsLines(path)
 	var res []KeyValue
 	var kv KeyValue
@@ -111,7 +114,7 @@ func ParseKVFile(path string) ([]KeyValue, error) {
 }
 
 // can we serialize a given value on a single line or must use multiple lines?
-func serFitsOneLine(s string) bool {
+func fitsOneLine(s string) bool {
 	if len(s) > 80 {
 		return false
 	}
@@ -135,7 +138,7 @@ func Serialize(k, v string) string {
 	if isEmptyString(v) {
 		return ""
 	}
-	if serFitsOneLine(v) {
+	if fitsOneLine(v) {
 		return fmt.Sprintf("%s: %s\n", k, v)
 	}
 	u.PanicIf(strings.Contains(v, RecordSeparator), "v contains RecordSeparator")
