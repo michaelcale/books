@@ -193,6 +193,7 @@ func shortenVersion(s string) string {
 
 func writeIndexTxtMust(path string, topic *Topic) {
 	s := kvstore.Serialize("Title", topic.Title)
+	s += kvstore.Serialize("Id", strconv.Itoa(topic.Id))
 	versions := shortenVersion(topic.VersionsJson)
 	s += kvstore.SerializeLong("Versions", versions)
 	if isEmptyString(versions) {
@@ -229,6 +230,7 @@ func writeIndexTxtMust(path string, topic *Topic) {
 
 func writeSectionMust(path string, example *Example) {
 	s := kvstore.Serialize("Title", example.Title)
+	s += kvstore.Serialize("Id", strconv.Itoa(example.Id))
 	s += kvstore.Serialize("Score", strconv.Itoa(example.Score))
 	s += kvstore.SerializeLong("Body", example.BodyMarkdown)
 	if isEmptyString(example.BodyMarkdown) {
