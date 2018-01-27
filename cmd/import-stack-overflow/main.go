@@ -124,12 +124,13 @@ func findDocTagByTitleMust(docTags []DocTag, title string) DocTag {
 
 func loadAll() {
 	timeStart := time.Now()
+	fmt.Printf("Loading Stack Overflow data...")
 	gDocTags = loadDocTagsMust()
 	gTopics = loadTopicsMust()
 	gExamples = loadExamplesMust()
 	gTopicHistories = loadTopicHistoriesMust()
 	gContributors = loadContributorsMust()
-	fmt.Printf("loadAll took %s\n", time.Since(timeStart))
+	fmt.Printf(" took %s\n", time.Since(timeStart))
 }
 
 func getTopicsByDocTagID(docTagID int) []*Topic {

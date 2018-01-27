@@ -23,8 +23,8 @@ type KeyValue struct {
 // Doc is a series of KeyValue pairs
 type Doc []KeyValue
 
-// GetV finds value by key, returns an error if didn't find
-func (d Doc) GetV(key string) (string, error) {
+// GetValue finds value by key, returns an error if didn't find
+func (d Doc) GetValue(key string) (string, error) {
 	for _, kv := range d {
 		if kv.Key == key {
 			return kv.Value, nil
@@ -33,8 +33,8 @@ func (d Doc) GetV(key string) (string, error) {
 	return "", fmt.Errorf("key '%s' not found", key)
 }
 
-// GetVSilent finds value by key. Returns def string if didn't find
-func (d Doc) GetVSilent(key string, defValue string) string {
+// GetValueSilent finds value by key. Returns def string if didn't find
+func (d Doc) GetValueSilent(key string, defValue string) string {
 	for _, kv := range d {
 		if kv.Key == key {
 			return kv.Value
@@ -70,7 +70,7 @@ func parseNextKV(lines []string) ([]string, KeyValue, error) {
 
 	if !strings.HasSuffix(s, ":") {
 		// this is singlie line "k: v"
-		parts := strings.SplitN(s, ":", 2)
+		parts := strings.SplitN(s, ": ", 2)
 		if len(parts) != 2 {
 			return nil, kv, fmt.Errorf("'%s' is not a valid start for k/v", s)
 		}

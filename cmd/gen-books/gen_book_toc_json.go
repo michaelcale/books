@@ -51,7 +51,7 @@ func genBookTOCJSONData(book *Book) ([]byte, error) {
 func genBookTOCJSONMust(book *Book) {
 	d, err := genBookTOCJSONData(book)
 	u.PanicIfErr(err)
-	path := filepath.Join("books_html", "book", book.TitleSafe, "toc.json")
+	path := filepath.Join("books_html", "book", book.FileNameBase, "toc.json")
 	u.CreateDirForFile(path)
 	err = ioutil.WriteFile(path, d, 0644)
 	u.PanicIfErr(err)
