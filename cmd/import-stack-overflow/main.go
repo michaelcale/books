@@ -299,7 +299,7 @@ func genBook(book *common.Book, defaultLang string) {
 
 		dirChapter := fmt.Sprintf("%04d-%s", chapter, common.MakeURLSafe(t.Title))
 		dirPath := filepath.Join("books", bookDstDir, dirChapter)
-		chapterIndexPath := filepath.Join(dirPath, "index.txt")
+		chapterIndexPath := filepath.Join(dirPath, "index.md")
 		writeIndexTxtMust(chapterIndexPath, t)
 		//fmt.Printf("%s\n", dirChapter)
 		chapter += 10

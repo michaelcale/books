@@ -74,7 +74,7 @@ func (s *Section) destFilePath() string {
 type Chapter struct {
 	Book       *Book
 	ChapterDir string
-	IndexDoc   kvstore.Doc // content of index.txt file
+	IndexDoc   kvstore.Doc // content of index.md file
 	Title      string      // extracted from IndexKV, used in book_index.tmpl.html
 	TitleSafe  string
 	Sections   []*Section
@@ -264,7 +264,7 @@ func buildSectionRefs(sections []*Section) {
 
 func parseChapter(chapter *Chapter) error {
 	dir := filepath.Join(chapter.Book.SourceDir, chapter.ChapterDir)
-	path := filepath.Join(dir, "index.txt")
+	path := filepath.Join(dir, "index.md")
 	doc, err := kvstore.ParseKVFile(path)
 	if err != nil {
 		return err
@@ -280,6 +280,9 @@ func parseChapter(chapter *Chapter) error {
 		}
 		name := fi.Name()
 		if strings.ToLower(filepath.Ext(name)) != ".md" {
+			continue
+		}
+		if strings.ToLower(name) == "index.md" {
 			continue
 		}
 		path = filepath.Join(dir, name)
