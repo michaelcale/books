@@ -128,7 +128,7 @@ func (c *Chapter) IntroductionHTML() template.HTML {
 	if err != nil {
 		return template.HTML("")
 	}
-	html := markdownToHTML([]byte(s))
+	html := markdownToHTML([]byte(s), "")
 	return template.HTML(html)
 }
 
@@ -138,7 +138,7 @@ func (c *Chapter) SyntaxHTML() template.HTML {
 	if err != nil {
 		return template.HTML("")
 	}
-	html := markdownToHTML([]byte(s))
+	html := markdownToHTML([]byte(s), "")
 	return template.HTML(html)
 }
 
@@ -148,7 +148,7 @@ func (c *Chapter) RemarksHTML() template.HTML {
 	if err != nil {
 		return template.HTML("")
 	}
-	html := markdownToHTML([]byte(s))
+	html := markdownToHTML([]byte(s), "")
 	return template.HTML(html)
 }
 
@@ -158,7 +158,7 @@ func (c *Chapter) ContributorsHTML() template.HTML {
 	if err != nil {
 		return template.HTML("")
 	}
-	html := markdownToHTML([]byte(s))
+	html := markdownToHTML([]byte(s), "")
 	return template.HTML(html)
 }
 
@@ -174,6 +174,7 @@ type Book struct {
 	SoContributors []int
 
 	cachedSectionsCount int
+	defaultLang         string // default programming language for programming examples
 }
 
 // GitHubText returns text we show in GitHub link

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"runtime"
 	"sort"
+	"strings"
 	"sync"
 	"time"
 
@@ -22,6 +23,26 @@ func getBooksToImport() []*common.Book {
 		return res[i].NewName() < res[j].NewName()
 	})
 	return res
+}
+
+// TODO: probably more
+func getDefaultLangForBook(bookName string) string {
+	s := strings.ToLower(bookName)
+	switch s {
+	case "android":
+		return "java"
+	case "ios":
+		return "ObjectiveC"
+	case "microsoft sql server":
+		return "sql"
+	case "node.js":
+		return "javascript"
+	case "mysql":
+		return "sql"
+	case ".net framework":
+		return "c#"
+	}
+	return s
 }
 
 func main() {

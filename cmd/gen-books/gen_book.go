@@ -98,7 +98,8 @@ func genAbout() {
 func genBookSection(section *Section) {
 	// TODO: move as a method on Section
 	if section.BodyHTML == "" {
-		html := markdownToHTML([]byte(section.BodyMarkdown))
+		defLang := getDefaultLangForBook(section.Book().Title)
+		html := markdownToHTML([]byte(section.BodyMarkdown), defLang)
 		section.BodyHTML = template.HTML(html)
 	}
 	path := section.destFilePath()
