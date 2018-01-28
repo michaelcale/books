@@ -123,7 +123,7 @@ func setCurrentChapter(chapters []*Chapter, current int) {
 
 func genBook(book *Book) {
 	// generate index.html for the book
-	path := filepath.Join(book.DestDir, "index.html")
+	path := filepath.Join(book.destDir, "index.html")
 	execTemplateToFileSilentMust("book_index.tmpl.html", book, path)
 	for i, chapter := range book.Chapters {
 		setCurrentChapter(book.Chapters, i)
