@@ -314,7 +314,10 @@ func parseChapter(chapter *Chapter) error {
 		if strings.ToLower(filepath.Ext(name)) != ".md" {
 			continue
 		}
-		if strings.ToLower(name) == "index.md" {
+
+		// some files are not meant to be processed here
+		switch strings.ToLower(name) {
+		case "index.md":
 			continue
 		}
 		path = filepath.Join(dir, name)
@@ -434,8 +437,12 @@ func parseBook(bookName string) (*Book, error) {
 			ch.No = len(chapters)
 			continue
 		}
-
-		if fi.Name() == "so_contributors.txt" {
+		name := strings.ToLower(fi.Name())
+		// some files should be ignored
+		if name == "toc.txt" {
+			continue
+		}
+		if name == "so_contributors.txt" {
 			path := filepath.Join(srcDir, fi.Name())
 			loadSoContributorsMust(book, path)
 			continue
