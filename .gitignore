@@ -1,5 +1,5 @@
 books/
-books_html/book/
+books_html/essential/
 books_html/index.html
 books_html/about.html
 cmd/gen-books/gen-books

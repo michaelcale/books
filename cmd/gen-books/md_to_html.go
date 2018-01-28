@@ -9,6 +9,9 @@ import (
 	"github.com/alecthomas/chroma/lexers"
 	"github.com/alecthomas/chroma/styles"
 	"github.com/gomarkdown/markdown"
+	"github.com/gomarkdown/markdown/ast"
+	mdhtml "github.com/gomarkdown/markdown/html"
+	"github.com/gomarkdown/markdown/parser"
 	"github.com/kjk/u"
 	"github.com/microcosm-cc/bluemonday"
 )
@@ -48,44 +51,44 @@ func htmlHighlight(w io.Writer, source, lang, defaultLang string) error {
 	return htmlFormatter.Format(w, highlightStyle, it)
 }
 
-func makeRenderHookCodeBlock(defaultLang string) markdown.RenderNodeFunc {
-	return func(w io.Writer, node *markdown.Node, entering bool) (markdown.WalkStatus, bool) {
-		nodeData, ok := node.Data.(*markdown.CodeBlockData)
+func makeRenderHookCodeBlock(defaultLang string) mdhtml.RenderNodeFunc {
+	return func(w io.Writer, node *ast.Node, entering bool) (ast.WalkStatus, bool) {
+		nodeData, ok := node.Data.(*ast.CodeBlockData)
 		if !ok {
-			return markdown.GoToNext, false
+			return ast.GoToNext, false
 		}
 		lang := string(nodeData.Info)
 		if false {
 			fmt.Printf("lang: '%s', code: %s\n", lang, string(node.Literal[:16]))
 			io.WriteString(w, "\n<pre class=\"chroma\"><code>")
-			markdown.EscapeHTML(w, node.Literal)
+			mdhtml.EscapeHTML(w, node.Literal)
 			io.WriteString(w, "</code></pre>\n")
 		} else {
 			htmlHighlight(w, string(node.Literal), lang, defaultLang)
 		}
-		return markdown.GoToNext, true
+		return ast.GoToNext, true
 	}
 }
 
 func markdownToUnsafeHTML(md []byte, defaultLang string) []byte {
-	extensions := markdown.NoIntraEmphasis |
-		markdown.Tables |
-		markdown.FencedCode |
-		markdown.Autolink |
-		markdown.Strikethrough |
-		markdown.SpaceHeadings |
-		markdown.NoEmptyLineBeforeBlock
-	parser := markdown.NewParserWithExtensions(extensions)
+	extensions := parser.NoIntraEmphasis |
+		parser.Tables |
+		parser.FencedCode |
+		parser.Autolink |
+		parser.Strikethrough |
+		parser.SpaceHeadings |
+		parser.NoEmptyLineBeforeBlock
+	parser := parser.NewParserWithExtensions(extensions)
 
-	htmlFlags := markdown.Smartypants |
-		markdown.SmartypantsFractions |
-		markdown.SmartypantsDashes |
-		markdown.SmartypantsLatexDashes
-	htmlParams := markdown.HTMLRendererParameters{
+	htmlFlags := mdhtml.Smartypants |
+		mdhtml.SmartypantsFractions |
+		mdhtml.SmartypantsDashes |
+		mdhtml.SmartypantsLatexDashes
+	htmlOpts := mdhtml.RendererOptions{
 		Flags:          htmlFlags,
 		RenderNodeHook: makeRenderHookCodeBlock(defaultLang),
 	}
-	renderer := markdown.NewHTMLRenderer(htmlParams)
+	renderer := mdhtml.NewRenderer(htmlOpts)
 	return markdown.ToHTML(md, parser, renderer)
 }
 
