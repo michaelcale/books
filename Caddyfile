@@ -1,5 +1,5 @@
 localhost:8080
-root books_html
+root www
 errors stdout
 log stdout
 ext .html

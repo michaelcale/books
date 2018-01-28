@@ -3,11 +3,22 @@ package main
 import (
 	"fmt"
 	"html/template"
+	"io"
 	"log"
 	"os"
 	"path/filepath"
 
 	"github.com/kjk/u"
+)
+
+const (
+	// top-level directory where .html files are generated
+	destDir = "www"
+	tmplDir = "tmpl"
+)
+
+var ( // directory where generated .html files for books are
+	destEssentialDir = filepath.Join(destDir, "essential")
 )
 
 var (
@@ -27,7 +38,7 @@ func createDirForFileMust(path string) {
 }
 
 func tmplPath(name string) string {
-	return filepath.Join("books_html", name)
+	return filepath.Join(tmplDir, name)
 }
 
 func loadTemplateHelperMust(name string, ref **template.Template) *template.Template {
@@ -86,12 +97,12 @@ func genIndex(books []*Book) {
 		GitHubText: "GitHub",
 		GitHubURL:  gitHubBaseURL,
 	}
-	path := filepath.Join("books_html", "index.html")
+	path := filepath.Join(destDir, "index.html")
 	execTemplateToFileMust("index.tmpl.html", d, path)
 }
 
 func genAbout() {
-	path := filepath.Join("books_html", "about.html")
+	path := filepath.Join(destDir, "about.html")
 	execTemplateToFileMust("about.tmpl.html", nil, path)
 }
 
@@ -121,8 +132,28 @@ func setCurrentChapter(chapters []*Chapter, current int) {
 	}
 }
 
+func copyFileMust(dst, src string) {
+	createDirForFileMust(dst)
+
+	in, err := os.Open(src)
+	u.PanicIfErr(err)
+	defer in.Close()
+	out, err := os.Create(dst)
+	u.PanicIfErr(err)
+	defer out.Close()
+	_, err = io.Copy(out, in)
+	u.PanicIfErr(err)
+}
+
+func copyCSSMust() {
+	src := filepath.Join(tmplDir, "main.css")
+	dst := filepath.Join(destDir, "main.css")
+	copyFileMust(dst, src)
+}
+
 func genBook(book *Book) {
 	// generate index.html for the book
+	copyCSSMust()
 	path := filepath.Join(book.destDir, "index.html")
 	execTemplateToFileSilentMust("book_index.tmpl.html", book, path)
 	for i, chapter := range book.Chapters {

@@ -69,7 +69,7 @@ func (a *Article) URL() string {
 }
 
 func (a *Article) destFilePath() string {
-	return filepath.Join("books_html", "essential", a.Book().FileNameBase, a.FileNameBase+".html")
+	return filepath.Join(destEssentialDir, a.Book().FileNameBase, a.FileNameBase+".html")
 }
 
 // Chapter represents a book chapter
@@ -125,7 +125,7 @@ func (c *Chapter) URL() string {
 }
 
 func (c *Chapter) destFilePath() string {
-	return filepath.Join("books_html", "essential", c.Book.FileNameBase, c.FileNameBase+".html")
+	return filepath.Join(destEssentialDir, c.Book.FileNameBase, c.FileNameBase+".html")
 }
 
 // TODO: get rid of IntroductionHTML, SyntaxHTML etc., convert to just Body in markdown format
@@ -413,7 +413,7 @@ func parseBook(bookName string) (*Book, error) {
 		TitleLong:    fmt.Sprintf("Essential %s", bookName),
 		FileNameBase: bookNameSafe,
 		sourceDir:    srcDir,
-		destDir:      filepath.Join("books_html", "essential", bookNameSafe),
+		destDir:      filepath.Join(destEssentialDir, bookNameSafe),
 	}
 	fileInfos, err := ioutil.ReadDir(srcDir)
 	if err != nil {
