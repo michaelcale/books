@@ -52,19 +52,19 @@ func htmlHighlight(w io.Writer, source, lang, defaultLang string) error {
 }
 
 func makeRenderHookCodeBlock(defaultLang string) mdhtml.RenderNodeFunc {
-	return func(w io.Writer, node *ast.Node, entering bool) (ast.WalkStatus, bool) {
-		nodeData, ok := node.Data.(*ast.CodeBlockData)
+	return func(w io.Writer, node ast.Node, entering bool) (ast.WalkStatus, bool) {
+		codeBlock, ok := node.(*ast.CodeBlock)
 		if !ok {
 			return ast.GoToNext, false
 		}
-		lang := string(nodeData.Info)
+		lang := string(codeBlock.Info)
 		if false {
-			fmt.Printf("lang: '%s', code: %s\n", lang, string(node.Literal[:16]))
+			fmt.Printf("lang: '%s', code: %s\n", lang, string(codeBlock.Literal[:16]))
 			io.WriteString(w, "\n<pre class=\"chroma\"><code>")
-			mdhtml.EscapeHTML(w, node.Literal)
+			mdhtml.EscapeHTML(w, codeBlock.Literal)
 			io.WriteString(w, "</code></pre>\n")
 		} else {
-			htmlHighlight(w, string(node.Literal), lang, defaultLang)
+			htmlHighlight(w, string(codeBlock.Literal), lang, defaultLang)
 		}
 		return ast.GoToNext, true
 	}
@@ -78,7 +78,7 @@ func markdownToUnsafeHTML(md []byte, defaultLang string) []byte {
 		parser.Strikethrough |
 		parser.SpaceHeadings |
 		parser.NoEmptyLineBeforeBlock
-	parser := parser.NewParserWithExtensions(extensions)
+	parser := parser.NewWithExtensions(extensions)
 
 	htmlFlags := mdhtml.Smartypants |
 		mdhtml.SmartypantsFractions |
