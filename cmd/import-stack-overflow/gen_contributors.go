@@ -32,15 +32,19 @@ Location: /users/1850609/acdcjunior
 */
 func resolveUserName(id int, trace bool) (string, error) {
 	uri := "https://stackoverflow.com/users/" + strconv.Itoa(id)
-	//fmt.Printf("%s\n", uri)
 	res, err := httpClient.Head(uri)
 	if err != nil {
 		return "", err
+	}
+	// I assume 404 means that the user has been deleted
+	if res.StatusCode == 404 {
+		return "user_deleted", nil
 	}
 	if res.StatusCode == 429 {
 		return "", errTooManyRequests
 	}
 	if res.StatusCode != 301 {
+		fmt.Printf("%s\n", uri)
 		fmt.Printf("%v\n", res.Header)
 		return "", fmt.Errorf("status code: %d", res.StatusCode)
 	}
@@ -94,7 +98,7 @@ func resolveUserNames(userIds []int) map[int]string {
 			panic("saved user names")
 		}
 		res[userID] = name
-		dur := time.Millisecond * 300
+		dur := time.Millisecond * 400
 		time.Sleep(dur)
 	}
 	saveUserNames(res)

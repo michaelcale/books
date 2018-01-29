@@ -368,7 +368,7 @@ func dumpMetaAndExit() {
 
 func main() {
 	// for ad-hoc operations uncomment one of those
-	// genContributorsAndExit()
+	genContributorsAndExit()
 	// dumpMetaAndExit()
 	// printDocTagsAndExit()
 
