@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"os"
 	"path"
 	"path/filepath"
 	"sort"
@@ -70,7 +71,7 @@ func calcExampleCount(docTag *DocTag) {
 	docTag.ExampleCount = n
 }
 
-func printDocTagsMust() {
+func printDocTagsAndExit() {
 	loadAll()
 	for i := range gDocTags {
 		docTag := &gDocTags[i]
@@ -82,6 +83,7 @@ func printDocTagsMust() {
 	for _, dc := range gDocTags {
 		fmt.Printf(`{ "%s", "", false, %d, %d },%s`, dc.Title, dc.ExampleCount, dc.TopicCount, "\n")
 	}
+	os.Exit(0)
 }
 
 func loadDocTagsMust() []DocTag {
@@ -192,6 +194,7 @@ func sortExamples(a []*Example) {
 	})
 }
 
+// sometime json representation of versions is empty array, we want to skip those
 func shortenVersion(s string) string {
 	if s == "[]" {
 		return ""
@@ -358,11 +361,17 @@ func genBook(book *common.Book, defaultLang string) {
 	fmt.Printf("Imported %s (%d chapters, %d articles) in %s\n", name, nChapters, nArticles, time.Since(timeStart))
 }
 
+func dumpMetaAndExit() {
+	loadAll()
+	os.Exit(0)
+}
+
 func main() {
-	if false {
-		printDocTagsMust()
-		return
-	}
+	// for ad-hoc operations uncomment one of those
+	// genContributorsAndExit()
+	// dumpMetaAndExit()
+	// printDocTagsAndExit()
+
 	timeStart := time.Now()
 	loadAll()
 	for _, bookInfo := range booksToImport {
