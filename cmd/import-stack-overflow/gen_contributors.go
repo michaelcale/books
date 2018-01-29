@@ -98,7 +98,7 @@ func resolveUserNames(userIds []int) map[int]string {
 			panic("saved user names")
 		}
 		res[userID] = name
-		dur := time.Millisecond * 600
+		dur := time.Millisecond * 1000
 		time.Sleep(dur)
 	}
 	saveUserNames(res)
