@@ -14,8 +14,15 @@ import (
 	"github.com/gomarkdown/markdown"
 	"github.com/kjk/programming-books/pkg/common"
 	"github.com/kjk/programming-books/pkg/kvstore"
+	"github.com/kjk/programming-books/pkg/stackoverflow"
 	"github.com/kjk/u"
 )
+
+type DocTag = stackoverflow.DocTag
+type Topic = stackoverflow.Topic
+type Example = stackoverflow.Example
+type TopicHistory = stackoverflow.TopicHistory
+type Contributor = stackoverflow.Contributor
 
 var (
 	gDocTags        []DocTag
@@ -79,35 +86,35 @@ func printDocTagsMust() {
 
 func loadDocTagsMust() []DocTag {
 	path := path.Join("stack-overflow-docs-dump", "doctags.json.gz")
-	docTags, err := loadDocTags(path)
+	docTags, err := stackoverflow.LoadDocTags(path)
 	u.PanicIfErr(err)
 	return docTags
 }
 
 func loadTopicsMust() []Topic {
 	path := path.Join("stack-overflow-docs-dump", "topics.json.gz")
-	topics, err := loadTopics(path)
+	topics, err := stackoverflow.LoadTopics(path)
 	u.PanicIfErr(err)
 	return topics
 }
 
 func loadTopicHistoriesMust() []TopicHistory {
 	path := path.Join("stack-overflow-docs-dump", "topichistories.json.gz")
-	topicHistories, err := loadTopicHistories(path)
+	topicHistories, err := stackoverflow.LoadTopicHistories(path)
 	u.PanicIfErr(err)
 	return topicHistories
 }
 
 func loadContributorsMust() []*Contributor {
 	path := path.Join("stack-overflow-docs-dump", "contributors.json.gz")
-	contributors, err := loadContibutors(path)
+	contributors, err := stackoverflow.LoadContibutors(path)
 	u.PanicIfErr(err)
 	return contributors
 }
 
 func loadExamplesMust() []*Example {
 	path := path.Join("stack-overflow-docs-dump", "examples.json.gz")
-	examples, err := loadExamples(path)
+	examples, err := stackoverflow.LoadExamples(path)
 	u.PanicIfErr(err)
 	return examples
 }

@@ -1,4 +1,4 @@
-package main
+package stackoverflow
 
 /*
 Dates are in format:
@@ -57,12 +57,6 @@ type Contributor struct {
 	DocContributorDeletionReasonId int
 }
 
-func loadContibutors(path string) ([]*Contributor, error) {
-	var res []*Contributor
-	err := jsonDecodeGzipped(path, &res)
-	return res, err
-}
-
 /*
 contributortypes.json
 	- Id
@@ -115,12 +109,6 @@ type DocTag struct {
 	HelloWorldDocTopicId int
 	TopicCount           int
 	ExampleCount         int
-}
-
-func loadDocTags(path string) ([]DocTag, error) {
-	var res []DocTag
-	err := jsonDecodeGzipped(path, &res)
-	return res, err
 }
 
 /*
@@ -199,12 +187,6 @@ type Example struct {
 	BodyMarkdown string
 }
 
-func loadExamples(path string) ([]*Example, error) {
-	var res []*Example
-	err := jsonDecodeGzipped(path, &res)
-	return res, err
-}
-
 /*
 topichistories.json
 	- Id
@@ -244,12 +226,6 @@ type TopicHistory struct {
 	CreationUserDisplayName string
 	Comment                 string
 	Text                    string
-}
-
-func loadTopicHistories(path string) ([]TopicHistory, error) {
-	var res []TopicHistory
-	err := jsonDecodeGzipped(path, &res)
-	return res, err
 }
 
 /*
@@ -344,10 +320,4 @@ type Topic struct {
 	SyntaxMarkdown       string
 	ParametersMarkdown   string
 	RemarksMarkdown      string
-}
-
-func loadTopics(path string) ([]Topic, error) {
-	var res []Topic
-	err := jsonDecodeGzipped(path, &res)
-	return res, err
 }

@@ -1,7 +1,6 @@
 package common
 
 import (
-	"io/ioutil"
 	"strings"
 )
 
@@ -71,15 +70,4 @@ func MakeURLSafe(s string) string {
 	s = strings.ToLower(s)
 	s = shortenConsequitve(s, "-")
 	return s
-}
-
-// ReadFileAsLines reads a file as lines
-func ReadFileAsLines(path string) ([]string, error) {
-	d, err := ioutil.ReadFile(path)
-	if err != nil {
-		return nil, err
-	}
-	s := string(d)
-	res := strings.Split(s, "\n")
-	return res, nil
 }
