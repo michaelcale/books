@@ -1,11 +1,25 @@
 package main
 
 import (
+	"encoding/json"
+	"errors"
 	"fmt"
+	"net/http"
 	"os"
+	"strconv"
+	"strings"
 	"time"
 
 	"github.com/kjk/u"
+)
+
+var (
+	errTooManyRequests = errors.New("too many requests")
+	httpClient         = http.Client{
+		CheckRedirect: func(req *http.Request, via []*http.Request) error {
+			return http.ErrUseLastResponse
+		},
+	}
 )
 
 /*
@@ -16,6 +30,76 @@ $ http HEAD https://stackoverflow.com/users/1850609/
 HTTP/1.1 301 Moved Permanently
 Location: /users/1850609/acdcjunior
 */
+func resolveUserName(id int, trace bool) (string, error) {
+	uri := "https://stackoverflow.com/users/" + strconv.Itoa(id)
+	//fmt.Printf("%s\n", uri)
+	res, err := httpClient.Head(uri)
+	if err != nil {
+		return "", err
+	}
+	if res.StatusCode == 429 {
+		return "", errTooManyRequests
+	}
+	if res.StatusCode != 301 {
+		fmt.Printf("%v\n", res.Header)
+		return "", fmt.Errorf("status code: %d", res.StatusCode)
+	}
+	loc := res.Header.Get("Location")
+	parts := strings.Split(loc, "/")
+	lastIdx := len(parts) - 1
+	name := parts[lastIdx]
+
+	if trace {
+		fmt.Printf("uri: '%s', loc: '%s', name: '%s'\n", uri, loc, name)
+	}
+	return name, nil
+}
+
+const userNamesPath = "users.json"
+
+func loadUserNames() map[int]string {
+	var res map[int]string
+	f, err := os.Open(userNamesPath)
+	if err != nil {
+		return make(map[int]string)
+	}
+	defer f.Close()
+	dec := json.NewDecoder(f)
+	err = dec.Decode(&res)
+	if err != nil || res == nil {
+		return make(map[int]string)
+	}
+	fmt.Printf("Loaded %d user names\n", len(res))
+	return res
+}
+
+func saveUserNames(d map[int]string) {
+	f, err := os.Create(userNamesPath)
+	u.PanicIfErr(err)
+	defer f.Close()
+	enc := json.NewEncoder(f)
+	enc.Encode(d)
+}
+
+func resolveUserNames(userIds []int) map[int]string {
+	res := loadUserNames()
+	for _, userID := range userIds {
+		if _, ok := res[userID]; ok {
+			continue
+		}
+		name, err := resolveUserName(userID, true)
+		if err != nil {
+			saveUserNames(res)
+			u.PanicIfErr(err)
+			panic("saved user names")
+		}
+		res[userID] = name
+		dur := time.Millisecond * 300
+		time.Sleep(dur)
+	}
+	saveUserNames(res)
+	return res
+}
 
 func genContributorsAndExit() {
 	timeStart := time.Now()
@@ -48,7 +132,10 @@ func genContributorsAndExit() {
 		exampleToBook[exampleID] = bookID
 	}
 
-	// TODO: build doc id = > doc name mapping
+	bookToName := make(map[int]string)
+	for _, book := range gDocTags {
+		bookToName[book.Id] = book.Title
+	}
 
 	// maps book id to map of contributor id => count of contributions
 	perBookContributors := make(map[int]map[int]int)
@@ -82,17 +169,30 @@ func genContributorsAndExit() {
 		bookContrib[c.UserId]++
 	}
 
+	var contributorIds []int
+	for uid := range contributors {
+		contributorIds = append(contributorIds, uid)
+	}
+	fmt.Printf("Resolving user ids for %d users\n", len(contributorIds))
+	userIDToName := resolveUserNames(contributorIds)
+
 	fmt.Printf("Total contributions: %d\n", len(gContributors))
 	fmt.Printf("Unique contributors: %d\n", len(contributors))
 	fmt.Printf("Total books: %d\n", len(perBookContributors))
 	fmt.Printf("Missing topics: %d\n", nMissingTopics)
 	fmt.Printf("Missing examples: %d\n", nMissingExamples)
-	max := 32
+
+	fmt.Printf("All:\n")
 	for cID, n := range contributors {
-		fmt.Printf("%d, %d\n", cID, n)
-		max--
-		if max < 0 {
-			break
+		uname := userIDToName[cID]
+		fmt.Printf("%d, %d, %s\n", cID, n, uname)
+	}
+	for bookID, bookContributors := range perBookContributors {
+		bookName := bookToName[bookID]
+		fmt.Printf("%s:\n", bookName)
+		for cID, n := range bookContributors {
+			uname := userIDToName[cID]
+			fmt.Printf("%d, %d, %s\n", cID, n, uname)
 		}
 	}
 	os.Exit(0)
