@@ -9,8 +9,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/kjk/programming-books/pkg/common"
-	"github.com/kjk/programming-books/pkg/kvstore"
+	"github.com/essentialbooks/books/pkg/common"
+	"github.com/essentialbooks/books/pkg/kvstore"
 	"github.com/kjk/u"
 )
 

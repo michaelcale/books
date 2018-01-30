@@ -9,7 +9,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/kjk/programming-books/pkg/common"
+	"github.com/essentialbooks/books/pkg/common"
 	"github.com/kjk/u"
 )
 

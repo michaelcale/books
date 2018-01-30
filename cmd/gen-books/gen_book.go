@@ -28,7 +28,7 @@ var (
 	articleTmpl   *template.Template
 	aboutTmpl     *template.Template
 
-	gitHubBaseURL = "https://github.com/kjk/programming-books"
+	gitHubBaseURL = "https://github.com/essentialbooks/books"
 )
 
 func createDirForFileMust(path string) {

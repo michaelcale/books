@@ -1,6 +1,6 @@
 package stackoverflow
 
-import "github.com/kjk/programming-books/pkg/common"
+import "github.com/essentialbooks/books/pkg/common"
 
 func LoadTopics(path string) ([]Topic, error) {
 	var res []Topic
