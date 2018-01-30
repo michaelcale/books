@@ -108,10 +108,10 @@ func resolveUserNames(userIds []int) map[int]string {
 func genContributorsAndExit() {
 	timeStart := time.Now()
 	fmt.Printf("Loading Stack Overflow data...")
-	gDocTags = loadDocTagsMust()
-	gContributors = loadContributorsMust()
-	gTopics = loadTopicsMust()
-	gExamples = loadExamplesMust()
+	gDocTags := loadDocTagsMust()
+	gContributors := loadContributorsMust()
+	gTopics := loadTopicsMust()
+	gExamples := loadExamplesMust()
 	fmt.Printf(" took %s\n", time.Since(timeStart))
 
 	// for fast search, build topic id => doc id mapping

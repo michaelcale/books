@@ -26,11 +26,6 @@ type TopicHistory = stackoverflow.TopicHistory
 type Contributor = stackoverflow.Contributor
 
 var (
-	gDocTags        []DocTag
-	gTopics         []Topic
-	gExamples       []*Example
-	gTopicHistories []TopicHistory
-	gContributors   []*Contributor
 	currDefaultLang string
 
 	emptyExamplexs []*Example
@@ -45,13 +40,14 @@ func mdToHTML(d []byte) []byte {
 }
 
 func getTopicsByDocID(docID int) map[int]bool {
-	topics := make(map[int]bool)
-	for _, topic := range gTopics {
+	res := make(map[int]bool)
+	topics := loadTopicsMust()
+	for _, topic := range topics {
 		if topic.DocTagId == docID {
-			topics[topic.Id] = true
+			res[topic.Id] = true
 		}
 	}
-	return topics
+	return res
 }
 
 func isEmptyString(s string) bool {
@@ -63,7 +59,8 @@ func calcExampleCount(docTag *DocTag) {
 	docID := docTag.Id
 	topics := getTopicsByDocID(docID)
 	n := 0
-	for _, ex := range gExamples {
+	examples := loadExamplesMust()
+	for _, ex := range examples {
 		if topics[ex.DocTopicId] {
 			n++
 		}
@@ -73,52 +70,76 @@ func calcExampleCount(docTag *DocTag) {
 
 func printDocTagsAndExit() {
 	loadAll()
-	for i := range gDocTags {
-		docTag := &gDocTags[i]
+	docs := loadDocTagsMust()
+	for i := range docs {
+		docTag := &docs[i]
 		calcExampleCount(docTag)
 	}
-	sort.Slice(gDocTags, func(i, j int) bool {
-		return gDocTags[i].ExampleCount < gDocTags[j].ExampleCount
+	sort.Slice(docs, func(i, j int) bool {
+		return docs[i].ExampleCount < docs[j].ExampleCount
 	})
-	for _, dc := range gDocTags {
+	for _, dc := range docs {
 		fmt.Printf(`{ "%s", "", false, %d, %d },%s`, dc.Title, dc.ExampleCount, dc.TopicCount, "\n")
 	}
 	os.Exit(0)
 }
 
+var (
+	docTagsCached        []DocTag
+	topicsCached         []Topic
+	topicHistoriesCached []TopicHistory
+	contributorsCached   []*Contributor
+	examplesCached       []*Example
+)
+
 func loadDocTagsMust() []DocTag {
-	path := path.Join("stack-overflow-docs-dump", "doctags.json.gz")
-	docTags, err := stackoverflow.LoadDocTags(path)
-	u.PanicIfErr(err)
-	return docTags
+	if docTagsCached == nil {
+		var err error
+		path := path.Join("stack-overflow-docs-dump", "doctags.json.gz")
+		docTagsCached, err = stackoverflow.LoadDocTags(path)
+		u.PanicIfErr(err)
+	}
+	return docTagsCached
 }
 
 func loadTopicsMust() []Topic {
-	path := path.Join("stack-overflow-docs-dump", "topics.json.gz")
-	topics, err := stackoverflow.LoadTopics(path)
-	u.PanicIfErr(err)
-	return topics
+	if topicsCached == nil {
+		var err error
+		path := path.Join("stack-overflow-docs-dump", "topics.json.gz")
+		topicsCached, err = stackoverflow.LoadTopics(path)
+		u.PanicIfErr(err)
+	}
+	return topicsCached
 }
 
 func loadTopicHistoriesMust() []TopicHistory {
-	path := path.Join("stack-overflow-docs-dump", "topichistories.json.gz")
-	topicHistories, err := stackoverflow.LoadTopicHistories(path)
-	u.PanicIfErr(err)
-	return topicHistories
+	if topicHistoriesCached == nil {
+		var err error
+		path := path.Join("stack-overflow-docs-dump", "topichistories.json.gz")
+		topicHistoriesCached, err = stackoverflow.LoadTopicHistories(path)
+		u.PanicIfErr(err)
+	}
+	return topicHistoriesCached
 }
 
 func loadContributorsMust() []*Contributor {
-	path := path.Join("stack-overflow-docs-dump", "contributors.json.gz")
-	contributors, err := stackoverflow.LoadContibutors(path)
-	u.PanicIfErr(err)
-	return contributors
+	if contributorsCached == nil {
+		var err error
+		path := path.Join("stack-overflow-docs-dump", "contributors.json.gz")
+		contributorsCached, err = stackoverflow.LoadContibutors(path)
+		u.PanicIfErr(err)
+	}
+	return contributorsCached
 }
 
 func loadExamplesMust() []*Example {
-	path := path.Join("stack-overflow-docs-dump", "examples.json.gz")
-	examples, err := stackoverflow.LoadExamples(path)
-	u.PanicIfErr(err)
-	return examples
+	if examplesCached == nil {
+		var err error
+		path := path.Join("stack-overflow-docs-dump", "examples.json.gz")
+		examplesCached, err = stackoverflow.LoadExamples(path)
+		u.PanicIfErr(err)
+	}
+	return examplesCached
 }
 
 func findDocTagByTitleMust(docTags []DocTag, title string) DocTag {
@@ -134,15 +155,16 @@ func findDocTagByTitleMust(docTags []DocTag, title string) DocTag {
 func loadAll() {
 	timeStart := time.Now()
 	fmt.Printf("Loading Stack Overflow data...")
-	gDocTags = loadDocTagsMust()
-	gTopics = loadTopicsMust()
-	gExamples = loadExamplesMust()
-	gTopicHistories = loadTopicHistoriesMust()
-	gContributors = loadContributorsMust()
+	loadDocTagsMust()
+	loadTopicsMust()
+	loadExamplesMust()
+	loadTopicHistoriesMust()
+	loadContributorsMust()
 	fmt.Printf(" took %s\n", time.Since(timeStart))
 }
 
 func getTopicsByDocTagID(docTagID int) []*Topic {
+	gTopics := loadTopicsMust()
 	var res []*Topic
 	for i, topic := range gTopics {
 		if topic.DocTagId == docTagID {
@@ -153,6 +175,7 @@ func getTopicsByDocTagID(docTagID int) []*Topic {
 }
 
 func getExampleByID(id int) *Example {
+	gExamples := loadExamplesMust()
 	for i, e := range gExamples {
 		if e.Id == id {
 			return gExamples[i]
@@ -162,6 +185,7 @@ func getExampleByID(id int) *Example {
 }
 
 func getExamplesForTopic(docTagID int, docTopicID int) []*Example {
+	gTopicHistories := loadTopicHistoriesMust()
 	var res []*Example
 	seenIds := make(map[int]bool)
 	for _, th := range gTopicHistories {
@@ -263,6 +287,7 @@ func printEmptyExamples() {
 }
 
 func getContributors(docID int) []int {
+	gContributors := loadContributorsMust()
 	topics := getTopicsByDocID(docID)
 	contributors := make(map[int]bool)
 	for _, c := range gContributors {
@@ -319,6 +344,7 @@ func genBook(book *common.Book, defaultLang string) {
 	newName := book.NewName()
 	currDefaultLang = defaultLang
 	bookDstDir := common.MakeURLSafe(newName)
+	gDocTags := loadDocTagsMust()
 	docTag := findDocTagByTitleMust(gDocTags, name)
 	//fmt.Printf("%s: docID: %d\n", title, docTag.Id)
 	topics := getTopicsByDocTagID(docTag.Id)
@@ -366,20 +392,116 @@ func dumpMetaAndExit() {
 	os.Exit(0)
 }
 
+func getImportedBooks() []string {
+	fileInfos, err := ioutil.ReadDir("books")
+	if err != nil {
+		return nil
+	}
+	var books []string
+	for _, fi := range fileInfos {
+		if fi.IsDir() {
+			books = append(books, fi.Name())
+		}
+	}
+	return books
+}
+
+func getAllBooks() []string {
+	gDocTags := loadDocTagsMust()
+	var books []string
+	for _, doc := range gDocTags {
+		book := doc.Title
+		books = append(books, book)
+	}
+	return books
+}
+
+func printAllBookNames() {
+	all := getAllBooks()
+	s := strings.Join(all, ", ")
+	fmt.Printf("All books: %s\n", s)
+}
+
+func printUsageAndExit() {
+	fmt.Printf("Usage: import-stack-overflow book-to-import\n")
+	imported := getImportedBooks()
+	if len(imported) > 0 {
+		s := strings.Join(imported, ", ")
+		fmt.Printf("Already imported: %s\n", s)
+	}
+	printAllBookNames()
+	os.Exit(1)
+}
+
+// some custom fixups for stack overflow book name => our book name
+var bookNameFixups = [][]string{
+	{"Intel x86 Assembly Language & Microarchitecture", "Intel x86 assembly"},
+	{"tensorflow", "TensorFlow"},
+	{"react-native", "React Native"},
+	{"postgresql", "PostgreSQL"},
+	{"batch-file", "Batch file"},
+	{"excel-vba", "Excel VBA"},
+	{"html5-canvas", "HTML Canvas"},
+	{"algorithm", "Algorithms"},
+	{"meteor", "Meteor"},
+}
+
+// convert a stack overflow book name to our book name
+func fixupBookName(soName string) string {
+	// "Ruby Language" => "Ruby" etc.
+	if strings.HasSuffix(soName, "Language") {
+		s := strings.TrimSuffix(soName, "Language")
+		return strings.TrimSpace(s)
+	}
+	// manual overrides
+	for _, fixup := range bookNameFixups {
+		if soName == fixup[0] {
+			return fixup[1]
+		}
+	}
+	return soName
+}
+
+func findBookByName(bookName string) *DocTag {
+	nameNoCase := strings.ToLower(bookName)
+	gDocTags := loadDocTagsMust()
+	for i, doc := range gDocTags {
+		titleNoCase := strings.ToLower(doc.Title)
+		if nameNoCase == titleNoCase {
+			return &gDocTags[i]
+		}
+	}
+	return nil
+}
+
 func main() {
 	// for ad-hoc operations uncomment one of those
-	genContributorsAndExit()
+	//genContributorsAndExit()
 	// dumpMetaAndExit()
 	// printDocTagsAndExit()
 
-	timeStart := time.Now()
-	loadAll()
-	for _, bookInfo := range booksToImport {
-		if !bookInfo.Import {
-			continue
-		}
-		genBook(bookInfo, "")
+	args := os.Args[1:]
+	if len(args) != 1 {
+		printUsageAndExit()
 	}
+	timeStart := time.Now()
+	fmt.Printf("Trying to import book %s\n", args[0])
+	loadAll()
+
+	bookName := args[0]
+	doc := findBookByName(bookName)
+	if doc == nil {
+		printAllBookNames()
+		fmt.Printf("\nDidn't find a book '%s'.\nSee above for list of available books\n", bookName)
+	}
+
+	/*
+		for _, bookInfo := range booksToImport {
+			if !bookInfo.Import {
+				continue
+			}
+			genBook(bookInfo, "")
+		}*/
 	fmt.Printf("Took %s\n", time.Since(timeStart))
-	printEmptyExamples()
+	//printEmptyExamples()
 }

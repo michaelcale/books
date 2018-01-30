@@ -10,5 +10,5 @@ go build -o import-stack-overflow
 Set-Location -Path ../..
 exitIfFailed
 
-./cmd/import-stack-overflow/import-stack-overflow
+./cmd/import-stack-overflow/import-stack-overflow $args
 Remove-Item -Force -ErrorAction SilentlyContinue ./cmd/import-stack-overflow/import-stack-overflow
