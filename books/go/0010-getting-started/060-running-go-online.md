@@ -4,17 +4,15 @@ Score: 13
 Body:
 ## The Go Playground ##
 
-One little known Go tool is **[The Go Playground](https://play.golang.org)**. If one wants to experiment with Go without downloading it, they can easily do so simply by . . .
+To test small snippets of Go code, you can use [The Go Playground](https://play.golang.org).
 
-1. Visiting the [Playground](https://play.golang.org) in their web browser
-2. Entering their code
-3. Clicking “Run”
+Playground has some limitations:
+* it only supports standard library so you can't use third party libraries
+* networking, file i/o is not available
+* time is simulated
 
 ## Sharing your code ##
 
 The Go Playground also has tools for sharing; if a user presses the “Share” button, a link (like [this one](https://play.golang.org/p/v3rrZLwEUC)) will be generated that can be sent to other people to test and edit.
 
-## In action ##
-
-[![The Go Playground in action](https://i.stack.imgur.com/1v2fz.png)](https://i.stack.imgur.com/1v2fz.png)
 |======|
