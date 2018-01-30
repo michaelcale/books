@@ -2,26 +2,38 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
+	"os"
 	"runtime"
-	"sort"
 	"strings"
 	"sync"
 	"time"
 
 	"github.com/kjk/programming-books/pkg/common"
+	"github.com/kjk/u"
 )
 
-func getBooksToImport() []*common.Book {
-	var res []*common.Book
-	for _, bookInfo := range common.BooksToProcess {
-		if !bookInfo.Import {
-			continue
+func dirFromBook(book *common.Book) string {
+	return common.MakeURLSafe(book.NewName())
+}
+
+func isBookImported(bookDirs []string, book *common.Book) bool {
+	dir := dirFromBook(book)
+	for _, dir2 := range bookDirs {
+		if dir == dir2 {
+			return true
 		}
-		res = append(res, bookInfo)
 	}
-	sort.Slice(res, func(i, j int) bool {
-		return res[i].NewName() < res[j].NewName()
-	})
+	return false
+}
+
+func getBooksToImport(bookDirs []string) []*common.Book {
+	var res []*common.Book
+	for _, book := range common.BooksToProcess {
+		if isBookImported(bookDirs, book) {
+			res = append(res, book)
+		}
+	}
 	return res
 }
 
@@ -29,6 +41,8 @@ func getBooksToImport() []*common.Book {
 func getDefaultLangForBook(bookName string) string {
 	s := strings.ToLower(bookName)
 	switch s {
+	case "go":
+		return "go"
 	case "android":
 		return "java"
 	case "ios":
@@ -45,10 +59,28 @@ func getDefaultLangForBook(bookName string) string {
 	return s
 }
 
+func getBookDirs() []string {
+	fileInfos, err := ioutil.ReadDir("books")
+	u.PanicIfErr(err)
+	var res []string
+	for _, fi := range fileInfos {
+		if fi.IsDir() {
+			res = append(res, fi.Name())
+		}
+	}
+	return res
+}
+
 func main() {
 	timeStart := time.Now()
 	var books []*Book
-	booksToImport := getBooksToImport()
+	booksToImport := getBooksToImport(getBookDirs())
+	for _, b := range booksToImport {
+		fmt.Printf("Importing book: %s\n", b.NewName())
+	}
+
+	os.RemoveAll("www")
+
 	for _, bookInfo := range booksToImport {
 		timeStart := time.Now()
 		bookName := bookInfo.NewName()
