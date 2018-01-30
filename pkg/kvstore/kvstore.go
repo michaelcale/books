@@ -52,7 +52,13 @@ func extractMultiLineValue(lines []string) ([]string, string, error) {
 			return rest, s, nil
 		}
 	}
-	return nil, "", fmt.Errorf("didn't find end of value line ('%s')", RecordSeparator)
+	// for convenience, we don't requuire RecordSeparator because most
+	// articles have only one multi-line value and it ends at the end of filea
+	// This might not detect mistakenly leaving RecordSeparator when we have
+	// more than one multi-line value. We can live with that.
+	s := strings.Join(lines[:], "\n")
+	return nil, s, nil
+	//return nil, "", fmt.Errorf("didn't find end of value line ('%s')", RecordSeparator)
 }
 
 // if error is io.EOF, we successfully finished parsing
