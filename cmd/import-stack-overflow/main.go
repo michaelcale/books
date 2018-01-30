@@ -26,8 +26,6 @@ type TopicHistory = stackoverflow.TopicHistory
 type Contributor = stackoverflow.Contributor
 
 var (
-	currDefaultLang string
-
 	emptyExamplexs []*Example
 	// if true, prints more information
 	verbose = false
@@ -338,14 +336,19 @@ func genTOCTxtMust(path string, docID int) {
 	u.PanicIfErr(err)
 }
 
-func genBook(book *common.Book, defaultLang string) {
+func importBook(docTag *DocTag, bookName string) {
 	timeStart := time.Now()
-	name := book.Name
-	newName := book.NewName()
-	currDefaultLang = defaultLang
-	bookDstDir := common.MakeURLSafe(newName)
-	gDocTags := loadDocTagsMust()
-	docTag := findDocTagByTitleMust(gDocTags, name)
+
+	bookNameSafe := common.MakeURLSafe(bookName)
+	bookTopDir := filepath.Join("books", bookNameSafe)
+	if pathExists(bookTopDir) {
+		fmt.Printf("Book '%s' has already been imported.\nTo re-import, delete directory '%s'\n", bookName, bookTopDir)
+		os.Exit(1)
+	}
+
+	fmt.Printf("Importing a book %s\n", bookName)
+	loadAll()
+
 	//fmt.Printf("%s: docID: %d\n", title, docTag.Id)
 	topics := getTopicsByDocTagID(docTag.Id)
 	nChapters := len(topics)
@@ -356,7 +359,7 @@ func genBook(book *common.Book, defaultLang string) {
 		sortExamples(examples)
 
 		dirChapter := fmt.Sprintf("%04d-%s", chapter, common.MakeURLSafe(t.Title))
-		dirPath := filepath.Join("books", bookDstDir, dirChapter)
+		dirPath := filepath.Join(bookTopDir, dirChapter)
 		chapterIndexPath := filepath.Join(dirPath, "index.md")
 		writeIndexTxtMust(chapterIndexPath, t)
 		//fmt.Printf("%s\n", dirChapter)
@@ -379,12 +382,11 @@ func genBook(book *common.Book, defaultLang string) {
 		}
 		nArticles += len(examples)
 	}
-	bookDstPath := filepath.Join("books", bookDstDir)
-	genContributors(bookDstPath, docTag.Id)
-	path := filepath.Join(bookDstPath, "toc.txt")
+	genContributors(bookTopDir, docTag.Id)
+	path := filepath.Join(bookTopDir, "toc.txt")
 	genTOCTxtMust(path, docTag.Id)
 
-	fmt.Printf("Imported %s (%d chapters, %d articles) in %s\n", name, nChapters, nArticles, time.Since(timeStart))
+	fmt.Printf("Imported %s (%d chapters, %d articles) in %s\n", bookName, nChapters, nArticles, time.Since(timeStart))
 }
 
 func dumpMetaAndExit() {
@@ -474,9 +476,14 @@ func findBookByName(bookName string) *DocTag {
 	return nil
 }
 
+func pathExists(path string) bool {
+	_, err := os.Stat(path)
+	return err == nil
+}
+
 func main() {
 	// for ad-hoc operations uncomment one of those
-	//genContributorsAndExit()
+	// genContributorsAndExit()
 	// dumpMetaAndExit()
 	// printDocTagsAndExit()
 
@@ -486,22 +493,17 @@ func main() {
 	}
 	timeStart := time.Now()
 	fmt.Printf("Trying to import book %s\n", args[0])
-	loadAll()
 
 	bookName := args[0]
 	doc := findBookByName(bookName)
 	if doc == nil {
 		printAllBookNames()
 		fmt.Printf("\nDidn't find a book '%s'.\nSee above for list of available books\n", bookName)
+		os.Exit(1)
 	}
 
-	/*
-		for _, bookInfo := range booksToImport {
-			if !bookInfo.Import {
-				continue
-			}
-			genBook(bookInfo, "")
-		}*/
+	importBook(doc, bookName)
+
 	fmt.Printf("Took %s\n", time.Since(timeStart))
 	//printEmptyExamples()
 }
