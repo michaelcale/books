@@ -8,7 +8,7 @@ A blank identifier can be assigned a value of any type, and is most commonly use
 
 **Multiple Return Values**
 
-```
+```go
 func SumProduct(a, b int) (int, int) {
     return a+b, a*b
 }
@@ -22,7 +22,7 @@ func main() {
 
 **Using `range`**
 
-```
+```go
 func main() {
 
     pets := []string{"dog", "cat", "fish"}

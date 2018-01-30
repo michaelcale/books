@@ -4,6 +4,7 @@ Score: 5
 Body:
 In Go, you can declare multiple variables at the same time.
 
+```go
     // You can declare multiple variables of the same type in one line
     var a, b, c string
 
@@ -13,9 +14,11 @@ In Go, you can declare multiple variables at the same time.
     x, y, z := 1, 2, 3
 
     foo, bar := 4, "stack" // `foo` is type `int`, `bar` is type `string`
+```
 
 If a function returns multiple values, you can also assign values to variables based on the function's return values.
 
+```go
     func multipleReturn() (int, int) {
         return 1, 2
     }
@@ -29,4 +32,5 @@ If a function returns multiple values, you can also assign values to variables b
     }
 
     w, z := multipleReturn2() // w = 3, z = 4
+```
 |======|
