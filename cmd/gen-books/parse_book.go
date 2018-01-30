@@ -56,9 +56,7 @@ func (a *Article) GitHubURL() string {
 // GitHubEditURL returns url to editing this article on GitHub
 // TODO: verify it's the right noe
 func (a *Article) GitHubEditURL() string {
-	uri := a.Chapter.GitHubURL() + "/" + filepath.Base(a.sourceFilePath)
-	uri = strings.Replace(uri, "/edit/tree/", "/blob/", -1)
-	return uri
+	return strings.Replace(a.GitHubURL(), "/blob/master/", "/edit/master/", -1)
 }
 
 // URL returns url of .html file with this article
@@ -105,9 +103,8 @@ func (c *Chapter) GitHubURL() string {
 
 // GitHubEditURL returns url to edit index.md document
 func (c *Chapter) GitHubEditURL() string {
-	// TODO: fix it
-	return "/"
-	//return c.Book.GitHubURL() + "/" + c.ChapterDir
+	uri := c.GitHubURL() + "/index.md"
+	return strings.Replace(uri, "/blob/master/", "/edit/master/", -1)
 }
 
 // VersionsHTML returns html version of versions
