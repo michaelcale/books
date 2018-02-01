@@ -77,3 +77,18 @@ func ReadFileAsLines(path string) ([]string, error) {
 	res := strings.Split(s, "\n")
 	return res, nil
 }
+
+// GetDirs returns all sub-directories in a dir
+func GetDirs(dir string) ([]string, error) {
+	fileInfos, err := ioutil.ReadDir(dir)
+	if err != nil {
+		return nil, err
+	}
+	var res []string
+	for _, fi := range fileInfos {
+		if fi.IsDir() {
+			res = append(res, fi.Name())
+		}
+	}
+	return res, nil
+}

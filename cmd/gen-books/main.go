@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"runtime"
 	"strings"
@@ -60,15 +59,9 @@ func getDefaultLangForBook(bookName string) string {
 }
 
 func getBookDirs() []string {
-	fileInfos, err := ioutil.ReadDir("books")
+	dirs, err := common.GetDirs("books")
 	u.PanicIfErr(err)
-	var res []string
-	for _, fi := range fileInfos {
-		if fi.IsDir() {
-			res = append(res, fi.Name())
-		}
-	}
-	return res
+	return dirs
 }
 
 func main() {

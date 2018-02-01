@@ -395,16 +395,8 @@ func dumpMetaAndExit() {
 }
 
 func getImportedBooks() []string {
-	fileInfos, err := ioutil.ReadDir("books")
-	if err != nil {
-		return nil
-	}
-	var books []string
-	for _, fi := range fileInfos {
-		if fi.IsDir() {
-			books = append(books, fi.Name())
-		}
-	}
+	books, err := common.GetDirs("books")
+	u.PanicIfErr(err)
 	return books
 }
 
