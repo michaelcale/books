@@ -12,6 +12,11 @@ import (
 	"github.com/kjk/u"
 )
 
+func gitRename(dst, src string) error {
+	fmt.Printf("%s =>\n%s\n\n", src, dst)
+	return nil
+}
+
 func getMdFiles(dir string) ([]string, error) {
 	fileInfos, err := ioutil.ReadDir(dir)
 	if err != nil {
@@ -48,18 +53,11 @@ func getNoFromName(name string) (int, string) {
 	return n, parts[1]
 }
 
-func renameFilesInChapter(chapterDir string) error {
-	files, err := getMdFiles(chapterDir)
-	if err != nil {
-		return err
-	}
+func sortNamesByNo(names []string, prec int) []*FileRenameInfo {
 	var ri []*FileRenameInfo
-	for _, file := range files {
-		if file == "index.md" {
-			continue
-		}
+	for _, name := range names {
 		i := &FileRenameInfo{
-			Name: file,
+			Name: name,
 		}
 		i.No, i.NameRest = getNoFromName(i.Name)
 		ri = append(ri, i)
@@ -70,11 +68,32 @@ func renameFilesInChapter(chapterDir string) error {
 	})
 	for i, info := range ri {
 		n := 10 * (i + 1)
-		info.NewName = fmt.Sprintf("%03d-%s", n, info.NameRest)
+		fmtStr := fmt.Sprintf("%%0%dd-%%s", prec)
+		info.NewName = fmt.Sprintf(fmtStr, n, info.NameRest)
 	}
+	return ri
+}
+
+func renameFilesInChapter(chapterDir string) error {
+	files, err := getMdFiles(chapterDir)
+	if err != nil {
+		return err
+	}
+	var names []string
+	for _, file := range files {
+		if file == "index.md" {
+			continue
+		}
+		names = append(names, file)
+	}
+
+	ri := sortNamesByNo(names, 3)
 	for _, info := range ri {
 		if info.NewName != info.Name {
-			fmt.Printf("Renaming %s = > %s\n", info.Name, info.NewName)
+			src := filepath.Join(chapterDir, info.Name)
+			dst := filepath.Join(chapterDir, info.NewName)
+			err = gitRename(dst, src)
+			u.PanicIfErr(err)
 		}
 	}
 	return nil
@@ -86,7 +105,16 @@ func renameChapters(bookDir string, chapterDirs []string) error {
 		err := renameFilesInChapter(chapterDir)
 		u.PanicIfErr(err)
 	}
-	// TODO: rename chapters
+
+	ri := sortNamesByNo(chapterDirs, 4)
+	for _, info := range ri {
+		if info.NewName != info.Name {
+			src := filepath.Join(bookDir, info.Name)
+			dst := filepath.Join(bookDir, info.NewName)
+			err := gitRename(dst, src)
+			u.PanicIfErr(err)
+		}
+	}
 	return nil
 }
 
