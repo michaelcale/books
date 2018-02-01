@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
+	"os/exec"
 	"path/filepath"
 	"sort"
 	"strconv"
@@ -13,7 +15,13 @@ import (
 )
 
 func gitRename(dst, src string) error {
-	fmt.Printf("%s =>\n%s\n\n", src, dst)
+	cmd := exec.Command("git", "mv", src, dst)
+	out, err := cmd.CombinedOutput()
+	if err != nil {
+		fmt.Printf("'git mv %s %s' failed with err '%s'. Output:\n%s\n", src, dst, err, string(out))
+		os.Exit(1)
+	}
+	fmt.Printf("git mv %s => %s\n", src, dst)
 	return nil
 }
 
