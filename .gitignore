@@ -3,3 +3,4 @@ cmd/import-stack-overflow/import-stack-overflow
 www/
 netlify.toml
 netlifyctl-debug.log
+cmd/preview/preview
