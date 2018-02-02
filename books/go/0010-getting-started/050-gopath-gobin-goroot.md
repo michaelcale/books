@@ -5,7 +5,7 @@ Body:
 
 ## `GOPATH`
 
-It's important to understand the effect `GOPATH` environment variable.
+It's important to understand the effect of `GOPATH` environment variable.
 
 If you come from other programming languages, you're probably used to placing source code anywhere in the file system.
 
