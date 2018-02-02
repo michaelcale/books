@@ -154,6 +154,7 @@ div.activity code {
 
 .article code {
     background-color: #f8f8f8;
+    background-color: #f5f2f0;
 }
 
 hr.toc-sep {
@@ -218,19 +219,6 @@ hr.toc-sep {
 }
 
 .github-link:hover {
-    background-color: #f1f1f1;
-}
-
-.bottom-right {
-    font-size: 0.8em;
-    position: fixed;
-    right: 4px;
-    bottom: 4px;
-    padding: 4px 8px;
-    border: 1px solid #666;
-}
-
-.bottom-right:hover {
     background-color: #f1f1f1;
 }
 
