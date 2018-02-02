@@ -106,8 +106,9 @@ func (c *Chapter) GitHubURL() string {
 
 // GitHubEditURL returns url to edit index.md document
 func (c *Chapter) GitHubEditURL() string {
-	uri := c.GitHubURL() + "/index.md"
-	return strings.Replace(uri, "/blob/master/", "/edit/master/", -1)
+	bookDir := filepath.Base(c.Book.destDir)
+	uri := gitHubBaseURL + "/edit/master/books/" + bookDir
+	return uri + "/" + c.ChapterDir + "/index.md"
 }
 
 // VersionsHTML returns html version of versions
