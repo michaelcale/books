@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"path/filepath"
 	"runtime"
 	"strings"
 	"sync"
@@ -87,7 +88,8 @@ func genAllBooks() {
 		books = append(books, book)
 	}
 
-	copyCSSMust()
+	copyToWwwMust(filepath.Join("tmpl", "main.css"))
+	copyToWwwMust(filepath.Join("tmpl", "app.js"))
 	genIndex(books)
 	genAbout()
 

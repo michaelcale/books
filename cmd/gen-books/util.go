@@ -2,11 +2,15 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"io/ioutil"
 	"log"
+	"os"
 	"os/exec"
 	"path/filepath"
 	"runtime"
+
+	"github.com/kjk/u"
 )
 
 func openBrowser(url string) {
@@ -24,6 +28,35 @@ func openBrowser(url string) {
 	if err != nil {
 		log.Fatal(err)
 	}
+}
+
+func isDirectory(path string) bool {
+	stat, err := os.Stat(path)
+	if err != nil {
+		return false
+	}
+	return stat.IsDir()
+}
+
+func copyFile(dst, src string) error {
+	fin, err := os.Open(src)
+	if err != nil {
+		return err
+	}
+	defer fin.Close()
+	fout, err := os.Create(dst)
+	if err != nil {
+		return err
+	}
+	defer fout.Close()
+	_, err = io.Copy(fout, fin)
+	return err
+}
+
+func copyFileMust(dst, src string) {
+	createDirForFileMust(dst)
+	err := copyFile(dst, src)
+	u.PanicIfErr(err)
 }
 
 func getDirsRecur(dir string) ([]string, error) {

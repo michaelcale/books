@@ -177,6 +177,14 @@ hr.toc-sep {
     padding-left: 8px;
 }
 
+.breadcrumbs__item:after {
+    content: "\2192";
+    font-family: Lucida Grande,Lucida Sans Unicode,Arial,Helvetica,sans-serif;
+    color: #a9a9a9;
+    display: inline-block;
+    margin: 0 9px 0 7px;
+}
+
 .hcenter {
     margin-left: auto;
     margin-right: auto;

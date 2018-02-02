@@ -79,7 +79,7 @@ func fixupURL(uri string, knownURLS []string) string {
 			return uri
 		}
 		if strings.HasPrefix(known, uri) {
-			fmt.Printf("fixupURL: %s => %s\n", uri, known)
+			//fmt.Printf("fixupURL: %s => %s\n", uri, known)
 			return known
 		}
 	}

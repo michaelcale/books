@@ -2,7 +2,6 @@ package main
 
 import (
 	"html/template"
-	"io"
 	"log"
 	"os"
 	"path/filepath"
@@ -145,25 +144,6 @@ func setCurrentChapter(chapters []*Chapter, current int) {
 	for i, chapter := range chapters {
 		chapter.IsCurrent = current == i
 	}
-}
-
-func copyFileMust(dst, src string) {
-	createDirForFileMust(dst)
-
-	in, err := os.Open(src)
-	u.PanicIfErr(err)
-	defer in.Close()
-	out, err := os.Create(dst)
-	u.PanicIfErr(err)
-	defer out.Close()
-	_, err = io.Copy(out, in)
-	u.PanicIfErr(err)
-}
-
-func copyCSSMust() {
-	src := filepath.Join(tmplDir, "main.css")
-	dst := filepath.Join(destDir, "main.css")
-	copyFileMust(dst, src)
 }
 
 func genBook(book *Book) {

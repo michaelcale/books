@@ -21,7 +21,7 @@
 </head>
 
 <body>
-    <h1 class="hdr"><a href="/">Books</a> / <a href="{{.Book.URL}}">{{.Book.Title}}</a> / <a href="{{.Chapter.URL}}">{{.Chapter.Title}}</a> / {{.Title}}</h1>
+    <h1 class="hdr"><a href="/" class="breadcrumbs__item">Books</a><a href="{{.Book.URL}}" class="breadcrumbs__item">{{.Book.Title}}</a><a href="{{.Chapter.URL}}" class="breadcrumbs__item">{{.Chapter.Title}}</a>{{.Title}}</h1>
 
     <div class="article">
         {{ .BodyHTML }}

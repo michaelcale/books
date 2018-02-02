@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io"
-	"os"
 	"path/filepath"
 	"strings"
 
@@ -11,41 +9,22 @@ import (
 	"github.com/kjk/u"
 )
 
-func copyFile(dst, src string) error {
-	fin, err := os.Open(src)
-	if err != nil {
-		return err
-	}
-	defer fin.Close()
-	fout, err := os.Create(dst)
-	if err != nil {
-		return err
-	}
-	defer fout.Close()
-	_, err = io.Copy(fout, fin)
-	return err
-}
-
-func copyToWww(path string) {
+func copyToWwwMust(path string) {
 	name := filepath.Base(path)
 	dst := filepath.Join("www", name)
-	err := copyFile(dst, path)
-	u.PanicIfErr(err)
-}
-
-func isDirectory(path string) bool {
-	stat, err := os.Stat(path)
-	if err != nil {
-		return false
-	}
-	return stat.IsDir()
+	copyFileMust(dst, path)
 }
 
 func handleFileChange(path string) {
 	fmt.Printf("handleFileChange: %s\n", path)
 
 	if strings.HasSuffix(path, "main.css") {
-		copyToWww(filepath.Join("tmpl", "main.css"))
+		copyToWwwMust(filepath.Join("tmpl", "main.css"))
+		return
+	}
+
+	if strings.HasSuffix(path, "app.js") {
+		copyToWwwMust(filepath.Join("tmpl", "app.js"))
 		return
 	}
 
