@@ -1,6 +1,5 @@
-Title: Installing
+Title: Installing Go compiler
 Id: 20381
-Score: 1
 Body:
 
 There are 2 production quality compilers:

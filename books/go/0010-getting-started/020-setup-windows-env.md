@@ -1,4 +1,4 @@
-Title: Setup on Windows
+Title: Windows setup
 Id: rd600086
 Body:
 

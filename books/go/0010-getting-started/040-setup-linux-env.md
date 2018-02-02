@@ -1,4 +1,4 @@
-Title: Setup on Linux
+Title: Linux setup
 Id: rd6000f2
 Body:
 

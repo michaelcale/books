@@ -1,12 +1,11 @@
 Title: Getting started
 Id: 198
 Body:
-[Go](https://golang.org/) is a programming language with the following characteristics:
+[Go](https://golang.org/) is a general-purpose programming language with the following characteristics:
 * [open-source](https://github.com/golang/go)
-* statically typed
 * cross-platform (supports Windows, Mac, Linux and more, multiple CPU architectures)
+* statically typed
+* fast
 * garbage collected
-* has built-in concurrency
-* is syntactically similar to C
-
-|======|
+* languague-level suport for concurrency
+* familiar C-like syntax

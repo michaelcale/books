@@ -2,7 +2,7 @@ Title: Hello, World!
 Id: 833
 Score: 92
 Body:
-Create file `hello.go` with content:
+Create file `hello.go`:
 
 ```go
 package main
@@ -16,7 +16,7 @@ func main() {
 
 [Playground](https://play.golang.org/p/I3l_5RKJts)
 
-When `Go` is [installed correctly](a-20381) this program can be compiled and run with `go run hello.go`.
+Compile and run with `go run hello.go`.
 
 # Output:
 

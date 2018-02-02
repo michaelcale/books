@@ -1,4 +1,4 @@
-Title: Setup on Mac OS
+Title: Mac OS setup
 Id: rd600058
 Body:
 

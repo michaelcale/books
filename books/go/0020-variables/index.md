@@ -8,6 +8,3 @@ Syntax:
 - y := 5 // declare and define y inferring its type to int
 - f := 4.5 // declare and define f inferring its type to float64
 - b := "bar" // declare and define b inferring its type to string
-
-
-|======|

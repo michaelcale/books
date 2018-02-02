@@ -133,6 +133,16 @@ func (c *Chapter) destFilePath() string {
 
 // TODO: get rid of IntroductionHTML, SyntaxHTML etc., convert to just Body in markdown format
 
+// BodyHTML retruns html version of Body: field
+func (c *Chapter) BodyHTML() template.HTML {
+	s, err := c.indexDoc.GetValue("Body")
+	if err != nil {
+		return template.HTML("")
+	}
+	html := markdownToHTML([]byte(s), "", c.Book)
+	return template.HTML(html)
+}
+
 // IntroductionHTML retruns html version of Introduction:
 func (c *Chapter) IntroductionHTML() template.HTML {
 	s, err := c.indexDoc.GetValue("Introduction")
