@@ -200,7 +200,7 @@ hr.toc-sep {
     filter: opacity(1);
 }
 
-.top-right {
+.github-link {
     font-size: 0.8em;
     position: fixed;
     right: 4px;
@@ -209,7 +209,7 @@ hr.toc-sep {
     border: 1px solid #666;
 }
 
-.top-right:hover {
+.github-link:hover {
     background-color: #f1f1f1;
 }
 
