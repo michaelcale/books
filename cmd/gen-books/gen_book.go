@@ -116,7 +116,7 @@ func genBookArticle(article *Article) {
 	// TODO: move as a method on Article
 	if article.BodyHTML == "" {
 		defLang := getDefaultLangForBook(article.Book().Title)
-		html := markdownToHTML([]byte(article.BodyMarkdown), defLang)
+		html := markdownToHTML([]byte(article.BodyMarkdown), defLang, article.Book())
 		article.BodyHTML = template.HTML(html)
 	}
 	path := article.destFilePath()

@@ -64,6 +64,7 @@ func (a *Article) GitHubEditURL() string {
 func (a *Article) URL() string {
 	chap := a.Chapter
 	book := chap.Book
+	// /essential/go/a-14047-flags
 	return fmt.Sprintf("/essential/%s/%s", book.FileNameBase, a.FileNameBase)
 }
 
@@ -122,6 +123,7 @@ func (c *Chapter) VersionsHTML() template.HTML {
 
 // URL is used in book_index.tmpl.html
 func (c *Chapter) URL() string {
+	// /essential/go/ch-4023-parsing-command-line-arguments-and-flags
 	return fmt.Sprintf("/essential/%s/%s", c.Book.FileNameBase, c.FileNameBase)
 }
 
@@ -137,7 +139,7 @@ func (c *Chapter) IntroductionHTML() template.HTML {
 	if err != nil {
 		return template.HTML("")
 	}
-	html := markdownToHTML([]byte(s), "")
+	html := markdownToHTML([]byte(s), "", c.Book)
 	return template.HTML(html)
 }
 
@@ -147,7 +149,7 @@ func (c *Chapter) SyntaxHTML() template.HTML {
 	if err != nil {
 		return template.HTML("")
 	}
-	html := markdownToHTML([]byte(s), "")
+	html := markdownToHTML([]byte(s), "", c.Book)
 	return template.HTML(html)
 }
 
@@ -157,7 +159,7 @@ func (c *Chapter) RemarksHTML() template.HTML {
 	if err != nil {
 		return template.HTML("")
 	}
-	html := markdownToHTML([]byte(s), "")
+	html := markdownToHTML([]byte(s), "", c.Book)
 	return template.HTML(html)
 }
 
@@ -167,7 +169,7 @@ func (c *Chapter) ContributorsHTML() template.HTML {
 	if err != nil {
 		return template.HTML("")
 	}
-	html := markdownToHTML([]byte(s), "")
+	html := markdownToHTML([]byte(s), "", c.Book)
 	return template.HTML(html)
 }
 
@@ -184,6 +186,7 @@ type Book struct {
 
 	cachedArticlesCount int
 	defaultLang         string // default programming language for programming examples
+	knownUrls           []string
 
 	AnalyticsCode string
 }
@@ -386,8 +389,11 @@ func genContributorsChapter(book *Book) *Chapter {
 	return ch
 }
 
-// make sure chapter/article ids within the book are unique, so that we can generate stable urls
+// make sure chapter/article ids within the book are unique,
+// so that we can generate stable urls.
+// also build a list of chapter/article urls
 func ensureUniqueIds(book *Book) {
+	var urls []string
 	chapterIds := make(map[string]*Chapter)
 	articleIds := make(map[string]*Article)
 	for _, c := range book.Chapters {
@@ -398,6 +404,7 @@ func ensureUniqueIds(book *Book) {
 			os.Exit(1)
 		}
 		chapterIds[c.ID] = c
+		urls = append(urls, c.FileNameBase)
 		for _, a := range c.Articles {
 			if a2, ok := articleIds[a.ID]; ok {
 				fmt.Printf("Duplicate article id: '%s', in:\n", a.ID)
@@ -406,8 +413,10 @@ func ensureUniqueIds(book *Book) {
 				os.Exit(1)
 			}
 			articleIds[a.ID] = a
+			urls = append(urls, a.FileNameBase)
 		}
 	}
+	book.knownUrls = urls
 }
 
 func parseBook(bookName string) (*Book, error) {
@@ -455,12 +464,13 @@ func parseBook(bookName string) (*Book, error) {
 		return nil, fmt.Errorf("Unexpected file at top-level: '%s'", fi.Name())
 	}
 
-	ensureUniqueIds(book)
-
 	ch := genContributorsChapter(book)
 	ch.No = len(chapters) + 1
 	chapters = append(chapters, ch)
 	book.Chapters = chapters
+
+	ensureUniqueIds(book)
+
 	fmt.Printf("Book '%s' %d chapters, %d articles\n", bookName, len(chapters), book.ArticlesCount())
 	return book, nil
 }

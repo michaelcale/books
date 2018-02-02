@@ -51,7 +51,7 @@ $ sudo apt-get install -y build-essential git curl wget
 $ wget https://storage.googleapis.com/golang/go<versions>.gz
 ```
 
-You can find the version lists [here][https://golang.org/doc/install].
+You can find the version lists [here](https://golang.org/doc/install).
 
 ```bash
 # To install go1.9.3 use

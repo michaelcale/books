@@ -14,5 +14,3 @@ Playground has some limitations:
 ## Sharing your code ##
 
 The Go Playground also has tools for sharing; if a user presses the “Share” button, a link (like [this one](https://play.golang.org/p/v3rrZLwEUC)) will be generated that can be sent to other people to test and edit.
-
-|======|
