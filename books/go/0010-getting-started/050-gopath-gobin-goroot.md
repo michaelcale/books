@@ -17,9 +17,9 @@ Go tools expects a strict layout of the source code workspace.
  - `pkg` — location of compiled packages (`.a` files)
  - `bin` — location of executables built by Go
 
-Like the system `PATH` environment variable, Go path is a `:`(`;` on Windows) delimited list of directories where Go will look for packages. The `go get` tool will also download packages to the first directory in this list.
+Like the system `PATH` environment variable, Go path is a `:` (`;` on Windows) delimited list of directories where Go will look for packages. The `go get` tool will also download packages to the first directory in this list.
 
-Since Go 1.8, the `GOPATH` environment variable will have a default value if it is unset. It defaults to $HOME/go on Unix/Linux and %USERPROFILE%/go on Windows.
+Since Go 1.8, the `GOPATH` environment variable will have a default value if it is unset. It defaults to `$HOME/go` on Unix/Linux and `%USERPROFILE%/go` on Windows.
 
 Some tools assume that `GOPATH` will contain a single directory.
 
@@ -33,5 +33,3 @@ This is the location of your Go installation. It is used to find the standard li
 
 
 To set up a basic Go development environment, only a few of the many environment variables that affect the behavior of the `go` tool (See: [Listing Go Environment Variables][1] for a full list) need to be set (generally in your shell's `~/.profile` file, or equivalent on Unix-like OSs).
-
-|======|
