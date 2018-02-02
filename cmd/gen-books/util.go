@@ -1,24 +1,48 @@
 package main
 
 import (
-	"bytes"
+	"fmt"
+	"io/ioutil"
+	"log"
+	"os/exec"
+	"path/filepath"
+	"runtime"
 )
 
-func normalizeNewlines(d []byte) []byte {
-	// replace CR LF (windows) with LF (unix)
-	d = bytes.Replace(d, []byte{13, 10}, []byte{10}, -1)
-	// replace CF (mac) with LF (unix)
-	d = bytes.Replace(d, []byte{13}, []byte{10}, -1)
-	return d
+func openBrowser(url string) {
+	var err error
+	switch runtime.GOOS {
+	case "linux":
+		err = exec.Command("xdg-open", url).Start()
+	case "windows":
+		err = exec.Command("rundll32", "url.dll,FileProtocolHandler", url).Start()
+	case "darwin":
+		err = exec.Command("open", url).Start()
+	default:
+		err = fmt.Errorf("unsupported platform")
+	}
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
-// return first line of d and the rest
-func bytesRemoveFirstLine(d []byte) (string, []byte) {
-	idx := bytes.IndexByte(d, 10)
-	//u.PanicIf(-1 == idx)
-	if -1 == idx {
-		return string(d), nil
+func getDirsRecur(dir string) ([]string, error) {
+	toVisit := []string{dir}
+	idx := 0
+	for idx < len(toVisit) {
+		dir = toVisit[idx]
+		idx++
+		fileInfos, err := ioutil.ReadDir(dir)
+		if err != nil {
+			return nil, err
+		}
+		for _, fi := range fileInfos {
+			if !fi.IsDir() {
+				continue
+			}
+			path := filepath.Join(dir, fi.Name())
+			toVisit = append(toVisit, path)
+		}
 	}
-	l := d[:idx]
-	return string(l), d[idx+1:]
+	return toVisit, nil
 }

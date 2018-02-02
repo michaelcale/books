@@ -15,10 +15,13 @@ import (
 
 var (
 	flgAnalytics string
+	flgPreview   bool
+	allBookDirs  []string
 )
 
 func parseFlags() {
 	flag.StringVar(&flgAnalytics, "analytics", "", "google analytics code")
+	flag.BoolVar(&flgPreview, "preview", false, "if true, will start watching for file changes and re-build everything")
 	flag.Parse()
 }
 
@@ -74,29 +77,17 @@ func getBookDirs() []string {
 	return dirs
 }
 
-func main() {
-	parseFlags()
-
+func genAllBooks() {
 	timeStart := time.Now()
+
 	var books []*Book
-	booksToImport := getBooksToImport(getBookDirs())
-	for _, b := range booksToImport {
-		fmt.Printf("Importing book: %s\n", b.NewName())
-	}
-
-	os.RemoveAll("www")
-
-	for _, bookInfo := range booksToImport {
-		timeStart := time.Now()
-		bookName := bookInfo.NewName()
+	for _, bookName := range allBookDirs {
 		book, err := parseBook(bookName)
-		if err != nil {
-			fmt.Printf("Error '%s' parsing book '%s'\n", err, bookName)
-			return
-		}
+		u.PanicIfErr(err)
 		books = append(books, book)
-		fmt.Printf("Generating book '%s' took %s\n", bookName, time.Since(timeStart))
 	}
+
+	copyCSSMust()
 	genIndex(books)
 	genAbout()
 
@@ -114,6 +105,21 @@ func main() {
 		}(book)
 	}
 	wg.Wait()
+	fmt.Printf("Used %d procs, finished generating all book in %s\n", nProcs, time.Since(timeStart))
+}
 
-	fmt.Printf("Used %d procs, finished in %s\n", nProcs, time.Since(timeStart))
+func main() {
+	parseFlags()
+
+	booksToImport := getBooksToImport(getBookDirs())
+	for _, bookInfo := range booksToImport {
+		allBookDirs = append(allBookDirs, bookInfo.NewName())
+	}
+
+	os.RemoveAll("www")
+
+	genAllBooks()
+	if flgPreview {
+		startPreview()
+	}
 }

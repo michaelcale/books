@@ -3,14 +3,12 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 function exitIfFailed { if ($LASTEXITCODE -ne 0) { exit } }
 
-$cmd = "cmd/preview/previe"
+Remove-Item -Force -ErrorAction SilentlyContinue ./cmd/gen-books/gen-books
 
-Remove-Item -Force -ErrorAction SilentlyContinue $cmd
-
-Set-Location -Path cmd/preview
-go build -o preview
+Set-Location -Path cmd/gen-books
+go build -o gen-books
 Set-Location -Path ../..
 exitIfFailed
 
-./cmd/preview/preview
-Remove-Item -Force -ErrorAction SilentlyContinue $cmd
+./cmd/gen-books/gen-books -preview
+Remove-Item -Force -ErrorAction SilentlyContinue ./cmd/gen-books/gen-books

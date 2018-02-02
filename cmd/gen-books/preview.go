@@ -35,8 +35,8 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
 	path := fileForURI(uri)
 	if path == "" {
 		fmt.Printf("Didn't find file for '%s'\n", uri)
-	} else {
-		// fmt.Printf("Serving '%s' for '%s'\n", path, uri)
+		http.NotFound(w, r)
+		return
 	}
 	http.ServeFile(w, r, path)
 }
@@ -56,7 +56,7 @@ func makeHTTPServer() *http.Server {
 	return srv
 }
 
-func main() {
+func startPreview() {
 	httpSrv := makeHTTPServer()
 	httpSrv.Addr = ":8080"
 
@@ -71,6 +71,8 @@ func main() {
 	}()
 	fmt.Printf("Started listening on %s\n", httpSrv.Addr)
 	openBrowser("http://localhost:8080")
+
+	go rebuildOnChanges()
 
 	c := make(chan os.Signal, 2)
 	signal.Notify(c, os.Interrupt /* SIGINT */, syscall.SIGTERM)

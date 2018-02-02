@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"html/template"
 	"io"
 	"log"
@@ -47,6 +46,7 @@ func loadTemplateHelperMust(name string, ref **template.Template) *template.Temp
 		return res
 	}
 	path := tmplPath(name)
+	//fmt.Printf("loadTemplateHelperMust: %s\n", path)
 	t, err := template.ParseFiles(path)
 	u.PanicIfErr(err)
 	*ref = t
@@ -73,7 +73,6 @@ func loadTemplateMust(name string) *template.Template {
 }
 
 func execTemplateToFileSilentMust(name string, data interface{}, path string) {
-	createDirForFileMust(path)
 	tmpl := loadTemplateMust(name)
 	f, err := os.Create(path)
 	u.PanicIfErr(err)
@@ -83,7 +82,6 @@ func execTemplateToFileSilentMust(name string, data interface{}, path string) {
 }
 
 func execTemplateToFileMust(name string, data interface{}, path string) {
-	fmt.Printf("%s\n", path)
 	execTemplateToFileSilentMust(name, data, path)
 }
 
@@ -162,7 +160,9 @@ func copyCSSMust() {
 
 func genBook(book *Book) {
 	// generate index.html for the book
-	copyCSSMust()
+	err := os.MkdirAll(book.destDir, 0755)
+	u.PanicIfErr(err)
+
 	path := filepath.Join(book.destDir, "index.html")
 	book.AnalyticsCode = flgAnalytics
 	execTemplateToFileSilentMust("book_index.tmpl.html", book, path)

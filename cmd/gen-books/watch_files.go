@@ -33,21 +33,43 @@ func copyToWww(path string) {
 	u.PanicIfErr(err)
 }
 
-func rebuildAll() {
-	// TOOD: implement me
+func isDirectory(path string) bool {
+	stat, err := os.Stat(path)
+	if err != nil {
+		return false
+	}
+	return stat.IsDir()
 }
 
 func handleFileChange(path string) {
 	fmt.Printf("handleFileChange: %s\n", path)
+
 	if strings.HasSuffix(path, "main.css") {
 		copyToWww(filepath.Join("tmpl", "main.css"))
 		return
 	}
+
 	if strings.HasSuffix(path, ".tmpl.html") {
-		rebuildAll()
+		fmt.Printf("Rebuilding all books\n")
+		genAllBooks()
 		return
 	}
-	// TODO: if only .md or renamed directory, only rebuild that one book
+
+	if strings.HasSuffix(path, ".md") {
+		fmt.Printf("Rebuilding all books\n")
+		// TODO: only rebuild the article or just the book
+		// TODO: this doesn't pick up new files
+		genAllBooks()
+		return
+	}
+
+	if isDirectory(path) {
+		// assume this is a renamed chapter directory
+		// TODO: only rebuild the book
+		fmt.Printf("Rebuilding all books\n")
+		genAllBooks()
+		return
+	}
 }
 
 func rebuildOnChanges() {
@@ -89,7 +111,7 @@ func rebuildOnChanges() {
 		}
 	}()
 	for _, dir := range dirs {
-		fmt.Printf("Watching dir: '%s'\n", dir)
+		//fmt.Printf("Watching dir: '%s'\n", dir)
 		watcher.Add(dir)
 	}
 	// waiting forever

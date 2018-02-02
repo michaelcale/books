@@ -421,10 +421,12 @@ func parseBook(bookName string) (*Book, error) {
 		sourceDir:    srcDir,
 		destDir:      filepath.Join(destEssentialDir, bookNameSafe),
 	}
+
 	fileInfos, err := ioutil.ReadDir(srcDir)
 	if err != nil {
 		return nil, err
 	}
+
 	var chapters []*Chapter
 	for _, fi := range fileInfos {
 		if fi.IsDir() {
