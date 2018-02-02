@@ -1,15 +1,14 @@
 ## Essential Books Project
 
-This project is a continuation of Stack Overflow Documentation, which
-ended in [Augutst 2017](https://meta.stackoverflow.com/questions/354217/sunsetting-documentation).
+[Essential Programming Books](https://www.programming-books.io) project is a continuation of Stack Overflow Documentation, which ended in [Augutst 2017](https://meta.stackoverflow.com/questions/354217/sunsetting-documentation).
 
-The intent is to preserve the work that's been done so far and improve upon it.
+The intent is to preserve that work and improve upon it.
 
 Guiding principles behind Essential Books:
 * driven by examples
 * articles are small and heavily interlinked
 * not limited by size
 
-This project is collaborative. All documentation is released under [Creative Commons BY-SA](https://creativecommons.org/licenses/by-sa/3.0/) license.
+This is a collaborative project. Please do contribute new articles and improvements to existing articles.
 
-You can contribute by submitting Pull Requests.
+All documentation is released under [Creative Commons BY-SA](https://creativecommons.org/licenses/by-sa/3.0/) license.
