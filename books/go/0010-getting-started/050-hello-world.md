@@ -1,6 +1,5 @@
 Title: Hello, World!
 Id: 833
-Score: 92
 Body:
 Create file `hello.go`:
 

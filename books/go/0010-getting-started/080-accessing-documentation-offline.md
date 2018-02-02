@@ -1,6 +1,5 @@
 Title: Accessing Documentation Offline
 Id: 24998
-Score: 16
 Body:
 For full documentation, run the command:
 ```
@@ -23,4 +22,3 @@ General help is also available from command-line:
 ```
 go help [command]
 ```
-|======|

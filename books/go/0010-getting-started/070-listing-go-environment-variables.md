@@ -1,7 +1,8 @@
 Title: Listing Go Environment Variables
 Id: 14405
-Score: 20
 Body:
+## TODO: move this to some other chapter
+
 Environment variables that affect the `go` tool can be viewed via the `go env [var ...]` command:
 
 ```bash

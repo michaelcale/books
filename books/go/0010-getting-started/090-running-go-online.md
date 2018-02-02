@@ -1,6 +1,5 @@
 Title: Running Go online
 Id: 27470
-Score: 13
 Body:
 ## The Go Playground ##
 

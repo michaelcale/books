@@ -1,6 +1,5 @@
 Title: GOPATH, GOROOT, GOBIN
 Id: 14406
-Score: 61
 Body:
 
 ## `GOPATH`

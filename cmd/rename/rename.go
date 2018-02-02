@@ -9,6 +9,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/essentialbooks/books/pkg/common"
 	"github.com/kjk/u"
@@ -102,6 +103,9 @@ func renameFilesInChapter(chapterDir string) error {
 			dst := filepath.Join(chapterDir, info.NewName)
 			err = gitRename(dst, src)
 			u.PanicIfErr(err)
+			// maybe prevent 'Unable to create '*/.git/index.lock': File exists.'
+			// errors from git
+			time.Sleep(time.Millisecond * 250)
 		}
 	}
 	return nil
