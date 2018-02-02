@@ -89,24 +89,32 @@ func execTemplateToFileMust(name string, data interface{}, path string) {
 
 func genIndex(books []*Book) {
 	d := struct {
-		Books      []*Book
-		GitHubText string
-		GitHubURL  string
+		Books         []*Book
+		GitHubText    string
+		GitHubURL     string
+		AnalyticsCode string
 	}{
-		Books:      books,
-		GitHubText: "GitHub",
-		GitHubURL:  gitHubBaseURL,
+		Books:         books,
+		GitHubText:    "GitHub",
+		GitHubURL:     gitHubBaseURL,
+		AnalyticsCode: flgAnalytics,
 	}
 	path := filepath.Join(destDir, "index.html")
 	execTemplateToFileMust("index.tmpl.html", d, path)
 }
 
 func genAbout() {
+	d := struct {
+		AnalyticsCode string
+	}{
+		AnalyticsCode: flgAnalytics,
+	}
 	path := filepath.Join(destDir, "about.html")
-	execTemplateToFileMust("about.tmpl.html", nil, path)
+	execTemplateToFileMust("about.tmpl.html", d, path)
 }
 
 func genBookArticle(article *Article) {
+	article.AnalyticsCode = flgAnalytics
 	// TODO: move as a method on Article
 	if article.BodyHTML == "" {
 		defLang := getDefaultLangForBook(article.Book().Title)
@@ -123,6 +131,7 @@ func genBookChapter(chapter *Chapter) {
 	}
 
 	path := chapter.destFilePath()
+	chapter.AnalyticsCode = flgAnalytics
 	execTemplateToFileSilentMust("chapter.tmpl.html", chapter, path)
 }
 
@@ -155,6 +164,7 @@ func genBook(book *Book) {
 	// generate index.html for the book
 	copyCSSMust()
 	path := filepath.Join(book.destDir, "index.html")
+	book.AnalyticsCode = flgAnalytics
 	execTemplateToFileSilentMust("book_index.tmpl.html", book, path)
 	for i, chapter := range book.Chapters {
 		setCurrentChapter(book.Chapters, i)

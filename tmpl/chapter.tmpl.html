@@ -8,6 +8,15 @@
 
     <title>{{.Title}}</title>
     <link href="/main.css" rel="stylesheet">
+    {{ if .AnalyticsCode }}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{.AnalyticsCode}}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{.AnalyticsCode}}');
+    </script>
+    {{ end }}
 </head>
 
 <body>

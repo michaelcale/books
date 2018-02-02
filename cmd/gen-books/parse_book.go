@@ -34,6 +34,7 @@ type Article struct {
 	IsCurrent bool // only used when part of Siblings
 
 	sourceFilePath string // path of the file from which we've read the article
+	AnalyticsCode  string
 }
 
 // Book retuns book this article belongs to
@@ -89,6 +90,8 @@ type Chapter struct {
 	// used when generating list of chapters at the bottom of each chapter page
 	// indicates the chapter we're in right now
 	IsCurrent bool
+
+	AnalyticsCode string
 }
 
 // GitHubText returns text we display in GitHub box
@@ -180,6 +183,8 @@ type Book struct {
 
 	cachedArticlesCount int
 	defaultLang         string // default programming language for programming examples
+
+	AnalyticsCode string
 }
 
 // GitHubText returns text we show in GitHub link

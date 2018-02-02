@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
 	"runtime"
@@ -11,6 +12,15 @@ import (
 	"github.com/essentialbooks/books/pkg/common"
 	"github.com/kjk/u"
 )
+
+var (
+	flgAnalytics string
+)
+
+func parseFlags() {
+	flag.StringVar(&flgAnalytics, "analytics", "", "google analytics code")
+	flag.Parse()
+}
 
 func dirFromBook(book *common.Book) string {
 	return common.MakeURLSafe(book.NewName())
@@ -65,6 +75,8 @@ func getBookDirs() []string {
 }
 
 func main() {
+	parseFlags()
+
 	timeStart := time.Now()
 	var books []*Book
 	booksToImport := getBooksToImport(getBookDirs())

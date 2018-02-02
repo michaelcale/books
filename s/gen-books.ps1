@@ -10,5 +10,5 @@ go build -o gen-books
 Set-Location -Path ../..
 exitIfFailed
 
-./cmd/gen-books/gen-books
+./cmd/gen-books/gen-books $args
 Remove-Item -Force -ErrorAction SilentlyContinue ./cmd/gen-books/gen-books
