@@ -30,6 +30,14 @@ var (
 	gitHubBaseURL = "https://github.com/essentialbooks/books"
 )
 
+func unloadTemplates() {
+	indexTmpl = nil
+	bookIndexTmpl = nil
+	chapterTmpl = nil
+	articleTmpl = nil
+	aboutTmpl = nil
+}
+
 func createDirForFileMust(path string) {
 	dir := filepath.Dir(path)
 	err := os.MkdirAll(dir, 0755)
