@@ -1,6 +1,6 @@
-Title: Go Clean
+Title: go clean
 Id: 17007
-Score: 1
 Body:
-`go clean` will clean up any temporary files created when invoking `go build` on a program. It will also clean files left over from Makefiles.
-|======|
+`go clean` will delete temporary files created when running `go build`.
+
+ It will also clean files left over from Makefiles.
