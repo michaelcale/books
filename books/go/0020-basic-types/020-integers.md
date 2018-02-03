@@ -12,3 +12,5 @@ Go has fixed-size signed and unsigned integers:
 It also has architecture-dependent integers:
 * `int` is `int32` on 32-bit processors and `int64` on 64-bit processors
 * `uint` is `uint32` on 32-bit processors and `uint64` on 64-bit processors
+
+[Zero value](a-6069) of an integer is 0.

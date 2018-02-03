@@ -28,3 +28,4 @@ prints:
 size of bool is: 1
 ```
 
+[Zero value](a-6069) of `bool` is `false`.
