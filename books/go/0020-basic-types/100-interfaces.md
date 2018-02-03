@@ -1,6 +1,7 @@
+---
 Title: Interfaces
 Id: 9010008c
-Body:
+---
 An interface defines a set of methods on a struct.
 
 Here's a definition of [io.Reader](https://golang.org/pkg/io/#Reader) interface from standard library:

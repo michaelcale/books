@@ -1,7 +1,8 @@
+---
 Title: Integers
 Search: int, ints
 Id: rd6000kf
-Body:
+---
 Go has fixed-size signed and unsigned integers:
 * `int8`, `uint8`
 * `byte` is an alias for `uint8`

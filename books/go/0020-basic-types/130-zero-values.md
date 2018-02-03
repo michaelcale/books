@@ -1,6 +1,7 @@
+---
 Title: Zero values
 Id: 6069
-Body:
+---
 Variables in Go are always initialized with a known value even if not explicitly assigned in source code.
 
 Each Go type has a zero value.

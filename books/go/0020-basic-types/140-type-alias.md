@@ -1,6 +1,7 @@
+---
 Title: Type aliases
 Id: 901000v5
-Body:
+---
 Type alias was introduced in Go 1.9 to make [code refactoring](https://talks.golang.org/2016/refactor.article) easier.
 
 Imagine you have package `foo` that exports type `Bar`.

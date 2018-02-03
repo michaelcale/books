@@ -1,6 +1,7 @@
+---
 Title: Empty interface
 Id: 90100072
-Body:
+---
 Type `interface{}` is called empty interface.
 
 By definition it's an [interface](a-9010008c) with no methods defined.

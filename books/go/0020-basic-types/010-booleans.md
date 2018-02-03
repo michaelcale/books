@@ -1,8 +1,8 @@
+---
 Title: Booleans
 Search: bool
 Id: rd6000m1
-Body:
-
+---
 Type `bool` can be `true` or `false`.
 
 ```go
