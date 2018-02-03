@@ -6,6 +6,6 @@ After installing the compiler you need to configure [`GOPATH`](a-14406) environm
 
 Since Go 1.8, the `GOPATH` environment variable has default value `%USERPROFILE%/go`.
 
-will have a default value if it is unset. It defaults to $HOME/go on Unix/Linux and  on Windows.
+You should understand the [effect of GOPATH](a-14406) on go tools.
 
-You should understand the [effect of GOPATH](a-14406).
+<!-- TODO: powershell setup -->

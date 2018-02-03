@@ -1,14 +1,10 @@
-Title: Go env
+Title: go env
 Id: 28737
-Score: 0
 Body:
-`go env [var ...]` prints go environment information.
+`go env [var ...]` prints information about environment variables that affect the behavior of Go tools.
 
->By default it prints all the information.
-
-`$go env`
-
-```
+```bash
+$ go env
 GOARCH="amd64"
 GOBIN=""
 GOEXE=""
@@ -25,13 +21,10 @@ CXX="clang++"
 CGO_ENABLED="1"
 ```
 
->If one or more variable names is given as arguments, it prints the value of each named variable on its own line.
+If one or more variable names is given as arguments, it prints the value of each named variable on its own line.
 
-`$go env GOOS GOPATH`
-```
+```bash
+$ go env GOOS GOPATH
 darwin
 /Users/vikashkv/work
 ```
-
-
-|======|
