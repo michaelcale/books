@@ -1,7 +1,7 @@
+---
 Title: Formatting text
 Id: 29829
-Score: 0
-Body:
+---
 Package `fmt` implements functions to print and format text using format _verbs_. Verbs are represented with a percent sign.
 
 General verbs:
@@ -57,4 +57,3 @@ Using the verbs, you can create strings concatenating multiple types:
     text3 := fmt.Sprintf("%s, %s (Age: %d)", "Obama", "Barack", 55)
 
 The function `Sprintf` formats the string in the first parameter replacing the verbs with the value of the values in the next parameters and returns the result. Like `Sprintf`, the function `Printf` also formats but instead of returning the result it prints the string.
-|======|

@@ -1,12 +1,13 @@
+---
 Title: Multidimensional Array
 Id: 7303
 Score: -2
-Body:
-Multidimensional arrays are basically arrays containing others arrays as elements.  
+---
+Multidimensional arrays are basically arrays containing others arrays as elements.
 It is represented like `[sizeDim1][sizeDim2]..[sizeLastDim]type`, replacing `sizeDim` by numbers corresponding to the length of the dimention, and `type` by the type of data in the multidimensional array.
 
-For example, `[2][3]int` is representing an array composed of **2 sub arrays** of **3 int typed elements**.  
-It can basically be the representation of a matrix of **2 lines** and **3 columns**. 
+For example, `[2][3]int` is representing an array composed of **2 sub arrays** of **3 int typed elements**.
+It can basically be the representation of a matrix of **2 lines** and **3 columns**.
 
 So we can make huge dimensions number array like `var values := [2017][12][31][24][60]int` for example if you need to store a number for each minutes since Year 0.
 
@@ -16,7 +17,7 @@ Some examples following:
 
     // Defining a 2d Array to represent a matrix like
     // 1 2 3     So with 2 lines and 3 columns;
-    // 4 5 6     
+    // 4 5 6
     var multiDimArray := [2/*lines*/][3/*columns*/]int{ [3]int{1, 2, 3}, [3]int{4, 5, 6} }
 
     // That can be simplified like this:
@@ -26,7 +27,7 @@ Some examples following:
     fmt.Println(multiDimArray)
     // > [[1 2 3] [4 5 6]]
 
-    fmt.Println(multiDimArray[0]) 
+    fmt.Println(multiDimArray[0])
     // > [1 2 3]    (first line of the array)
 
     fmt.Println(multiDimArray[0][1])
@@ -36,8 +37,8 @@ Some examples following:
 
     // We can also define array with as much dimensions as we need
     // here, initialized with all zeros
-    var multiDimArray := [2][4][3][2]string{} 
-  
+    var multiDimArray := [2][4][3][2]string{}
+
     fmt.Println(multiDimArray);
     // Yeah, many dimensions stores many data
     // > [[[["" ""] ["" ""]] [["" ""] ["" ""]] [["" ""] ["" ""]]]
@@ -56,7 +57,7 @@ Some examples following:
 
     fmt.Println(multiDimArray);
     // If we could see in 4 dimensions, maybe we could see the result as a simple format
-        
+
     // > [[[["All zero indexes" ""] ["" ""]] [["" ""] ["" ""]] [["" ""] ["" ""]]]
     //    [[["" ""] ["" ""]] [["" ""] ["" ""]] [["" ""] ["" ""]]]
     //    [[["" ""] ["" ""]] [["" ""] ["" ""]] [["" ""] ["" ""]]]
@@ -65,6 +66,3 @@ Some examples following:
     //    [[["" ""] ["" ""]] [["" ""] ["" ""]] [["" ""] ["" ""]]]
     //    [[["" ""] ["" ""]] [["" ""] ["" ""]] [["" ""] ["" ""]]]
     //    [[["" ""] ["" ""]] [["" ""] ["" ""]] [["" ""] ["" "All indexes to max"]]]]
-    
-
-|======|

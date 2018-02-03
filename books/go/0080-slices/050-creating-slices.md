@@ -1,7 +1,8 @@
+---
 Title: Creating Slices
 Id: 4807
 Score: 1
-Body:
+---
 Slices are the typical way go programmers store lists of data.
 
 To declare a slice variable use the `[]Type` syntax.
@@ -17,14 +18,14 @@ Another way to initialize a slice is with the `make` function. It three argument
     a := make([]int, 0, 5)
 
 You can add elements to your new slice using `append`.
-    
+
     a = append(a, 5)
 
 Check the number of elements in your slice using `len`.
 
     length := len(a)
 
-Check the capacity of your slice using `cap`. The capacity is the number of elements currently allocated to be in memory for the slice. You can always append to a slice at capacity as Go will automatically create a bigger slice for you. 
+Check the capacity of your slice using `cap`. The capacity is the number of elements currently allocated to be in memory for the slice. You can always append to a slice at capacity as Go will automatically create a bigger slice for you.
 
     capacity := cap(a)
 
@@ -40,7 +41,5 @@ You can also use a `for` loop over slices with `range`. The first variable is th
 
 [Go Playground][2]
 
-
   [1]: http://stackoverflow.com/documentation/go/732/maps#t=201701150248144194028
   [2]: https://play.golang.org/p/l9M34jbOla
-|======|

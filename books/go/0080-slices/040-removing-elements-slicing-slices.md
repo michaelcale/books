@@ -1,27 +1,28 @@
+---
 Title: Removing elements / "Slicing" slices
 Id: 3420
 Score: 1
-Body:
+---
 If you need to remove one or more elements from a slice, or if you need to work with a sub slice of another existing one; you can use the following method.
 
 > Following examples uses slice of int, but that works with all type of slice.
 
 So for that, we need a slice, from witch we will remove some elements:
 
-    slice := []int{1, 2, 3, 4, 5, 6} 
+    slice := []int{1, 2, 3, 4, 5, 6}
     // > [1 2 3 4 5 6]
 
 We need also the indexes of elements to remove:
- 
+
     // index of first element to remove (corresponding to the '3' in the slice)
     var first = 2
 
     // index of last element to remove (corresponding to the '5' in the slice)
-    var last = 4 
+    var last = 4
 
 And so we can "slice" the slice, removing undesired elements:
 
-    // keeping elements from start to 'first element to remove' (not keeping first to remove), 
+    // keeping elements from start to 'first element to remove' (not keeping first to remove),
     // removing elements from 'first element to remove' to 'last element to remove'
     // and keeping all others elements to the end of the slice
     newSlice1 := append(slice[:first], slice[last+1:]...)
@@ -67,6 +68,5 @@ You can also removing some elements from the end of the slice:
     newSlice7 := slice[:first]
     // > [1 2]
 
-> If the new slice have to contains exactly the same elements than the first one, you can use the same thing but with `last := first-1`.  
+> If the new slice have to contains exactly the same elements than the first one, you can use the same thing but with `last := first-1`.
 (This can be useful in case of your indexes are previously computed)
-|======|

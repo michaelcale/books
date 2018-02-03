@@ -1,7 +1,8 @@
+---
 Title: Creating a map
 Id: 2484
 Score: 5
-Body:
+---
 One can declare and initialize a map in a single statement using a [*composite literal*][1].
 
 Using automatic type Short variable declaration:
@@ -74,4 +75,3 @@ You can create and use a map directly, without the need to assign it to a variab
 
 
   [1]: https://golang.org/ref/spec#Composite_literals
-|======|

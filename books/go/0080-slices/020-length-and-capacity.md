@@ -1,7 +1,8 @@
+---
 Title: Length and Capacity
 Id: 3561
 Score: 4
-Body:
+---
 Slices have both length and capacity.  The length of a slice is the number of elements *currently* in the slice, while the capacity is the number of elements the slice *can hold* before needing to be reallocated.
 
 When creating a slice using the built-in `make()` function, you can specify its length, and optionally its capacity. If the capacity is not explicitly specified, it will be the specified length.
@@ -53,4 +54,4 @@ c = cap(s) // c > 5
 It is, therefore, generally good practice to allocate sufficient capacity when first creating a slice, if you know how much space you'll need, to avoid unnecessary reallocations.
 
   [1]: https://play.golang.org/p/E1OoWPDjwW
-|======|
+

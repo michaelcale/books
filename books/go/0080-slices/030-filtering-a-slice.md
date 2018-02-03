@@ -1,7 +1,8 @@
+---
 Title: Filtering a slice
 Id: 6786
 Score: 1
-Body:
+---
 To filter a slice without allocating a new underlying array:
 
     // Our base slice
@@ -18,4 +19,3 @@ To filter a slice without allocating a new underlying array:
 
     // (Optional) Reassign the slice
     slice = tmp // [2, 4]
-|======|

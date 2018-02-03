@@ -1,7 +1,7 @@
+---
 Title: String type
 Id: 29828
-Score: 0
-Body:
+---
 The `string` type allows you to store text, which is a series of characters. There are multiple ways to create strings. A literal string is created by writing the text between double quotes.
 
     text := "Hello World"
@@ -23,4 +23,3 @@ Strings can also be defined using backticks ` `` `. This creates a raw string li
 In the previous example, `text1` escapes the `\n` character which represents a new line while `text2` contains the new line character directly. If you compare `text1 == text2` the result will be `true`.
 
 However, ``text2 := `Hello\nWorld` `` would not escape the `\n` character which means the string contains the text `Hello\nWorld` without a new line. It would be the equivalent of typing `text1 := "Hello\\nWorld"`.
-|======|

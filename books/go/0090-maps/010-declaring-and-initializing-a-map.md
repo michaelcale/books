@@ -1,7 +1,8 @@
+---
 Title: Declaring and initializing a map
 Id: 2483
 Score: 30
-Body:
+---
 You define a map using the keyword `map`, followed by the types of its keys and its values:
 
     // Keys are ints, values are ints.
@@ -63,6 +64,3 @@ The key type can be any [comparable](http://golang.org/ref/spec#Comparison_opera
 
     // Declare via short variable declaration and initialize with a literal value.
     m := map[string]Person{}
-
-
-|======|

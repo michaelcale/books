@@ -1,7 +1,8 @@
+---
 Title: Iterating the keys of a map
 Id: 2487
 Score: 6
-Body:
+---
     people := map[string]int{
       "john": 30,
       "jane": 29,
@@ -18,6 +19,4 @@ If you are just looking for the keys, since they are the first value, you can si
       fmt.Println("Name:", key)
     }
 
-Note that when iterating over a map with a range loop, [the iteration order is not specified](https://blog.golang.org/go-maps-in-action) and is not guaranteed to be the same from one iteration to the next. 
-
-|======|
+Note that when iterating over a map with a range loop, [the iteration order is not specified](https://blog.golang.org/go-maps-in-action) and is not guaranteed to be the same from one iteration to the next.

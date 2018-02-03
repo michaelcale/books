@@ -1,7 +1,8 @@
+---
 Title: Counting map elements
 Id: 2528
 Score: 14
-Body:
+---
 The built-in function [`len`](https://golang.org/pkg/builtin/#len) returns the number of elements in a `map`
 
     m := map[string]int{}
@@ -14,5 +15,3 @@ If a variable points to a `nil` map, then `len` returns 0.
 
     var m map[string]int
     len(m) // 0
-
-|======|

@@ -1,7 +1,8 @@
+---
 Title: Deleting a map element
 Id: 2489
 Score: 4
-Body:
+---
 The [`delete`](https://golang.org/pkg/builtin/#delete) built-in function removes the element with the specified key from a map.
 
     people := map[string]int{"john": 30, "jane": 29}
@@ -20,5 +21,3 @@ If the `map` is `nil` or there is no such element, `delete` has no effect.
 
     var something map[string]int
     delete(something, "notfound") // no-op
-
-|======|

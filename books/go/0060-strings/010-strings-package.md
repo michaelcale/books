@@ -1,7 +1,8 @@
+---
 Title: strings package
 Id: 30331
 Score: 1
-Body:
+---
 * [`strings.Contains`](https://golang.org/pkg/strings/#Contains)
 
       fmt.Println(strings.Contains("foobar", "foo")) // true
@@ -44,5 +45,3 @@ Body:
       fmt.Println(strings.TrimSpace("  foobar  ")) // foobar
 
 More: https://golang.org/pkg/strings/.
-
-|======|

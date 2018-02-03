@@ -1,12 +1,13 @@
+---
 Title: Check for element in a map
 Id: 4650
 Score: 16
-Body:
+---
 To get a value from the map, you just have to do something like:00
 
     value := mapName[ key ]
 
-If the map contains the key, it returns the corresponding value.  
+If the map contains the key, it returns the corresponding value.
 If not, it returns zero-value of the map's value type (`0` if map of `int` values, `""` if map of `string` values...)
 
     m  := map[string]string{"foo": "foo_value", "bar": ""}
@@ -15,7 +16,7 @@ If not, it returns zero-value of the map's value type (`0` if map of `int` value
     k3 := m["nop"]  // returns "" since the key does not exist, and "" is the string type's zero value
 
 To differentiate between empty values and non-existent keys, you can use the second returned value of the map access (using like `value, hasKey := map["key"]`).
-  
+
 This second value is `boolean` typed, and will be:
 - `true` when the value is in the map,
 - `false` when the map does not contains the given key.
@@ -30,4 +31,3 @@ Look at the following example:
         // The map does not have the given key
         // the value will be the zero-value of the map's type
     }
-|======|

@@ -1,7 +1,8 @@
+---
 Title: Creating maps with slices as values
 Id: 3910
 Score: 1
-Body:
+---
     m := make(map[string][]int)
 
 Accessing a non-existent key will return a nil slice as a value. Since nil slices act like zero length slices when used with `append` or other built-in functions you do not normally need to check to see if a key exists:
@@ -14,4 +15,3 @@ Deleting a key from map sets the key back to a nil slice:
 
     delete(m, "key1")
     // m["key1"] == nil
-|======|
