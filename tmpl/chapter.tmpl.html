@@ -20,81 +20,88 @@
 </head>
 
 <body>
-    <div class="hdr"><a href="/" class="breadcrumbs__item">Books</a><a href="{{.Book.URL}}" >{{.Book.Title}}</a></div>
+    <div class="top-header">
+        <div><a href="/">Essential Books</a></div>
+        <input id="search-input" placeholder="Search book...">
+        <div>Right Side</div>
+    </div>
 
-    <div class="article">
-        <h1>{{.Title}}</h1>
+    <div class="content-wrapper">
+        <div class="hdr"><a href="/" class="breadcrumbs__item">Books</a><a href="{{.Book.URL}}">Essential {{.Book.Title}}</a></div>
 
-        {{if .ContributorsHTML}}
-        <h2>Contributors</h2>
-        <div>
-            {{.ContributorsHTML}}
-        </div>
-        {{end}}
+        <div class="article">
+            <h1>{{.Title}}</h1>
 
-        {{if .VersionsHTML}}
-        <h2>Versions</h2>
-        <div>
-            {{.VersionsHTML}}
-        </div>
-        {{end}}
-
-        {{if .IntroductionHTML}}
-        <h2>Introduction</h2>
-        <div>
-            {{.IntroductionHTML}}
-        </div>
-        {{end}}
-
-        {{if .SyntaxHTML}}
-        <h2>Syntax</h2>
-        <div>
-            {{.SyntaxHTML}}
-        </div>
-        {{end}}
-
-        {{if .RemarksHTML}}
-        <h2>Remarks</h2>
-        <div>
-            {{.RemarksHTML}}
-        </div>
-        {{end}}
-
-        {{if .BodyHTML}}
-        {{.BodyHTML}}
-        {{end}}
-
-        <div class="chapter-toc">
-            {{range .Articles}}
+            {{if .ContributorsHTML}}
+            <h2>Contributors</h2>
             <div>
-                <!-- <span class="chap-no">{{.No}}</span> -->
-                <a href="{{.URL}}">{{.Title}}</a>
+                {{.ContributorsHTML}}
             </div>
             {{end}}
-        </div>
-    </div>
-    <hr class="toc-sep">
 
-    <div class="chapter-toc-wrapper">
-        <div class="toc-header">{{.Book.TitleLong}}</div>
-
-        <div class="chapters-toc">
-            {{range .Book.Chapters}}
-                {{if .IsCurrent}}
-                    <div class="chapters-toc-item">
-                        <!-- <span class="chap-no">{{.No}}</span>  -->
-                        <span class="is-current">{{.Title}}</span>
-                    </div>
-                {{else}}
-                    <div class="chapters-toc-item">
-                        <!-- <span class="chap-no">{{.No}}</span> -->
-                        <a href="{{.URL}}">{{.Title}}</a>
-                    </div>
-                {{end}}
+            {{if .VersionsHTML}}
+            <h2>Versions</h2>
+            <div>
+                {{.VersionsHTML}}
+            </div>
             {{end}}
+
+            {{if .IntroductionHTML}}
+            <h2>Introduction</h2>
+            <div>
+                {{.IntroductionHTML}}
+            </div>
+            {{end}}
+
+            {{if .SyntaxHTML}}
+            <h2>Syntax</h2>
+            <div>
+                {{.SyntaxHTML}}
+            </div>
+            {{end}}
+
+            {{if .RemarksHTML}}
+            <h2>Remarks</h2>
+            <div>
+                {{.RemarksHTML}}
+            </div>
+            {{end}}
+
+            {{if .BodyHTML}}
+            {{.BodyHTML}}
+            {{end}}
+
+            <div class="chapter-toc">
+                {{range .Articles}}
+                <div>
+                    <!-- <span class="chap-no">{{.No}}</span> -->
+                    <a href="{{.URL}}">{{.Title}}</a>
+                </div>
+                {{end}}
+            </div>
+        </div>
+        <hr class="toc-sep">
+
+        <div class="chapter-toc-wrapper">
+            <div class="toc-header">{{.Book.TitleLong}}</div>
+
+            <div class="chapters-toc">
+                {{range .Book.Chapters}}
+                    {{if .IsCurrent}}
+                        <div class="chapters-toc-item">
+                            <!-- <span class="chap-no">{{.No}}</span>  -->
+                            <span class="is-current">{{.Title}}</span>
+                        </div>
+                    {{else}}
+                        <div class="chapters-toc-item">
+                            <!-- <span class="chap-no">{{.No}}</span> -->
+                            <a href="{{.URL}}">{{.Title}}</a>
+                        </div>
+                    {{end}}
+                {{end}}
+            </div>
         </div>
     </div>
-
     <div class="github-link-small">
         <a href="{{.GitHubEditURL}}" target="_blank">{{.GitHubText}}</a>
     </div>

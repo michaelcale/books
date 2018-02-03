@@ -21,33 +21,40 @@
 </head>
 
 <body>
-    <div class="hdr"><a href="/" class="breadcrumbs__item">Books</a><a href="{{.Book.URL}}" class="breadcrumbs__item">{{.Book.Title}}</a><a href="{{.Chapter.URL}}">{{.Chapter.Title}}</a></div>
-
-
-    <div class="article">
-        <h1>{{.Title}}</h1>
-        {{ .BodyHTML }}
+    <div class="top-header">
+        <div><a href="/">Essential Books</a></div>
+        <input id="search-input" placeholder="Search book...">
+        <div>Right Side</div>
     </div>
 
-    <hr class="toc-sep">
+    <div class="content-wrapper">
+        <div class="hdr"><a href="/" class="breadcrumbs__item">Books</a><a href="{{.Book.URL}}" class="breadcrumbs__item">Essential {{.Book.Title}}</a><a href="{{.Chapter.URL}}">{{.Chapter.Title}}</a></div>
 
-    <div class="article-chapter-toc">
-        <a href="{{.Chapter.URL}}">{{.Chapter.Title}}</a> / <b>{{.Title}}</b>
+        <div class="article">
+            <h1>{{.Title}}</h1>
+            {{ .BodyHTML }}
+        </div>
 
-        <div class="article-article-toc">
-        {{range .Siblings}}
-            {{if .IsCurrent}}
-                <div>
-                    <!--<span class="chap-no">{{.No}}</span> -->
-                    <span class="is-current">{{.Title}}</span>
-                </div>
-            {{else}}
-                <div>
-                    <!-- <span class="chap-no">{{.No}}</span> -->
-                    <a href="{{.URL}}">{{.Title}}</a>
-                </div>
+        <hr class="toc-sep">
+
+        <div class="article-chapter-toc">
+            <a href="{{.Chapter.URL}}">{{.Chapter.Title}}</a> / <b>{{.Title}}</b>
+
+            <div class="article-article-toc">
+            {{range .Siblings}}
+                {{if .IsCurrent}}
+                    <div>
+                        <!--<span class="chap-no">{{.No}}</span> -->
+                        <span class="is-current">{{.Title}}</span>
+                    </div>
+                {{else}}
+                    <div>
+                        <!-- <span class="chap-no">{{.No}}</span> -->
+                        <a href="{{.URL}}">{{.Title}}</a>
+                    </div>
+                {{end}}
             {{end}}
-        {{end}}
+            </div>
         </div>
     </div>
 
