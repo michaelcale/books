@@ -1,6 +1,5 @@
 Title: Basic Zero Values
 Id: 21169
-Score: 1
 Body:
 Variables in Go are always initialized whether you give them a starting value or not.  Each type, including custom types, has a zero value they are set to if not given a value.
 
