@@ -1,7 +1,8 @@
+---
 Title: Multiple constants declaration
 Id: 9400
 Score: 1
-Body:
+---
 You can declare multiple constants within the same `const` block:
 
     const (
@@ -23,4 +24,4 @@ For more examples of using `iota` to declare constants, see https://stackoverflo
 You can also declare multiple constants using the multiple assignment. However, this syntax may be harder to read and it is generally avoided.
 
     const Foo, Bar = "foo", "bar"
-|======|
+

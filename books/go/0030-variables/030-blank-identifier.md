@@ -1,7 +1,7 @@
+---
 Title: Blank Identifier
 Id: 29103
-Score: 2
-Body:
+---
 Go will throw an error when there is a variable that is unused, in order to encourage you to write better code. However, there are some situations when you really don't need to use a value stored in a variable. In those cases, you use a "blank identifier" `_` to assign and discard the assigned value.
 
 A blank identifier can be assigned a value of any type, and is most commonly used in functions that return multiple values.
@@ -35,4 +35,4 @@ func main() {
 
 }
 ```
-|======|
+

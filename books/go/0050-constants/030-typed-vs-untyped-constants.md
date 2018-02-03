@@ -1,7 +1,7 @@
+---
 Title: Typed vs. Untyped Constants
 Id: 12431
-Score: 0
-Body:
+---
 Constants in Go may be typed or untyped. For instance, given the following string literal:
 
     "bar"
@@ -26,4 +26,4 @@ The difference comes into play when we attempt to assign these constants in a co
     var mys MyString
     mys = foo      // This works just fine
     mys = typedFoo // cannot use typedFoo (type string) as type MyString in assignment
-|======|
+

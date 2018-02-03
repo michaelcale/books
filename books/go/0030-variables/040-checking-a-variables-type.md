@@ -1,7 +1,7 @@
+---
 Title: Checking a variable's type
 Id: 29105
-Score: 2
-Body:
+---
 There are some situations where you won't be sure what type a variable is when it is returned from a function. You can always check a variable's type by using `var.(type)` if you are unsure what type it is:
 
 ```go
@@ -18,4 +18,3 @@ switch x := x.(type) {
         fmt.Printf("unexpected type %T\n", x)     // %T prints whatever type x is
 }
 ```
-|======|

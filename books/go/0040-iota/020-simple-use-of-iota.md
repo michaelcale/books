@@ -1,7 +1,8 @@
+---
 Title: Simple use of iota
 Id: 9704
 Score: 6
-Body:
+---
 To create a list of constants - assign `iota` value to each element:
 
     const (
@@ -17,4 +18,4 @@ To create a list of constants in a shortened way - assign `iota` value to the fi
       b        // b = 1
       c        // c = 2
     )
-|======|
+

@@ -1,6 +1,8 @@
+---
 Title: Variables
 Id: 674
-Syntax:
+---
+## Syntax
 - var x int   // declare variable x with type int
 - var s string // declare variable s with type string
 - x = 4 // define x value
