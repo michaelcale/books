@@ -15,7 +15,7 @@ func Inverse(v float32) (reciprocal float32) {
 [play it on playground](https://play.golang.org/p/dS_bGmP6W0)
 
 ```go
-//A function can also return multiple values
+// function can return multiple values
 func split(sum int) (x, y int) {
     x = sum * 4 / 9
     y = sum - x
