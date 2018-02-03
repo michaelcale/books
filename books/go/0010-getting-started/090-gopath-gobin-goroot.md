@@ -1,7 +1,7 @@
+---
 Title: GOPATH, GOROOT, GOBIN
 Id: 14406
-Body:
-
+---
 ## `GOPATH`
 
 It's important to understand the effect of `GOPATH` environment variable.

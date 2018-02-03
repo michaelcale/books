@@ -1,7 +1,7 @@
+---
 Title: Mac OS setup
 Id: rd600058
-Body:
-
+---
 After installing the compiler you need to configure [`GOPATH`](a-14406) environment variable.
 
 Since Go 1.8, the `GOPATH` environment variable has default value of `$HOME/go` so you can skip setting it.

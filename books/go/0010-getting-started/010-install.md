@@ -1,7 +1,7 @@
+---
 Title: Installing Go compiler
 Id: 20381
-Body:
-
+---
 There are 2 production quality compilers:
 * gc, the official compiler
 * [gccgo](https://golang.org/doc/install/gccgo). It's also created by the Go project, but is not used as ofent as gc.

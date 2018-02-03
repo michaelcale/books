@@ -1,6 +1,7 @@
 package kvstore
 
 import (
+	"errors"
 	"fmt"
 	"io"
 	"strings"
@@ -10,8 +11,8 @@ import (
 )
 
 const (
-	// RecordSeparator is a (hopefully) unique string that separates records in Key/Value file
-	RecordSeparator = "|======|"
+	// recordSeparator is a (hopefully) unique string that separates records in Key/Value file
+	recordSeparator = "|======|"
 )
 
 // KeyValue represents a key/value pair
@@ -46,7 +47,7 @@ func (d Doc) GetValueSilent(key string, defValue string) string {
 func extractMultiLineValue(lines []string) ([]string, string, error) {
 	for i, line := range lines {
 		line = strings.TrimSpace(line)
-		if line == RecordSeparator {
+		if line == recordSeparator {
 			rest := lines[i+1:]
 			s := strings.Join(lines[:i], "\n")
 			return rest, s, nil
@@ -90,6 +91,40 @@ func parseNextKV(lines []string) ([]string, KeyValue, error) {
 	return lines, kv, err
 }
 
+func isYamlSeparator(s string) bool {
+	s = strings.TrimSpace(s)
+	return s == "---"
+}
+
+// parses a variant of the file which has yaml metadata at the top
+// https://github.com/blog/1647-viewing-yaml-metadata-in-your-documents
+// The body is represented as Body key
+func parseKVFileWithYamlMeta(lines []string) (Doc, error) {
+	line := lines[0]
+	lines = lines[1:]
+	u.PanicIf(!isYamlSeparator(line), "first line is '%s' and should be '---'", line)
+	var res []KeyValue
+	var kv KeyValue
+	var err error
+	for len(lines) > 0 {
+		if isYamlSeparator(lines[0]) {
+			body := strings.Join(lines[1:], "\n")
+			kv = KeyValue{
+				Key:   "Body",
+				Value: body,
+			}
+			res = append(res, kv)
+			return res, nil
+		}
+		lines, kv, err = parseNextKV(lines)
+		if err != nil {
+			return nil, err
+		}
+		res = append(res, kv)
+	}
+	return nil, errors.New("didn't find closing '---'")
+}
+
 /*
 ParseKVFile parsers my brand of key/value text file optimized for human editing
 Key/value are encoded in 2 ways:
@@ -105,6 +140,15 @@ value
 */
 func ParseKVFile(path string) (Doc, error) {
 	lines, err := common.ReadFileAsLines(path)
+	if err != nil {
+		return nil, err
+	}
+	if len(lines) == 0 {
+		return nil, fmt.Errorf("%s is an empty document", path)
+	}
+	if isYamlSeparator(lines[0]) {
+		return parseKVFileWithYamlMeta(lines)
+	}
 	var res []KeyValue
 	var kv KeyValue
 	for {
@@ -147,9 +191,9 @@ func Serialize(k, v string) string {
 	if fitsOneLine(v) {
 		return fmt.Sprintf("%s: %s\n", k, v)
 	}
-	u.PanicIf(strings.Contains(v, RecordSeparator), "v contains RecordSeparator")
+	u.PanicIf(strings.Contains(v, recordSeparator), "v contains RecordSeparator")
 
-	return fmt.Sprintf("%s:\n%s\n%s\n", k, v, RecordSeparator)
+	return fmt.Sprintf("%s:\n%s\n%s\n", k, v, recordSeparator)
 }
 
 // SerializeLong serializes key/value in the long form
@@ -157,6 +201,6 @@ func SerializeLong(k, v string) string {
 	if isEmptyString(v) {
 		return ""
 	}
-	u.PanicIf(strings.Contains(v, RecordSeparator), "v contains RecordSeparator")
-	return fmt.Sprintf("%s:\n%s\n%s\n", k, v, RecordSeparator)
+	u.PanicIf(strings.Contains(v, recordSeparator), "v contains RecordSeparator")
+	return fmt.Sprintf("%s:\n%s\n%s\n", k, v, recordSeparator)
 }

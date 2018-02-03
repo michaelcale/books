@@ -1,6 +1,7 @@
+---
 Title: Running Go in online playground
 Id: 27470
-Body:
+---
 ## The Go Playground ##
 
 To test small snippets of Go code, you can use [The Go Playground](https://play.golang.org).

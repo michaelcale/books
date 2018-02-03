@@ -1,6 +1,7 @@
+---
 Title: Hello, World!
 Id: 833
-Body:
+---
 Create file `hello.go`:
 
 ```go

@@ -1,7 +1,7 @@
+---
 Title: Linux setup
 Id: rd6000f2
-Body:
-
+---
 After installing the compiler you need to configure [`GOPATH`](a-14406) environment variable.
 
 ```bash
