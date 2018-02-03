@@ -237,19 +237,32 @@ hr.toc-sep {
 }
 
 .chapter-toc-wrapper:hover {
-    filter: opacity(1);
+    filter: opacity(1)
 }
 
 .github-link {
     font-size: 0.8em;
     position: fixed;
-    right: 4px;
-    top: 12px;
+    right: 18px;
+    top: 18px;
     padding: 4px 8px;
     border: 1px solid #666;
 }
 
 .github-link:hover {
+    background-color: #f1f1f1;
+}
+
+.github-link-small {
+    font-size: 0.6em;
+    position: fixed;
+    right: 18px;
+    top: 17px;
+    padding: 4px 8px;
+    border: 1px solid #666;
+}
+
+.github-link-small:hover {
     background-color: #f1f1f1;
 }
 

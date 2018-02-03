@@ -14,6 +14,7 @@ func copyToWwwMust(path string) {
 	name := filepath.Base(path)
 	dst := filepath.Join("www", name)
 	copyFileMust(dst, path)
+	fmt.Printf("Copied %s => %s\n", path, dst)
 }
 
 func handleFileChange(path string) {
@@ -93,8 +94,7 @@ func rebuildOnChanges() {
 		//fmt.Printf("Watching dir: '%s'\n", dir)
 		watcher.Add(dir)
 	}
-	// waiting forever
-	// TODO: pick up ctrl-c and cleanup and quit
+
 	<-done
 	fmt.Printf("exited rebuildOnChanges()\n")
 	os.Exit(1)
