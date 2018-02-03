@@ -5,8 +5,6 @@ import (
 	"log"
 	"os"
 	"path/filepath"
-
-	"github.com/kjk/u"
 )
 
 const (
@@ -37,17 +35,11 @@ func unloadTemplates() {
 	aboutTmpl = nil
 }
 
-func createDirForFileMust(path string) {
-	dir := filepath.Dir(path)
-	err := os.MkdirAll(dir, 0755)
-	u.PanicIfErr(err)
-}
-
 func tmplPath(name string) string {
 	return filepath.Join(tmplDir, name)
 }
 
-func loadTemplateHelperMust(name string, ref **template.Template) *template.Template {
+func loadTemplateHelperMaybeMust(name string, ref **template.Template) *template.Template {
 	res := *ref
 	if res != nil {
 		return res
@@ -55,12 +47,15 @@ func loadTemplateHelperMust(name string, ref **template.Template) *template.Temp
 	path := tmplPath(name)
 	//fmt.Printf("loadTemplateHelperMust: %s\n", path)
 	t, err := template.ParseFiles(path)
-	u.PanicIfErr(err)
+	maybePanicIfErr(err)
+	if err != nil {
+		return nil
+	}
 	*ref = t
 	return t
 }
 
-func loadTemplateMust(name string) *template.Template {
+func loadTemplateMaybeMust(name string) *template.Template {
 	var ref **template.Template
 	switch name {
 	case "index.tmpl.html":
@@ -76,20 +71,23 @@ func loadTemplateMust(name string) *template.Template {
 	default:
 		log.Fatalf("unknown template '%s'\n", name)
 	}
-	return loadTemplateHelperMust(name, ref)
+	return loadTemplateHelperMaybeMust(name, ref)
 }
 
-func execTemplateToFileSilentMust(name string, data interface{}, path string) {
-	tmpl := loadTemplateMust(name)
+func execTemplateToFileSilentMaybeMust(name string, data interface{}, path string) {
+	tmpl := loadTemplateMaybeMust(name)
+	if tmpl == nil {
+		return
+	}
 	f, err := os.Create(path)
-	u.PanicIfErr(err)
+	maybePanicIfErr(err)
 	defer f.Close()
 	err = tmpl.Execute(f, data)
-	u.PanicIfErr(err)
+	maybePanicIfErr(err)
 }
 
-func execTemplateToFileMust(name string, data interface{}, path string) {
-	execTemplateToFileSilentMust(name, data, path)
+func execTemplateToFileMaybeMust(name string, data interface{}, path string) {
+	execTemplateToFileSilentMaybeMust(name, data, path)
 }
 
 func genIndex(books []*Book) {
@@ -105,7 +103,7 @@ func genIndex(books []*Book) {
 		AnalyticsCode: flgAnalytics,
 	}
 	path := filepath.Join(destDir, "index.html")
-	execTemplateToFileMust("index.tmpl.html", d, path)
+	execTemplateToFileMaybeMust("index.tmpl.html", d, path)
 }
 
 func genAbout() {
@@ -115,7 +113,7 @@ func genAbout() {
 		AnalyticsCode: flgAnalytics,
 	}
 	path := filepath.Join(destDir, "about.html")
-	execTemplateToFileMust("about.tmpl.html", d, path)
+	execTemplateToFileMaybeMust("about.tmpl.html", d, path)
 }
 
 func genBookArticle(article *Article) {
@@ -127,7 +125,7 @@ func genBookArticle(article *Article) {
 		article.BodyHTML = template.HTML(html)
 	}
 	path := article.destFilePath()
-	execTemplateToFileSilentMust("article.tmpl.html", article, path)
+	execTemplateToFileSilentMaybeMust("article.tmpl.html", article, path)
 }
 
 func genBookChapter(chapter *Chapter) {
@@ -137,7 +135,7 @@ func genBookChapter(chapter *Chapter) {
 
 	path := chapter.destFilePath()
 	chapter.AnalyticsCode = flgAnalytics
-	execTemplateToFileSilentMust("chapter.tmpl.html", chapter, path)
+	execTemplateToFileSilentMaybeMust("chapter.tmpl.html", chapter, path)
 }
 
 func setCurrentChapter(chapters []*Chapter, current int) {
@@ -149,11 +147,14 @@ func setCurrentChapter(chapters []*Chapter, current int) {
 func genBook(book *Book) {
 	// generate index.html for the book
 	err := os.MkdirAll(book.destDir, 0755)
-	u.PanicIfErr(err)
+	maybePanicIfErr(err)
+	if err != nil {
+		return
+	}
 
 	path := filepath.Join(book.destDir, "index.html")
 	book.AnalyticsCode = flgAnalytics
-	execTemplateToFileSilentMust("book_index.tmpl.html", book, path)
+	execTemplateToFileSilentMaybeMust("book_index.tmpl.html", book, path)
 	for i, chapter := range book.Chapters {
 		setCurrentChapter(book.Chapters, i)
 		genBookChapter(chapter)

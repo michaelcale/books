@@ -84,12 +84,15 @@ func genAllBooks() {
 	var books []*Book
 	for _, bookName := range allBookDirs {
 		book, err := parseBook(bookName)
-		u.PanicIfErr(err)
+		maybePanicIfErr(err)
+		if err != nil {
+			continue
+		}
 		books = append(books, book)
 	}
 
-	copyToWwwMust(filepath.Join("tmpl", "main.css"))
-	copyToWwwMust(filepath.Join("tmpl", "app.js"))
+	copyToWwwMaybeMust(filepath.Join("tmpl", "main.css"))
+	copyToWwwMaybeMust(filepath.Join("tmpl", "app.js"))
 	genIndex(books)
 	genAbout()
 

@@ -9,8 +9,6 @@ import (
 	"os/exec"
 	"path/filepath"
 	"runtime"
-
-	"github.com/kjk/u"
 )
 
 func openBrowser(url string) {
@@ -51,12 +49,6 @@ func copyFile(dst, src string) error {
 	defer fout.Close()
 	_, err = io.Copy(fout, fin)
 	return err
-}
-
-func copyFileMust(dst, src string) {
-	createDirForFileMust(dst)
-	err := copyFile(dst, src)
-	u.PanicIfErr(err)
 }
 
 func getDirsRecur(dir string) ([]string, error) {

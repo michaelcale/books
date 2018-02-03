@@ -10,10 +10,50 @@ import (
 	"github.com/kjk/u"
 )
 
-func copyToWwwMust(path string) {
+var (
+	softErrorMode bool
+	errors        []string
+)
+
+func maybePanicIfErr(err error) {
+	if err == nil {
+		return
+	}
+	if !softErrorMode {
+		u.PanicIfErr(err)
+	}
+	errors = append(errors, err.Error())
+}
+
+func clearErrors() {
+	errors = nil
+}
+
+func printAndClearErrors() {
+	if len(errors) == 0 {
+		return
+	}
+	errStr := strings.Join(errors, "\n")
+	fmt.Printf("\n%d errors:\n%s\n\n", len(errors), errStr)
+	clearErrors()
+}
+
+func createDirForFileMaybeMust(path string) {
+	dir := filepath.Dir(path)
+	err := os.MkdirAll(dir, 0755)
+	maybePanicIfErr(err)
+}
+
+func copyFileMaybeMust(dst, src string) {
+	createDirForFileMaybeMust(dst)
+	err := copyFile(dst, src)
+	maybePanicIfErr(err)
+}
+
+func copyToWwwMaybeMust(path string) {
 	name := filepath.Base(path)
 	dst := filepath.Join("www", name)
-	copyFileMust(dst, path)
+	copyFileMaybeMust(dst, path)
 	fmt.Printf("Copied %s => %s\n", path, dst)
 }
 
@@ -21,12 +61,12 @@ func handleFileChange(path string) {
 	fmt.Printf("handleFileChange: %s\n", path)
 
 	if strings.HasSuffix(path, "main.css") {
-		copyToWwwMust(filepath.Join("tmpl", "main.css"))
+		copyToWwwMaybeMust(filepath.Join("tmpl", "main.css"))
 		return
 	}
 
 	if strings.HasSuffix(path, "app.js") {
-		copyToWwwMust(filepath.Join("tmpl", "app.js"))
+		copyToWwwMaybeMust(filepath.Join("tmpl", "app.js"))
 		return
 	}
 
@@ -54,6 +94,7 @@ func handleFileChange(path string) {
 }
 
 func rebuildOnChanges() {
+	softErrorMode = true
 	dirs, err := getDirsRecur("tmpl")
 	u.PanicIfErr(err)
 	dirs2, err := getDirsRecur("books")
@@ -84,7 +125,9 @@ func rebuildOnChanges() {
 				if event.Op&fsnotify.Write == fsnotify.Write {
 					fmt.Println("modified file:", event.Name)
 				}
+				clearErrors()
 				handleFileChange(event.Name)
+				printAndClearErrors()
 			case err := <-watcher.Errors:
 				fmt.Println("error:", err)
 			}
