@@ -29,6 +29,7 @@
             <th class="book-name">Book</th>
             <th>Chapters</th>
             <th>Articles</th>
+            <th>Contributors</th>
         </tr>
         </thead>
         <tbody>
@@ -37,6 +38,7 @@
                 <td class="book-name"><a href="{{.URL}}">{{.Title}}</a></td>
                 <td class="light">{{ .ChaptersCount }}</td>
                 <td class="light">{{ .ArticlesCount}}</td>
+                <td class="light"><a href="{{.ContributorsURL}}">{{.ContributorCount}}</a></td>
             </tr>
             {{end}}
         </tbody>

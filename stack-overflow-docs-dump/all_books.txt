@@ -1105,45 +1105,45 @@ uwp: uwp, 22
 wpf: wpf, 23
 
 Books in http://books.goalkicker.com/:
-.NET Framework: .net, 59
-algorithm: algorithm, 65
 Android: android, 268
-Angular 2: angular2, 70
-AngularJS: angularjs, 52
-Bash: bash, 71
-C Language: c, 63
-C++: c++, 147
-C# Language: c#, 165
-CSS: css, 56
-Entity Framework Core: entity-framework-core, 3
-excel-vba: excel-vba, 31
-Git: git, 61
-Haskell Language: haskell, 78
-HTML: html, 41
-html5-canvas: html5-canvas, 18
 iOS: ios, 210
+Python Language: python, 206
 Java Language: java, 185
+C# Language: c#, 165
+C++: c++, 147
+R Language: r, 131
+Microsoft SQL Server: sql-server, 113
+Node.js: node.js, 111
+PHP: php, 109
 JavaScript: javascript, 106
+Haskell Language: haskell, 78
+PowerShell: powershell, 74
+Ruby on Rails: ruby-on-rails, 74
+MySQL: mysql, 73
+Ruby Language: ruby, 72
+Bash: bash, 71
+Angular 2: angular2, 70
+algorithm: algorithm, 65
+SQL: sql, 64
+C Language: c, 63
+Git: git, 61
+Swift Language: swift, 60
+.NET Framework: .net, 59
+CSS: css, 56
+Objective-C Language: objective-c, 53
+AngularJS: angularjs, 52
+Visual Basic .NET Language: vb.net, 51
+VBA: vba, 46
+HTML: html, 41
+Perl Language: perl, 40
+MATLAB Language: matlab, 34
+Oracle Database: oracle, 33
+excel-vba: excel-vba, 31
+TypeScript: typescript, 30
+postgresql: postgresql, 29
+MongoDB: mongodb, 27
+GNU/Linux: linux, 21
+html5-canvas: html5-canvas, 18
 jQuery: jquery, 18
 latex: latex, 17
-GNU/Linux: linux, 21
-MATLAB Language: matlab, 34
-Microsoft SQL Server: sql-server, 113
-MongoDB: mongodb, 27
-MySQL: mysql, 73
-Node.js: node.js, 111
-Objective-C Language: objective-c, 53
-Oracle Database: oracle, 33
-Perl Language: perl, 40
-PHP: php, 109
-postgresql: postgresql, 29
-PowerShell: powershell, 74
-Python Language: python, 206
-R Language: r, 131
-Ruby on Rails: ruby-on-rails, 74
-Ruby Language: ruby, 72
-SQL: sql, 64
-Swift Language: swift, 60
-TypeScript: typescript, 30
-VBA: vba, 46
-Visual Basic .NET Language: vb.net, 51
+Entity Framework Core: entity-framework-core, 3

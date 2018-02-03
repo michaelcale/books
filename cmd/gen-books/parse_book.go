@@ -4,8 +4,10 @@ import (
 	"fmt"
 	"html/template"
 	"io/ioutil"
+	"net/url"
 	"os"
 	"path/filepath"
+	"sort"
 	"strconv"
 	"strings"
 
@@ -183,6 +185,13 @@ func (c *Chapter) ContributorsHTML() template.HTML {
 	return template.HTML(html)
 }
 
+// SoContributor describes a StackOverflow contributor
+type SoContributor struct {
+	ID      int
+	URLPart string
+	Name    string
+}
+
 // Book represents a book
 type Book struct {
 	Title          string // used in index.tmpl.html
@@ -192,13 +201,23 @@ type Book struct {
 	Chapters       []*Chapter
 	sourceDir      string // dir where source markdown files are
 	destDir        string // dif where destitation html files are
-	SoContributors []int
+	SoContributors []SoContributor
 
 	cachedArticlesCount int
 	defaultLang         string // default programming language for programming examples
 	knownUrls           []string
 
 	AnalyticsCode string
+}
+
+// ContributorCount returns number of contributors
+func (b *Book) ContributorCount() int {
+	return len(b.SoContributors)
+}
+
+// ContributorsURL returns url of the chapter that lists contributors
+func (b *Book) ContributorsURL() string {
+	return b.URL() + "/ch-contributors"
 }
 
 // GitHubText returns text we show in GitHub link
@@ -350,32 +369,47 @@ func parseChapter(chapter *Chapter) error {
 	return nil
 }
 
-func soContributorURL(userID int) string {
-	return fmt.Sprintf("https://stackoverflow.com/users/%d/", userID)
+func soContributorURL(userID int, userName string) string {
+	return fmt.Sprintf("https://stackoverflow.com/users/%d/%s", userID, userName)
 }
 
 func loadSoContributorsMust(book *Book, path string) {
 	lines, err := common.ReadFileAsLines(path)
 	u.PanicIfErr(err)
-	var ids []int
+	var contributors []SoContributor
 	for _, line := range lines {
 		id, err := strconv.Atoi(line)
 		u.PanicIfErr(err)
-		ids = append(ids, id)
+		name := soUserIDToNameMap[id]
+		u.PanicIf(name == "", "no SO contributor for id %d", id)
+		if name == "user_deleted" {
+			continue
+		}
+		nameUnescaped, err := url.PathUnescape(name)
+		u.PanicIfErr(err)
+		c := SoContributor{
+			ID:      id,
+			URLPart: name,
+			Name:    nameUnescaped,
+		}
+		contributors = append(contributors, c)
 	}
-	book.SoContributors = ids
+	sort.Slice(contributors, func(i, j int) bool {
+		return contributors[i].Name < contributors[j].Name
+	})
+	book.SoContributors = contributors
 }
 
 // TODO: add github contributors
-func genContributorsMarkdown(soUserIDs []int) string {
-	if len(soUserIDs) == 0 {
+func genContributorsMarkdown(contributors []SoContributor) string {
+	if len(contributors) == 0 {
 		return ""
 	}
 	lines := []string{
 		"Contributors from Stack Overflow:",
 	}
-	for _, userID := range soUserIDs {
-		s := fmt.Sprintf("* [%d](%s)", userID, soContributorURL(userID))
+	for _, c := range contributors {
+		s := fmt.Sprintf("* [%s](%s)", c.Name, soContributorURL(c.ID, c.Name))
 		lines = append(lines, s)
 	}
 	return strings.Join(lines, "\n")
@@ -385,7 +419,7 @@ func genContributorsChapter(book *Book) *Chapter {
 	md := genContributorsMarkdown(book.SoContributors)
 	var doc kvstore.Doc
 	kv := kvstore.KeyValue{
-		Key:   "Contributors",
+		Key:   "Body",
 		Value: md,
 	}
 	doc = append(doc, kv)

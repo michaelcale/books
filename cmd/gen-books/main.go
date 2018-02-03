@@ -15,9 +15,10 @@ import (
 )
 
 var (
-	flgAnalytics string
-	flgPreview   bool
-	allBookDirs  []string
+	flgAnalytics      string
+	flgPreview        bool
+	allBookDirs       []string
+	soUserIDToNameMap map[int]string
 )
 
 func parseFlags() {
@@ -113,6 +114,12 @@ func genAllBooks() {
 	fmt.Printf("Used %d procs, finished generating all book in %s\n", nProcs, time.Since(timeStart))
 }
 
+func loadSOUserMappingsMust() {
+	path := filepath.Join("stack-overflow-docs-dump", "users.json.gz")
+	err := common.JSONDecodeGzipped(path, &soUserIDToNameMap)
+	u.PanicIfErr(err)
+}
+
 func main() {
 	parseFlags()
 
@@ -120,7 +127,7 @@ func main() {
 	for _, bookInfo := range booksToImport {
 		allBookDirs = append(allBookDirs, bookInfo.NewName())
 	}
-
+	loadSOUserMappingsMust()
 	os.RemoveAll("www")
 
 	genAllBooks()
