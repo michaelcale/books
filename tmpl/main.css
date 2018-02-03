@@ -13,7 +13,7 @@ body {
 
 /* h1 by default is 2em, we want something smaller */
 h1.hdr {
-    font-size: 1.3em;
+    font-size: 0.8em;
 }
 
 .light {
@@ -244,7 +244,7 @@ hr.toc-sep {
     font-size: 0.8em;
     position: fixed;
     right: 4px;
-    top: 22px;
+    top: 12px;
     padding: 4px 8px;
     border: 1px solid #666;
 }
