@@ -112,14 +112,19 @@ a.blue:hover {
 
 #search-input {
     width: 50vw;
-    height: 20px;
+    height: 16px;
+}
+
+/* no blue border when focused */
+#search-input:focus {
+    outline-width: 0;
 }
 
 .github-link {
     font-size: 0.8em;
     position: fixed;
     right: 18px;
-    top: 50px;
+    top: 62px;
     padding: 4px 8px;
     border: 1px solid #666;
 }
