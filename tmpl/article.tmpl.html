@@ -35,9 +35,9 @@
         <div class="article-article-toc">
         {{range .Siblings}}
             {{if .IsCurrent}}
-                <div><span class="chap-no">{{.No}}.</span> <span class="is-current">{{.Title}}</span></div>
+                <div><span class="chap-no">{{.No}}</span> <span class="is-current">{{.Title}}</span></div>
             {{else}}
-                <div><span class="chap-no">{{.No}}.</span> <a href="{{.URL}}">{{.Title}}</a></div>
+                <div><span class="chap-no">{{.No}}</span> <a href="{{.URL}}">{{.Title}}</a></div>
             {{end}}
         {{end}}
         </div>

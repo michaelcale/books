@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"path/filepath"
 	"strings"
 
@@ -43,13 +44,12 @@ func handleFileChange(path string) {
 		return
 	}
 
-	if isDirectory(path) {
-		// assume this is a renamed chapter directory
-		// TODO: only rebuild the book
-		fmt.Printf("Rebuilding all books\n")
-		genAllBooks()
-		return
-	}
+	// if this is rename of a directory, the name is the old name, so the directory
+	// no longer exists
+	// assume this is a renamed chapter directory
+	// TODO: only rebuild the book that changed
+	fmt.Printf("Rebuilding all books\n")
+	genAllBooks()
 }
 
 func rebuildOnChanges() {
@@ -68,7 +68,6 @@ func rebuildOnChanges() {
 		defer func() {
 			if r := recover(); r != nil {
 				fmt.Printf("Recovered in rebuildOnChanges(). Error: '%s'\n", r)
-				// TODO: why this doesn't seem to trigger done
 				done <- true
 			}
 		}()
@@ -97,5 +96,6 @@ func rebuildOnChanges() {
 	// waiting forever
 	// TODO: pick up ctrl-c and cleanup and quit
 	<-done
-	fmt.Printf("exiting rebuildOnChanges()")
+	fmt.Printf("exited rebuildOnChanges()\n")
+	os.Exit(1)
 }

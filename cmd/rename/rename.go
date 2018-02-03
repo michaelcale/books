@@ -15,15 +15,30 @@ import (
 	"github.com/kjk/u"
 )
 
-func gitRename(dst, src string) error {
+func gitRename(dst, src string) (string, error) {
 	cmd := exec.Command("git", "mv", src, dst)
 	out, err := cmd.CombinedOutput()
-	if err != nil {
-		fmt.Printf("'git mv %s %s' failed with err '%s'. Output:\n%s\n", src, dst, err, string(out))
-		os.Exit(1)
+	return string(out), err
+}
+
+// git rename sometimes fails with "fatal: Unable to create '*/.git/index.lock': File exists." error
+// retry in this case
+// it might be caused by vscode doing git operations at the same time
+func gitRenameRetryMust(dst, src string) {
+	defer fmt.Printf("git mv %s => %s\n", src, dst)
+	out, err := gitRename(dst, src)
+	if err == nil {
+		return
 	}
-	fmt.Printf("git mv %s => %s\n", src, dst)
-	return nil
+	if strings.Contains(out, "index.lock") {
+		time.Sleep(time.Millisecond * 500)
+		out, err = gitRename(dst, src)
+	}
+	if err == nil {
+		return
+	}
+	fmt.Printf("'git mv %s %s' failed with err '%s'. Output:\n%s\n", src, dst, err, out)
+	os.Exit(1)
 }
 
 func getMdFiles(dir string) ([]string, error) {
@@ -101,11 +116,7 @@ func renameFilesInChapter(chapterDir string) error {
 		if info.NewName != info.Name {
 			src := filepath.Join(chapterDir, info.Name)
 			dst := filepath.Join(chapterDir, info.NewName)
-			err = gitRename(dst, src)
-			u.PanicIfErr(err)
-			// maybe prevent 'Unable to create '*/.git/index.lock': File exists.'
-			// errors from git
-			time.Sleep(time.Millisecond * 250)
+			gitRenameRetryMust(dst, src)
 		}
 	}
 	return nil
@@ -123,8 +134,7 @@ func renameChapters(bookDir string, chapterDirs []string) error {
 		if info.NewName != info.Name {
 			src := filepath.Join(bookDir, info.Name)
 			dst := filepath.Join(bookDir, info.NewName)
-			err := gitRename(dst, src)
-			u.PanicIfErr(err)
+			gitRenameRetryMust(dst, src)
 		}
 	}
 	return nil
