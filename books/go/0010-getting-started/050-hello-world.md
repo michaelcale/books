@@ -17,7 +17,7 @@ func main() {
 
 Compile and run with `go run hello.go`.
 
-# Output:
+## Output:
 
 ```text
 Hello, 世界

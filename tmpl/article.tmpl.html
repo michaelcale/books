@@ -21,9 +21,11 @@
 </head>
 
 <body>
-    <h1 class="hdr"><a href="/" class="breadcrumbs__item">Books</a><a href="{{.Book.URL}}" class="breadcrumbs__item">{{.Book.Title}}</a><a href="{{.Chapter.URL}}" class="breadcrumbs__item">{{.Chapter.Title}}</a>{{.Title}}</h1>
+    <div class="hdr"><a href="/" class="breadcrumbs__item">Books</a><a href="{{.Book.URL}}" class="breadcrumbs__item">{{.Book.Title}}</a><a href="{{.Chapter.URL}}">{{.Chapter.Title}}</a></div>
+
 
     <div class="article">
+        <h1>{{.Title}}</h1>
         {{ .BodyHTML }}
     </div>
 

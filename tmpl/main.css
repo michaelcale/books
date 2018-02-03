@@ -16,6 +16,10 @@ h1.hdr {
     font-size: 0.8em;
 }
 
+div.hdr {
+    font-size: 0.8em;
+}
+
 .light {
     color: gray;
 }

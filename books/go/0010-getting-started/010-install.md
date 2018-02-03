@@ -8,28 +8,28 @@ There are 2 production quality compilers:
 
 This article describes installing gc compiler.
 
-# Installing on Windows
+## Installing on Windows
 
 Download `.msi` installer from [https://golang.org/dl/](https://golang.org/dl/) and run it.
 
 Read [setting up Windows environment](a-rd600086).
 
-# Installing on Mac OS
+## Installing on Mac OS
 
-## Using official binaries
+### Using official binaries
 
 Download `.pkg` installer from [https://golang.org/dl/](https://golang.org/dl/) and run it.
 
-## Using Homebrew
+### Using Homebrew
 
 * if you don't have Homebrew installed, install it following [instructions](https://brew.sh/)
 * `brew install go`
 
 Read [setting up Mac environment](a-rd600058).
 
-# On Ubuntu
+## On Ubuntu
 
-## Using Ubuntu provided pacakge
+### Using Ubuntu provided pacakge
 
 ```bash
 $ sudo apt-get update
@@ -40,7 +40,7 @@ Note that packages provided by Ubuntu are often outdated. A new version of Go is
 
 For that reason we recommend installing binary packages.
 
-## Using binary packages
+### Using binary packages
 
 Those instructions work on pretty much every Linux distribution:
 
@@ -64,6 +64,6 @@ $ rm go1.9.3.linux-amd64.tar.gz
 
 Read [setting up Unix environment](a-rd6000f2).
 
-# Other OSes
+## Other OSes
 
 Follow [official instructions](https://golang.org/doc/install).
