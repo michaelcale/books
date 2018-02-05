@@ -2,7 +2,7 @@
 Title: Variables
 Id: 674
 ---
-Variable declarations follows format: **variable-name** **variable-type** format.
+Variable declarations follows **variable-name** **variable-type** format.
 
 It's a different order than C. On the plus side it's more consistent and complex delcarations are easier to write.
 
