@@ -8,8 +8,10 @@ In memory, an image can be seen as a matrix of pixel (color). However, when an i
 
 is provided for this particular usage. In order to be able to handle various image formats, prior to calling the `image.Decode` function, the decoder must be registered through [`image.RegisterFormat`](https://golang.org/pkg/image/#RegisterFormat) function defined as
 
-    func RegisterFormat(name, magic string, 
-        decode func(io.Reader) (Image, error), decodeConfig func(io.Reader) (Config, error))
+```go
+func RegisterFormat(name, magic string,
+    decode func(io.Reader) (Image, error), decodeConfig func(io.Reader) (Config, error))
+```
 
 Currently, the image package supports three file formats: [JPEG](https://golang.org/pkg/image/jpeg/), [GIF](https://golang.org/pkg/image/gif/) and [PNG](https://golang.org/pkg/image/png/). To register a decoder, add the following
 
@@ -17,19 +19,21 @@ Currently, the image package supports three file formats: [JPEG](https://golang.
 
 to the application's `main` package. Somewhere in your code (not necessary in `main` package), to load a JPEG image, use the following snippets:
 
-    f, err := os.Open("inputimage.jpg")
-    if err != nil {
-        // Handle error
-    }
-    defer f.Close()
+```go
+f, err := os.Open("inputimage.jpg")
+if err != nil {
+    log.Fatalf("os.Open() failed with %s\n", err)
+}
+defer f.Close()
 
-    img, fmtName, err := image.Decode(f)
-    if err != nil {
-        // Handle error
-    }
-    
-    // `fmtName` contains the name used during format registration
-    // Work with `img` ...
+img, fmtName, err := image.Decode(f)
+if err != nil {
+    log.Fatalf("image.Decode() failed with %s\n", err)
+}
+
+// `fmtName` contains the name used during format registration
+// Work with `img` ...
+```
 
 ## Save to PNG ##
 
@@ -39,70 +43,76 @@ to the application's `main` package. Somewhere in your code (not necessary in `m
 
 then an image can be saved with the following snippets:
 
-    f, err := os.Create("outimage.png")
-    if err != nil {
-        // Handle error
-    }
-    defer f.Close()
+```go
+f, err := os.Create("outimage.png")
+if err != nil {
+    log.Fatalf("os.Create() failed with %s\n", err)
+}
+defer f.Close()
 
-    // Encode to `PNG` with `DefaultCompression` level
-    // then save to file
-    err = png.Encode(f, img)
-    if err != nil {
-        // Handle error
-    }
+// Encode to `PNG` with `DefaultCompression` level
+// then save to file
+err = png.Encode(f, img)
+if err != nil {
+    log.Fatalf("png.Encode() failed with %s\n", err)
+}
+```
 
 If you want to specify compression level other than `DefaultCompression` level, create an *encoder*, e.g.
 
-    enc := png.Encoder{
-        CompressionLevel: png.BestSpeed,
-    }
-    err := enc.Encode(f, img)
+```go
+enc := png.Encoder{
+    CompressionLevel: png.BestSpeed,
+}
+err := enc.Encode(f, img)
+```
 
 ## Save to JPEG ##
 
 To save to `jpeg` format, use the following:
 
-    import "image/jpeg"
-    
-    // Somewhere in the same package
-    f, err := os.Create("outimage.jpg")
-    if err != nil {
-        // Handle error
-    }
-    defer f.Close()
+```go
+import "image/jpeg"
 
-    // Specify the quality, between 0-100
-    // Higher is better
-    opt := jpeg.Options{
-        Quality: 90,
-    }
-    err = jpeg.Encode(f, img, &opt)
-    if err != nil {
-        // Handle error
-    }
+// Somewhere in the same package
+f, err := os.Create("outimage.jpg")
+if err != nil {
+    log.Fatalf("os.Create() failed with %s\n", err)
+}
+defer f.Close()
+
+// Specify the quality, between 0-100
+// Higher is better
+opt := jpeg.Options{
+    Quality: 90,
+}
+err = jpeg.Encode(f, img, &opt)
+if err != nil {
+    log.Fatalf("jpeg.Encode() failed with %s\n", err)
+}
+```
 
 ## Save to GIF ##
 
 To save the image to GIF file, use the following snippets.
 
-    import "image/gif"
-    
-    // Samewhere in the same package
-    f, err := os.Create("outimage.gif")
-    if err != nil {
-        // Handle error
-    }
-    defer f.Close()
-    
-    opt := gif.Options {
-        NumColors: 256, 
-        // Add more parameters as needed
-    }
+```go
+import "image/gif"
 
-    err = gif.Encode(f, img, &opt)
-    if err != nil {
-        // Handle error
-    }
-     
-|======|
+// Samewhere in the same package
+f, err := os.Create("outimage.gif")
+if err != nil {
+    log.Fatalf("os.Create() failed with %s\n", err)
+}
+defer f.Close()
+
+opt := gif.Options {
+    NumColors: 256,
+    // Add more parameters as needed
+}
+
+err = gif.Encode(f, img, &opt)
+if err != nil {
+    log.Fatalf("gif.Encode() failed with %s\n", err)
+}
+```
