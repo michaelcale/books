@@ -406,6 +406,8 @@ func genContributorsMarkdown(contributors []SoContributor) string {
 		return ""
 	}
 	lines := []string{
+		"Contributors from [GitHub](https://github.com/essentialbooks/books/graphs/contributors)",
+		"",
 		"Contributors from Stack Overflow:",
 	}
 	for _, c := range contributors {
