@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"io/ioutil"
 	"os"
 	"path/filepath"
 	"runtime"
@@ -79,8 +80,32 @@ func getBookDirs() []string {
 	return dirs
 }
 
+func copyCoversMust() {
+	createDirForFileMaybeMust(filepath.Join("www", "covers", "foo.png"))
+	fileInfos, err := ioutil.ReadDir("covers")
+	u.PanicIfErr(err)
+	for _, fi := range fileInfos {
+		if fi.IsDir() || !fi.Mode().IsRegular() {
+			continue
+		}
+		name := fi.Name()
+		if strings.Contains(name, "@2x") {
+			continue
+		}
+		dst := filepath.Join("www", "covers", name)
+		if pathExists(dst) {
+			continue
+		}
+		src := filepath.Join("covers", name)
+		copyFile(dst, src)
+
+	}
+}
+
 func genAllBooks() {
 	timeStart := time.Now()
+
+	copyCoversMust()
 
 	var books []*Book
 	for _, bookName := range allBookDirs {
@@ -95,6 +120,7 @@ func genAllBooks() {
 	copyToWwwMaybeMust(filepath.Join("tmpl", "main.css"))
 	copyToWwwMaybeMust(filepath.Join("tmpl", "app.js"))
 	genIndex(books)
+	genIndex2()
 	genAbout()
 
 	nProcs := runtime.GOMAXPROCS(-1)

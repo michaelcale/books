@@ -73,6 +73,7 @@ func handleFileChange(path string) {
 	if strings.HasSuffix(path, ".tmpl.html") {
 		fmt.Printf("Template changed, rebuilding all books\n")
 		unloadTemplates() // for reloading of templates from disk
+		//genIndex()
 		genAllBooks()
 		return
 	}

@@ -29,36 +29,19 @@
         <h1 class="hcenter">Essential Programming Books</h1>
         <div class="hcenter smaller"><a href="/about">about this project</a></div>
 
-        <table class="book-list">
-            <thead>
-            <tr class="header">
-                <th class="book-name">Book</th>
-                <th>Chapters</th>
-                <th>Articles</th>
-                <th>Contributors</th>
-            </tr>
-            </thead>
-            <tbody>
-                {{range .Books}}
-                <tr>
-                    <td class="book-name"><a href="{{.URL}}">{{.Title}}</a></td>
-                    <td class="light">{{ .ChaptersCount }}</td>
-                    <td class="light">{{ .ArticlesCount}}</td>
-                    <td class="light"><a href="{{.ContributorsURL}}">{{.ContributorCount}}</a></td>
-                </tr>
-                {{end}}
-            </tbody>
-        </table>
+        <div class="covers">
+            {{range .Covers}}
+            <div class="cover-img-wrapper">
+                <img class="img-cover" src="{{.URL}}">
+            </div>
+            {{end}}
+        </div>
 
         <hr class="toc-sep">
 
         <div class="hcenter light mt16 fs0p8em">
             Maintained by <a href="https://blog.kowalczyk.info" target="_blank">Krzysztof Kowalczyk</a>
     </div>
-    </div>
-
-    <div class="github-link">
-        <a href="{{.GitHubURL}}" target="_blank">{{.GitHubText}}</a>
     </div>
 
 </body>

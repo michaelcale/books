@@ -110,6 +110,30 @@ a.blue:hover {
     margin-top: 40px;
 }
 
+.covers {
+    padding-top: 16px;
+    padding-right: 32px;
+    padding-left: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cover-img-wrapper {
+    margin-bottom: 16px;
+}
+
+.img-cover {
+    width: 256px;
+    height: 363px;
+    transition: all .3s ease-in-out;
+}
+
+.img-cover:hover {
+    transform: scale(1.05);
+}
+
 #search-input {
     width: 50vw;
     height: 16px;
