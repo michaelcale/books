@@ -4,6 +4,7 @@ var (
 	coverNames = []string{
 		"NETFramework",
 		"Go",
+		"Algorithms",
 		"Android",
 		"AngularJS",
 		"Angular2",
@@ -44,8 +45,9 @@ var (
 		"VisualBasicNET",
 	}
 	langToCover = map[string]string{
-		"android": "Android",
-		"go":      "Go",
+		"android":    "Android",
+		"go":         "Go",
+		"algorithms": "Algorithms",
 
 		"Angular2":       "Angular2",
 		"AngularJS":      "AngularJS",
