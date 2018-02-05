@@ -154,6 +154,8 @@ a.blue:hover {
 /* no blue border when focused */
 #search-input:focus {
     outline-width: 0;
+    border: 1px solid blue;
+    transform: scale(1.3);
 }
 
 .github-link {

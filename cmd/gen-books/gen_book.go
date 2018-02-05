@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"html/template"
 	"log"
 	"os"
@@ -132,7 +131,6 @@ func genIndex2() {
 		AnalyticsCode: flgAnalytics,
 	}
 	path := filepath.Join(destDir, "index2.html")
-	fmt.Printf("generating index2.tmpl.html\n")
 	execTemplateToFileMaybeMust("index2.tmpl.html", d, path)
 
 }
