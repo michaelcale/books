@@ -235,6 +235,12 @@ func (b *Book) URL() string {
 	return fmt.Sprintf("/essential/%s/", b.titleSafe)
 }
 
+// CoverURL returns url to cover image
+func (b *Book) CoverURL() string {
+	coverName := langToCover[b.titleSafe]
+	return fmt.Sprintf("/covers/%s.png", coverName)
+}
+
 // ArticlesCount returns total number of articles
 func (b *Book) ArticlesCount() int {
 	if b.cachedArticlesCount != 0 {

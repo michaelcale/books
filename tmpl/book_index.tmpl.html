@@ -29,6 +29,10 @@
     <div class="content-wrapper">
         <h1 class="hdr"><a href="/" class="breadcrumbs__item">Books</a>{{.TitleLong}}</h1>
 
+        <div class="book-img-cover-wrapper">
+            <img class="book-img-cover" src="{{.CoverURL}}">
+       </div>
+
         <div class="toc-header">Chapters</div>
         <div class="chapters-toc">
             {{range .Chapters}}

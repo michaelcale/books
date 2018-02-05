@@ -134,6 +134,18 @@ a.blue:hover {
     transform: scale(1.05);
 }
 
+.book-img-cover-wrapper {
+    display: flex;
+    justify-content: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.book-img-cover {
+    width: 20%;
+    height: 20%;
+}
+
 #search-input {
     width: 50vw;
     height: 16px;
