@@ -122,7 +122,7 @@ function onUpDown(ev) {
   }
 }
 
-function onKeyUp(ev) {
+function onKeyDown(ev) {
   // console.log(ev);
   if (ev.key == "/") {
     onKeySlash(ev);
@@ -491,7 +491,7 @@ function onSearchInputChanged(ev) {
 function start() {
   console.log("started");
 
-  document.addEventListener("keyup", onKeyUp, true);
+  document.addEventListener("keydown", onKeyDown, true);
   var el = getSearchInputElement();
   el.addEventListener("input", onSearchInputChanged, true);
   document.addEventListener("mousemove", onMouseMove, true);
