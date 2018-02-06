@@ -1,8 +1,26 @@
 // we're applying react-like state => UI
 var currentState = {
+  // TODO: use searchInputFocused
+  searchInputFocused: false,
   searchResults: [],
-  searchInputFocused: false
+  // index within searchResults array, -1 means not selected
+  selectedSearchResult: -1,
 };
+
+// polyfil for Object.is
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+if (!Object.is) {
+  Object.is = function(x, y) {
+    // SameValue algorithm
+    if (x === y) { // Steps 1-5, 7-10
+      // Steps 6.b-6.e: +0 != -0
+      return x !== 0 || 1 / x === 1 / y;
+    } else {
+     // Step 6.a: NaN == NaN
+     return x !== x && y !== y;
+    }
+  };
+}
 
 var rebuildUITimer = null;
 function triggerUIRebuild() {
@@ -19,11 +37,6 @@ function requestRebuildUI() {
   window.requestAnimationFrame(triggerUIRebuild);
 }
 
-function areValuesEqual(v1, v2) {
-  // TODO: implement me
-  return false;
-}
-
 function setState(newState) {
   var vOld, vNew;
   var stateChanged = false;
@@ -33,7 +46,7 @@ function setState(newState) {
     if (stateChanged) {
       // avoid calling areValuesEqual if we're updating the state anyway
       currentState[k] = vNew;
-    } else if (!areValuesEqual(vOld, vNew)) {
+    } else if (!Object.is(vOld, vNew)) {
       stateChanged = true;
       currentState[k] = vNew;
     }
@@ -43,32 +56,21 @@ function setState(newState) {
   }
 }
 
-function getSearchInputElement() {
-  return document.getElementById("search-input");
-}
-
-function focusAndClearSearchInput() {
-  var el = getSearchInputElement();
-  el.value = "";
-  el.focus();
-}
-
-function unfocusAndClearSearchInput() {
-  var el = getSearchInputElement();
-  el.value = "";
-  el.blur();
-  clearSearchResults();
-}
-
 function onKeyUp(ev) {
   // console.log(ev);
   if (ev.key == "/") {
-    focusAndClearSearchInput();
+    setState({
+      searchInputFocused: true,
+    });
+    //focusAndClearSearchInput();
     ev.preventDefault();
     return;
   }
   if (ev.key == "Escape") {
-    unfocusAndClearSearchInput();
+    setState({
+      searchInputFocused: false,
+    });
+    //unfocusAndClearSearchInput();
     ev.preventDefault();
     return;
   }
@@ -215,7 +217,31 @@ function rebuildSearchResultsUI() {
   el.innerHTML = html;
 }
 
+
+function getSearchInputElement() {
+  return document.getElementById("search-input");
+}
+
+function setSearchInputFocus() {
+  console.log("setSearchInputFocus:", currentState.searchInputFocused);
+  var el = getSearchInputElement();
+  var wantsFocus = currentState.searchInputFocused;
+  var isFocused = (document.activeElement === el);
+  if (isFocused == wantsFocus) {
+    return;
+  }
+  if (wantsFocus) {
+    el.value = "";
+    el.focus();
+  } else {
+    el.value = "";
+    el.blur();
+    clearSearchResults();
+  }
+}
+
 function rebuildUIFromState() {
+  setSearchInputFocus();
   rebuildSearchResultsUI();
 }
 
@@ -230,7 +256,12 @@ var currentSearchTerm;
 var maxSearchResults = 25;
 
 function doSearch(searchTerm) {
+  searchTerm = searchTerm.trim();
   if (searchTerm == currentSearchTerm) {
+    return;
+  }
+  if (searchTerm.length == 0) {
+    clearSearchResults();
     return;
   }
   var toFind = searchTerm.toLowerCase();

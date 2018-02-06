@@ -171,13 +171,15 @@ or use grid for top-header instead of flexbox.
     left: 13vw; /* (100 - 74) / 2 */
     right: 13vw;
     border: 1px solid black;
-    min-height: 320px;
+    /* min-height: 320px; */
     max-height: 75vh;
     background-color: white;
     display: none;
     padding: 4px 8px;
     line-height: 1.3em;
     cursor: pointer;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 /* higlight search results with yellow-ish background */
