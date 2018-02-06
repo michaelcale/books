@@ -1,11 +1,12 @@
 // we're applying react-like state => UI
 var currentState = {
-  // TODO: use searchInputFocused
   searchInputFocused: false,
   searchResults: [],
   // index within searchResults array, -1 means not selected
-  selectedSearchResult: -1
+  selectedSearchResult: -1,
 };
+
+var currentSearchTerm = "";
 
 // polyfil for Object.is
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
@@ -66,7 +67,6 @@ function isChapterOrArticle(s) {
 }
 
 function navigateToSearchResult(idx) {
-
   var loc = window.location.pathname;
   var parts = loc.split("/");
   var lastIdx = parts.length - 1;
@@ -306,18 +306,26 @@ function scrollIntoViewIfOutOfView(el) {
 }
 
 function rebuildSearchResultsUI() {
+  var html;
   var results = currentState.searchResults;
   var selectedIdx = currentState.selectedSearchResult;
   var el = document.getElementById("search-results");
   var blurOverlay = document.getElementById("blur-overlay");
   if (results.length == 0) {
-    el.style.display = "none";
-    blurOverlay.style.display = "none";
+    if (currentSearchTerm == "") {
+      el.style.display = "none";
+      blurOverlay.style.display = "none";
+    } else {
+      el.style.display = "block";
+      blurOverlay.style.display = "block";
+      html = "<div class='no-search-results'>No search results for '" + currentSearchTerm + "'</div>";
+      el.innerHTML = html;
+    }
     return;
   }
   el.style.display = "block";
   blurOverlay.style.display = "block";
-  var html = buildResultsHTML(results, selectedIdx);
+  html = buildResultsHTML(results, selectedIdx);
   el.innerHTML = html;
 
   // ensure element is scrolled into view
@@ -356,13 +364,12 @@ function rebuildUIFromState() {
 }
 
 function clearSearchResults() {
+  currentSearchTerm = "";
   setState({
     searchResults: [],
     selectedSearchResult: -1
   });
 }
-
-var currentSearchTerm;
 
 var maxSearchResults = 25;
 
@@ -371,6 +378,7 @@ function doSearch(searchTerm) {
   if (searchTerm == currentSearchTerm) {
     return;
   }
+  currentSearchTerm = searchTerm;
   if (searchTerm.length == 0) {
     clearSearchResults();
     return;
