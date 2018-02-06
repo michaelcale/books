@@ -1,7 +1,8 @@
+---
 Title: Handling http method, accessing query strings & request body
 Id: 21219
 Score: 0
-Body:
+---
 Here are a simple example of some common tasks related to developing an API, differentiating between the HTTP Method of the request, accessing query string values and accessing the request body.
 
 Resources
