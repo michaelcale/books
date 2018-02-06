@@ -254,8 +254,8 @@ func (b *Book) CanonnicalURL() string {
 	return fullURLBase + b.URL()
 }
 
-// ShareOnTweeterText returns text for sharing on tweeter
-func (b *Book) ShareOnTweeterText() string {
+// ShareOnTwitterText returns text for sharing on twitter
+func (b *Book) ShareOnTwitterText() string {
 	return fmt.Sprintf(`"Essential %s" - a free programming book`, b.Title)
 }
 
