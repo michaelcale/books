@@ -106,6 +106,19 @@ a.blue:hover {
     border-bottom: 2px solid lightgray;
 }
 
+/*
+we make top-header-left and top-header-right the same size so that search
+input field is centered. We could also center with fixed positioning
+or use grid for top-header instead of flexbox.
+*/
+.top-header-left {
+    width: 160px;
+}
+
+.top-header-right {
+    width: 160px;
+}
+
 .content-wrapper {
     margin-top: 40px;
 }
@@ -149,6 +162,30 @@ a.blue:hover {
 #search-input {
     width: 50vw;
     height: 16px;
+}
+
+#search-results {
+    position: fixed;
+    top: 38px;
+    width: 74vw;
+    left: 13vw; /* (100 - 74) / 2 */
+    right: 13vw;
+    border: 1px solid black;
+    min-height: 320px;
+    max-height: 75vh;
+    background-color: white;
+    display: none;
+    padding: 4px 8px;
+    line-height: 1.3em;
+    cursor: pointer;
+}
+
+/* higlight search results with yellow-ish background */
+.hili {
+    /* font-weight: bold; */
+    padding: 1px 2px;
+    background: #ffeb3b;
+    border-radius: 2px;
 }
 
 /* no blue border when focused */

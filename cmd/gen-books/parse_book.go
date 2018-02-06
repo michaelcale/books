@@ -235,6 +235,11 @@ func (b *Book) URL() string {
 	return fmt.Sprintf("/essential/%s/", b.titleSafe)
 }
 
+// TocSearchJSURL returns data for searching titles of chapters/articles
+func (b *Book) TocSearchJSURL() string {
+	return b.URL() + "/toc_search.js"
+}
+
 // CoverURL returns url to cover image
 func (b *Book) CoverURL() string {
 	coverName := langToCover[b.titleSafe]

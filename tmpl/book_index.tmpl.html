@@ -17,16 +17,19 @@
         gtag('config', '{{.AnalyticsCode}}');
     </script>
     {{ end }}
+    <script src="{{.TocSearchJSURL}}"></script>
     <script src="/app.js"></script>
 
 </head>
 
 <body>
     <div class="top-header">
-        <div><a href="/">Essential Books</a></div>
+        <div class="top-header-left"><a href="/">Essential Books</a></div>
         <input id="search-input" placeholder="Search {{.TitleLong}}...">
-        <div><!-- Right Side--></div>
+        <div class="top-header-right"><!-- Right Side--></div>
     </div>
+
+    <div id="search-results"></div>
 
     <div class="content-wrapper">
         <h1 class="hdr"><a href="/" class="breadcrumbs__item">Books</a>{{.TitleLong}}</h1>

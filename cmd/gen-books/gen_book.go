@@ -188,5 +188,6 @@ func genBook(book *Book) {
 		setCurrentChapter(book.Chapters, i)
 		genBookChapter(chapter)
 	}
+	genBookTOCSearchMust(book)
 	//genBookTOCJSONMust(book)
 }
