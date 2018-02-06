@@ -4,7 +4,7 @@ var currentState = {
   searchInputFocused: false,
   searchResults: [],
   // index within searchResults array, -1 means not selected
-  selectedSearchResult: -1,
+  selectedSearchResult: -1
 };
 
 // polyfil for Object.is
@@ -12,12 +12,13 @@ var currentState = {
 if (!Object.is) {
   Object.is = function(x, y) {
     // SameValue algorithm
-    if (x === y) { // Steps 1-5, 7-10
+    if (x === y) {
+      // Steps 1-5, 7-10
       // Steps 6.b-6.e: +0 != -0
       return x !== 0 || 1 / x === 1 / y;
     } else {
-     // Step 6.a: NaN == NaN
-     return x !== x && y !== y;
+      // Step 6.a: NaN == NaN
+      return x !== x && y !== y;
     }
   };
 }
@@ -56,22 +57,81 @@ function setState(newState) {
   }
 }
 
+function isChapterOrArticle(s) {
+  return s.startsWith("ch-") || s.startsWith("a-");
+}
+
+function onEnter(ev) {
+  var selIdx = currentState.selectedSearchResult;
+  if (selIdx == -1) {
+    return;
+  }
+  var loc = window.location.pathname;
+  var parts = loc.split("/");
+  var lastIdx = parts.length - 1;
+  var lastEl = parts[lastIdx];
+  var selected = currentState.searchResults[selIdx];
+  var uri = selected[0];
+  if (isChapterOrArticle(lastEl)) {
+    parts[lastIdx] = uri;
+  } else {
+    parts.push(uri);
+  }
+  loc = parts.join("/");
+  clearSearchResults();
+  window.location = loc;
+}
+
+function onKeySlash(ev) {
+  setState({
+    searchInputFocused: true
+  });
+  ev.preventDefault();
+}
+
+function onEscape(ev) {
+  setState({
+    searchInputFocused: false
+  });
+  ev.preventDefault();
+}
+
+function onUpDown(ev) {
+  var results = currentState.searchResults;
+  var n = results.length;
+  var selIdx = currentState.selectedSearchResult;
+  if (n <= 0 || selIdx < 0) {
+    return;
+  }
+  var dir = (ev.key == "ArrowUp") ? -1 : 1;
+  var newIdx = selIdx + dir;
+  if (newIdx >= 0 && newIdx < n) {
+    setState({
+      selectedSearchResult: newIdx
+    });
+    ev.preventDefault();
+  }
+}
+
 function onKeyUp(ev) {
   // console.log(ev);
   if (ev.key == "/") {
-    setState({
-      searchInputFocused: true,
-    });
-    //focusAndClearSearchInput();
-    ev.preventDefault();
+    onKeySlash(ev);
     return;
   }
+
   if (ev.key == "Escape") {
-    setState({
-      searchInputFocused: false,
-    });
-    //unfocusAndClearSearchInput();
-    ev.preventDefault();
+    onEscape(ev);
+    return;
+  }
+
+  if (ev.key == "Enter") {
+    onEnter(ev);
+    return;
+  }
+
+  if (ev.key == "ArrowUp" || ev.key == "ArrowDown") {
+    onUpDown(ev);
     return;
   }
 }
@@ -189,7 +249,7 @@ function div(html, opt) {
 
 // results is in format:
 // [uri, title, match idx, match len];
-function buildResultsHTML(results) {
+function buildResultsHTML(results, selectedIdx) {
   var a = [];
   var n = results.length;
   for (var i = 0; i < n; i++) {
@@ -198,8 +258,14 @@ function buildResultsHTML(results) {
     var idx = r[2];
     var len = r[3];
     var html = hilightSearchResult(title, idx, len);
-    var opt = {id: "search-result-no-" + i};
-    var s = tagOpen("div", opt) + html + "</div>";
+    var opt = {
+      id: "search-result-no-" + i,
+      cls: "search-result",
+    };
+    if (i == selectedIdx) {
+      opt.cls += " search-result-selected";
+    }
+    var s = div(html, opt);
     a.push(s);
   }
   return a.join("\n");
@@ -207,16 +273,17 @@ function buildResultsHTML(results) {
 
 function rebuildSearchResultsUI() {
   var results = currentState.searchResults;
+  var selectedIdx = currentState.selectedSearchResult;
   var el = document.getElementById("search-results");
   if (results.length == 0) {
     el.style.display = "none";
     return;
   }
   el.style.display = "block";
-  var html = buildResultsHTML(results);
+  var html = buildResultsHTML(results, selectedIdx);
   el.innerHTML = html;
+  // TOOD: ensure selected search result is visible
 }
-
 
 function getSearchInputElement() {
   return document.getElementById("search-input");
@@ -226,7 +293,7 @@ function setSearchInputFocus() {
   console.log("setSearchInputFocus:", currentState.searchInputFocused);
   var el = getSearchInputElement();
   var wantsFocus = currentState.searchInputFocused;
-  var isFocused = (document.activeElement === el);
+  var isFocused = document.activeElement === el;
   if (isFocused == wantsFocus) {
     return;
   }
@@ -247,7 +314,8 @@ function rebuildUIFromState() {
 
 function clearSearchResults() {
   setState({
-    searchResults: []
+    searchResults: [],
+    selectedSearchResult: -1
   });
 }
 
@@ -282,7 +350,8 @@ function doSearch(searchTerm) {
   }
   console.log("search results:", res);
   setState({
-    searchResults: res
+    searchResults: res,
+    selectedSearchResult: 0
   });
 }
 

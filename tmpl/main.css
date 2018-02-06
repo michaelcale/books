@@ -182,11 +182,16 @@ or use grid for top-header instead of flexbox.
     overflow-x: hidden;
 }
 
+.search-result-selected {
+    background-color: lightgray;
+}
+
 /* higlight search results with yellow-ish background */
 .hili {
     /* font-weight: bold; */
     padding: 1px 2px;
-    background: #ffeb3b;
+    /* background: #ffeb3b; */
+    background: rgba(255,235,59, 0.6);
     border-radius: 2px;
 }
 
