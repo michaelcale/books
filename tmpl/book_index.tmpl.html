@@ -6,6 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="referrer" content="always">
 
+    <meta name="twitter:card" value="summary">
+    <meta name="twitter:site" content="@kjk">
+    <meta name="twitter:title" content="{{.TitleLong}}">
+    <!-- do something else for description -->
+    <meta name="twitter:description" content="{{.TitleLong}}">
+    <meta name="twitter:creator" content="@kjk">
+    <meta name="twitter:image" content="{{.CoverFullURL}}">
+    <!-- do something else for title -->
+    <meta property="og:title" content="{{.TitleLong}}">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="{{.CanonnicalURL}}" />
+    <!-- do something else for description -->
+    <meta property="og:description" content="{{.TitleLong}}">
+    <meta property="og:image" content="{{.CoverFullURL}}">
+
     <title>{{.TitleLong}}</title>
     <link href="/main.css" rel="stylesheet">
     {{ if .AnalyticsCode }}
@@ -68,7 +83,9 @@
     <div id="bottom-footer">
         <div>Maintained by <a href="https://blog.kowalczyk.info" target="_blank">Krzysztof Kowalczyk</a>
         </div>
-
+        <div class="share-me">
+            Share "{{.TitleLong}}" <a href="https://twitter.com/intent/tweet?text={{.ShareOnTweeterText}}&url={{.CanonnicalURL}}&via=kjk">on Twitter</a>
+        </div>
         <div>
             <a href="{{.GitHubURL}}" target="_blank">{{.GitHubText}}</a>
         </div>

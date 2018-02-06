@@ -16,6 +16,10 @@ import (
 	"github.com/kjk/u"
 )
 
+const (
+	fullURLBase = "https://www.programming-books.io/"
+)
+
 // Article represents a part of a chapter
 type Article struct {
 	// stable, globally unique (across all bookd) id
@@ -44,6 +48,19 @@ func (a *Article) Book() *Book {
 	return a.Chapter.Book
 }
 
+// URL returns url of .html file with this article
+func (a *Article) URL() string {
+	chap := a.Chapter
+	book := chap.Book
+	// /essential/go/a-14047-flags
+	return fmt.Sprintf("/essential/%s/%s", book.FileNameBase, a.FileNameBase)
+}
+
+// CanonnicalURL returns full url including host
+func (a *Article) CanonnicalURL() string {
+	return fullURLBase + a.URL()
+}
+
 // GitHubText returns text we display in GitHub box
 func (a *Article) GitHubText() string {
 	return "Edit on GitHub"
@@ -60,14 +77,6 @@ func (a *Article) GitHubURL() string {
 // TODO: verify it's the right noe
 func (a *Article) GitHubEditURL() string {
 	return strings.Replace(a.GitHubURL(), "/blob/master/", "/edit/master/", -1)
-}
-
-// URL returns url of .html file with this article
-func (a *Article) URL() string {
-	chap := a.Chapter
-	book := chap.Book
-	// /essential/go/a-14047-flags
-	return fmt.Sprintf("/essential/%s/%s", book.FileNameBase, a.FileNameBase)
 }
 
 func (a *Article) destFilePath() string {
@@ -127,6 +136,11 @@ func (c *Chapter) VersionsHTML() template.HTML {
 func (c *Chapter) URL() string {
 	// /essential/go/ch-4023-parsing-command-line-arguments-and-flags
 	return fmt.Sprintf("/essential/%s/%s", c.Book.FileNameBase, c.FileNameBase)
+}
+
+// CanonnicalURL returns full url including host
+func (c *Chapter) CanonnicalURL() string {
+	return fullURLBase + c.URL()
 }
 
 func (c *Chapter) destFilePath() string {
@@ -235,6 +249,16 @@ func (b *Book) URL() string {
 	return fmt.Sprintf("/essential/%s/", b.titleSafe)
 }
 
+// CanonnicalURL returns full url including host
+func (b *Book) CanonnicalURL() string {
+	return fullURLBase + b.URL()
+}
+
+// ShareOnTweeterText returns text for sharing on tweeter
+func (b *Book) ShareOnTweeterText() string {
+	return fmt.Sprintf(`"Essential %s" - a free programming book`, b.Title)
+}
+
 // TocSearchJSURL returns data for searching titles of chapters/articles
 func (b *Book) TocSearchJSURL() string {
 	return b.URL() + "/toc_search.js"
@@ -244,6 +268,11 @@ func (b *Book) TocSearchJSURL() string {
 func (b *Book) CoverURL() string {
 	coverName := langToCover[b.titleSafe]
 	return fmt.Sprintf("/covers/%s.png", coverName)
+}
+
+// CoverFullURL returns a URL for the cover including host
+func (b *Book) CoverFullURL() string {
+	return fullURLBase + b.CoverURL()
 }
 
 // ArticlesCount returns total number of articles

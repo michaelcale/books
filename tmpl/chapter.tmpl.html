@@ -6,6 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="referrer" content="always">
 
+    <meta name="twitter:card" value="summary">
+    <meta name="twitter:site" content="@kjk">
+    <meta name="twitter:title" content="{{.Title}}">
+    <!-- do something else for description -->
+    <meta name="twitter:description" content="{{.Book.TitleLong}}">
+    <meta name="twitter:creator" content="@kjk">
+    <meta name="twitter:image" content="{{.Book.CoverFullURL}}">
+    <!-- do something else for title -->
+    <meta property="og:title" content="{{.Title}}">
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="{{.CanonnicalURL}}" />
+    <!-- do something else for description -->
+    <meta property="og:description" content="{{.Title}}">
+    <meta property="og:image" content="{{.Book.CoverFullURL}}">
+
     <title>{{.Title}}</title>
     <link href="/main.css" rel="stylesheet">
     {{ if .AnalyticsCode }}
@@ -90,25 +105,28 @@
             <div class="toc-header">{{.Book.TitleLong}}</div>
 
             <div class="chapters-toc">
-                {{range .Book.Chapters}}
-                    {{if .IsCurrent}}
-                        <div class="chapters-toc-item">
-                            <!-- <span class="chap-no">{{.No}}</span>  -->
-                            <span class="is-current">{{.Title}}</span>
-                        </div>
-                    {{else}}
-                        <div class="chapters-toc-item">
-                            <!-- <span class="chap-no">{{.No}}</span> -->
-                            <a href="{{.URL}}">{{.Title}}</a>
-                        </div>
-                    {{end}}
+            {{range .Book.Chapters}}
+                {{if .IsCurrent}}
+                    <div class="chapters-toc-item">
+                        <!-- <span class="chap-no">{{.No}}</span>  -->
+                        <span class="is-current">{{.Title}}</span>
+                    </div>
+                {{else}}
+                    <div class="chapters-toc-item">
+                        <!-- <span class="chap-no">{{.No}}</span> -->
+                        <a href="{{.URL}}">{{.Title}}</a>
+                    </div>
                 {{end}}
+            {{end}}
             </div>
         </div>
     </div>
 
     <div id="bottom-footer">
         <div>Maintained by <a href="https://blog.kowalczyk.info" target="_blank">Krzysztof Kowalczyk</a>
+        </div>
+        <div class="share-me">
+            Share "{{.Book.TitleLong}}" <a href="https://twitter.com/intent/tweet?text={{.Book.ShareOnTweeterText}}&url={{.Book.CanonnicalURL}}&via=kjk">on Twitter</a>
         </div>
         <div>
             <a href="{{.GitHubEditURL}}" target="_blank">{{.GitHubText}}</a>
