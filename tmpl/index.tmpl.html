@@ -20,7 +20,7 @@
 </head>
 
 <body>
-    <div class="top-header">
+    <div id="top-header">
         <div>Essential Books</div>
         <div><!-- Right Side--></div>
     </div>
@@ -50,15 +50,13 @@
             </tbody>
         </table>
 
-        <hr class="toc-sep">
-
-        <div class="hcenter light mt16 fs0p8em">
-            Maintained by <a href="https://blog.kowalczyk.info" target="_blank">Krzysztof Kowalczyk</a>
-    </div>
     </div>
 
-    <div class="github-link">
-        <a href="{{.GitHubURL}}" target="_blank">{{.GitHubText}}</a>
+    <div id="bottom-footer">
+        <div>Maintained by <a href="https://blog.kowalczyk.info" target="_blank">Krzysztof Kowalczyk</a></div>
+        <div>
+            <a href="{{.GitHubURL}}" target="_blank">{{.GitHubText}}</a>
+        </div>
     </div>
 
 </body>

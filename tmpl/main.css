@@ -91,7 +91,7 @@ a.blue:hover {
     color: #4183c4;
 }
 
-.top-header {
+#top-header {
     position: fixed;
     top: 0px;
     /* same as body margin */
@@ -119,8 +119,25 @@ or use grid for top-header instead of flexbox.
     width: 160px;
 }
 
+#bottom-footer {
+    position: fixed;
+    bottom: 0px;
+    left: 20px;
+    right: 20px;
+    height: 28px;
+    background-color: white;
+    border-top: 1px solid lightgray;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8em;
+}
+
 .content-wrapper {
+    /* make space for top-header */
     margin-top: 40px;
+    /* make space for bottom-footer */
+    margin-bottom: 36px;
 }
 
 .covers {
@@ -161,7 +178,30 @@ or use grid for top-header instead of flexbox.
 
 #search-input {
     width: 50vw;
-    height: 16px;
+    font-size: 14px;
+    padding: 2px 8px;
+    border-radius: .25rem;
+    border: 1px solid rgba(0,0,0,.15);
+    box-shadow: inset 0 0 0 0 transparent;
+    outline: 0;
+    z-index: 25;
+}
+
+#blur-overlay {
+    display: none;
+    z-index: 10;
+    background-color: rgba(0,0,0,.4);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+/* no blue border when focused */
+#search-input:focus {
+    /* border: 1px solid lightskyblue; */
+    border: 1px solid #aaaaaa;
 }
 
 #search-results {
@@ -171,6 +211,11 @@ or use grid for top-header instead of flexbox.
     left: 13vw; /* (100 - 74) / 2 */
     right: 13vw;
     border: 1px solid black;
+
+    border-radius: .25rem;
+    border: 1px solid #aaaaaa;
+    z-index: 25;
+
     /* min-height: 320px; */
     max-height: 75vh;
     background-color: white;
@@ -183,7 +228,7 @@ or use grid for top-header instead of flexbox.
 }
 
 .search-result-selected {
-    background-color: lightgray;
+    background-color:#EEEEEE;
 }
 
 /* higlight search results with yellow-ish background */
@@ -195,12 +240,6 @@ or use grid for top-header instead of flexbox.
     border-radius: 2px;
 }
 
-/* no blue border when focused */
-#search-input:focus {
-    outline-width: 0;
-    border: 1px solid blue;
-    transform: scale(1.3);
-}
 
 .github-link {
     font-size: 0.8em;
@@ -290,10 +329,16 @@ hr.toc-sep {
     }
 }
 
-
 .article-chapter-toc {
     background-color: white;
+    margin-top: 16px;
+    filter: opacity(0.6)
 }
+
+.article-chapter-toc:hover {
+    filter: opacity(1)
+}
+
 
 .article-article-toc {
     padding-top: 8px;

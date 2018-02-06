@@ -309,11 +309,14 @@ function rebuildSearchResultsUI() {
   var results = currentState.searchResults;
   var selectedIdx = currentState.selectedSearchResult;
   var el = document.getElementById("search-results");
+  var blurOverlay = document.getElementById("blur-overlay");
   if (results.length == 0) {
     el.style.display = "none";
+    blurOverlay.style.display = "none";
     return;
   }
   el.style.display = "block";
+  blurOverlay.style.display = "block";
   var html = buildResultsHTML(results, selectedIdx);
   el.innerHTML = html;
 
