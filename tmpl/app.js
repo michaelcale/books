@@ -280,6 +280,31 @@ function buildResultsHTML(results, selectedIdx) {
   return a.join("\n");
 }
 
+// https://stackoverflow.com/questions/6215779/scroll-if-element-is-not-visible
+// TODO: improve on scroll up
+function scrollIntoViewIfOutOfView(el) {
+  var parent = el.parentElement;
+  var topOfPage = parent.scrollTop;
+  var heightOfPage = parent.clientHeight;
+  var elY = 0;
+  var elH = 0;
+  if (document.layers) { // NS4
+      elY = el.y;
+      elH = el.height;
+  } else {
+      for(var p=el; p&&p.tagName!='BODY'; p=p.offsetParent){
+          elY += p.offsetTop;
+      }
+      elH = el.offsetHeight;
+  }
+  if ((topOfPage + heightOfPage) < (elY + elH)) {
+      el.scrollIntoView(false);
+  }
+  else if (elY < topOfPage) {
+      el.scrollIntoView(true);
+  }
+}
+
 function rebuildSearchResultsUI() {
   var results = currentState.searchResults;
   var selectedIdx = currentState.selectedSearchResult;
@@ -291,7 +316,13 @@ function rebuildSearchResultsUI() {
   el.style.display = "block";
   var html = buildResultsHTML(results, selectedIdx);
   el.innerHTML = html;
-  // TOOD: ensure selected search result is visible
+
+  // ensure element is scrolled into view
+  window.requestAnimationFrame(() => {
+    var id = "search-result-no-" + selectedIdx;
+    var el = document.getElementById(id);
+    scrollIntoViewIfOutOfView(el);
+  });
 }
 
 function getSearchInputElement() {
