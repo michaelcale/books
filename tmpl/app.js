@@ -29,16 +29,20 @@ function triggerUIRebuild() {
   rebuildUIFromState();
 }
 
-function requestRebuildUI() {
+function requestRebuildUI(now) {
   // debounce the requests
   if (rebuildUITimer != null) {
     window.cancelAnimationFrame(rebuildUITimer);
     rebuildUITimer = null;
   }
-  window.requestAnimationFrame(triggerUIRebuild);
+  if (now) {
+    triggerUIRebuild();
+  } else {
+    window.requestAnimationFrame(triggerUIRebuild);
+  }
 }
 
-function setState(newState) {
+function setState(newState, now=false) {
   var vOld, vNew;
   var stateChanged = false;
   for (var k in newState) {
@@ -53,7 +57,7 @@ function setState(newState) {
     }
   }
   if (stateChanged) {
-    requestRebuildUI();
+    requestRebuildUI(now);
   }
 }
 
@@ -61,16 +65,13 @@ function isChapterOrArticle(s) {
   return s.startsWith("ch-") || s.startsWith("a-");
 }
 
-function onEnter(ev) {
-  var selIdx = currentState.selectedSearchResult;
-  if (selIdx == -1) {
-    return;
-  }
+function navigateToSearchResult(idx) {
+
   var loc = window.location.pathname;
   var parts = loc.split("/");
   var lastIdx = parts.length - 1;
   var lastEl = parts[lastIdx];
-  var selected = currentState.searchResults[selIdx];
+  var selected = currentState.searchResults[idx];
   var uri = selected[0];
   if (isChapterOrArticle(lastEl)) {
     parts[lastIdx] = uri;
@@ -80,6 +81,14 @@ function onEnter(ev) {
   loc = parts.join("/");
   clearSearchResults();
   window.location = loc;
+}
+
+function onEnter(ev) {
+  var selIdx = currentState.selectedSearchResult;
+  if (selIdx == -1) {
+    return;
+  }
+  navigateToSearchResult(selIdx);
 }
 
 function onKeySlash(ev) {
@@ -290,7 +299,7 @@ function getSearchInputElement() {
 }
 
 function setSearchInputFocus() {
-  console.log("setSearchInputFocus:", currentState.searchInputFocused);
+  // console.log("setSearchInputFocus:", currentState.searchInputFocused);
   var el = getSearchInputElement();
   var wantsFocus = currentState.searchInputFocused;
   var isFocused = document.activeElement === el;
@@ -373,25 +382,78 @@ function makeDebouncer(timeInMs) {
 // and do addEventListener("input", debounce(onSearchInputChanged, 250, false))
 var searchInputDebouncer = makeDebouncer(250);
 
+function getIdxFromSearchResultElementId(id) {
+  if (!id) {
+    return -1;
+  }
+  if (!id.startsWith("search-result-no-")) {
+    return -1;
+  }
+  var parts = id.split("-");
+  var nStr = parts[parts.length-1];
+  var n = parseInt(nStr, 10);
+  return isNaN(n) ? -1 : n;
+}
+
+function findEnclosingResultNode(el) {
+  while (el) {
+    var idx = getIdxFromSearchResultElementId(el.id);
+    if (idx > 0) {
+      return idx;
+    }
+    el = el.parentNode;
+  }
+  return -1;
+}
+
+// if search result item is
+function onClick(ev) {
+  var el = ev.target;
+  console.log("el:", el);
+  var idx = findEnclosingResultNode(el);
+  if (idx < 0) {
+    setState({
+      selectedSearchResult: -1,
+    })
+    console.log("stopped propagation");
+    ev.stopPropagation();
+    return;
+  }
+  if (idx >= 0) {
+    navigateToSearchResult(idx);
+  }
+  ev.stopPropagation();
+}
+
+// when we're over elements with id "search-result-no-${id}", set this one
+// as selected element
+function onMouseMove(ev) {
+  var el = ev.target;
+  var idx = getIdxFromSearchResultElementId(el.id);
+  if (idx < 0) {
+    return;
+  }
+  //console.log("ev.target:", el, "id:", el.id, "idx:", idx);
+  setState({
+    selectedSearchResult: idx,
+  }, true);
+  ev.stopPropagation();
+}
+
 function onSearchInputChanged(ev) {
   var s = ev.target.value;
   var fn = doSearch.bind(this, s);
   searchInputDebouncer(fn);
 }
 
-function startGlobalKeyListening() {
-  document.addEventListener("keyup", onKeyUp, true);
-}
-
-function startInputElementListening() {
-  var el = getSearchInputElement();
-  el.addEventListener("input", onSearchInputChanged, true);
-}
-
 function start() {
   console.log("started");
-  startGlobalKeyListening();
-  startInputElementListening();
+
+  document.addEventListener("keyup", onKeyUp, true);
+  var el = getSearchInputElement();
+  el.addEventListener("input", onSearchInputChanged, true);
+  document.addEventListener("mousemove", onMouseMove, true);
+  document.addEventListener("click", onClick, true);
 }
 
 // parsed and DOM ready but before loading external resources like images or stylesheets
