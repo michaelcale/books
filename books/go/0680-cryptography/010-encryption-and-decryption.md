@@ -1,7 +1,8 @@
+---
 Title: Encryption and decryption
 Id: 30884
 Score: 2
-Body:
+---
 # Foreword
 This is a detailed example about how to encrypt and decrypt data with Go. The uses code is shorten, e.g. the error handling is not mentioned. The full working project with error handling and user interface could be found on Github [here][1].
 
@@ -69,7 +70,7 @@ Now, we are able to derive a key and a vector out of the master password and the
 
     keyLength := 256
     rfc2898Iterations := 6
-    
+
     keyVectorData := pbkdf2.Key(masterPassword, saltBytes, rfc2898Iterations, (keyLength/8)+aes.BlockSize, sha1.New)
     keyBytes := keyVectorData[:keyLength/8]
     vectorBytes := keyVectorData[keyLength/8:]
@@ -134,7 +135,7 @@ As mentioned before, we could split salt and encrypted data by the delimiter byt
             encryptedBytesBase64 = encryptedFileData[n+1:]
             break
         }
-    } 
+    }
 
 ## Step 4
 Next, we must decode the base64 encoded bytes:
@@ -148,7 +149,7 @@ Now, we are able to derive a key and a vector out of the master password and the
 
     keyLength := 256
     rfc2898Iterations := 6
-    
+
     keyVectorData := pbkdf2.Key(masterPassword, saltBytes, rfc2898Iterations, (keyLength/8)+aes.BlockSize, sha1.New)
     keyBytes := keyVectorData[:keyLength/8]
     vectorBytes := keyVectorData[keyLength/8:]
@@ -171,29 +172,30 @@ Convert the read bytes to string: `decryptedString := string(decryptedData)`. Be
 ## Step 10
 Construct a `secret` out of the lines:
 
-    artifact := secret{}
-    artifact.DisplayName = lines[0]
-    artifact.Notes = lines[1]
-    artifact.Username = lines[2]
-    artifact.EMail = lines[3]
-    artifact.CopyMethod = lines[4]
-    artifact.Password = lines[5]
-    artifact.CustomField01Name = lines[6]
-    artifact.CustomField01Data = lines[7]
-    artifact.CustomField02Name = lines[8]
-    artifact.CustomField02Data = lines[9]
-    artifact.CustomField03Name = lines[10]
-    artifact.CustomField03Data = lines[11]
-    artifact.CustomField04Name = lines[12]
-    artifact.CustomField04Data = lines[13]
-    artifact.CustomField05Name = lines[14]
-    artifact.CustomField05Data = lines[15]
-    artifact.CustomField06Name = lines[16]
-    artifact.CustomField06Data = lines[17]
+```go
+artifact := secret{}
+artifact.DisplayName = lines[0]
+artifact.Notes = lines[1]
+artifact.Username = lines[2]
+artifact.EMail = lines[3]
+artifact.CopyMethod = lines[4]
+artifact.Password = lines[5]
+artifact.CustomField01Name = lines[6]
+artifact.CustomField01Data = lines[7]
+artifact.CustomField02Name = lines[8]
+artifact.CustomField02Data = lines[9]
+artifact.CustomField03Name = lines[10]
+artifact.CustomField03Data = lines[11]
+artifact.CustomField04Name = lines[12]
+artifact.CustomField04Data = lines[13]
+artifact.CustomField05Name = lines[14]
+artifact.CustomField05Data = lines[15]
+artifact.CustomField06Name = lines[16]
+artifact.CustomField06Data = lines[17]
+```
 
 Finally, re-create the line breaks within the notes field: `artifact.Notes = strings.Replace(artifact.Notes, string(65000), "\n", -1)`.
 
   [1]: https://github.com/SommerEngineering/PasswordManager/blob/master/EncryptFile.go
   [2]: https://en.wikipedia.org/wiki/Salt_(cryptography)
   [3]: https://en.wikipedia.org/wiki/Base64
-|======|

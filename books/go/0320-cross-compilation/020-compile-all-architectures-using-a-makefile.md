@@ -1,10 +1,11 @@
+---
 Title: Compile all architectures using a Makefile
 Id: 3298
 Score: 12
-Body:
+---
 This Makefile will cross compile and zip up executables for Windows, Mac and Linux (ARM and x86).
 
-```
+```make
 # Replace demo with your desired executable name
 appname := demo
 
@@ -58,8 +59,4 @@ build/windows_amd64.zip: $(sources)
     $(call build,windows,amd64,.exe)
     $(call zip,windows,amd64,.exe)
 ```
-(be cautious that [Makefile's need hard tabs not spaces][1])
-
-
-  [1]: http://stackoverflow.com/a/16945143/1462575
-|======|
+(be cautious that [Makefile's need hard tabs not spaces](http://stackoverflow.com/a/16945143/1462575))

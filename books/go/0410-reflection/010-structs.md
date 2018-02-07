@@ -1,9 +1,9 @@
+---
 Title: Structs
 Id: 6071
 Score: 0
-Body:
-<!-- language: lang-go -->
-<pre><code>
+---
+```go
 import "reflect"
 
 type S struct {
@@ -29,5 +29,4 @@ indirect.NumMethod() // 1
 
 indirect.Method(0).Call([]reflect.Value{})              // "example"
 indirect.MethodByName("String").Call([]reflect.Value{}) // "example"
-</code></pre>
-|======|
+```

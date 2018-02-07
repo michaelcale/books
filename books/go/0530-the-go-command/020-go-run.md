@@ -21,7 +21,7 @@ Execute without compiling to a file: `go run main.go`
 
 If program is split into multiple files, you must provide all files:
 
-```bash
+```sh
 $ go run main.go assets.go
 ```
 

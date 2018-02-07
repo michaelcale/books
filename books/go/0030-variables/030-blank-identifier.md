@@ -24,7 +24,6 @@ func main() {
 
 ```go
 func main() {
-
     pets := []string{"dog", "cat", "fish"}
 
     // Range returns both the current index and value
@@ -32,7 +31,6 @@ func main() {
     for _, pet := range pets {
         fmt.Println(pet)
     }
-
 }
 ```
 

@@ -1,7 +1,8 @@
+---
 Title: Return time.Time Zero Value when function has an Error
 Id: 27600
 Score: 0
-Body:
+---
 ```go
 const timeFormat = "15 Monday January 2006"
 
@@ -15,4 +16,3 @@ func ParseDate(s string) (time.Time, error) {
     }
     return t, nil
 }
-|======|

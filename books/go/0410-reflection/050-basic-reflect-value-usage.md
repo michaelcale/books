@@ -1,9 +1,9 @@
+---
 Title: Basic reflect.Value Usage
 Id: 6070
 Score: -1
-Body:
-<!-- language: lang-go -->
-<pre><code>
+---
+```go
 import "reflect"
 
 value := reflect.ValueOf(4)
@@ -19,5 +19,4 @@ value.SetInt(5) // panics -- non-pointer/slice/array types are not addressable
 
 x := 4
 reflect.ValueOf(&x).Elem().SetInt(5) // works
-</code></pre>
-|======|
+```

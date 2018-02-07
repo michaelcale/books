@@ -1,22 +1,25 @@
+---
 Title: vendor.json using Govendor tool
 Id: 30033
 Score: 2
-Body:
-  
-    # It creates vendor folder and vendor.json inside it
-    govendor init
+---
 
-    # Add dependencies in vendor.json
-    govendor fetch <dependency>
+```sh
+# It creates vendor folder and vendor.json inside it
+govendor init
 
-    # Usage on new repository
-    # fetch depenencies in vendor.json
-    govendor sync
+# Add dependencies in vendor.json
+govendor fetch <dependency>
 
+# Usage on new repository
+# fetch depenencies in vendor.json
+govendor sync
+```
 
 Example vendor.json
 
-    {
+```js
+{
 
     "comment": "",
     "ignore": "test",
@@ -36,6 +39,5 @@ Example vendor.json
     ],
     "rootPath": "github.com/sample"
 
-    }
-
-|======|
+}
+```

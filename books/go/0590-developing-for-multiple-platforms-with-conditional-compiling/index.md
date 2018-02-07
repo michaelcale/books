@@ -1,15 +1,16 @@
+---
 Title: Developing for Multiple Platforms with Conditional Compiling
 Id: 8599
-Introduction:
+---
 Platform based conditional compiling comes in two forms in Go, one is with file suffixes and the other is with build tags.
-|======|
-Syntax:
+
+## Syntax
 * After "`// +build`", a single platform or a list can follow
 * Platform can be reverted by preceding it by `!` sign
 * List of space separated platforms are ORed together
 
-|======|
-Remarks:
+## Remarks
+
 **Caveats for build tags:**
 * The `// +build` constraint must be placed at the top of the file, even before package clause.
 * It must be followed by one blank line to separate from package comments.
@@ -23,9 +24,8 @@ Remarks:
 | linux    |
 | netbsd   |
 | openbsd  |
-| plan9    | 
-| solaris  | 
+| plan9    |
+| solaris  |
 | windows  |
 
 Refer to `$GOOS` list in https://golang.org/doc/install/source#environment for the most up-to-date platform list.
-|======|

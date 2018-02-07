@@ -1,7 +1,8 @@
+---
 Title: Comparing Time
 Id: 32577
 Score: 0
-Body:
+---
 Sometime you will need to know, with 2 dates objects, if there are corresponding to the same date, or find which date is after the other.
 
 In **Go**, there is 4 way to compare dates:
@@ -19,13 +20,14 @@ In **Go**, there is 4 way to compare dates:
 <!-- break -->
 
 > TIPS: If you need to know if a date is before or equal another one, just need to combine the 4 operators
-> - `date1 == date2 && date1.After(date2)`, returns `true` when date1 is after or equal date2  
+> - `date1 == date2 && date1.After(date2)`, returns `true` when date1 is after or equal date2
 >or using `! (date1.Before(date2))`
 > - `date1 == date2 && date1.Before(date2)`, returns `true` when date1 is before or equal date2
 >or using `!(date1.After(date2))`
 
 Some examples to see how to use:
 
+```
     // Init 2 dates for example
     var date1 = time.Date(2009, time.November, 10, 23, 0, 0, 0, time.UTC)
     var date2 = time.Date(2017, time.July, 25, 16, 22, 42, 123, time.UTC)
@@ -48,4 +50,4 @@ Some examples to see how to use:
 
     bool11 := !(date1.Before(date3)) // true, because date1 is not before date3
     bool12 := !(date1.After(date3)) // true, because date1 is not after date3
-|======|
+```

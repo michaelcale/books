@@ -7,7 +7,7 @@ Score: 7
 ## Generate a certificate
 In order to run a HTTPS server, a certificate is necessary. Generating a self-signed certificate with `openssl` is done by executing this command:
 
-```bash
+```sh
 openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout key.pem -out cert.pem -subj "/CN=example.com" -days 3650`
 ```
 

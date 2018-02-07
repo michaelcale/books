@@ -1,9 +1,9 @@
+---
 Title: reflect.Value.Elem()
 Id: 6073
 Score: 0
-Body:
-<!-- language: lang-go -->
-<pre><code>
+---
+```go
 import "reflect"
 
 // this is effectively a pointer dereference
@@ -20,5 +20,4 @@ value.Type().Name() // int
 value.Type().Kind() // reflect.Int
 value.Set(4)        // this works
 value.Interface()   // 4
-</code></pre>
-|======|
+```

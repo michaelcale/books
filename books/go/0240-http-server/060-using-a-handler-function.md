@@ -71,7 +71,7 @@ func main() {
 
 Here's the output using `cURL`:
 
-```bash
+```sh
 ➜  ~ curl -i localhost:8080/foo
 HTTP/1.1 200 OK
 Date: Wed, 20 Jul 2016 18:23:08 GMT

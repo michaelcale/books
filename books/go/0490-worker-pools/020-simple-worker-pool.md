@@ -1,9 +1,10 @@
+---
 Title: Simple worker pool
 Id: 14633
 Score: 0
-Body:
+---
 A simple worker pool implementation:
-```
+```go
 package main
 
 import (
@@ -31,7 +32,7 @@ func main() {
     // make our channels for communicating work and results
     jobs := make(chan job, 100) // 100 was chosen arbitrarily
     results := make(chan result, 100)
-       
+
     // spin up workers and use a sync.WaitGroup to indicate completion
     wg := sync.WaitGroup
     for i := 0; i < runtime.NumCPU; i++ {
@@ -41,7 +42,7 @@ func main() {
             worker(jobs, results)
         }()
     }
-    
+
     // wait on the workers to finish and close the result channel
     // to signal downstream that all work is done
     go func() {
@@ -66,4 +67,3 @@ func main() {
     }
 }
 ```
-|======|

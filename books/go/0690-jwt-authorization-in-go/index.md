@@ -1,13 +1,11 @@
+---
 Title: JWT Authorization in Go
 Id: 10161
-Versions:
-[{"Name":"1.7.3","GroupName":null},{"Name":"1.8.0","GroupName":null}]
-|======|
-Introduction:
+---
+## Introduction
 JSON Web Tokens (JWTs) are a popular method for representing claims securely between two parties. Understanding how to work with them is important when developing web applications or application programming interfaces.
-|======|
-Remarks:
+
+## Remarks
 context.Context and HTTP middleware are outside the scope of this topic, but nonetheless those curious, wandering souls should check out https://github.com/goware/jwtauth, https://github.com/auth0/go-jwt-middleware, and https://github.com/dgrijalva/jwt-go.
 
 Huge kudos to Dave Grijalva for his amazing work on go-jwt.
-|======|

@@ -1,9 +1,9 @@
+---
 Title: Build tags
 Id: 26887
 Score: 0
-Body:
-<!-- language: lang -->
-```
+---
+```go
 // +build linux
 
 package lib
@@ -30,4 +30,3 @@ package lib
 
 var SomeUnix int // Will be compiled in linux, darwin and plan9 but not on others
 ```
-|======|

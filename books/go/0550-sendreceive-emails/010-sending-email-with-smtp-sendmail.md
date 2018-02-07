@@ -1,10 +1,11 @@
+---
 Title: Sending Email with smtp.SendMail()
 Id: 20761
 Score: 2
-Body:
-Sending email is pretty simple in Go. It helps to understand the RFC 822, which specifies the style an email need to be in, the code below sends a RFC 822 compliant email. 
+---
+Sending email is pretty simple in Go. It helps to understand the RFC 822, which specifies the style an email need to be in, the code below sends a RFC 822 compliant email.
 
-```
+```go
 package main
 
 import (
@@ -26,8 +27,8 @@ func main() {
     // using PlainText, but other authentication methods are encouraged
     auth := smtp.PlainAuth("", from, "password", host)
 
-    // NOTE: Using the backtick here ` works like a heredoc, which is why all the 
-    // rest of the lines are forced to the beginning of the line, otherwise the 
+    // NOTE: Using the backtick here ` works like a heredoc, which is why all the
+    // rest of the lines are forced to the beginning of the line, otherwise the
     // formatting is wrong for the RFC 822 style
     message := `To: "Some User" <someuser@example.com>
 From: "Other User" <otheruser@example.com>
@@ -46,12 +47,10 @@ This is the message we are sending. That's it!
 
 The above will send a message like the following:
 
-```
+```text
 To: "Other User" <otheruser@example.com>
 From: "Some User" <someuser@example.com>
 Subject: Testing Email From Go!!
 
 This is the message we are sending. That's it!
-.
 ```
-|======|

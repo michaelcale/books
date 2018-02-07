@@ -1,16 +1,15 @@
+---
 Title: JSON
 Id: 994
-Syntax:
+---
+## Syntax
 - func Marshal(v interface{}) ([]byte, error)
 - func Unmarshal(data []byte, v interface{}) error
 
-|======|
-Remarks:
-The package [`"encoding/json"`][1] Package json implements encoding and decoding of JSON objects in `Go`.
-
+## Remarks
+The package [`"encoding/json"`](https://golang.org/pkg/encoding/json/) Package json implements encoding and decoding of JSON objects in `Go`.
 
 ----------
-
 
 Types in JSON along with their corresponding concrete types in Go are:
 
@@ -20,8 +19,3 @@ Types in JSON along with their corresponding concrete types in Go are:
 | numbers   | float64 or int   |
 | string   | string   |
 | null   | nil   |
-
-
-
-  [1]: https://golang.org/pkg/encoding/json/
-|======|

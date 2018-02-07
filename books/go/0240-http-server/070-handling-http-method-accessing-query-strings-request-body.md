@@ -71,7 +71,7 @@ func main() {
 
 Sample curl output:
 
-```bash
+```sh
 $ curl -i 'localhost:8080?city=Seattle&state=WA' -H 'Content-Type: text/plain' -X GET
 HTTP/1.1 200 OK
 Date: Fri, 02 Sep 2016 16:36:24 GMT

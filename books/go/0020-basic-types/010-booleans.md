@@ -11,7 +11,9 @@ fmt.Printf("b is: '%v'\n", b)
 b = false
 fmt.Printf("b is: '%v'\n", b)
 ```
-prints:
+
+**Output:**
+
 ```text
 b is: 'true'
 b is: 'false'
@@ -23,7 +25,9 @@ Size of `bool` variable (e.g. when part of a struct) is 1 byte.
 var b bool = true
 fmt.Printf("size of bool is: %d\n", unsafe.Sizeof(b))
 ```
-prints:
+
+**Output:**
+
 ```text
 size of bool is: 1
 ```

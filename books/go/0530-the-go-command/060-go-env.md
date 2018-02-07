@@ -3,7 +3,7 @@ Id: 28737
 Body:
 `go env [var ...]` prints information about environment variables that affect the behavior of Go tools.
 
-```bash
+```sh
 $ go env
 GOARCH="amd64"
 GOBIN=""
@@ -23,7 +23,7 @@ CGO_ENABLED="1"
 
 If one or more variable names is given as arguments, it prints the value of each named variable on its own line.
 
-```bash
+```sh
 $ go env GOOS GOPATH
 darwin
 /Users/vikashkv/work

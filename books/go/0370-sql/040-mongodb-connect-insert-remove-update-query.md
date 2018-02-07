@@ -1,9 +1,8 @@
-Title:
-MongoDB: connect & insert & remove & update & query
-|======|
+---
+Title: MongoDB: connect & insert & remove & update & query
 Id: 29663
 Score: 0
-Body:
+---
 ```go
 package main
 
@@ -112,4 +111,3 @@ func MongoUpdate(dbName, C string, selector bson.M, update interface{}) error {
     return nil
 }
 ```
-|======|

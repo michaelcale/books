@@ -1,8 +1,10 @@
+---
 Title: Basic memory Profiling
 Id: 25407
 Score: 0
-Body:
-```
+---
+
+``go
 var memprofile = flag.String("memprofile", "", "write memory profile to `file`")
 
 func main() {
@@ -20,10 +22,9 @@ func main() {
     }
 }
 ```
-```
+
+```go
 go build main.go
 main.exe -memprofile mem.prof
 go tool pprof main.exe mem.prof
-
 ```
-|======|

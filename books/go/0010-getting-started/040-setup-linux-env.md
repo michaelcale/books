@@ -4,18 +4,18 @@ Id: rd6000f2
 ---
 After installing the compiler you need to configure [`GOPATH`](a-14406) environment variable.
 
-```bash
+```sh
 mkdir -p $HOME/go
 ```
 
 Add following two lines at the end of the `~/.bashrc` file
 
-```bash
+```sh
 export GOPATH=$HOME/go
 export PATH=$GOPATH/bin:/usr/local/go/bin:$PATH
 ```
 
-```bash
+```sh
 $ source ~/.bashrc
 ```
 

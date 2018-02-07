@@ -1,12 +1,11 @@
+---
 Title: Restfull Projects API with Gin
 Id: 29299
 Score: 1
-Body:
+---
 > Gin is a web framework written in Golang. It features a martini-like API with much better performance, up to 40 times faster. If you need performance and good productivity, you will love Gin.
 
-
 ----------
-
 
 There will be 8 packages + main.go
 
@@ -28,13 +27,11 @@ Controllers package will store all the API logic. Whatever your API, your logic 
 
 [![controllers][2]][2]
 
-
 ----------
 <h2>core</h2>
-Core package will store all your created models,  ORM, etc 
+Core package will store all your created models,  ORM, etc
 
 [![core][3]][3]
-
 
 ----------
 <h2>libs</h2>
@@ -46,11 +43,9 @@ This package will store any library that used in projects. But only for manually
 <h2>middlewares</h2>
 This package store every middleware  that used in project, could be creation/validation of cors,device-id , auth etc
 
-[![middlewares][5]][5] 
-
+[![middlewares][5]][5]
 
 ----------
-
 
 <h2>public</h2>
 This pacakge will store every public and static files, could be html, css, javascript ,images, etc
@@ -58,7 +53,7 @@ This pacakge will store every public and static files, could be html, css, javas
 [![public][6]][6]
 ----------
 <h2>routers</h2>
-This package will store every routes in your REST API. 
+This package will store every routes in your REST API.
 
 [![routers][7]][7]
 
@@ -66,9 +61,9 @@ See sample code how to assign the routes.
 
 **auth_r.go**
 <pre>
-import (      
+import (
     auth "simple-api/controllers/v1/auth"
-    "gopkg.in/gin-gonic/gin.v1"    
+    "gopkg.in/gin-gonic/gin.v1"
 )
 
 func SetAuthRoutes(router *gin.RouterGroup) {
@@ -82,7 +77,7 @@ func SetAuthRoutes(router *gin.RouterGroup) {
  * @apiParamExample {json} Input
  *    {
  *      "username": "your username",
- *        "password"     : "your password"        
+ *        "password"     : "your password"
  *    }
  * @apiSuccess {Object} authenticate Response
  * @apiSuccess {Boolean} authenticate.success Status
@@ -91,7 +86,7 @@ func SetAuthRoutes(router *gin.RouterGroup) {
  * @apiSuccess {String} authenticate.token Your JSON Token
  * @apiSuccessExample {json} Success
  *    {
- *        "authenticate": {     
+ *        "authenticate": {
  *               "statuscode": 200,
  *              "success": true,
  *           "message": "Login Successfully",
@@ -121,7 +116,7 @@ import (
 func InitRoutes(g *gin.RouterGroup)  {
     g.Use(appid.AppIDMiddleWare())
     SetHelloRoutes(g)
-    SetAuthRoutes(g) // SetAuthRoutes invoked 
+    SetAuthRoutes(g) // SetAuthRoutes invoked
     g.Use(token.TokenAuthMiddleWare())  //secure the API From this line to bottom with JSON Auth
     g.Use(appid.ValidateAppIDMiddleWare())
     SetTaskRoutes(g)
@@ -167,7 +162,7 @@ func init() {
 func main() {
     fmt.Println("Server Running on Port: ", 9090)
     http.ListenAndServe(":9090",router)
-}   
+}
 
 func noRouteHandler() gin.HandlerFunc{
     return  func(c *gin.Context) {
@@ -179,7 +174,7 @@ func noRouteHandler() gin.HandlerFunc{
     var method        string = c.Request.Method
 
     var tempEr models.ErrorModel
-    tempEr.ErrorCode     = 4041    
+    tempEr.ErrorCode     = 4041
     tempEr.Hints         = "Not Found !! \n Routes In Valid. You enter on invalid Page/Endpoint"
     tempEr.Info            = "visit http://localhost:9090/v1/docs to see the available routes"
     listError             = append(listError,tempEr)
@@ -191,8 +186,8 @@ func noRouteHandler() gin.HandlerFunc{
         listError,
         endpoint,
         method,
-    } 
-    var content gin.H = responseModel.NewResponse();   
+    }
+    var content gin.H = responseModel.NewResponse();
     c.JSON(statuscode,content)
     }
 }
@@ -203,7 +198,7 @@ ps: Every code in this example, come from different projects
 ----------
 
 
-see sample [projects on github][9] 
+see sample [projects on github][9]
 
 
   [1]: https://i.stack.imgur.com/bfJba.png
@@ -215,4 +210,3 @@ see sample [projects on github][9]
   [7]: https://i.stack.imgur.com/quAlO.png
   [8]: https://i.stack.imgur.com/rKTS9.png
   [9]: https://github.com/bxcodec/Simple-API-Go
-|======|

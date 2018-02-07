@@ -1,14 +1,15 @@
+---
 Title: Normal Handler Function
 Id: 28935
 Score: 0
-Body:
-    func loginHandler(w http.ResponseWriter, r *http.Request) {
-                // Steps to login
-    }
-    
+---
+```go
+func loginHandler(w http.ResponseWriter, r *http.Request) {
+            // Steps to login
+}
 
-    func main() {
-        http.HandleFunc("/login", loginHandler)
-        http.ListenAndServe(":8080", nil)
-    }
-|======|
+func main() {
+    http.HandleFunc("/login", loginHandler)
+    http.ListenAndServe(":8080", nil)
+}
+```

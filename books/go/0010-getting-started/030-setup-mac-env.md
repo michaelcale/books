@@ -10,7 +10,7 @@ Create go directory with `mkdir $HOME/go`.
 
 Add the following to `~/.bash_profile` file:
 
-```bash
+```sh
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
 ```
@@ -29,7 +29,7 @@ Adding `$GOPATH/bin` to `PATH` is a matter of convenience. When you install Go p
 
 I often write Go libraries, so I like to add the following shortcut to `~/.bash_profile`:
 
-```bash
+```sh
 alias cdgo="cd $GOPATH/src/github.com/kjk"
 ```
 

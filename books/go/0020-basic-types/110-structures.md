@@ -3,6 +3,17 @@ Title: Structures
 Search: struct
 Id: rd600098
 ---
-TODO: write me. Also make a full chapter just for string
+A structure groups multiple values into a single thing.
 
-[Zero value](a-6069) of `struct` is a struct whose fields have zero values.
+Struct basics:
+```go
+type MyStruct struct {
+    IntVal int
+    StringVal string
+    unexportedIntVal int
+}
+```
+
+[Zero value](a-6069) of `struct` is a struct whose fields are set to thier respective zero values.
+
+Learn more about [structs](ch-374).

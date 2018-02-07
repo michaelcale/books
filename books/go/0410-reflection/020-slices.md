@@ -1,9 +1,9 @@
+---
 Title: Slices
 Id: 6072
 Score: 0
-Body:
-<!-- language: lang-go -->
-<pre><code>
+---
+```go
 import "reflect"
 
 s := []int{1, 2, 3}
@@ -21,5 +21,4 @@ value.Index(1).Set(5)
 
 typ := reflect.SliceOf(reflect.TypeOf("example"))
 newS := reflect.MakeSlice(typ, 0, 10) // an empty []string{} with capacity 10
-</code></pre>
-|======|
+```

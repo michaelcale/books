@@ -28,7 +28,7 @@ import "C"
 
 > **IMPORTANT**: Do **not leave a newline between the `include` and the `import "C"`** statements or you will get this type of errors on build:
 
-```bash
+```sh
 # command-line-arguments
 could not determine kind of name for C.Hello
 could not determine kind of name for C.sum
@@ -192,7 +192,7 @@ Also, the return of the call will give us a C `int` and an error in case somethi
 
 Try running our go app by using `go run main.go`
 
-```bash
+```sh
 $ go run main.go
 Hello world!
 Sum of 5 + 4 is 9
@@ -200,7 +200,7 @@ Sum of 5 + 4 is 9
 
 # Generating a binary
 If you try a go build you could get multiple definition errors.
-```bash
+```sh
 $ go build
 # github.com/sayden/c-bindings
 /tmp/go-build329491076/github.com/sayden/c-bindings/_obj/hello.o: In function `Hello':
@@ -213,7 +213,7 @@ collect2: error: ld returned 1 exit status
 ```
 
 The trick is to refer to the main file directly when using `go build`:
-```bash
+```sh
 $ go build main.go
 $ ./main
 Hello world!

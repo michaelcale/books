@@ -1,8 +1,9 @@
+---
 Title: Listing all folders in the current directory
 Id: 9310
 Score: 1
-Body:
-```
+---
+```go
 package main
 
 import (
@@ -25,4 +26,3 @@ func main() {
     }
 }
 ```
-|======|

@@ -31,7 +31,7 @@ Read [setting up Mac environment](a-rd600058).
 
 ### Using Ubuntu provided pacakge
 
-```bash
+```sh
 $ sudo apt-get update
 $ sudo apt-get install go
 ```
@@ -44,7 +44,7 @@ For that reason we recommend installing binary packages.
 
 Those instructions work on pretty much every Linux distribution:
 
-```bash
+```sh
 $ sudo apt-get update
 $ sudo apt-get install -y build-essential git curl wget
 $ wget https://storage.googleapis.com/golang/go<versions>.gz
@@ -52,7 +52,7 @@ $ wget https://storage.googleapis.com/golang/go<versions>.gz
 
 You can find the version lists [here](https://golang.org/doc/install).
 
-```bash
+```sh
 # To install go1.9.3 use
 $ wget https://storage.googleapis.com/golang/go1.9.3.linux-amd64.tar.gz
 

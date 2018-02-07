@@ -1,10 +1,11 @@
+---
 Title: Querying
 Id: 4169
 Score: 0
-Body:
+---
 This example is showing how to query a database with `database/sql`, taking as example a MySql database.
 
-```
+```go
 package main
 
 import (
@@ -39,4 +40,3 @@ func main() {
     }
 }
 ```
-|======|

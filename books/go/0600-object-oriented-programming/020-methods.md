@@ -1,8 +1,9 @@
+---
 Title: Methods
 Id: 27427
 Score: 1
-Body:
-In Go a method is 
+---
+In Go a method is
 
 > a function that acts on a variable of a certain type, called the receiver
 
@@ -14,41 +15,42 @@ a method in Go has the following signature
 
 `func (name receiverType) methodName(paramterList) (returnList) {}`
 
-    package main
+```go
+package main
 
-    type Admin struct {
-        Username, Password string
+type Admin struct {
+    Username, Password string
+}
+
+func (admin Admin) Delete() {
+    fmt.Println("Admin Deleted")
+}
+
+type User struct {
+    ID uint64
+    FullName, Email string
+    Admin
+}
+
+func (user User) SendEmail(email string) {
+    fmt.Printf("Email sent to: %s\n", user.Email)
+}
+
+func main() {
+    admin := Admin{
+        "zola",
+        "supersecretpassword",
     }
 
-    func (admin Admin) Delete() {
-        fmt.Println("Admin Deleted")
+    user := User{
+        1,
+        "Zelalem Mekonen",
+        "zola.mk.27@gmail.com",
+        admin,
     }
 
-    type User struct {
-        ID uint64
-        FullName, Email string
-        Admin
-    }
+    user.SendEmail("Hello") // Email sent to: zola.mk.27@gmail.com
 
-    func (user User) SendEmail(email string) {
-        fmt.Printf("Email sent to: %s\n", user.Email)
-    } 
-
-    func main() {
-        admin := Admin{
-            "zola",
-            "supersecretpassword",
-        }
-    
-        user := User{
-            1,
-            "Zelalem Mekonen",
-            "zola.mk.27@gmail.com",
-            admin,
-        }
-
-        user.SendEmail("Hello") // Email sent to: zola.mk.27@gmail.com
-
-        admin.Delete() // Admin Deleted
-    }
-|======|
+    admin.Delete() // Admin Deleted
+}
+```

@@ -23,7 +23,7 @@ To compile the program run: `go build main.go`
 
 You can specify what system or architecture to build by modifying the `env` before `build`:
 
-```bash
+```sh
 env GOOS=linux go build main.go # builds for Linux
 env GOARCH=arm go build main.go # builds for ARM architecture
 ```

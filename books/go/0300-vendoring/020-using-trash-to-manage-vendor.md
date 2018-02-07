@@ -1,10 +1,11 @@
+---
 Title: Using trash to manage ./vendor
 Id: 26497
 Score: 2
-Body:
+---
 [`trash`](https://github.com/rancher/trash) is a minimalistic vendoring tool that you configure with `vendor.conf` file. This example is for `trash` itself:
 
-```
+```text
 # package
 github.com/rancher/trash
 
@@ -27,11 +28,10 @@ After the package name goes the version (commit, tag or branch) and optionally t
 
 To populate your ./vendor dir, you need to have `vendor.conf` file in the current dir and just run:
 
-```bash
+```sh
 $ trash
 ```
 
 Trash will clone the vendored libraries into `~/.trash-cache` (by default), checkout requested versions, copy the files into `./vendor` dir and **prune non-imported packages and test files**. This last step keeps your ./vendor lean and mean and helps save space in your project repo.
 
 Note: as of v0.2.5 trash is available for Linux and macOS, and only supports git to retrieve packages, as git's the most popular one, but we're working on adding all the others that `go get` supports.
-|======|

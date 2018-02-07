@@ -1,6 +1,8 @@
+---
 Title: Deferred Function Calls
 Id: 10474
 Score: 0
+---
 BodyHtml:
 <p>Deferred function calls serve a similar purpose to things like <code>finally</code> blocks in languages like Java: they ensure that some function will be executed when the outer function returns, regardless of if an error occurred or which return statement was hit in cases with multiple returns. This is useful for cleaning up resources that must be closed like network connections or file pointers. The <code>defer</code> keyword indicates a deferred function call, similarly to the <code>go</code> keyword initiating a new goroutine. Like a <code>go</code> call, function arguments are evaluated immediately, but unlike a <code>go</code> call, deferred functions are not executed concurrently.</p>
 <pre><code>func MyFunc() {
@@ -19,5 +21,3 @@ BodyHtml:
 }()
 </code></pre>
 
-
-|======|

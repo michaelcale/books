@@ -33,20 +33,20 @@ func main() {
 
 You can run the server using:
 
-```bash
+```sh
 $ go run server.go
 ```
 
 Or you can compile and run.
 
-```bash
+```sh
 $ go build server.go
 $ ./server
 ```
 
 The server will listen to the specified port (`:8080`). You can test it with any HTTP client. Here's an example with `cURL`:
 
-```bash
+```sh
 curl -i http://localhost:8080/
 HTTP/1.1 200 OK
 Date: Wed, 20 Jul 2016 18:04:46 GMT

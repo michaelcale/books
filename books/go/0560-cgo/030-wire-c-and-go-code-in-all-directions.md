@@ -1,15 +1,15 @@
+---
 Title: Wire C and Go code in all directions
 Id: 28985
 Score: 1
-Body:
+---
 **Calling C code from Go**
 
-
-```
+```go
 package main
 
 /*
-// Everything in comments above the import "C" is C code and will be compiles with the GCC. 
+// Everything in comments above the import "C" is C code and will be compiles with the GCC.
 // Make sure you have a GCC installed.
 
 int addInC(int a, int b) {
@@ -22,7 +22,7 @@ import "fmt"
 func main() {
        a := 3
        b := 5
-       
+
        c := C.addInC(C.int(a), C.int(b))
 
        fmt.Println("Add in C:", a, "+", b, "=", int(c))
@@ -31,7 +31,7 @@ func main() {
 
 **Calling Go code from C**
 
-```
+```go
 package main
 
 /*
@@ -47,7 +47,7 @@ import (
 func main() {
        a := 3
        b := 5
-       
+
        c := C.multiplyInGo(C.int(a), C.int(b))
 
        fmt.Println("multiplyInGo:", a, "*", b, "=", int(c))
@@ -61,7 +61,7 @@ func go_multiply(a C.int, b C.int) C.int {
 
 Dealing with Function pointers
 
-```
+```go
 package main
 
 /*
@@ -103,7 +103,8 @@ func go_multiply(a C.int, b C.int) C.int {
 **Convert Types, Access Structs and Pointer Arithmetic**
 
 From the official Go documentation:
-```
+
+```go
 // Go string to C string
 // The C string is allocated in the C heap using malloc.
 // It is the caller's responsibility to arrange for it to be
@@ -129,7 +130,8 @@ func C.GoBytes(unsafe.Pointer, C.int) []byte
 ```
 
 How to use it:
-```
+
+```go
 func go_handleData(data *C.uint8_t, length C.uint8_t) []byte {
        return C.GoBytes(unsafe.Pointer(data), C.int(length))
 }
@@ -149,4 +151,3 @@ func getPayload(packet *C.packet_t) []byte {
        return payload
 }
 ```
-|======|

@@ -31,7 +31,7 @@ func main() {
 
 You can replace the method `Original` with `Refactor` with `gofmt`:
 
-```bash
+```sh
 $ gofmt -r 'Original -> Refactor' -d main.go
 ```
 

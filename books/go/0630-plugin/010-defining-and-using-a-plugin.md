@@ -1,8 +1,10 @@
+---
 Title: Defining and using a plugin
 Id: 28409
 Score: 1
-Body:
-```
+---
+
+```go
 package main
 
 import "fmt"
@@ -20,7 +22,7 @@ go build -buildmode=plugin
 
 And then loaded and used from your application:
 
-```
+```go
 p, err := plugin.Open("plugin_name.so")
 if err != nil {
     panic(err)
@@ -41,4 +43,3 @@ f.(func())() // prints "Hello, number 7"
 ```
 
 Example from _[The State of Go 2017](https://talks.golang.org/2017/state-of-go.slide#1)_.
-|======|

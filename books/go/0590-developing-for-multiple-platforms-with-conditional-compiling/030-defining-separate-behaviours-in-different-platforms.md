@@ -1,12 +1,13 @@
+---
 Title: Defining separate behaviours in different platforms
 Id: 26889
 Score: 0
-Body:
+---
 Different platforms can have separate implementations of the same method. This example also illustrates how build tags and file suffixes can be used together.
 
 File `main.go`:
-<!-- language: lang -->
-```
+
+```go
 package main
 
 import "fmt"
@@ -18,8 +19,8 @@ func main() {
 ```
 
 `details.go`:
-<!-- language: lang -->
-```
+
+```go
 // +build !windows
 
 package main
@@ -32,8 +33,7 @@ func printDetails() {
 ```
 
 `details_windows.go`:
-<!-- language: lang -->
-```
+```go
 package main
 
 import "fmt"
@@ -42,5 +42,3 @@ func printDetails() {
     fmt.Println("Windows specific details")
 }
 ```
-
-|======|

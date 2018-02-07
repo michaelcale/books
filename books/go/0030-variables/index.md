@@ -8,13 +8,13 @@ It's a different order than C. On the plus side it's more consistent and complex
 
 Various ways of defining variables:
 ```go
-// declare a single top-level variable
+// declaration of a single top-level variable
 var topLevelInt int = 5
 
-// grouping multiple top-level declarations
+// grouping of multiple top-level declarations
 var (
     intVal int // value is initialized with zero-value
-    str string = "str" // assining
+    str string = "str" // assigning
 
     // functions are first-class values so can be assigned to variables
     // f is variable of type func(a int) string

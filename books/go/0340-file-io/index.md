@@ -1,6 +1,8 @@
+---
 Title: File I/O
 Id: 1033
-Syntax:
+---
+## Syntax
 - file, err := os.Open(*name*) // Opens a file in read-only mode. A non-nil error is returned if the file could not be opened.
 - file, err := os.Create(*name*) // Creates or opens a file if it already exists in write-only mode. The file is overwritten to if it already exists. A non-nil error is returned if the file could not be opened.
 - file, err := os.OpenFile(*name*, *flags*, *perm*) // Opens a file in the mode specified by the flags. A non-nil error is returned if the file could not be opened.
@@ -9,8 +11,8 @@ Syntax:
 - err := os.Remove(*name*) // Deletes a file. A non-nil error is returned if the file could not be deleted.
 - err := os.RemoveAll(*name*) // Deletes a file or whole directory hierarchy. A non-nil error is returned if the file or directory could not be deleted.
 - err := os.Rename(*oldName*, *newName*) // Renames or moves a file (can be across directories). A non-nil error is returned if the file could not be moved.
-|======|
-Parameters:
+
+## Parameters
 | Parameter | Details |
 | ------ | ------ |
 | name   | A filename or path of type string. For example: `"hello.txt"`.|
@@ -19,4 +21,4 @@ Parameters:
 | data   | A slice of bytes (`[]byte`) representing the raw data of a file.|
 | perm   | The UNIX permission bits used to open a file with of type `os.FileMode`. Several constants are available to help with the use of permission bits.|
 | flag   | File open flags that determine the methods that can be called on the file handler of type `int`. Several constants are available to help with the use of flags. They are: `os.O_RDONLY `, `os.O_WRONLY `, `os.O_RDWR `, `os.O_APPEND`, `os.O_CREATE`, `os.O_EXCL`, `os.O_SYNC`, and `os.O_TRUNC`.|
-|======|
+

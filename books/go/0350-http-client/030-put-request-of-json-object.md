@@ -1,10 +1,11 @@
+---
 Title: PUT request of JSON object
 Id: 27703
 Score: 1
-Body:
+---
 The following updates a User object via a PUT request and prints the status code of the request:
 
-```
+```go
 package main
 
 import (
@@ -49,4 +50,3 @@ func main() {
 
     fmt.Println(resp.StatusCode)
 }
-|======|

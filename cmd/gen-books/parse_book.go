@@ -493,13 +493,12 @@ func ensureUniqueIds(book *Book) {
 		urls = append(urls, c.FileNameBase)
 		for _, a := range c.Articles {
 			if a2, ok := articleIds[a.ID]; ok {
-				fmt.Printf("Duplicate article id: '%s', in:\n", a.ID)
-				fmt.Printf("Article '%s', file: '%s'\n", a.Title, a.sourceFilePath)
-				fmt.Printf("Article '%s', file: '%s'\n", a2.Title, a2.sourceFilePath)
-				os.Exit(1)
+				err := fmt.Errorf("Duplicate article id: '%s', in: %s and %s", a.ID, a.sourceFilePath, a2.sourceFilePath)
+				maybePanicIfErr(err)
+			} else {
+				articleIds[a.ID] = a
+				urls = append(urls, a.FileNameBase)
 			}
-			articleIds[a.ID] = a
-			urls = append(urls, a.FileNameBase)
 		}
 	}
 	book.knownUrls = urls

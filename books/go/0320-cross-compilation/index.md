@@ -1,15 +1,15 @@
+---
 Title: Cross Compilation
 Id: 1020
-Versions:
-[{"Name":"1.5.0","GroupName":null},{"Name":"1.6.0","GroupName":null},{"Name":"1.7.0","GroupName":null},{"Name":"1.8.0","GroupName":null}]
-|======|
-Introduction:
+---
+## Introduction
+
 The Go compiler can produce binaries for many platforms, i.e. processors and systems. Unlike with most other compilers, there is no specific requirement to cross-compiling, it is as easy to use as regular compiling.
-|======|
-Syntax:
+
+## Syntax
  - GOOS=linux GOARCH=amd64 go build
-|======|
-Remarks:
+
+## Remarks
 Supported Operating System and Architecture target combinations [(source)](https://golang.org/doc/install/source#environment)
 
 | $GOOS | $GOARCH |
@@ -42,4 +42,3 @@ Supported Operating System and Architecture target combinations [(source)](https
 | solaris    | amd64 |
 | windows    | 386 |
 | windows    | amd64 |
-|======|

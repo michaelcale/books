@@ -1,10 +1,11 @@
+---
 Title: Assigning signals to a channel
 Id: 15744
 Score: 1
-Body:
+---
 Often times you will have reason to catch when your program is being told to stop by the OS and take some actions to preserve the state, or clean up your application. To accomplish this you can use the `os/signal` package from the standard library. Below is a simple example of assigning all signals from the system to a channel, and then how to react to those signals.
 
-```
+```go
 package main
 
 import (
@@ -17,7 +18,7 @@ func main() {
     // create a channel for os.Signal
     sigChan := make(chan os.Signal)
 
-    // assign all signal notifications to the channel 
+    // assign all signal notifications to the channel
     signal.Notify(sigChan)
 
     // blocks until you get a signal from the OS
@@ -32,9 +33,8 @@ func main() {
 
 When you run the above script it will create a channel, and then block until that channel receives a signal.
 
-```
-$ go run signals.go 
+```sh
+$ go run signals.go
 ^CReceived signal from OS: interrupt
 ```
 The `^C` above is the keyboard command `CTRL+C` which sends the `SIGINT` signal.
-|======|
