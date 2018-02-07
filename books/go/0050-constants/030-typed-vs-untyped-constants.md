@@ -10,20 +10,25 @@ one might say that the type of the literal is `string`, however, this is not sem
 
 Similarly, if we assign the literal to a constant:
 
+```go
     const foo = "bar"
+```
 
 It remains untyped since, by default, constants are untyped. It is possible to declare it as a *typed string constant* as well:
 
+```go
     const typedFoo string = "bar"
+```
 
 The difference comes into play when we attempt to assign these constants in a context that does have type. For instance, consider the following:
 
-    var s string
-    s = foo      // This works just fine
-    s = typedFoo // As does this
+```go
+var s string
+s = foo      // This works just fine
+s = typedFoo // As does this
 
-    type MyString string
-    var mys MyString
-    mys = foo      // This works just fine
-    mys = typedFoo // cannot use typedFoo (type string) as type MyString in assignment
-
+type MyString string
+var mys MyString
+mys = foo      // This works just fine
+mys = typedFoo // cannot use typedFoo (type string) as type MyString in assignment
+```

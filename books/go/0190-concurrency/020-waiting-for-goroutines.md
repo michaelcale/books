@@ -1,31 +1,35 @@
+---
 Title: Waiting for goroutines
 Id: 2490
 Score: 11
-Body:
+---
+
 [Go programs end when the `main` function ends][1], therefore it is common practice to wait for all goroutines to finish. A common solution for this is to use a [sync.WaitGroup][2] object.
 
-    package main
+```go
+package main
 
-    import (
-        "fmt"
-        "sync"
-    )
+import (
+    "fmt"
+    "sync"
+)
 
-    var wg sync.WaitGroup // 1
+var wg sync.WaitGroup // 1
 
-    func routine(i int) {
-        defer wg.Done() // 3
-        fmt.Printf("routine %v finished\n", i)
+func routine(i int) {
+    defer wg.Done() // 3
+    fmt.Printf("routine %v finished\n", i)
+}
+
+func main() {
+    wg.Add(10) // 2
+    for i := 0; i < 10; i++ {
+        go routine(i) // *
     }
-
-    func main() {
-        wg.Add(10) // 2
-        for i := 0; i < 10; i++ {
-            go routine(i) // *
-        }
-        wg.Wait() // 4
-        fmt.Println("main finished")
-    }
+    wg.Wait() // 4
+    fmt.Println("main finished")
+}
+```
 
 [Run the example in the playground](https://play.golang.org/p/64vfZSXXHv)
 
@@ -43,4 +47,4 @@ WaitGroup usage in order of execution:
   [3]: http://golang.org/ref/mem#tmp_5
   [4]: http://golang.org/ref/spec#Defer_statements
   [5]: http://golang.org/ref/spec#Go_statements
-|======|
+

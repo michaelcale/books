@@ -1,11 +1,15 @@
+---
 Title: Create a HTTPS Server
 Id: 3248
 Score: 7
-Body:
-# Generate a certificate
+---
+
+## Generate a certificate
 In order to run a HTTPS server, a certificate is necessary. Generating a self-signed certificate with `openssl` is done by executing this command:
 
-    openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout key.pem -out cert.pem -subj "/CN=example.com" -days 3650`
+```bash
+openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout key.pem -out cert.pem -subj "/CN=example.com" -days 3650`
+```
 
 The parameters are:
 
@@ -21,21 +25,24 @@ The parameters are:
 
 Note: A self-signed certificate could be used e.g. for internal projects, debugging, testing, etc. Any browser out there will mention, that this certificate is not safe. In order to avoid this, the certificate must signed by a certification authority. Mostly, this is not available for free. One exception is the "Let's Encrypt" movement: https://letsencrypt.org
 
-# The necessary Go code
+## The necessary Go code
+
 You can handle configure TLS for the server with the following code. `cert.pem` and `key.pem` are your SSL certificate and key, which where generated with the above command.
 
-    package main
-    
-    import (
-        "log"
-        "net/http"
-    )
-    
-    func main() {
-        http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-            w.Write([]byte("Hello, world!"))
-        })
-    
-        log.Fatal(http.ListenAndServeTLS(":443","cert.pem","key.pem", nil))
-    }
-|======|
+```go
+package main
+
+import (
+    "log"
+    "net/http"
+)
+
+func main() {
+    http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+        w.Write([]byte("Hello, world!"))
+    })
+
+    log.Fatal(http.ListenAndServeTLS(":443","cert.pem","key.pem", nil))
+}
+```
+

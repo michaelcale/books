@@ -1,5 +1,5 @@
 ---
-Title: Removing elements / "Slicing" slices
+Title: Removing elements from slice
 Id: 3420
 Score: 1
 ---

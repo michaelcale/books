@@ -1,7 +1,7 @@
+---
 Title: Panic and Recover
 Id: 4350
-Remarks:
-This article assumes knowledge of http://stackoverflow.com/documentation/go/2795/defer/9429/defer-basics#t=201607290732570770784
+---
+This article assumes knowledge of [defer basics](a-9429).
 
-For ordinary error handling, read the [topic on error handling]( http://stackoverflow.com/documentation/go/785/error-handling#t=201607280938169342432)
-|======|
+For ordinary error handling, read chapter on [error handling](ch-785).

@@ -16,9 +16,11 @@ Strings can be concatenated using the `+` operator.
 
 Strings can also be defined using backticks ` `` `. This creates a raw string literal which means characters won't be escaped.
 
-    text1 := "Hello\nWorld"
-    text2 := `Hello
-    World`
+```go
+text1 := "Hello\nWorld"
+text2 := `Hello
+World`
+```
 
 In the previous example, `text1` escapes the `\n` character which represents a new line while `text2` contains the new line character directly. If you compare `text1 == text2` the result will be `true`.
 

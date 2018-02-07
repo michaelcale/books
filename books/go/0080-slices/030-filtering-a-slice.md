@@ -5,6 +5,7 @@ Score: 1
 ---
 To filter a slice without allocating a new underlying array:
 
+```go
     // Our base slice
     slice := []int{ 1, 2, 3, 4 }
     // Create a zero-length slice with the same underlying array
@@ -19,3 +20,4 @@ To filter a slice without allocating a new underlying array:
 
     // (Optional) Reassign the slice
     slice = tmp // [2, 4]
+```

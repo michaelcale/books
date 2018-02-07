@@ -13,7 +13,7 @@ To declare and initialize a slice variable in one line use the `[]Type{values}` 
 
     var a []int = []int{3, 1, 4, 1, 5, 9}
 
-Another way to initialize a slice is with the `make` function. It three arguments: the `Type` of the slice (or [map][1]), the `length`, and the `capacity`.
+Another way to initialize a slice is with the `make` function. It three arguments: the `Type` of the slice (or [map][ch-732]), the `length`, and the `capacity`.
 
     a := make([]int, 0, 5)
 
@@ -39,7 +39,4 @@ You can also use a `for` loop over slices with `range`. The first variable is th
         fmt.Println("Index: " + index + " Value: " + value)  // Prints "Index: 0 Value: 5" (and continues until end of slice)
     }
 
-[Go Playground][2]
-
-  [1]: http://stackoverflow.com/documentation/go/732/maps#t=201701150248144194028
-  [2]: https://play.golang.org/p/l9M34jbOla
+[Go Playground](https://play.golang.org/p/l9M34jbOla)

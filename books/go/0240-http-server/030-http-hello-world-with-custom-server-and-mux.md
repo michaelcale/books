@@ -1,33 +1,35 @@
+---
 Title: HTTP Hello World with custom server and mux
 Id: 2570
 Score: 4
-Body:
+---
+```go
     package main
-    
-    import (
-        "log"
-        "net/http"
-    )
-    
-    func main() {
 
-        // Create a mux for routing incoming requests
-        m := http.NewServeMux()
+import (
+    "log"
+    "net/http"
+)
 
-        // All URLs will be handled by this function
-        m.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-            w.Write([]byte("Hello, world!"))
-        })
+func main() {
 
-        // Create a server listening on port 8000
-        s := &http.Server{
-            Addr:    ":8000",
-            Handler: m,
-        }
+    // Create a mux for routing incoming requests
+    m := http.NewServeMux()
 
-        // Continue to process new requests until an error occurs
-        log.Fatal(s.ListenAndServe())
+    // All URLs will be handled by this function
+    m.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+        w.Write([]byte("Hello, world!"))
+    })
+
+    // Create a server listening on port 8000
+    s := &http.Server{
+        Addr:    ":8000",
+        Handler: m,
     }
 
-Press <kbd>Ctrl</kbd>+<kbd>C</kbd> to stop the process.
-|======|
+    // Continue to process new requests until an error occurs
+    log.Fatal(s.ListenAndServe())
+}
+```
+
+Press `Ctrl+C` to stop the process.

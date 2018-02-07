@@ -1,8 +1,10 @@
+---
 Title: Pointer v. Value Methods
 Id: 6049
 Score: 1
-Body:
-# Pointer Methods
+---
+
+## Pointer Methods
 
 Pointer methods can be called even if the variable is itself not a pointer.
 
@@ -12,7 +14,7 @@ According to the [Go Spec](https://golang.org/ref/spec#Method_values),
 
 You can see this in this example:
 
-```
+```go
 package main
 
 import "fmt"
@@ -33,7 +35,7 @@ func main() {
     fmt.Printf("f.Bar is %d\n", f.Bar)
     f.Increment()
     fmt.Printf("f.Bar is %d\n", f.Bar)
-    
+
     // As you can see, calling `(&f).Increment` directly does the same thing.
     f = Foo{}
     fmt.Printf("f.Bar is %d\n", f.Bar)
@@ -53,7 +55,7 @@ According to the [Go Spec](https://golang.org/ref/spec#Method_values),
 
 You can see this in this example:
 
-```
+```go
 package main
 
 import "fmt"
@@ -75,7 +77,7 @@ func main() {
     fmt.Printf("(*p).Bar is %d\n", (*p).Bar)
     p.Increment()
     fmt.Printf("(*p).Bar is %d\n", (*p).Bar)
-    
+
     // As you can see, calling `(*p).Increment` directly does the same thing.
     p = &Foo{}
     fmt.Printf("(*p).Bar is %d\n", (*p).Bar)
@@ -94,4 +96,3 @@ To learn more about pointer and value methods, visit the [Go Spec section on Met
 _Note 1: The parenthesis (`()`) around `*p` and `&f` before selectors like `.Bar` are there for grouping purposes, and must be kept._
 
 _Note 2: Although pointers can be converted to values (and vice-versa) when they are the receivers for a method, they are_ not _automattically converted to eachother when they are arguments inside of a function._
-|======|

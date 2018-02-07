@@ -1,15 +1,17 @@
+---
 Title: Type Switch Statements
 Id: 4625
 Score: 2
-Body:
+---
 A simple type switch:
-```
+
+```go
 // assuming x is an expression of type interface{}
 switch t := x.(type) {
 case nil:
     // x is nil
     // t will be type interface{}
-case int: 
+case int:
     // underlying type of x is int
     // t will be int in this case as well
 case string:
@@ -27,7 +29,8 @@ default:
 ----------
 
 You can test for any type, including `error`, user-defined types, interface types, and function types:
-```
+
+```go
 switch t := x.(type) {
 case error:
     log.Fatal(t)
@@ -41,4 +44,4 @@ case func(string) bool:
     }
 }
 ```
-|======|
+

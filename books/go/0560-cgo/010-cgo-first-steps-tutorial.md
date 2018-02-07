@@ -1,9 +1,8 @@
-Title:
-Cgo: First steps tutorial
-|======|
+---
+Title: Cgo: First steps tutorial
 Id: 21315
 Score: 1
-Body:
+---
 Some examples to understand the workflow of using Go C Bindings
 
 ## What
@@ -224,4 +223,3 @@ Sum of 5 + 4 is 9
 > Remember that you can provide a name to the binary file by using `-o` flag `go build -o my_c_binding main.go`
 
 I hope you enjoyed this tutorial.
-|======|

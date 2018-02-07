@@ -1,78 +1,79 @@
+---
 Title: Literal functions & closures
 Id: 1265
 Score: 7
-Body:
+---
 A simple literal function, printing `Hello!` to stdout:
 
-    package main
+```go
+package main
 
-    import "fmt"
+import "fmt"
 
-    func main() {
-        func(){
-            fmt.Println("Hello!")
-        }()
-    }
+func main() {
+    func(){
+        fmt.Println("Hello!")
+    }()
+}
+```
 
 [play it on playground](https://play.golang.org/p/upOAwpOaue)
 
-
 ----------
-
 
 A literal function, printing the `str` argument to stdout:
 
-    package main
-    
-    import "fmt"
-    
-    func main() {
-        func(str string) {
-            fmt.Println(str)
-        }("Hello!")
-    }
+```go
+package main
+
+import "fmt"
+
+func main() {
+    func(str string) {
+        fmt.Println(str)
+    }("Hello!")
+}
+```
 
 [play it on playground](https://play.golang.org/p/jz-5wpEkY2)
 
-
 ----------
-
 
 A literal function, closing over the variable `str`:
 
-    package main
+```go
+package main
 
-    import "fmt"
+import "fmt"
 
-    func main() {
-        str := "Hello!"
-        func() {
-            fmt.Println(str)
-        }()
-    }
+func main() {
+    str := "Hello!"
+    func() {
+        fmt.Println(str)
+    }()
+}
+```
 
 [play it on playground](https://play.golang.org/p/j6ZgyAna7l)
 
-
 ----------
-
 
 It is possible to assign a literal function to a variable:
 
-    package main
-    
-    import (
-        "fmt"
-    )
-    
-    func main() {
-        str := "Hello!"
-        anon := func() {
-            fmt.Println(str)
-        }
-        anon()
-    }
+```go
+package main
 
+import (
+    "fmt"
+)
+
+func main() {
+    str := "Hello!"
+    anon := func() {
+        fmt.Println(str)
+    }
+    anon()
+}
+```
 
 [play it on playground](https://play.golang.org/p/Ick7RmdTFb)
-|======|

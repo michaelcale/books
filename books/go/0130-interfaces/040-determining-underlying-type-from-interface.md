@@ -1,6 +1,8 @@
+---
 Title: Determining underlying type from interface
 Id: 6081
 Score: 2
+---
 Body:
 In go it can sometimes be useful to know which underlying type you have been passed. This can be done with a type switch. This assumes we have two structs:
 ```go
@@ -23,7 +25,6 @@ type Painter interface {
 Then we can use this switch to determine the underlying type:
 
 ```go
-
 func WhichPainter(painter Painter) {
     switch painter.(type) {
     case Rembrandt:
@@ -35,4 +36,3 @@ func WhichPainter(painter Painter) {
     }
 }
 ```
-|======|

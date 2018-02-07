@@ -7,25 +7,23 @@ This is an enumeration for const creation. Go compiler starts iota from 0 and in
 
 Program to use iota in const
 
-    package main
+```go
+package main
 
-    import "fmt"
+import "fmt"
 
-    const (
-        Low = 5 * iota
-        Medium
-        High
-    )
+const (
+    Low = 5 * iota
+    Medium
+    High
+)
 
-    func main() {
-        // Use our iota constants.
-        fmt.Println(Low)
-        fmt.Println(Medium)
-        fmt.Println(High)
-    }
+func main() {
+    // Use our iota constants.
+    fmt.Println(Low)
+    fmt.Println(Medium)
+    fmt.Println(High)
+}
+```
 
-Try it in [Go Playground][1]
-
-
-  [1]: https://play.golang.org/p/jyJEzyZSi6
-
+Try it in [Go Playground](https://play.golang.org/p/jyJEzyZSi6)

@@ -1,10 +1,11 @@
+---
 Title: Basic decoding / unmarshalling of nested elements with data
 Id: 6046
 Score: 1
-Body:
+---
 XML elements often nest, have data in attributes and/or as character data. The way to capture this data is by using `,attr` and `,chardata` respectively for those cases.
 
-```
+```go
 var doc = `
 <parent>
   <child1 attr1="attribute one"/>
@@ -33,8 +34,7 @@ func main() {
     }
 
     fmt.Println(obj.Child2.Cdata1)
-
 }
 ```
+
 [`Playground`](https://play.golang.org/p/yQrZPNTaWo)
-|======|

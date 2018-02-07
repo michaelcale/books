@@ -1,10 +1,11 @@
+---
 Title: Waiting for work to finish
 Id: 27738
 Score: 0
-Body:
+---
 A common technique for using channels is to create some number of workers (or consumers) to read from the channel. Using a sync.WaitGroup is an easy way to wait for those workers to finish running.
 
-```
+```go
 package main
 
 import (
@@ -54,4 +55,3 @@ func doWork(work int) {
     fmt.Println("slept for", work, "milliseconds")
 }
 ```
-|======|

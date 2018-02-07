@@ -1,10 +1,11 @@
+---
 Title: Using select with timeouts
 Id: 12207
 Score: 2
-Body:
+---
 So here, I have removed the `for` loops, and made a **timeout** by adding a second `case` to the `select` that returns after 3 seconds. Because the `select` just waits until ANY case is true, the second `case` fires, and then our script ends, and `chatter()` never even gets a chance to finish.
 
-```
+```go
 // Use of the select statement with channels, for timeouts, etc.
 package main
 
@@ -43,4 +44,4 @@ func main() {
     }
 }
 ```
-|======|
+
