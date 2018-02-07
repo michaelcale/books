@@ -49,4 +49,4 @@ func main() {
 }
 ```
 
-[Run a slightly modified version of this code in Go Playground](https://play.golang.org/p/LXcPiIPrgf)
+[Playground](https://play.golang.org/p/LXcPiIPrgf)

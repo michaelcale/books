@@ -50,4 +50,4 @@ func bufferedUnbufferedExample(buffered bool) {
 }
 ```
 
-[go playground](https://play.golang.org/p/PUR0kDdxli)
+[Playground](https://play.golang.org/p/PUR0kDdxli)

@@ -23,7 +23,7 @@ func main() {
 }
 ```
 
-[play it on playground](https://play.golang.org/p/rnzg1yK_Va)
+[Playground](https://play.golang.org/p/rnzg1yK_Va)
 
 You can also give a slice to a variadic function, with `...`:
 
@@ -35,4 +35,4 @@ func main() {
 }
 ```
 
-[Play it on playground](https://play.golang.org/p/gl4L5R9v8_)
+[Playground](https://play.golang.org/p/gl4L5R9v8_)

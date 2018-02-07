@@ -48,5 +48,5 @@ func main() {
 }
 ```
 
-[Go Playground](https://play.golang.org/p/I5e3yOaRcI)
+[Playground](https://play.golang.org/p/I5e3yOaRcI)
 

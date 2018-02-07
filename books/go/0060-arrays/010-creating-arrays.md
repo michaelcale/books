@@ -48,5 +48,4 @@ fmt.Println("structs:", structs) // > [{0 } {0 } {0 } {0 } {0 } {0 } {0 } {0 }]
 // prints {0 } because Number are 0 and Text are empty; separated by a space
 ```
 
-[play it on playground](https://play.golang.org/p/7oPdlN8xt8)
-
+[Playground](https://play.golang.org/p/7oPdlN8xt8)

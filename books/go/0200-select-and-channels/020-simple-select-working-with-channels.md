@@ -62,4 +62,4 @@ func main() {
 }
 ```
 
-[Try it on the Go Playground!](https://play.golang.org/p/jMeu32yIUJ)
+[Playground](https://play.golang.org/p/jMeu32yIUJ)

@@ -32,4 +32,4 @@ func main() {
 }
 ```
 
-[Open in Playground](https://play.golang.org/p/bhtAQWt5ci)
+[Playground](https://play.golang.org/p/bhtAQWt5ci)

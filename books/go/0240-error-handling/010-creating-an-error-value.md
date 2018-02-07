@@ -49,4 +49,4 @@ func DoSomething(someID int) error {
 }
 ```
 
-[Open in Playground](https://play.golang.org/p/4xlwXJo2m0)
+[Playground](https://play.golang.org/p/4xlwXJo2m0)

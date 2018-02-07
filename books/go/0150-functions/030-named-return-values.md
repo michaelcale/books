@@ -12,7 +12,7 @@ func Inverse(v float32) (reciprocal float32) {
     return
 }
 ```
-[play it on playground](https://play.golang.org/p/dS_bGmP6W0)
+[Playground](https://play.golang.org/p/dS_bGmP6W0)
 
 ```go
 // function can return multiple values
@@ -22,7 +22,7 @@ func split(sum int) (x, y int) {
     return
 }
 ```
-[play it on playground](https://play.golang.org/p/upOAwpOaue)
+[Playground](https://play.golang.org/p/upOAwpOaue)
 
 Two important things must be noted:
 

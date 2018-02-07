@@ -37,4 +37,4 @@ func main() {
 }
 ```
 
-[`Playground`](https://play.golang.org/p/yQrZPNTaWo)
+[Playground](https://play.golang.org/p/yQrZPNTaWo)

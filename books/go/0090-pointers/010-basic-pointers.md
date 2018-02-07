@@ -53,4 +53,4 @@ func main() {
 }
 ```
 
-[Try this code](https://play.golang.org/p/KdE4TBbUL2)
+[Playground](https://play.golang.org/p/KdE4TBbUL2)

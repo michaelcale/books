@@ -15,11 +15,11 @@ Or like this named empty struct type:
 type T struct{}
 ```
 
-The interesting thing about the empty struct is that, its size is zero (try [The Go Playground](https://play.golang.org/p/ICQkZn01ng)):
+The interesting thing about the empty struct is that, its size is zero (try [Playground](https://play.golang.org/p/ICQkZn01ng)):
 
     fmt.Println(unsafe.Sizeof(s))
 
-This prints `0`, so the empty struct itself takes no memory. so it is good option for quit channel, like (try [The Go Playground](https://play.golang.org/p/j3qowmGdmC)):
+This prints `0`, so the empty struct itself takes no memory. so it is good option for quit channel, like (try [Playground](https://play.golang.org/p/j3qowmGdmC)):
 
 ```go
 package main

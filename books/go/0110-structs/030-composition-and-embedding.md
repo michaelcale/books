@@ -30,7 +30,7 @@ func main() {
 }
 ```
 
-[play it on playground](https://play.golang.org/p/MfBhvhNMa-)
+[Playground](https://play.golang.org/p/MfBhvhNMa-)
 
 ## Embedding
 
@@ -74,4 +74,4 @@ Look that the `AuthenticatedRequest` that has a `ResourceFormatter` embedded str
 
 **But** the downside of it is that you cannot access objects outside of your composition. So `ResourceFormatter` cannot access members from `AuthenticatedRequest`.
 
-[Play it on playground](https://play.golang.org/p/Ngl3D8UW5I)
+[Playground](https://play.golang.org/p/Ngl3D8UW5I)

@@ -21,7 +21,7 @@ func main() {
 }
 ```
 
-[play it on playground](https://play.golang.org/p/18NqQo3PA6)
+[Playground](https://play.golang.org/p/18NqQo3PA6)
 
 Will output:
 

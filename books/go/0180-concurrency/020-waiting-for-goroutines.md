@@ -31,7 +31,7 @@ func main() {
 }
 ```
 
-[Run the example in the playground](https://play.golang.org/p/64vfZSXXHv)
+[Playground](https://play.golang.org/p/64vfZSXXHv)
 
 WaitGroup usage in order of execution:
 

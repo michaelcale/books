@@ -17,7 +17,7 @@ func main() {
 }
 ```
 
-[play it on playground](https://play.golang.org/p/upOAwpOaue)
+[Playground](https://play.golang.org/p/upOAwpOaue)
 
 ----------
 
@@ -35,7 +35,7 @@ func main() {
 }
 ```
 
-[play it on playground](https://play.golang.org/p/jz-5wpEkY2)
+[Playground](https://play.golang.org/p/jz-5wpEkY2)
 
 ----------
 
@@ -54,7 +54,7 @@ func main() {
 }
 ```
 
-[play it on playground](https://play.golang.org/p/j6ZgyAna7l)
+[Playground](https://play.golang.org/p/j6ZgyAna7l)
 
 ----------
 
@@ -76,4 +76,4 @@ func main() {
 }
 ```
 
-[play it on playground](https://play.golang.org/p/Ick7RmdTFb)
+[Playground](https://play.golang.org/p/Ick7RmdTFb)

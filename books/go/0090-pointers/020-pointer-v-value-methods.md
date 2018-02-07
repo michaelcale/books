@@ -43,7 +43,7 @@ func main() {
     fmt.Printf("f.Bar is %d\n", f.Bar)
 }
 ```
-**[Play it](https://play.golang.org/p/jlQLrSnH-E)**
+[Playground](https://play.golang.org/p/jlQLrSnH-E)
 
 # Value Methods
 
@@ -85,7 +85,7 @@ func main() {
     fmt.Printf("(*p).Bar is %d\n", (*p).Bar)
 }
 ```
-**[Play it](https://play.golang.org/p/Efc0IVgzh8)**
+[Playground](https://play.golang.org/p/Efc0IVgzh8)
 
 ----------
 

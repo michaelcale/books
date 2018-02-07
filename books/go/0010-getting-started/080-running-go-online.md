@@ -4,7 +4,7 @@ Id: 27470
 ---
 ## The Go Playground
 
-To test small snippets of Go code, you can use [The Go Playground](https://play.golang.org).
+To test small snippets of Go code, you can use [Playground](https://play.golang.org).
 
 Playground has some limitations:
 * it only supports standard library. You can't use third party libraries
