@@ -5,6 +5,8 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"sync"
+	"time"
 
 	"github.com/fsnotify/fsnotify"
 	"github.com/kjk/u"
@@ -57,41 +59,69 @@ func copyToWwwMaybeMust(path string) {
 	fmt.Printf("Copied %s => %s\n", path, dst)
 }
 
+var (
+	muRegen       sync.Mutex
+	nextRegenSeq  int32
+	booksToRegen  []string
+	regenAllBooks bool
+)
+
 func handleFileChange(path string) {
 	fmt.Printf("handleFileChange: %s\n", path)
 
+	// those happen fast so we can just do them
 	if strings.HasSuffix(path, "main.css") {
+		clearErrors()
 		copyToWwwMaybeMust(filepath.Join("tmpl", "main.css"))
+		printAndClearErrors()
 		return
 	}
 
 	if strings.HasSuffix(path, "app.js") {
+		clearErrors()
 		copyToWwwMaybeMust(filepath.Join("tmpl", "app.js"))
+		printAndClearErrors()
 		return
 	}
 
+	muRegen.Lock()
+	defer muRegen.Unlock()
+
+	nextRegenSeq++
 	if strings.HasSuffix(path, ".tmpl.html") {
-		fmt.Printf("Template changed, rebuilding all books\n")
+		regenAllBooks = true
+	} else if strings.HasSuffix(path, ".md") {
+		// TODO: figure out which book is it and add to booksToRegen
+	} else {
+		// most likely a directory moved
+		// TODO: figure out which book is it and add to booksToRegen
+	}
+
+	// wait a second before regenerating books. this allows to collapse
+	// multiple rapid changes into a single op
+	go func(seq int32) {
+		time.Sleep(time.Second)
+		muRegen.Lock()
+		if seq != nextRegenSeq {
+			// another file change arrived in the meantime, so we'll allow
+			// next goroutine to re-generate changes
+			muRegen.Unlock()
+			return
+		}
+
+		//localRegenAllBooks := regenAllBooks
+		regenAllBooks = false
+		//localBooksToRegen := booksToRegen
+		booksToRegen = nil
+		muRegen.Unlock()
+
+		clearErrors()
+		// TODO: use localRegenAllBooks and localBooksToRegen
 		unloadTemplates() // for reloading of templates from disk
 		//genIndex()
 		genAllBooks()
-		return
-	}
-
-	if strings.HasSuffix(path, ".md") {
-		fmt.Printf("Rebuilding all books\n")
-		// TODO: only rebuild the article or just the book
-		// TODO: this doesn't pick up new files
-		genAllBooks()
-		return
-	}
-
-	// if this is rename of a directory, the name is the old name, so the directory
-	// no longer exists
-	// assume this is a renamed chapter directory
-	// TODO: only rebuild the book that changed
-	fmt.Printf("Rebuilding all books\n")
-	genAllBooks()
+		defer printAndClearErrors()
+	}(nextRegenSeq)
 }
 
 func rebuildOnChanges() {
@@ -126,9 +156,7 @@ func rebuildOnChanges() {
 				if event.Op&fsnotify.Write == fsnotify.Write {
 					fmt.Println("modified file:", event.Name)
 				}
-				clearErrors()
 				handleFileChange(event.Name)
-				printAndClearErrors()
 			case err := <-watcher.Errors:
 				fmt.Println("error:", err)
 			}
