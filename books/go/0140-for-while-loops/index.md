@@ -1,5 +1,5 @@
 ---
-Title: Loops
+Title: for, while loops
 Id: 975
 ---
 ## Introduction
