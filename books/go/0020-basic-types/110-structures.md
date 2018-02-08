@@ -3,7 +3,7 @@ Title: Structures
 Search: struct
 Id: rd600098
 ---
-A structure groups multiple values into a single thing.
+A structure groups multiple values into a single entity.
 
 Struct basics:
 ```go
