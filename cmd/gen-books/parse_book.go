@@ -355,14 +355,49 @@ func buildArticleSiblings(articles []*Article) {
 	}
 }
 
+// Parses @file ${fileName} directives and replaces them
+// with the content of the file
+func processFileIncludes(path string) ([]string, error) {
+	lines, err := common.ReadFileAsLines(path)
+	if err != nil {
+		return nil, err
+	}
+	var res []string
+	for _, line := range lines {
+		if strings.HasPrefix(line, "@file ") {
+			fmt.Printf("processFileIncludes('%s'\n", path)
+			lines2, err := extractCodeSnippetsAsMarkdownLines(filepath.Dir(path), line)
+			if err != nil {
+				fmt.Printf("processFileIncludes: error '%s'\n", err)
+				return nil, err
+			}
+			res = append(res, lines2...)
+		} else {
+			res = append(res, line)
+		}
+	}
+	return res, nil
+}
+
+func paarseKVFileWithIncludes(path string) (kvstore.Doc, error) {
+	lines, err := processFileIncludes(path)
+	if err == nil {
+		return kvstore.ParseKVLines(lines)
+	}
+	// if processFileIncludes fails we retry without file includes
+	return kvstore.ParseKVFile(path)
+}
+
 func parseChapter(chapter *Chapter) error {
 	dir := filepath.Join(chapter.Book.sourceDir, chapter.ChapterDir)
 	path := filepath.Join(dir, "index.md")
-	doc, err := kvstore.ParseKVFile(path)
-	if err != nil {
-		return err
-	}
 	chapter.indexFilePath = path
+	doc, err := paarseKVFileWithIncludes(path)
+	if err != nil {
+		fmt.Printf("Error parsing KV file: '%s'\n", path)
+	}
+	maybePanicIfErr(err)
+
 	chapter.indexDoc = doc
 	chapter.Title, err = doc.GetValue("Title")
 	if err != nil {

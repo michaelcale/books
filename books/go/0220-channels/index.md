@@ -2,8 +2,8 @@
 Title: Channels
 Id: 1263
 ---
-
 ## Introduction
+
 A channel contains values of a given type. Values can be written to a channel and read from it, and they circulate inside the channel in first-in-first-out order. There is a distinction between buffered channels, which can contain several messages, and unbuffered channels, which cannot. Channels are typically used to communicate between goroutines, but are also useful in other circumstances.
 
 ## Syntax

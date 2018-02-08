@@ -146,11 +146,19 @@ func ParseKVFile(path string) (Doc, error) {
 	if len(lines) == 0 {
 		return nil, fmt.Errorf("%s is an empty document", path)
 	}
+	return ParseKVLines(lines)
+}
+
+// ParseKVLines parses KV format from lines
+func ParseKVLines(lines []string) (Doc, error) {
 	if isYamlSeparator(lines[0]) {
 		return parseKVFileWithYamlMeta(lines)
 	}
-	var res []KeyValue
-	var kv KeyValue
+	var (
+		res []KeyValue
+		kv  KeyValue
+		err error
+	)
 	for {
 		lines, kv, err = parseNextKV(lines)
 		if err == io.EOF {
