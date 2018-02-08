@@ -7,7 +7,7 @@ Score: 1
 
 ## Find position of string in another string
 
-[`strings.Index`](https://golang.org/pkg/strings/#Index)
+Using [`strings.Index`](https://golang.org/pkg/strings/#Index):
 
 ```go
 s := "where hello is?"
@@ -22,9 +22,7 @@ fmt.Printf("Index of non-existent substring is: %d\n", idx)
 
 ## Find position of string in another string from end
 
-Above we searched from the beginning of the string. We can also search from end.
-
-[`strings.LastIndex`](https://golang.org/pkg/strings/#LastIndex)
+Above we searched from the beginning of the string. We can also search from end using [`strings.LastIndex`](https://golang.org/pkg/strings/#LastIndex):
 
 ```go
 s := "hello and second hello"
@@ -33,7 +31,7 @@ idx := strings.LastIndex(s, toFind)
 fmt.Printf("when searching from end, '%s' is in s at position %d\n", toFind, idx)
 ```
 
-## Find all occurences of substring
+## Find all occurences of a substring
 
 Above we only found first occurence of substring. Here's how to find all of them:
 ```go
@@ -55,7 +53,7 @@ for {
 
 ## Check if a string contains another string
 
-[`strings.Contains`](https://golang.org/pkg/strings/#Contains)
+Using [`strings.Contains`](https://golang.org/pkg/strings/#Contains):
 
 ```go
 s := "is hello there?"
@@ -69,7 +67,7 @@ if strings.Contains(s, toFind) {
 
 ## Check if a strings starts with another strings
 
-[`strings.HasPrefix`](https://golang.org/pkg/strings/#HasPrefix)
+Using [`strings.HasPrefix`](https://golang.org/pkg/strings/#HasPrefix):
 
 ```go
 s := "this is string"
@@ -79,10 +77,11 @@ if strings.HasPrefix(s, toFind) {
 } else {
       fmt.Printf("'%s' doesn't start with '%s'\n", s, toFind)
 }
+```
 
 ## Check if a strings ends with another strings
 
-[`strings.HasSuffix`](https://golang.org/pkg/strings/#HasSuffix)
+Using [`strings.HasSuffix`](https://golang.org/pkg/strings/#HasSuffix):
 
 ```go
 s := "this is string"

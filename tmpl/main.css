@@ -312,31 +312,31 @@ hr.toc-sep {
 }
 
 /* TODO: possibly tweak those breakpoints e.g. add a column every 240px? */
-@media (max-width: 1200px) {
+@media (max-width: 1600px) {
     .chapters-toc {
         columns: 5;
     }
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1280px) {
     .chapters-toc {
         columns: 4;
     }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 960px) {
     .chapters-toc {
         columns: 3;
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
     .chapters-toc {
         columns: 2;
     }
 }
 
-@media (max-width: 240px) {
+@media (max-width: 320px) {
     .chapters-toc {
         columns: 1;
     }

@@ -19,15 +19,33 @@ func ReadFileAsLines(path string) ([]string, error) {
 }
 ```
 
-## Read file as lines using a scanner
+## Iterate over lines in a file
 
-TODO: write version that uses a scanner
+It's more efficient to only process one line at a time, as opposed to reading the whole file into memory.
 
-## Normalize newlines
+We can do that using [`bufio.Scanner`](https://golang.org/pkg/bufio/#Scanner):
 
-TODO: write example that normalizes newlines
+```go
+func IterLinesInFile(filePath string) error {
+    file, err := os.Open(filePath)
+    if err != nil {
+        return err
+    }
+    defer file.Close()
+    scanner := bufio.NewScanner(file)
+    // Scan() reads next line and returns false when reached end or error
+    for scanner.Scan() {
+        line := scanner.Text()
+        // process the line
+    }
+    // check if Scan() finished because of error or because it reached end of file
+    return scanner.Err()
+}
+```
 
-## A detour about newlines
+<!-- version that uses a callback -->
+
+## A note about newlines
 
 There are 3 common ways to represent a newline.
 
@@ -44,3 +62,15 @@ You can assume that your code will only see e.g. Unix style line ending and only
 A simple way to handle multiple newline representations is to normalize newlines and then operate on normalized version.
 
 Finally you can write code that handles all newline endings. Inevitably, such code is a bit more complicated.
+
+## Normalize newlines
+
+```go
+func NormalizeNewlines(d []byte) []byte {
+	// replace CR LF (windows) with LF (unix)
+	d = bytes.Replace(d, []byte{13, 10}, []byte{10}, -1)
+	// replace CF (mac) with LF (unix)
+	d = bytes.Replace(d, []byte{13}, []byte{10}, -1)
+	return d
+}
+```

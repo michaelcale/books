@@ -2,17 +2,30 @@
 Title: Arrays
 Id: 390
 ---
-## Introduction
-Arrays are specific data type, representing an ordered collection of elements of another type.
 
-In Go, Arrays can be simple (sometime called "lists") or multi-dimensional (like for example a 2-dimentions arrays is representing a ordered collection of arrays, that contains elements)
+Arrays in Go have fixed sized. They can't grow.
 
-## Syntax
- - var variableName [5]ArrayType // Declaring an array of size 5.
- - var variableName [2][3]ArrayType = { {Value1, Value2, Value3}, {Value4, Value5, Value6} }  // Declaring a multidimensional array
- - variableName := [...]ArrayType {Value1, Value2, Value3} // Declare an array of size 3 (The compiler will count the array elements to define the size)
- - arrayName[2]              // Getting the value by index.
- - arrayName[5] = 0          // Setting the value at index.
- - arrayName[0]              // First value of the Array
- - arrayName[ len(arrayName)-1 ] // Last value of the Array
+Because of that arrays in Go are used rarely. Instead [slices](ch-733) are used in most cases.
 
+[Zero value](a-6069) of array is array where all values have zero value.
+
+Elements of arrays are laid out in memory consequitevely, which is good for speed.
+
+Arrays are passed by value which means that passing array argument to a function copies the whole array. This is slow if the array is large.
+
+Array basics:
+```go
+a := [3]int{4, 5}     // array of 2 ints
+
+// access element of array
+fmt.Printf("a[2]: %d\n", a[2])
+
+// set element of array
+a[1] = 3
+
+// get size of array
+fmt.Printf("size of array a: %d\n", len(a))
+
+// when using [...] size will be deduced from { ... }
+a2 := [...]{4, 8, -1} // array of 3 integers
+```

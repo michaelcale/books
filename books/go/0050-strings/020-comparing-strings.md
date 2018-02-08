@@ -5,7 +5,7 @@ Id: 29828
 
 ## Compare strings with ==, > and <
 
-``go
+```go
 s1 := "string one"
 s2 := "string two"
 
@@ -44,9 +44,7 @@ You can also compare with [strings.Compare](https://golang.org/pkg/strings/#Comp
 
 ## Case-insensitive compare
 
-[strings.EqualFold](https://golang.org/pkg/strings/#EqualFold)
-
-Sometimes you want "Go" to equal "go", which is not the case when using `==`.
+Sometimes you want "Go" to equal "go", which is not the case when using `==`. You can do that using [strings.EqualFold](https://golang.org/pkg/strings/#EqualFold):
 
 ```go
 s1 := "gone"
