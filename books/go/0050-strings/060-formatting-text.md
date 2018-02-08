@@ -2,9 +2,28 @@
 Title: Formatting text
 Id: 29829
 ---
-Package `fmt` implements functions to print and format text using format _verbs_. Verbs are represented with a percent sign.
 
-General verbs:
+Go's standard library implements C-style string formatting in [`fmt`](https://golang.org/pkg/fmt/) package.
+
+```go
+s := fmt.Sprintf("Hello %s", "World")
+fmt.Printf("s: '%s'\n", s)
+s = fmt.Sprintf("%d + %f = %d", 2, float64(3), 5)
+```
+
+First argument to `fmt.Sprintf` is formatting string which tells how to format subsequent argument. Following are values that will be formatted.
+
+`fmt.Sprintf` creates a formatted string.
+
+For covenience, there's also:
+* `fmt.Fprintf(w io.Writer, string format, args... interface{})`, which will write formatted string to a given writer
+* `fmt.Pritnf(format string, args.. interface{})` which writes formatted string to `os.Stdout`.
+
+<!-- TODO: more examples for goal-oriented -->
+
+The function `Sprintf` formats the string in the first parameter replacing the verbs with the value of the values in the next parameters and returns the result. Like `Sprintf`, the function `Printf` also formats but instead of returning the result it prints the string.
+
+## List of string formatting verbs
 
 ```text
 %v    // the value in a default format
@@ -61,13 +80,3 @@ Pointer:
 ```text
 %p    // base 16 notation, with leading 0x
 ```
-
-Using the verbs, you can create strings concatenating multiple types:
-
-```go
-text1 := fmt.Sprintf("Hello %s", "World")
-text2 := fmt.Sprintf("%d + %d = %d", 2, 3, 5)
-text3 := fmt.Sprintf("%s, %s (Age: %d)", "Obama", "Barack", 55)
-```
-
-The function `Sprintf` formats the string in the first parameter replacing the verbs with the value of the values in the next parameters and returns the result. Like `Sprintf`, the function `Printf` also formats but instead of returning the result it prints the string.
