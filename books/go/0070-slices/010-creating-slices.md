@@ -1,5 +1,5 @@
 ---
-Title: Creating Slices
+Title: Creating slices
 Id: 4807
 Score: 1
 ---

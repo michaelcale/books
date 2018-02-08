@@ -1,5 +1,5 @@
 ---
-Title: Adding Two slices together
+Title: Adding slices
 Id: 3296
 Score: 4
 ---
