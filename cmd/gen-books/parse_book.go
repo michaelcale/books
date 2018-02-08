@@ -304,9 +304,10 @@ func dumpKV(doc kvstore.Doc) {
 }
 
 func parseArticle(path string) (*Article, error) {
-	doc, err := kvstore.ParseKVFile(path)
+	doc, err := paarseKVFileWithIncludes(path)
 	if err != nil {
 		fmt.Printf("Error parsing KV file: '%s'\n", path)
+		maybePanicIfErr(err)
 		return nil, err
 	}
 	article := &Article{
@@ -395,8 +396,8 @@ func parseChapter(chapter *Chapter) error {
 	doc, err := paarseKVFileWithIncludes(path)
 	if err != nil {
 		fmt.Printf("Error parsing KV file: '%s'\n", path)
+		maybePanicIfErr(err)
 	}
-	maybePanicIfErr(err)
 
 	chapter.indexDoc = doc
 	chapter.Title, err = doc.GetValue("Title")

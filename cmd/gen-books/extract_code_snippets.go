@@ -117,10 +117,21 @@ func getLangFromFileExt(fileName string) string {
 	return ""
 }
 
+func trimEmptyLines(lines []string) []string {
+	for len(lines) > 0 && len(lines[0]) == 0 {
+		lines = lines[1:]
+	}
+	for len(lines) > 0 && len(lines[len(lines)-1]) == 0 {
+		lines = lines[:len(lines)-1]
+	}
+	return lines
+}
+
 // TODO: implement 'output' option
 func extractCodeSnippetsAsMarkdownLines(baseDir string, line string) ([]string, error) {
 	// line is:
 	// @file ${fileName} [output]
+	addOutput := false
 	u.PanicIf(!strings.HasPrefix(line, "@file"))
 	line = strings.TrimSpace(line)
 	parts := strings.Split(line, " ")
@@ -135,6 +146,17 @@ func extractCodeSnippetsAsMarkdownLines(baseDir string, line string) ([]string, 
 	if !fileExists(path) {
 		return nil, fmt.Errorf("no file '%s' in line '%s'", path, line)
 	}
+	rest := parts[2:]
+	for len(rest) > 0 {
+		s := rest[0]
+		rest = rest[1:]
+		switch s {
+		case "output":
+			addOutput = true
+		default:
+			return nil, fmt.Errorf("unknown option '%s' in '%s'", s, line)
+		}
+	}
 	lines, err := extractCodeSnippets(path)
 	if err != nil {
 		return nil, err
@@ -144,13 +166,28 @@ func extractCodeSnippetsAsMarkdownLines(baseDir string, line string) ([]string, 
 	res = append(res, lines...)
 	res = append(res, "```")
 
-	// TODO: implement 'output' option
+	if addOutput {
+		out, err := getOutput(path)
+		if err != nil {
+			fmt.Printf("getOutput('%s'): error '%s', output: '%s'\n", path, err, out)
+			maybePanicIfErr(err)
+		} else {
+			res = append(res, "")
+			res = append(res, "**Output**:")
+			res = append(res, "")
+			res = append(res, "```text")
+			lines := strings.Split(out, "\n")
+			lines = trimEmptyLines(lines)
+			res = append(res, lines...)
+			res = append(res, "```")
+		}
+	}
 	return res, nil
 }
 
 // runs `go run ${path}` and returns captured output`
 func getGoOutput(path string) (string, error) {
-	cmd := exec.Command("go", "run", "path")
+	cmd := exec.Command("go", "run", path)
 	out, err := cmd.Output()
 	return string(out), err
 }
