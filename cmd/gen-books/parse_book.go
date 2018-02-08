@@ -366,7 +366,7 @@ func processFileIncludes(path string) ([]string, error) {
 	var res []string
 	for _, line := range lines {
 		if strings.HasPrefix(line, "@file ") {
-			fmt.Printf("processFileIncludes('%s'\n", path)
+			//fmt.Printf("processFileIncludes('%s'\n", path)
 			lines2, err := extractCodeSnippetsAsMarkdownLines(filepath.Dir(path), line)
 			if err != nil {
 				fmt.Printf("processFileIncludes: error '%s'\n", err)

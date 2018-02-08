@@ -3,7 +3,7 @@ Title: Constants
 Search: const
 Id: rd6000bc
 ---
-You can declare constants of simple values that can be constructed at compile time.
+Go supports constants of character, string, boolean, and numeric values.
 
 Basic constant syntax:
 ```go

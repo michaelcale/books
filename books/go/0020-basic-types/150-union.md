@@ -2,8 +2,8 @@
 Title: Unions
 Id: 80100004
 ---
-Go doesn't have unions like C++.
+Go doesn't have a union type like C.
 
-In Go some use cases of union can be achived with empty interface.
+To combine a value and its type into a single entity, use empty interface (`interface{}`).
 
 <!-- TODO: article on using empty interfaces as unions -->
