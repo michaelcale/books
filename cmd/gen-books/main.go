@@ -156,6 +156,12 @@ func main() {
 	loadSOUserMappingsMust()
 	os.RemoveAll("www")
 
+	if flgPreview {
+		go updateGoDeps()
+	} else {
+		updateGoDeps()
+	}
+
 	genAllBooks()
 	if flgPreview {
 		startPreview()

@@ -188,7 +188,7 @@ func extractCodeSnippetsAsMarkdownLines(baseDir string, line string) ([]string, 
 // runs `go run ${path}` and returns captured output`
 func getGoOutput(path string) (string, error) {
 	cmd := exec.Command("go", "run", path)
-	out, err := cmd.Output()
+	out, err := cmd.CombinedOutput()
 	return string(out), err
 }
 
