@@ -4,15 +4,7 @@ Id: 833
 ---
 Create file `hello.go`:
 
-```go
-package main
-
-import "fmt"
-
-func main() {
-    fmt.Println("Hello, 世界")
-}
-```
+@file hello_world.go
 
 [Playground](https://play.golang.org/p/I3l_5RKJts)
 

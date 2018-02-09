@@ -76,6 +76,16 @@ func shiftLines(lines []string) {
 	}
 }
 
+func trimEmptyLines(lines []string) []string {
+	for len(lines) > 0 && len(lines[0]) == 0 {
+		lines = lines[1:]
+	}
+	for len(lines) > 0 && len(lines[len(lines)-1]) == 0 {
+		lines = lines[:len(lines)-1]
+	}
+	return lines
+}
+
 func extractCodeSnippets(path string) ([]string, error) {
 	lines, err := common.ReadFileAsLines(path)
 	if err != nil {
@@ -102,8 +112,12 @@ func extractCodeSnippets(path string) ([]string, error) {
 			res = append(res, line)
 		}
 	}
+	// if there are no show: markings, assume we want to show the whole file
+	if len(res) == 0 {
+		return trimEmptyLines(lines), nil
+	}
 	shiftLines(res)
-	return res, nil
+	return trimEmptyLines(res), nil
 }
 
 func getLangFromFileExt(fileName string) string {
@@ -117,17 +131,17 @@ func getLangFromFileExt(fileName string) string {
 	return ""
 }
 
-func trimEmptyLines(lines []string) []string {
-	for len(lines) > 0 && len(lines[0]) == 0 {
-		lines = lines[1:]
-	}
-	for len(lines) > 0 && len(lines[len(lines)-1]) == 0 {
-		lines = lines[:len(lines)-1]
-	}
-	return lines
+// replace potentially windows paths \foo\bar into unix paths /foo/bar
+func toUnixPath(s string) string {
+	return strings.Replace(s, `\`, "/", -1)
 }
 
-// TODO: implement 'output' option
+// convert local path like books/go/foo.go into path to the file in a github repo
+func getGitHubPathForFile(path string) string {
+	return "https://github.com/essentialbooks/books/blob/master/" + toUnixPath(path)
+}
+
+// baseDir is books/go/
 func extractCodeSnippetsAsMarkdownLines(baseDir string, line string) ([]string, error) {
 	// line is:
 	// @file ${fileName} [output]
@@ -162,7 +176,10 @@ func extractCodeSnippetsAsMarkdownLines(baseDir string, line string) ([]string, 
 		return nil, err
 	}
 	lang := getLangFromFileExt(path)
-	res := []string{"```" + lang}
+	sep := "|"
+	u.PanicIf(strings.Contains(lang, sep), "lang ('%s') contains '%s'", lang, sep)
+	u.PanicIf(strings.Contains(path, sep), "path ('%s') contains '%s'", path, sep)
+	res := []string{"```" + lang + "|" + getGitHubPathForFile(path)}
 	res = append(res, lines...)
 	res = append(res, "```")
 

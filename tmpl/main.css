@@ -410,6 +410,31 @@ pre.chroma {
     tab-size: 2;
 }
 
+/* this allows to position child absolutely */
+pre.code-box {
+    position: relative;
+}
+
+/* box that potentially displays file name linking to github and 'run' button for playground */
+.code-box-nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.code-box-file-name {
+    border: 1px solid #e5e5e5;
+    padding: 2px 4px;
+}
+
+.code-box-file-name a {
+    text-decoration: none;
+}
+
+.code-box-file-name a:hover {
+    text-decoration: underline;
+}
+
 /* Background */ .chroma { color: #272822; background-color: #fafafa }
 /* Error */ .chroma .err { color: #960050; background-color: #dfdfdf }
 /* LineTableTD */ .chroma .lntd { vertical-align: top; padding: 0; margin: 0; border: 0; }
