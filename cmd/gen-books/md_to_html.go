@@ -116,13 +116,12 @@ func fixupHTMLCodeBlock(s string, gitHubLoc string) string {
 	}
 	// gitHubLoc is sth. like github.com/essentialbooks/books/books/go/
 	fileName := path.Base(gitHubLoc)
-	uri := "https://" + gitHubLoc
 	s = strings.Replace(s, `class="chroma"`, `class="chroma code-box"`, -1)
 	html := fmt.Sprintf(`<div class="code-box-nav">
 	<div class="code-box-file-name">
-		<a href="%s" target="_blank">%s</a>
+		<a href="%s">%s</a>
 	</div>
-</div>`, uri, fileName)
+</div>`, gitHubLoc, fileName)
 	s = strings.Replace(s, "</pre>", html+"</pre>", -1)
 	//fmt.Printf("After:\n\n%s\n\n", s)
 	return s
