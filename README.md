@@ -9,6 +9,7 @@ Guiding principles behind Essential Books:
 * articles are small and heavily interlinked
 * not limited by size
 
-This is a collaborative project. Please do contribute new articles and improvements to existing articles.
+This is a collaborative project. Please [do contribute](how-to-contribute.md) new articles and improvements to existing articles.
 
 All documentation is released under [Creative Commons BY-SA](https://creativecommons.org/licenses/by-sa/3.0/) license.
+
