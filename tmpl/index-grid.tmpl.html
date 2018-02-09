@@ -28,11 +28,14 @@
     <div class="content-wrapper" style="margin-top: 52px;">
         <h1 class="hcenter">Essential Programming Books</h1>
         <div class="hcenter smaller"><a href="/about">about this project</a></div>
+        <div class="view-switch">View: <a href="/">list</a> : view</div>
 
         <div class="covers">
-            {{range .Covers}}
+            {{range .Books}}
             <div class="cover-img-wrapper">
-                <img class="img-cover" src="{{.URL}}">
+                <a href="{{.URL}}">
+                    <img class="img-cover" src="{{.CoverURL}}">
+                </a>
             </div>
             {{end}}
         </div>

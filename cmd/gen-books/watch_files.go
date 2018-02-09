@@ -118,9 +118,8 @@ func handleFileChange(path string) {
 		clearErrors()
 		// TODO: use localRegenAllBooks and localBooksToRegen
 		unloadTemplates() // for reloading of templates from disk
-		//genIndex()
 		genAllBooks()
-		defer printAndClearErrors()
+		printAndClearErrors()
 	}(nextRegenSeq)
 }
 

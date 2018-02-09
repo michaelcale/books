@@ -120,7 +120,7 @@ func genAllBooks() {
 	copyToWwwMaybeMust(filepath.Join("tmpl", "main.css"))
 	copyToWwwMaybeMust(filepath.Join("tmpl", "app.js"))
 	genIndex(books)
-	genIndex2()
+	genIndexGrid(books)
 	genAbout()
 
 	nProcs := runtime.GOMAXPROCS(-1)

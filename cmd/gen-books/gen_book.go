@@ -19,7 +19,7 @@ var ( // directory where generated .html files for books are
 
 var (
 	indexTmpl     *template.Template
-	index2Tmpl    *template.Template
+	indexGridTmpl *template.Template
 	bookIndexTmpl *template.Template
 	chapterTmpl   *template.Template
 	articleTmpl   *template.Template
@@ -61,8 +61,8 @@ func loadTemplateMaybeMust(name string) *template.Template {
 	switch name {
 	case "index.tmpl.html":
 		ref = &indexTmpl
-	case "index2.tmpl.html":
-		ref = &index2Tmpl
+	case "index-grid.tmpl.html":
+		ref = &indexGridTmpl
 	case "book_index.tmpl.html":
 		ref = &bookIndexTmpl
 	case "chapter.tmpl.html":
@@ -109,30 +109,16 @@ func genIndex(books []*Book) {
 	execTemplateToFileMaybeMust("index.tmpl.html", d, path)
 }
 
-// Cover represents a book cover
-type Cover struct {
-	URL string
-}
-
-func genIndex2() {
-	var covers []Cover
-	for _, coverName := range coverNames {
-		uri := "/covers/" + coverName + ".png"
-		c := Cover{
-			URL: uri,
-		}
-		covers = append(covers, c)
-	}
+func genIndexGrid(books []*Book) {
 	d := struct {
-		Covers        []Cover
+		Books         []*Book
 		AnalyticsCode string
 	}{
-		Covers:        covers,
+		Books:         books,
 		AnalyticsCode: flgAnalytics,
 	}
-	path := filepath.Join(destDir, "index2.html")
-	execTemplateToFileMaybeMust("index2.tmpl.html", d, path)
-
+	path := filepath.Join(destDir, "index-grid.html")
+	execTemplateToFileMaybeMust("index-grid.tmpl.html", d, path)
 }
 
 func genAbout() {
