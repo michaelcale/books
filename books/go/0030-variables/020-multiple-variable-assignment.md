@@ -4,33 +4,8 @@ Id: 2193
 ---
 In Go, you can declare multiple variables at the same time.
 
-```go
-// You can declare multiple variables of the same type in one line
-var a, b, c string
-
-var d, e string = "Hello", "world!"
-
-// You can also use short declaration to assign multiple variables
-x, y, z := 1, 2, 3
-
-foo, bar := 4, "stack" // `foo` is type `int`, `bar` is type `string`
-```
+@file mulitple_variable.go
 
 If a function returns multiple values, you can also assign values to variables based on the function's return values.
 
-```go
-func multipleReturn() (int, int) {
-    return 1, 2
-}
-
-x, y := multipleReturn() // x = 1, y = 2
-
-func multipleReturn2() (a int, b int) {
-    a = 3
-    b = 4
-    return
-}
-
-w, z := multipleReturn2() // w = 3, z = 4
-```
-
+@file mulitple_variable_2.go output
