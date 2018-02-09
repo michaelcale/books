@@ -2,19 +2,11 @@
 Title: Hello, World!
 Id: 833
 ---
-Create file `hello.go`:
+Create file `hello_world.go` and run it with `go run hello_world.go`.
 
-@file hello_world.go
+@file hello_world.go output
 
 [Playground](https://play.golang.org/p/I3l_5RKJts)
-
-Compile and run with `go run hello.go`.
-
-## Output:
-
-```text
-Hello, 世界
-```
 
 Once you are happy with the code it can be compiled to an executable with `go build hello.go`.
 
