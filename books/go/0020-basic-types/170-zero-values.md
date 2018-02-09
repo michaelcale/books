@@ -28,21 +28,6 @@ The values of zero type are unsurprising:
 |function|nil|
 
 Said differently:
-```go
-var zeroBool bool             // = false
-var zeroInt int               // = 0
-var zeroF32 float32           // = 0.0
-var zeroStr string            // = ""
-var zeroPtr *int              // = nil
-var zeroSlice []uint32        // = nil
-var zeroMap map[string]int    // = nil
-var zeroInterface interface{} // = nil
-var zeroChan chan bool        // = nil
-var zeroArray [5]int          // = [0, 0, 0, 0, 0]
-type struc struct {
-	a int
-	b string
-}
-var zeroStruct struc    // = { a: 0, b: ""}
-var zeroFunc func(bool) // = nil
-```
+
+@file zero_values.go output
+
