@@ -411,7 +411,7 @@ pre.chroma {
 }
 
 /* this allows to position child absolutely */
-pre.code-box {
+.code-box {
     position: relative;
 }
 
