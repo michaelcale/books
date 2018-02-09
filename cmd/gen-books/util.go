@@ -43,6 +43,11 @@ func isDirectory(path string) bool {
 	return stat.IsDir()
 }
 
+func createDirMust(dir string) {
+	err := os.MkdirAll(dir, 0755)
+	u.PanicIfErr(err)
+}
+
 func copyFile(dst, src string) error {
 	fin, err := os.Open(src)
 	if err != nil {

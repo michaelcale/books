@@ -44,6 +44,7 @@ var (
 		"VBA",
 		"VisualBasicNET",
 	}
+
 	langToCover = map[string]string{
 		"android":    "Android",
 		"go":         "Go",

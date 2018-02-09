@@ -80,26 +80,41 @@ func getBookDirs() []string {
 	return dirs
 }
 
-func copyCoversMust() {
-	createDirForFileMaybeMust(filepath.Join("www", "covers", "foo.png"))
-	fileInfos, err := ioutil.ReadDir("covers")
+func shouldCopyImage(path string) bool {
+	return !strings.Contains(path, "@2x")
+}
+
+func copyFilesRecur(dstDir, srcDir string, shouldCopyFunc func(path string) bool) {
+	createDirMust(dstDir)
+	fileInfos, err := ioutil.ReadDir(srcDir)
 	u.PanicIfErr(err)
 	for _, fi := range fileInfos {
-		if fi.IsDir() || !fi.Mode().IsRegular() {
-			continue
-		}
 		name := fi.Name()
-		if strings.Contains(name, "@2x") {
+		if fi.IsDir() {
+			dst := filepath.Join(dstDir, name)
+			src := filepath.Join(srcDir, name)
+			copyFilesRecur(dst, src, shouldCopyFunc)
 			continue
 		}
-		dst := filepath.Join("www", "covers", name)
+
+		src := filepath.Join(srcDir, name)
+		dst := filepath.Join(dstDir, name)
+		shouldCopy := true
+		if shouldCopyFunc != nil {
+			shouldCopy = shouldCopyFunc(src)
+		}
+		if !shouldCopy {
+			continue
+		}
 		if pathExists(dst) {
 			continue
 		}
-		src := filepath.Join("covers", name)
-		copyFile(dst, src)
-
+		copyFileMust(dst, src)
 	}
+}
+
+func copyCoversMust() {
+	copyFilesRecur(filepath.Join("www", "covers"), "covers", shouldCopyImage)
 }
 
 func genAllBooks() {
@@ -148,6 +163,10 @@ func loadSOUserMappingsMust() {
 
 func main() {
 	parseFlags()
+
+	if false {
+		genTwitterImagesAndExit()
+	}
 
 	booksToImport := getBooksToImport(getBookDirs())
 	for _, bookInfo := range booksToImport {

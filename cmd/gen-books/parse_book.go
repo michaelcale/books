@@ -17,7 +17,7 @@ import (
 )
 
 const (
-	fullURLBase = "https://www.programming-books.io/"
+	fullURLBase = "https://www.programming-books.io"
 )
 
 // Article represents a part of a chapter
@@ -273,6 +273,12 @@ func (b *Book) CoverURL() string {
 // CoverFullURL returns a URL for the cover including host
 func (b *Book) CoverFullURL() string {
 	return fullURLBase + b.CoverURL()
+}
+
+// CoverTwitterFullURL returns a URL for the cover including host
+func (b *Book) CoverTwitterFullURL() string {
+	coverName := langToCover[b.titleSafe]
+	return fullURLBase + fmt.Sprintf("/covers/twitter/%s.png", coverName)
 }
 
 // ArticlesCount returns total number of articles
