@@ -4,7 +4,7 @@ Id: 2193
 ---
 In Go, you can declare multiple variables at the same time.
 
-@file multitple_variable.go
+@file multiple_variable.go
 
 If a function returns multiple values, you can also assign values to variables based on the function's return values.
 

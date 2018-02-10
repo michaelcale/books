@@ -5,11 +5,7 @@ Id: 29829
 
 Go's standard library implements C-style string formatting in [`fmt`](https://golang.org/pkg/fmt/) package.
 
-```go
-s := fmt.Sprintf("Hello %s", "World")
-fmt.Printf("s: '%s'\n", s)
-s = fmt.Sprintf("%d + %f = %d", 2, float64(3), 5)
-```
+@file formatting_text.go output
 
 First argument to `fmt.Sprintf` is formatting string which tells how to format subsequent argument. Following are values that will be formatted.
 
