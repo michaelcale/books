@@ -24,3 +24,5 @@ if len(s) == 0　{
     fmt.Print("s is empty.\n")
 }
 ```
+
+This works for both `nil` and non-nil slice with no elements.

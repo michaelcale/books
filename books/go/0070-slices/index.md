@@ -15,16 +15,8 @@ Length is the current number of elements in the slice.
 
 The difference between capacity and length is how many elements we can append to a slice before we have to re-allocate underlying array.
 
-[Zero value of slice](a-6807) is nil.
+[Zero value of a slice](a-6807) is nil.
 
 Basic of slices:
-```go
-// create empty slice (0 length) with capacity of 5
-slice := make([]int, 0, 5)
-// append element to end of slice
-slice = append(slice, 5)
-// append multiple elements to end
-slice = append(slice, 3, 4)
-fmt.Printf("length of slice is: %d\n", len(slice))
-fmt.Printf("capacity of slice is: %d\n", cap(slice))
-```
+
+@file index.go output

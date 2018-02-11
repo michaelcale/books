@@ -3,11 +3,8 @@ Title: Adding slices
 Id: 3296
 Score: 4
 ---
-```go
-slice1 := []string{"!"}
-slice2 := []string{"Hello", "world"}
-slice  := append(slice1, slice2...)
-```
+
+@file add_slices.go output
 
 [Playground](https://play.golang.org/p/H3EsjlcMu5)
 

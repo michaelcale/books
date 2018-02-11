@@ -30,7 +30,7 @@ for idx, val := range s {
 // 1 0
 // 2 0
 ```
-[Run it on play.golang.org][1]
+[Run it on play.golang.org](https://play.golang.org/p/E1OoWPDjwW)
 
 You cannot access elements beyond the length of a slice, even if the index is within capacity:
 ```
@@ -52,6 +52,3 @@ n = len(s) // n == 7
 c = cap(s) // c > 5
 ```
 It is, therefore, generally good practice to allocate sufficient capacity when first creating a slice, if you know how much space you'll need, to avoid unnecessary reallocations.
-
-  [1]: https://play.golang.org/p/E1OoWPDjwW
-
