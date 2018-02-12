@@ -8,7 +8,6 @@ import (
 	"path/filepath"
 	"runtime"
 	"strings"
-	"sync"
 	"time"
 
 	"github.com/essentialbooks/books/pkg/common"
@@ -122,6 +121,8 @@ func genAllBooks() {
 
 	copyCoversMust()
 
+	nProcs := runtime.GOMAXPROCS(-1)
+
 	var books []*Book
 	for _, bookName := range allBookDirs {
 		book, err := parseBook(bookName)
@@ -129,8 +130,10 @@ func genAllBooks() {
 		if err != nil {
 			continue
 		}
+		book.sem = make(chan bool, nProcs)
 		books = append(books, book)
 	}
+	fmt.Printf("Parsed books in %s\n", time.Since(timeStart))
 
 	copyToWwwMaybeMust(filepath.Join("tmpl", "main.css"))
 	copyToWwwMaybeMust(filepath.Join("tmpl", "app.js"))
@@ -138,21 +141,10 @@ func genAllBooks() {
 	genIndexGrid(books)
 	genAbout()
 
-	nProcs := runtime.GOMAXPROCS(-1)
-	sem := make(chan bool, nProcs)
-	var wg sync.WaitGroup
 	for _, book := range books {
-		wg.Add(1)
-		sem <- true
-		go func(b *Book) {
-			genBook(b)
-			<-sem
-			wg.Done()
-			fmt.Printf("Generated %s, %d chapters, %d articles\n", b.Title, len(b.Chapters), b.ArticlesCount())
-		}(book)
+		genBook(book)
 	}
-	wg.Wait()
-	fmt.Printf("Used %d procs, finished generating all book in %s\n", nProcs, time.Since(timeStart))
+	fmt.Printf("Used %d procs, finished generating all books in %s\n", nProcs, time.Since(timeStart))
 }
 
 func loadSOUserMappingsMust() {

@@ -1,5 +1,5 @@
 ---
-Title: Switch Statements
+Title: switch statement
 Id: 4377
 Score: 2
 ---

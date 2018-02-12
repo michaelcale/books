@@ -7,9 +7,11 @@ import (
 	"net/url"
 	"os"
 	"path/filepath"
+	"runtime"
 	"sort"
 	"strconv"
 	"strings"
+	"sync"
 
 	"github.com/essentialbooks/books/pkg/common"
 	"github.com/essentialbooks/books/pkg/kvstore"
@@ -222,6 +224,10 @@ type Book struct {
 	knownUrls           []string
 
 	AnalyticsCode string
+
+	// for concurrency
+	sem chan bool
+	wg  sync.WaitGroup
 }
 
 // ContributorCount returns number of contributors
@@ -565,21 +571,34 @@ func parseBook(bookName string) (*Book, error) {
 		return nil, err
 	}
 
+	nProcs := runtime.GOMAXPROCS(-1)
+
+	sem := make(chan bool, nProcs)
+	var wg sync.WaitGroup
 	var chapters []*Chapter
+	var err2 error
+
 	for _, fi := range fileInfos {
 		if fi.IsDir() {
 			ch := &Chapter{
 				Book:       book,
 				ChapterDir: fi.Name(),
 			}
-			err = parseChapter(ch)
-			if err != nil {
-				return nil, err
-			}
-			chapters = append(chapters, ch)
 			ch.No = len(chapters)
+			chapters = append(chapters, ch)
+			sem <- true
+			wg.Add(1)
+			go func(chap *Chapter) {
+				err = parseChapter(chap)
+				if err != nil {
+					err2 = err
+				}
+				wg.Done()
+				<-sem
+			}(ch)
 			continue
 		}
+
 		name := strings.ToLower(fi.Name())
 		// some files should be ignored
 		if name == "toc.txt" {
@@ -592,6 +611,7 @@ func parseBook(bookName string) (*Book, error) {
 		}
 		return nil, fmt.Errorf("Unexpected file at top-level: '%s'", fi.Name())
 	}
+	wg.Wait()
 
 	ch := genContributorsChapter(book)
 	ch.No = len(chapters) + 1

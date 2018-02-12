@@ -1,10 +1,12 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"log"
 	"os"
 	"path/filepath"
+	"time"
 )
 
 const (
@@ -160,6 +162,9 @@ func setCurrentChapter(chapters []*Chapter, current int) {
 }
 
 func genBook(book *Book) {
+	fmt.Printf("Started genering book %s\n", book.Title)
+	timeStart := time.Now()
+
 	// generate index.html for the book
 	err := os.MkdirAll(book.destDir, 0755)
 	maybePanicIfErr(err)
@@ -172,8 +177,16 @@ func genBook(book *Book) {
 	execTemplateToFileSilentMaybeMust("book_index.tmpl.html", book, path)
 	for i, chapter := range book.Chapters {
 		setCurrentChapter(book.Chapters, i)
-		genBookChapter(chapter)
+		book.sem <- true
+		book.wg.Add(1)
+		go func(chap *Chapter) {
+			genBookChapter(chap)
+			book.wg.Done()
+			<-book.sem
+		}(chapter)
 	}
 	genBookTOCSearchMust(book)
+	book.wg.Wait()
+	fmt.Printf("Generated %s, %d chapters, %d articles in %s\n", book.Title, len(book.Chapters), book.ArticlesCount(), time.Since(timeStart))
 	//genBookTOCJSONMust(book)
 }
