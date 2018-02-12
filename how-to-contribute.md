@@ -26,3 +26,15 @@ A crucial tool is `./s/preview.ps1`.
 It rebuilds all HTML, starts a web server for local preview of changes.
 
 It also watches the source markdown files for changes and rebuilds HTML when they change. That way you can make a change to .md file, save it and refresh corresponding page in the browser to see a change.
+
+### What to improve?
+
+Some articles have implicit notes about what to improve.
+
+You can find them with [this search](https://github.com/essentialbooks/books/search?utf8=%E2%9C%93&q=TODO%3A&type=).
+
+Each book can be improved by adding more articles.
+
+Areas that are likely to always need improvement:
+* examples for common tasks (e.g. parsing json/xml/cvs/markdown files, accessing databases etc.)
+* examples for popular third-party libraries

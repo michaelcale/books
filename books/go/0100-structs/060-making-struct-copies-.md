@@ -1,5 +1,5 @@
 ---
-Title: Making struct copies.
+Title: Duplicate a struct (make a copy)
 Id: 5352
 Score: 4
 ---

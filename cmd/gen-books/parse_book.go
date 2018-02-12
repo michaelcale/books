@@ -290,6 +290,8 @@ func (b *Book) ArticlesCount() int {
 	for _, ch := range b.Chapters {
 		n += len(ch.Articles)
 	}
+	// each chapter has index.md which is also an article
+	n += len(b.Chapters)
 	b.cachedArticlesCount = n
 	return n
 }

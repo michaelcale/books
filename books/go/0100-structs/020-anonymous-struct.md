@@ -3,31 +3,11 @@ Title: Anonymous struct
 Id: 1299
 Score: 18
 ---
-It is possible to create an anonymous struct:
 
-```go
-data := struct {
-    Number int
-    Text   string
-} {
-    42,
-    "Hello world!",
-}
-```
+You can create anonymous structs:
 
-Full example:
-
-```go
-package main
-
-import (
-    "fmt"
-)
-
-func main() {
-    data := struct {Number int; Text string}{42, "Hello world!"} // anonymous struct
-    fmt.Printf("%+v\n", data)
-}
-```
+@file anonymous_structs.go output
 
 [Playground](https://play.golang.org/p/atpNnP5wE_)
+
+Anonymous structs are often used in test suites.

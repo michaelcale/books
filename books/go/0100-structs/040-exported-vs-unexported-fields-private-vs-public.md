@@ -1,5 +1,5 @@
 ---
-Title: Exported vs. Unexported Fields (Private vs Public)
+Title: Exported vs. unexported fields (private vs public)
 Id: 1255
 Score: 10
 ---
