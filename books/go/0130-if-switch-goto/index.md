@@ -1,5 +1,5 @@
 ---
-Title: if, switch
+Title: if, switch, goto
 Id: 1342
 ---
 Basics of `if`:
