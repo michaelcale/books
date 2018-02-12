@@ -47,7 +47,7 @@ func updateImport(importSpec *ast.ImportSpec) {
 	}
 	updatedImports[name] = true
 	if !shouldUpdatePackage(name) {
-		fmt.Printf("not doing go get -u %s\n", name)
+		//fmt.Printf("not doing go get -u %s\n", name)
 		return
 	}
 	fmt.Printf("running go get -u %s\n", name)

@@ -24,3 +24,6 @@ struct StructName {
 ```
 
 The struct tags used with the `encoding/xml` and `encoding/json` package are used throughout the standard libarary.
+
+<!-- TODO: example with multiple tags -->
+<!-- TODO: link to json, xml chapters -->

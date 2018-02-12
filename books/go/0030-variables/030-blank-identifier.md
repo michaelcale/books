@@ -1,5 +1,5 @@
 ---
-Title: Blank Identifier
+Title: Blank identifier
 Id: 29103
 ---
 To help avoid mistakes, Go compiler doesn't allow unused variables.

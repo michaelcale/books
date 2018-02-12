@@ -141,13 +141,20 @@ func getGitHubPathForFile(path string) string {
 	return "https://github.com/essentialbooks/books/blob/master/" + toUnixPath(path)
 }
 
-// baseDir is books/go/
-func extractCodeSnippetsAsMarkdownLines(baseDir string, line string) ([]string, error) {
-	// line is:
-	// @file ${fileName} [output]
-	addOutput := false
-	u.PanicIf(!strings.HasPrefix(line, "@file"))
+// FileDirective describes result of parsing
+// @file verify_type_implements_interface.go output allow_error
+type FileDirective struct {
+	FileName   string
+	WithOutput bool
+	AllowError bool
+}
+
+// parseFileDirective parses line like:
+// @file ${fileName} [output] [allow_error]
+// into FileDirective
+func parseFileDirective(line string) (*FileDirective, error) {
 	line = strings.TrimSpace(line)
+	u.PanicIf(!strings.HasPrefix(line, "@file"))
 	parts := strings.Split(line, " ")
 	if len(parts) < 2 {
 		return nil, fmt.Errorf("invalid @file line: '%s'", line)
@@ -155,21 +162,36 @@ func extractCodeSnippetsAsMarkdownLines(baseDir string, line string) ([]string, 
 	if parts[0] != "@file" {
 		return nil, fmt.Errorf("invalid @file line: '%s'", line)
 	}
-	fileName := parts[1]
-	path := filepath.Join(baseDir, fileName)
+	res := &FileDirective{}
+	parts = parts[1:]
+	res.FileName = parts[0]
+	parts = parts[1:]
+	for _, s := range parts {
+		if len(s) == 0 {
+			continue
+		}
+		if s == "output" {
+			res.WithOutput = true
+		} else if s == "allow_error" {
+			res.AllowError = true
+		} else {
+			return nil, fmt.Errorf("invalid @file line: '%s', unknown option '%s'", line, s)
+		}
+	}
+	return res, nil
+}
+
+// baseDir is books/go/
+func extractCodeSnippetsAsMarkdownLines(baseDir string, line string) ([]string, error) {
+	// line is:
+	// @file ${fileName} [output]
+	directive, err := parseFileDirective(line)
+	if err != nil {
+		return nil, err
+	}
+	path := filepath.Join(baseDir, directive.FileName)
 	if !fileExists(path) {
 		return nil, fmt.Errorf("no file '%s' in line '%s'", path, line)
-	}
-	rest := parts[2:]
-	for len(rest) > 0 {
-		s := rest[0]
-		rest = rest[1:]
-		switch s {
-		case "output":
-			addOutput = true
-		default:
-			return nil, fmt.Errorf("unknown option '%s' in '%s'", s, line)
-		}
 	}
 	lines, err := extractCodeSnippets(path)
 	if err != nil {
@@ -183,41 +205,26 @@ func extractCodeSnippetsAsMarkdownLines(baseDir string, line string) ([]string, 
 	res = append(res, lines...)
 	res = append(res, "```")
 
-	if addOutput {
-		out, err := getOutput(path)
-		if isOutputError(err, out) {
-			fmt.Printf("getOutput('%s'): error '%s', output: '%s'\n", path, err, out)
-			maybePanicIfErr(err)
-		} else {
-			res = append(res, "")
-			res = append(res, "**Output**:")
-			res = append(res, "")
-			res = append(res, "```text")
-			lines := strings.Split(out, "\n")
-			lines = trimEmptyLines(lines)
-			res = append(res, lines...)
-			res = append(res, "```")
-		}
+	if !directive.WithOutput {
+		return res, nil
 	}
+
+	out, err := getOutput(path)
+	if err != nil && !directive.AllowError {
+		fmt.Printf("getOutput('%s'): error '%s', output: '%s'\n", path, err, out)
+		maybePanicIfErr(err)
+		return res, err
+	}
+
+	res = append(res, "")
+	res = append(res, "**Output**:")
+	res = append(res, "")
+	res = append(res, "```text")
+	lines = strings.Split(out, "\n")
+	lines = trimEmptyLines(lines)
+	res = append(res, lines...)
+	res = append(res, "```")
 	return res, nil
-}
-
-// sometimes Go code snippets panic which returns an error
-// but we want to show that as the output in the book so
-// we white-list errors caused by panics
-// TODO: strip dirs in stack trace lines in panic output i.e.
-// 	/Users/kjk/src/go/src/github.com/essentialbooks/books/books/go/0080-maps/zero_value2.go:15 +0x19d
-// =>
-// 	/zero_value2.go:15 +0x19d
-
-func isOutputError(err error, out string) bool {
-	if err == nil {
-		return false
-	}
-	if strings.Contains(out, "panic:") {
-		return false
-	}
-	return true
 }
 
 // runs `go run ${path}` and returns captured output`

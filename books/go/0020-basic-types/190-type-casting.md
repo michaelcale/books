@@ -7,3 +7,5 @@ Unlike a language like C, Go doesn't do implicit casting between types.
 You have to cast between compatible types manually:
 
 @file type_casting.go
+
+<!-- TODO: link to dynamic casting with type switch and type assertion -->
