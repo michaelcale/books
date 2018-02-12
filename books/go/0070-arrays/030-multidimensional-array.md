@@ -1,5 +1,5 @@
 ---
-Title: Multidimensional Array
+Title: Multidimensional array
 Id: 7303
 Score: -2
 ---

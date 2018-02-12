@@ -1,5 +1,5 @@
 ---
-Title: Basic Loop
+Title: Basic loop
 Id: 3172
 Score: 7
 ---

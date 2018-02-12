@@ -145,20 +145,21 @@ func genBookArticle(article *Article) {
 	execTemplateToFileSilentMaybeMust("article.tmpl.html", article, path)
 }
 
-func genBookChapter(chapter *Chapter) {
+func genBookChapter(chapter *Chapter, currNo int) {
 	for _, article := range chapter.Articles {
 		genBookArticle(article)
 	}
 
 	path := chapter.destFilePath()
 	chapter.AnalyticsCode = flgAnalytics
-	execTemplateToFileSilentMaybeMust("chapter.tmpl.html", chapter, path)
-}
-
-func setCurrentChapter(chapters []*Chapter, current int) {
-	for i, chapter := range chapters {
-		chapter.IsCurrent = current == i
+	d := struct {
+		*Chapter
+		CurrentChapterNo int
+	}{
+		Chapter:          chapter,
+		CurrentChapterNo: currNo,
 	}
+	execTemplateToFileSilentMaybeMust("chapter.tmpl.html", d, path)
 }
 
 func genBook(book *Book) {
@@ -175,18 +176,19 @@ func genBook(book *Book) {
 	path := filepath.Join(book.destDir, "index.html")
 	book.AnalyticsCode = flgAnalytics
 	execTemplateToFileSilentMaybeMust("book_index.tmpl.html", book, path)
+
 	for i, chapter := range book.Chapters {
-		setCurrentChapter(book.Chapters, i)
 		book.sem <- true
 		book.wg.Add(1)
-		go func(chap *Chapter) {
-			genBookChapter(chap)
+		go func(idx int, chap *Chapter) {
+			genBookChapter(chap, idx)
 			book.wg.Done()
 			<-book.sem
-		}(chapter)
+		}(i+1, chapter)
 	}
 	genBookTOCSearchMust(book)
 	book.wg.Wait()
+
 	fmt.Printf("Generated %s, %d chapters, %d articles in %s\n", book.Title, len(book.Chapters), book.ArticlesCount(), time.Since(timeStart))
 	//genBookTOCJSONMust(book)
 }

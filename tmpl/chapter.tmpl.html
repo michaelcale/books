@@ -37,6 +37,7 @@
 </head>
 
 <body>
+    {{$currChapterNo:=.CurrentChapterNo}}
     <div id="top-header">
         <div class="top-header-left"><a href="/">Essential Books</a></div>
         <input id="search-input" placeholder="Search Essential {{.Book.Title}}...">
@@ -106,7 +107,7 @@
 
             <div class="chapters-toc">
             {{range .Book.Chapters}}
-                {{if .IsCurrent}}
+                {{if eq $currChapterNo .No}}
                     <div class="chapters-toc-item">
                         <!-- <span class="chap-no">{{.No}}</span>  -->
                         <span class="is-current">{{.Title}}</span>

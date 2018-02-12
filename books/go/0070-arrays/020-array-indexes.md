@@ -1,5 +1,5 @@
 ---
-Title: Array Indexes
+Title: Array indexes
 Id: 32352
 ---
 Arrays values should be accessed using a number specifying the location of the desired value in the array. This number is called Index.

@@ -99,11 +99,7 @@ type Chapter struct {
 	Title         string      // extracted from IndexKV, used in book_index.tmpl.html
 	FileNameBase  string      // format: ch-${ID}-${Title}, used for URL and .html file name
 	Articles      []*Article
-	No            int // TODO: can I get rid of this?
-
-	// used when generating list of chapters at the bottom of each chapter page
-	// indicates the chapter we're in right now
-	IsCurrent bool
+	No            int
 
 	AnalyticsCode string
 }
@@ -584,17 +580,17 @@ func parseBook(bookName string) (*Book, error) {
 				Book:       book,
 				ChapterDir: fi.Name(),
 			}
-			ch.No = len(chapters)
 			chapters = append(chapters, ch)
 			sem <- true
 			wg.Add(1)
 			go func(chap *Chapter) {
 				err = parseChapter(chap)
 				if err != nil {
+					// not thread safe but whatever
 					err2 = err
 				}
-				wg.Done()
 				<-sem
+				wg.Done()
 			}(ch)
 			continue
 		}
@@ -614,12 +610,15 @@ func parseBook(bookName string) (*Book, error) {
 	wg.Wait()
 
 	ch := genContributorsChapter(book)
-	ch.No = len(chapters) + 1
 	chapters = append(chapters, ch)
+
+	for i, ch := range chapters {
+		ch.No = i + 1
+	}
 	book.Chapters = chapters
 
 	ensureUniqueIds(book)
 
 	fmt.Printf("Book '%s' %d chapters, %d articles\n", bookName, len(chapters), book.ArticlesCount())
-	return book, nil
+	return book, err2
 }

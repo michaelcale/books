@@ -1,5 +1,5 @@
 ---
-Title: Different Forms of For Loop
+Title: Different forms of for loop
 Id: 7956
 Score: 3
 ---

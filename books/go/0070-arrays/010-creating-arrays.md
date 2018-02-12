@@ -1,5 +1,5 @@
 ---
-Title: Creating arrays
+Title: Create array
 Id: 1295
 Score: 2
 ---
