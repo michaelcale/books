@@ -1,21 +1,15 @@
 ---
-Title: Copy a Map
+Title: Copy a map
 Id: 9834
 Score: 8
 ---
-Like slices, maps hold **references** to an underlying data structure. So by assigning its value to another variable, only the reference will be passed. To copy the map, it is necessary to create another map and copy each value:
 
-```go
-// Create the original map
-originalMap := make(map[string]int)
-originalMap["one"] = 1
-originalMap["two"] = 2
+In Go all values are passed by copy.
 
-// Create the target map
-targetMap := make(map[string]int)
+However, similar to slices, the value of a map is only a reference to underlying data.
 
-// Copy from the original map to the target map
-for key, value := range originalMap {
-  targetMap[key] = value
-}
-```
+When you assign a map to another variable or pass to another function, you only copy the reference.
+
+To copy the values, we need to write a bit of code:
+
+@file copy_map.go

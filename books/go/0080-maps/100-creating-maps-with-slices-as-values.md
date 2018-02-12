@@ -1,5 +1,5 @@
 ---
-Title: Creating maps with slices as values
+Title: Maps with slices as values
 Id: 3910
 Score: 1
 ---

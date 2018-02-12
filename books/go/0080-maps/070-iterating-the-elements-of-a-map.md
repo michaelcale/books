@@ -1,23 +1,19 @@
 ---
-Title: Iterating the elements of a map
+Title: Iterate keys, values or both with range
 Id: 2486
 Score: 7
 ---
 
-```go
-import fmt
+Iteration order is not specified. Go randomizes the order of iteration on purpose so that code doesn't incorrectly rely on specific order.
 
-people := map[string]int{
-  "john": 30,
-  "jane": 29,
-  "mark": 11,
-}
+## Iterate both keys and values
 
-for key, value := range people {
-  fmt.Println("Name:", key, "Age:", value)
-}
-```
+@file iterate_key_and_values.go output
 
-Iteration order is not specified. In fact, Go on purpose randomizes the order of iteration so that programmers don't write buggy code by relying on specific order.
+## Iterate just keys
 
-You can also discard either the keys or the values of the map, if you are looking to just [grab keys](a-2487) or just grab values.
+@file iterate_keys.go output
+
+## Iterate just values
+
+@file iterate_values.go output

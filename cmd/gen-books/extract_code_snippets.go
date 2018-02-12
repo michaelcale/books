@@ -185,7 +185,7 @@ func extractCodeSnippetsAsMarkdownLines(baseDir string, line string) ([]string, 
 
 	if addOutput {
 		out, err := getOutput(path)
-		if err != nil {
+		if isOutputError(err, out) {
 			fmt.Printf("getOutput('%s'): error '%s', output: '%s'\n", path, err, out)
 			maybePanicIfErr(err)
 		} else {
@@ -200,6 +200,24 @@ func extractCodeSnippetsAsMarkdownLines(baseDir string, line string) ([]string, 
 		}
 	}
 	return res, nil
+}
+
+// sometimes Go code snippets panic which returns an error
+// but we want to show that as the output in the book so
+// we white-list errors caused by panics
+// TODO: strip dirs in stack trace lines in panic output i.e.
+// 	/Users/kjk/src/go/src/github.com/essentialbooks/books/books/go/0080-maps/zero_value2.go:15 +0x19d
+// =>
+// 	/zero_value2.go:15 +0x19d
+
+func isOutputError(err error, out string) bool {
+	if err == nil {
+		return false
+	}
+	if strings.Contains(out, "panic:") {
+		return false
+	}
+	return true
 }
 
 // runs `go run ${path}` and returns captured output`

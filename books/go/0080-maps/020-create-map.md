@@ -1,9 +1,9 @@
 ---
-Title: Creating a map
+Title: Create a map
 Id: 2484
 Score: 5
 ---
-One can declare and initialize a map in a single statement using a [*composite literal*][1].
+One can declare and initialize a map in a single statement using a [*composite literal*](https://golang.org/ref/spec#Composite_literals).
 
 Using automatic type Short variable declaration:
 
@@ -72,6 +72,3 @@ You can create and use a map directly, without the need to assign it to a variab
       "LastName": "Doe",
       "Age": "30"}
     fmt.Println(data)
-
-
-  [1]: https://golang.org/ref/spec#Composite_literals
