@@ -567,7 +567,8 @@ func parseBook(bookName string) (*Book, error) {
 		return nil, err
 	}
 
-	nProcs := runtime.GOMAXPROCS(-1)
+	// leave one for other programs
+	nProcs := runtime.GOMAXPROCS(-1) - 1
 
 	sem := make(chan bool, nProcs)
 	var wg sync.WaitGroup

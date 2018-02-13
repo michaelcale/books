@@ -121,7 +121,8 @@ func genAllBooks() {
 
 	copyCoversMust()
 
-	nProcs := runtime.GOMAXPROCS(-1)
+	// leave one for other programs
+	nProcs := runtime.GOMAXPROCS(-1) - 1
 
 	var books []*Book
 	for _, bookName := range allBookDirs {
