@@ -1,7 +1,6 @@
 ---
-Title: Simple CSV parsing
+Title: CSV
 Id: 20508
-Score: 1
 ---
 Consider this CSV data:
 

@@ -1,7 +1,6 @@
 ---
 Title: range statement
-Id: 801000o7
-Score: 2
+Id: 80100076
 ---
 
 Basics of `range`:
