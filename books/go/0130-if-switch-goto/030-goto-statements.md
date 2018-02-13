@@ -7,4 +7,4 @@ A `goto` statement transfers control to the statement with the corresponding lab
 
 Executing the `goto` statement must not cause any variables to come into scope that were not already in scope at the point of the `goto`.
 
-@file goto.go
+@file goto.go output
