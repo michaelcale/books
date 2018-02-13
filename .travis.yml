@@ -2,6 +2,7 @@ language: go
 
 install:
   - go get -u github.com/netlify/netlifyctl
+  - go get -u ./...
 
 script:
   - ./s/build_travis.sh
