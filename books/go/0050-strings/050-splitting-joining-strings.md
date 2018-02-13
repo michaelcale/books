@@ -1,5 +1,5 @@
 ---
-Title: Splitting and joining strings
+Title: Split and join strings
 Id: 5eq100s7
 ---
 

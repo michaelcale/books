@@ -1,7 +1,6 @@
 ---
-Title: Creating slices
+Title: Create a slice
 Id: 4807
-Score: 1
 ---
 Slices are the typical way go programmers store lists of data.
 

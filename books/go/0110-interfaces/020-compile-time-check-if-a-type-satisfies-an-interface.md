@@ -1,7 +1,6 @@
 ---
 Title: Compile-time check if a type satisfies an interface
 Id: 14631
-Score: 6
 ---
 Interfaces and implementations (types that implement an interface) are "detached". So it is a rightful question how to check at compile-time if a type implements an interface.
 

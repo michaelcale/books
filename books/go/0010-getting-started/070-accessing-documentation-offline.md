@@ -1,5 +1,5 @@
 ---
-Title: Accessing Documentation Offline
+Title: Accessing documentation offline
 Id: 24998
 ---
 For full documentation, run the command:

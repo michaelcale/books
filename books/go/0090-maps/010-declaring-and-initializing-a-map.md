@@ -1,7 +1,6 @@
 ---
-Title: Declaring and initializing a map
+Title: Declare and initialize a map
 Id: 2483
-Score: 30
 ---
 You define a map using the keyword `map`, followed by the types of its keys and its values:
 

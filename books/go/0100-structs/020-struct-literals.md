@@ -1,7 +1,6 @@
 ---
 Title: Struct literals
 Id: 12466
-Score: 5
 ---
 A value of a struct type can be written using a *struct literal* that specifies values for its fields.
 

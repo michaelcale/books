@@ -1,5 +1,5 @@
 ---
-Title: Parsing text
+Title: Parse text
 Id: 5eq100r9
 ---
 

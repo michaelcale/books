@@ -1,7 +1,6 @@
 ---
 Title: Methods
 Id: 1257
-Score: 18
 ---
 Struct methods are functions attached to structs:
 

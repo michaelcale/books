@@ -1,5 +1,5 @@
 ---
-Title: Comparing strings
+Title: Compare strings
 Id: 29828
 ---
 

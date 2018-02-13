@@ -1,5 +1,5 @@
 ---
-Title: Removing white space, characters, substrings
+Title: Remove white space, characters, substrings
 Search: Trimming white space
 Id: 5eq100da
 ---

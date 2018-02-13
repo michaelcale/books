@@ -1,7 +1,6 @@
 ---
-Title: Filtering a slice
+Title: Filter a slice
 Id: 6786
-Score: 1
 ---
 
 To filter a slice without allocating a new underlying array:

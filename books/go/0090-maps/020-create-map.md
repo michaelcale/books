@@ -1,7 +1,6 @@
 ---
 Title: Create a map
 Id: 2484
-Score: 5
 ---
 One can declare and initialize a map in a single statement using a [*composite literal*](https://golang.org/ref/spec#Composite_literals).
 

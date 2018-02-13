@@ -1,7 +1,6 @@
 ---
-Title: Iterate keys, values or both with range
+Title: Iterate over keys, values or both with range
 Id: 2486
-Score: 7
 ---
 
 Iteration order is not specified. Go randomizes the order of iteration on purpose so that code doesn't incorrectly rely on specific order.

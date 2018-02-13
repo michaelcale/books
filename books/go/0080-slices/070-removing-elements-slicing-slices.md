@@ -1,7 +1,6 @@
 ---
-Title: Removing elements from slice
+Title: Remove elements from slice
 Id: 3420
-Score: 1
 ---
 If you need to remove one or more elements from a slice, or if you need to work with a sub slice of another existing one; you can use the following method.
 

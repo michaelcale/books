@@ -1,7 +1,6 @@
 ---
-Title: Check for element in a map
+Title: Get value by key
 Id: 4650
-Score: 16
 ---
 To get a value from the map, you just have to do something like:00
 

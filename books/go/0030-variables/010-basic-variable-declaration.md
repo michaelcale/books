@@ -1,5 +1,5 @@
 ---
-Title: Basic Variable Declaration
+Title: Basic variable declaration
 Id: 2192
 ---
 Go is a statically typed language i.e. we know the type of varialbes at compile time.

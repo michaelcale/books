@@ -1,9 +1,7 @@
 ---
-Title: Anonymous struct
+Title: Anonymous structs
 Id: 1299
-Score: 18
 ---
-
 You can create anonymous structs:
 
 @file anonymous_structs.go output

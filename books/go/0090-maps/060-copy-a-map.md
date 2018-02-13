@@ -1,9 +1,7 @@
 ---
 Title: Copy a map
 Id: 9834
-Score: 8
 ---
-
 In Go all values are passed by copy.
 
 However, similar to slices, the value of a map is only a reference to underlying data.

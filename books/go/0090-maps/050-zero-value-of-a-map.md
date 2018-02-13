@@ -1,7 +1,6 @@
 ---
 Title: Zero value of a map
 Id: 2485
-Score: 9
 ---
 The zero value of a `map` is `nil` and has a length of `0`.
 

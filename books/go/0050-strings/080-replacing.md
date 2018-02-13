@@ -1,5 +1,5 @@
 ---
-Title: Replacing strings
+Title: Replace strings
 Search: Replace substring
 Id: 5eq100h1
 ---

@@ -1,7 +1,6 @@
 ---
-Title: Basic Declaration
+Title: Basic declaration
 Id: 1254
-Score: 7
 ---
 A basic struct is declared as follows:
 

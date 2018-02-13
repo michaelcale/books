@@ -1,7 +1,6 @@
 ---
-Title: Deleting a map element
+Title: Delete map element
 Id: 2489
-Score: 4
 ---
 The [`delete`](https://golang.org/pkg/builtin/#delete) built-in function removes the element with the specified key from a map.
 

@@ -1,7 +1,6 @@
 ---
-Title: Counting map elements
+Title: Count number of map entries
 Id: 2528
-Score: 14
 ---
 The built-in function [`len`](https://golang.org/pkg/builtin/#len) returns the number of elements in a `map`
 

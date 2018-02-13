@@ -1,8 +1,7 @@
 ---
-Title: Finding strings inside strings
+Title: Find string in another string
 Search: searching for strings
 Id: 30331
-Score: 1
 ---
 
 ## Find position of string in another string

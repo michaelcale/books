@@ -1,7 +1,6 @@
 ---
 Title: Zero value of slice
 Id: 6807
-Score: 1
 ---
 [Zero value](a-6069) of slice is `nil`.
 

@@ -1,5 +1,5 @@
 ---
-Title: Formatting text
+Title: Format text
 Id: 29829
 ---
 

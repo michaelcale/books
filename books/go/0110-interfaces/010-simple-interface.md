@@ -1,7 +1,6 @@
 ---
 Title: Simple interface
 Id: 4001
-Score: 9
 ---
 In Go, an interface is just a set of methods. We use an interface to specify a behavior of a given object.
 

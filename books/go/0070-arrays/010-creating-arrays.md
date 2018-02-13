@@ -1,7 +1,6 @@
 ---
 Title: Create array
 Id: 1295
-Score: 2
 ---
 An array in go is an ordered collection of same types elements.
 The basic notation to represent arrays is to use `[]` with the variable name.

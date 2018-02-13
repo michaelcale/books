@@ -1,5 +1,5 @@
 ---
-Title: Convert to lower case or upper case
+Title: Convert string to lower case or upper case
 Search: covert to title
 Id: 5eq1005a
 ---

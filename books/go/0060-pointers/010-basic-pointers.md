@@ -1,5 +1,5 @@
 ---
-Title: Basic Pointers
+Title: Basic pointers
 Id: 4054
 Score: 2
 ---
