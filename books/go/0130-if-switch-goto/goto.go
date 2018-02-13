@@ -8,6 +8,8 @@ func gotoIfOdd(n int) {
 		goto isOdd
 	}
 	fmt.Printf("%d is even\n", n)
+	return
+
 isOdd:
 	fmt.Printf("%d is odd\n", n)
 }
