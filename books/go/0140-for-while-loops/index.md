@@ -3,6 +3,34 @@ Title: for, while loops
 Id: 975
 ---
 
-## Introduction
+Go has only one looping construct: `for` loop.
 
-As one of the most basic functions in programming, loops are an important piece to nearly every programming language. Loops enable developers to set certain portions of their code to repeat through a number of loops which are referred to as iterations. This topic covers using multiple types of loops and applications of loops in Go.
+Here are basic forms.
+
+## Full form
+
+@file index.go output
+
+Every loop statement is optional.
+
+## Without initialization statement
+
+@file index2.go output
+
+## Without test exression
+
+Using `break` to terminate the loop
+
+@file index3.go output
+
+## Without increment statement
+
+@file index4.go output
+
+## Infinite loop
+
+@file index5.go output
+
+## `for` loop with `range`
+
+@file index6.go output
