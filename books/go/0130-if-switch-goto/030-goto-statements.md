@@ -1,7 +1,6 @@
 ---
 Title: goto statements
 Id: 18834
-Score: 3
 ---
 A `goto` statement transfers control to the statement with the corresponding label within the same function.
 
