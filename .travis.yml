@@ -1,5 +1,19 @@
 language: go
 
+branches:
+  only:
+    - master
+
+# https://github.com/GoogleCloudPlatform/golang-samples/blob/master/.travis.yml
+before_cache:
+  - rm -rf $GOPATH/src/github.com/essentialbooks
+  - rm -rf $GOPATH/pkg/**/github.com/essentialbooks
+
+cache:
+  directories:
+    - $GOPATH/src
+    - $GOPATH/pkg
+
 install:
   - ./s/travis_install.sh
 
