@@ -2,8 +2,8 @@
 Title: Error Handling
 Id: 785
 ---
-
 Basic error handling:
+
 @file index.go output
 
 **Important notes about error handling:**

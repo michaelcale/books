@@ -1,41 +1,13 @@
 ---
 Title: Recovering from panic
 Id: 22031
-Score: 1
 ---
-A common mistake is to declare a slice and start requesting indexes from it without initializing it, which leads to an "index out of range" panic. The following code explains how to recover from the panic without exiting the program, which is the normal behavior for a panic. In most situations, returning an error in this fashion rather than exiting the program on a panic is only useful for development or testing purposes.
+A common mistake is to declare a slice and start requesting indexes from it without initializing it, which leads to an "index out of range" panic.
 
-```go
-type Foo struct {
-    Is []int
-}
+The following code explains how to recover from the panic without exiting the program, which is the normal behavior for a panic.
 
-func main() {
-    fp := &Foo{}
-    if err := fp.Panic(); err != nil {
-        fmt.Printf("Error: %v", err)
-    }
-    fmt.Println("ok")
-}
+In most situations, returning an error in this fashion rather than exiting the program on a panic is only useful for development or testing purposes.
 
-func (fp *Foo) Panic() (err error) {
-    defer PanicRecovery(&err)
-    fp.Is[0] = 5
-    return nil
-}
-
-func PanicRecovery(err *error) {
-
-    if r := recover(); r != nil {
-        if _, ok := r.(runtime.Error); ok {
-                //fmt.Println("Panicing")
-                //panic(r)
-                *err = r.(error)
-        } else {
-            *err = r.(error)
-        }
-    }
-}
-```
+@file recover_from_panic.go
 
 The use of a separate function (rather than closure) allows re-use of the same function in other functions prone to panic.
