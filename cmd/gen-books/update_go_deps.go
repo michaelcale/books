@@ -29,11 +29,6 @@ func shouldUpdatePackage(name string) bool {
 }
 
 func updateImport(importSpec *ast.ImportSpec) {
-	if importSpec.Name != nil {
-		name := importSpec.Name.Name
-		fmt.Printf("name import: '%s'\n", name)
-		return
-	}
 	if importSpec.Path == nil {
 		return
 	}
