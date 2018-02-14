@@ -9,6 +9,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"strings"
+	"time"
 )
 
 /*
@@ -78,6 +79,8 @@ func updateGoDepsInFile(path string) {
 }
 
 func updateGoDeps() {
+	timeStart := time.Now()
+	fmt.Printf("udpateGoDeps() start\n")
 	updatedImports = make(map[string]bool)
 	dir := filepath.Join("books", "go")
 	walkFunc := func(path string, info os.FileInfo, err error) error {
@@ -92,4 +95,5 @@ func updateGoDeps() {
 		return nil
 	}
 	filepath.Walk(dir, walkFunc)
+	fmt.Printf("updateGoDeps() finished in %s\n", time.Since(timeStart))
 }
