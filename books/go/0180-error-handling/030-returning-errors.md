@@ -1,7 +1,6 @@
 ---
 Title: Returning an error
 Id: 2707
-Score: 3
 ---
 In Go you don't _raise_ an error. Instead, you _return_ an `error` in case of failure.
 

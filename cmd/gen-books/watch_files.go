@@ -97,10 +97,10 @@ func handleFileChange(path string) {
 		// TODO: figure out which book is it and add to booksToRegen
 	}
 
-	// wait a second before regenerating books. this allows to collapse
+	// wait a bit before regenerating books. this allows to collapse
 	// multiple rapid changes into a single op
 	go func(seq int32) {
-		time.Sleep(time.Second)
+		time.Sleep(time.Second * 5)
 		muRegen.Lock()
 		if seq != nextRegenSeq {
 			// another file change arrived in the meantime, so we'll allow

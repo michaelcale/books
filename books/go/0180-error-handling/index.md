@@ -2,27 +2,29 @@
 Title: Error Handling
 Id: 785
 ---
-## Introduction
-In Go, unexpected situations are handled using **errors**, not exceptions. This approach is more similar to that of C, using errno, than to that of Java or other object-oriented languages, with their try/catch blocks. However, an error is not an integer but an interface.
 
-A function that may fail typically returns an **error** as its last return value. If this error is not **nil**, something went wrong, and the caller of the function should take action accordingly.
+Basic error handling:
+@file index.go output
 
-## Remarks
-Note how in Go you don't _raise_ an error. Instead, you _return_ an error in case of failure.
+**Important notes about error handling:**
 
-If a function can fail, the last returned value is generally an `error` type.
+Unlike languages like C# or Python, Go handles errors by returning error values, not raising exceptions.
 
-```go
-// This method doesn't fail
-func DoSomethingSafe() {
-}
+Go also includes exception handling with [panic and recover](ch-4350) but it's not supposed to be used frequently.
 
-// This method can fail
-func DoSomething() (error) {
-}
+Errors are values, just like integers or string.
 
-// This method can fail and, when it succeeds,
-// it returns a string.
-func DoAndReturnSomething() (string, error) {
-}
-```
+Type `error` is a built-in [interface](ch-1221) which implements `Error() string` method.
+
+You can use your own types as `error` values by implementing `Error() string` method or you can use `errors.New(msg string)` or `fmt.Errorf(format string, args... interface{})` from standard library.
+
+To indicate no errors, return `nil`.
+
+If a function returns errors, it should always be the last returned value.
+
+Often you want to propagate error value up to the caller until a point in your code where you want to handle it.
+
+**You should always check for errors.**
+
+You can often see people asking on mailing lists or StackOverflow why their code doesn't and it would be obvious if the code didn't skip error checking.
+

@@ -1,52 +1,45 @@
 ---
-Title: Creating an error value
+Title: Creating errors
 Id: 2705
-Score: 12
 ---
-The simplest way to create an error is by using the [`errors`](https://golang.org/pkg/errors/) package.
+
+There are several ways to create an error value.
+
+## Use errors.New
+
+The simplest way, `errors.New(msg string)` creates error value from string.
 
 ```go
-errors.New("this is an error")
+return errors.New("error created with errors.New")
 ```
 
-If you want to add additional information to an error, the [`fmt`](https://golang.org/pkg/fmt/) package also provides a useful error creation method:
+## Use fmt.Errorf
+
+For more complex error messages, `fmt.Errorf(format string, args ...interface{})` takes a formatting string and arguments:
 
 ```go
-var f float64
-fmt.Errorf("error with some additional information: %g", f)
+return fmt.Errorf("error created with %s", "fmt.Errorf")
 ```
 
-Here's a full example, where the error is returned from a function:
+It's a shortcut for `errors.New(fmt.Sprintf(...))`.
+
+## Use global error variable
 
 ```go
-package main
+// ErrGlobal exported so that others can compare returned error value with this variable
+var ErrGlobal = errors.New("global error variable")
 
-import (
-    "errors"
-    "fmt"
-)
-
-var ErrThreeNotFound = errors.New("error 3 is not found")
-
-func main() {
-    fmt.Println(DoSomething(1)) // succeeds! returns nil
-    fmt.Println(DoSomething(2)) // returns a specific error message
-    fmt.Println(DoSomething(3)) // returns an error variable
-    fmt.Println(DoSomething(4)) // returns a simple error message
-}
-
-func DoSomething(someID int) error {
-    switch someID {
-    case 3:
-        return ErrThreeNotFound
-    case 2:
-        return fmt.Errorf("this is an error with extra info: %d", someID)
-    case 1:
-        return nil
-    }
-
-    return errors.New("this is an error")
-}
+return ErrGlobal
 ```
 
-[Playground](https://play.golang.org/p/4xlwXJo2m0)
+Sometimes you want the error to have an identity so that callers can test if returned error is this specific error. You can do it by declaring global variable as `ErrGlobal` in example above.
+
+One example of such error from standard library is `io.EOF` although usually the naming convetion for such errors is `Err*`.
+
+## Nil indicates no error
+
+To indicate there was no error, return nil.
+
+
+Finally, you can [create custom error type](a-2706).
+
