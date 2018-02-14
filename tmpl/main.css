@@ -1,14 +1,17 @@
 body {
-    margin: 20px;
 
-    font-family: 'Open Sans', sans;
-    /* github font */
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    /* font-family: 'Open Sans', sans; */
+
     /* stack overflow font */
-    font-family: Arial,"Helvetica Neue",Helvetica,sans-serif;
+    /* font-family: Arial,"Helvetica Neue",Helvetica,sans-serif; */
+
+    /* github font see http://markdotto.com/2018/02/07/github-system-fonts/ */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
     font-size: 16px;
     color: rgb(35, 35, 35);
+
+    margin: 20px;
 }
 
 /* h1 by default is 2em, we want something smaller */
