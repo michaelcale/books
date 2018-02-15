@@ -1,5 +1,5 @@
 ---
-Title: Timout reading from channel
+Title: Timout reading from channel with select
 Id: 6050
 ---
 Receiving froma channel with `<- chan` or `for range` loop blocks.

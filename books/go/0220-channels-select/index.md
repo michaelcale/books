@@ -1,8 +1,7 @@
 ---
-Title: Channels
+Title: Channels and aelect
 Id: 1263
 ---
-
 A channel is a thread-safe queue of values of a given type.
 
 A primary use for channels is to communicate between goroutines.

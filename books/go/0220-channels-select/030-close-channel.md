@@ -2,7 +2,6 @@
 Title: Closing channels
 Id: rd6000v9
 ---
-
 You can [close](a-rd6000v9) a channel with `close(chan)`.
 
 Main purpose of closing a channel is to notify worker goroutines that their work is done and they can finish.

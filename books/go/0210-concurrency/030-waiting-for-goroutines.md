@@ -18,6 +18,6 @@ WaitGroup usage in order of execution:
  3. Decreasing the counter. This must be done at the exit of a goroutine. By using a deferred call, we make sure that it [will be called whenever function ends](http://golang.org/ref/spec#Defer_statements), no matter how it ends.
  4. Waiting for the counter to reach 0. This must be done in the main goroutine to prevent the program from exiting before all goroutines have finished.
 
-\* Parameters are [evaluated before starting a new goroutine](http://golang.org/ref/spec#Go_statements).
+Parameters are evaluated [before starting a new goroutine](http://golang.org/ref/spec#Go_statements).
 
 Thus it is necessary to define their values explicitly before `wg.Add(10)` so that possibly-panicking code will not increase the counter. Adding 10 items to the WaitGroup, so it will wait for 10 items before `wg.Wait` returns the control back to `main()` goroutine. Here, the value of i is defined in the for loop.

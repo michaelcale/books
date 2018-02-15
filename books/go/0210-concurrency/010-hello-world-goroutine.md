@@ -6,7 +6,7 @@ Single channel, single goroutine, one write, one read.
 
 @file hello_world.go output
 
-[Run it on playground](https://play.golang.org/p/t-5U31vPcb)
+[Playground](https://play.golang.org/p/t-5U31vPcb)
 
 The channel `ch` is an **[unbuffered or synchronous channel](https://golang.org/doc/effective_go.html#channels)**.
 
