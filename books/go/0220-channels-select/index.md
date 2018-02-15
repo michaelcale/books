@@ -1,5 +1,5 @@
 ---
-Title: Channels and aelect
+Title: Channels and select
 Id: 1263
 ---
 A channel is a thread-safe queue of values of a given type.

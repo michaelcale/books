@@ -1,27 +1,17 @@
 ---
-Title: Mutex Locking
+Title: Read-Write mutes (RWMutex)
 Id: 8652
-Score: 1
 ---
-Mutex locking in Go allows you to ensure that only one goroutine at a time has a lock:
+In a `sync.Mutex` `Lock()` always takes an exclusive lock.
 
-```go
-import "sync"
+In read-heavy scenarios we can improve performance if we allow multiple readers but only one writer.
 
-func mutexTest() {
-    lock := sync.Mutex{}
-    go func(m *sync.Mutex) {
-        m.Lock()
-        defer m.Unlock()   // Automatically unlock when this function returns
-        // Do some things
-    }(&lock)
+A `sync.RWMutex` has 2 types of lock function: lock for reading and lock for writing.
 
-    lock.Lock()
-    // Do some other things
-    lock.Unlock()
-}
-```
+It follows the following rules:
+* a writer lock takes exclusive lock
+* a reader lock will allow another readers but not writer
 
-Using a `Mutex` allows you to avoid race conditions, concurrent modifications, and other issues associated with multiple concurrent routines operating on the same resources. Note that `Mutex.Unlock()` can be executed by any routine, not just the routine that got the lock. Also note that the call to `Mutex.Lock()` will not fail if another routine holds the lock; it will block until the lock is released.
+Here's a cache variant that uses read-write lock:
 
-**Tip:** Whenever you're passing a Mutex variable to a function, always pass it as a pointer. Otherwise a copy is made of your variable, which defeats the purpose of the Mutex. If you're using an older Go version (< 1.7), the compiler will not warn you about this mistake!
+@file rwlock.go output
