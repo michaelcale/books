@@ -17,13 +17,13 @@ func expensiveOperation(n int) int {
 
 func getCached(n int) int {
 	mu.Lock()
-	if v, isCached := cache[n]; isCached {
-		mu.Unlock()
+	v, isCached := cache[n]
+	mu.Unlock()
+	if isCached {
 		return v
 	}
-	mu.Unlock()
 
-	v := expensiveOperation(n)
+	v = expensiveOperation(n)
 
 	mu.Lock()
 	cache[n] = v
