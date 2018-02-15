@@ -10,6 +10,6 @@ Each stack's function will exit and run deferred calls until the panic is handle
 
 If this occurs, the argument provided to panic and a stack trace will be printed to `stderr`.
 
-@file index.go output allow_error
+@file panic.go output allow_error
 
 `panic` accepts any type as its parameter.

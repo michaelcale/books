@@ -123,6 +123,8 @@ func handleFileChange(path string) {
 	}(nextRegenSeq)
 }
 
+// TODO: when a directory is renamed or created, I need to add it
+// to the list of watched directories
 func rebuildOnChanges() {
 	softErrorMode = true
 	dirs, err := getDirsRecur("tmpl")

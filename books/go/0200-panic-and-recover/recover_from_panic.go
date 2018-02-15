@@ -11,34 +11,26 @@ type Foo struct {
 }
 
 type Foo struct {
-    Is []int
-}
-
-func main() {
-    fp := &Foo{}
-    if err := fp.Panic(); err != nil {
-        fmt.Printf("Error: %v", err)
-    }
-    fmt.Println("ok")
+	Is []int
 }
 
 func (fp *Foo) Panic() (err error) {
-    defer PanicRecovery(&err)
-    fp.Is[0] = 5
-    return nil
+	defer PanicRecovery(&err)
+	fp.Is[0] = 5
+	return nil
 }
 
 func PanicRecovery(err *error) {
 
-    if r := recover(); r != nil {
-        if _, ok := r.(runtime.Error); ok {
-                //fmt.Println("Panicing")
-                //panic(r)
-                *err = r.(error)
-        } else {
-            *err = r.(error)
-        }
-    }
+	if r := recover(); r != nil {
+		if _, ok := r.(runtime.Error); ok {
+			//fmt.Println("Panicing")
+			//panic(r)
+			*err = r.(error)
+		} else {
+			*err = r.(error)
+		}
+	}
 }
 
 func main() {
@@ -49,4 +41,4 @@ func main() {
 	fmt.Println("ok")
 }
 
-x// :show end
+// :show end
