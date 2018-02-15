@@ -15,15 +15,19 @@ Basic of channels:
 
 A [zero value](a-6069) of a channel is `nil` so the first thing to do is to create a channel with `make(chan ${type})`.
 
-To put value at the end of a queue use send `chan <-` operator.
+Send operator `chan <- value` enqueues value at the end.
 
 If channel is full, `<-` will block.
 
 Send on a `nil` channel blocks forever.
 
-To retrieve value from a queue use retrieve `<- chan` operator. If channel is empty, retrieve will block.
+Retrieve statement `value = <- chan` picks up the value from the front of the queue.
 
-Another way to retrieve a value form channel is to use `select` statement. Using `select` allows to wait on multiple channels, do a non-blocking wait and implement [timeouts](a-6050).
+If channel is empty, retrieve will block.
+
+Another way to retrieve a value form channel is to use `select` statement.
+
+Using `select` allows to wait on multiple channels, do a non-blocking wait and implement [timeouts](a-6050).
 
 Yet another is to use [range](a-4134).
 
