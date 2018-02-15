@@ -1,5 +1,5 @@
 ---
-Title: Parsing CSV files
+Title: CSV
 Id: 5818
 ---
 ## Syntax

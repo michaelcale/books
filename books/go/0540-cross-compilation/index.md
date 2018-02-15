@@ -1,5 +1,5 @@
 ---
-Title: Cross Compilation
+Title: Cross compilation
 Id: 1020
 ---
 ## Introduction
