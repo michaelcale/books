@@ -7,21 +7,40 @@ A channel is a thread-safe queue of values of a given type.
 
 A primary use for channels is to communicate between goroutines.
 
-For example,
+For that reason we talk about sending values to a channel (`ch <- value`) and receving values from a channel (`value <- ch`).
 
-## Introduction
+Basic of channels:
 
-A channel contains values of a given type. Values can be written to a channel and read from it, and they circulate inside the channel in first-in-first-out order. There is a distinction between buffered channels, which can contain several messages, and unbuffered channels, which cannot. Channels are typically used to communicate between goroutines, but are also useful in other circumstances.
+@file index.go output
 
-## Syntax
-- make(chan int) // create an unbuffered channel
-- make(chan int, 5) // create a buffered channel with a capacity of 5
-- close(ch) // closes a channel "ch"
-- ch <- 1 // write the value of 1 to a channel "ch"
-- val := <-ch // read a value from channel "ch"
-- val, ok := <-ch // alternate syntax; ok is a bool indicating if the channel is closed
+A [zero value](a-6069) of a channel is `nil` so the first thing to do is to create a channel with `make(chan ${type})`.
 
-## Remarks
-A channel holding the empty struct `make(chan struct{})` is a clear message to the user that no information is transmitted over the channel and that it's purely used for synchronization.
+To put value at the end of a queue use send `chan <-` operator.
 
-Regarding unbuffered channels, a channel write will block until a corresponding read occurs from another goroutine. The same is true for a channel read blocking while waiting for a writer.
+If channel is full, `<-` will block.
+
+Send on a `nil` channel blocks forever.
+
+To retrieve value from a queue use retrieve `<- chan` operator. If channel is empty, retrieve will block.
+
+Another way to retrieve a value form channel is to use `select` statement. Using `select` allows to wait on multiple channels, do a non-blocking wait and implement [timeouts](a-6050).
+
+Yet another is to use [range](a-4134).
+
+Channels have a fixed capacity.
+
+Channel created with `make(chan bool)` is called unbuffered channel. Send on unbuffered channel blocks until a corresponding receive.
+
+Channel created with `make(chan int, 3)` is a channel of integets with capacity of 5. It's called a buffered channel.
+
+The first 3 sends will finish immediately, the 4th will block until a value is recieved from a channel.
+
+You can [close](a-rd6000v9) a channel with `close(chan)`.
+
+Closing channel twice [panics](ch-4350).
+
+Sending to closed channel [panics](ch-4350).
+
+A receive from closed channels returns zero value immediately.
+
+A closed channel finishes `range` over a channel.

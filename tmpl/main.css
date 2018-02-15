@@ -96,6 +96,7 @@ a.blue:hover {
 
 #top-header {
     position: fixed;
+    z-index: 2;
     top: 0px;
     /* same as body margin */
     left: 20px;

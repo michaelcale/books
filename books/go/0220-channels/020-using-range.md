@@ -1,41 +1,19 @@
 ---
-Title: Using range
+Title: Using range to read from a channel
 Id: 4134
-Score: 2
 ---
 When reading multiple values from a channel, using `range` is a common pattern:
 
-```go
-func foo() chan int {
-    ch := make(chan int)
-
-    go func() {
-        ch <- 1
-        ch <- 2
-        ch <- 3
-        close(ch)
-
-    }()
-
-    return ch
-}
-
-func main() {
-    for n := range foo() {
-        fmt.Println(n)
-    }
-
-    fmt.Println("channel is now closed")
-}
-```
+@file range.go output
 
 [Playground](https://play.golang.org/p/18ODvaZub9)
 
-Output
+Using a `for range` loop is one of three ways to read values from a channel.
 
-```text
-1
-2
-3
-channel is now closed
-```
+The loop ends when the channel is closed.
+
+This is a common pattern when using worker pool:
+* create a single channel for all workers
+* launch workers
+* workers use `for v := range chan` to pick up jobs to process
+* after enquing all jobs, close the channel so that worker goroutines end when they process all jobs from a channel
