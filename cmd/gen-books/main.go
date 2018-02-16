@@ -163,6 +163,10 @@ func main() {
 		genTwitterImagesAndExit()
 	}
 
+	if false {
+		testGetGoPlaygroundShareIDAndExit()
+	}
+
 	if flgUpdateGoPlayground {
 		goBookDir := filepath.Join("books", "go")
 		updateGoPlaygroundLinks(goBookDir)
