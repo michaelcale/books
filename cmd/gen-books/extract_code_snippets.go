@@ -154,7 +154,7 @@ type FileDirective struct {
 
 // String serializes FileDirective back to string format
 func (fd *FileDirective) String() string {
-	s := fmt.Sprintf("@file %s ", fd.FileName)
+	s := fmt.Sprintf("@file %s", fd.FileName)
 	if fd.WithOutput {
 		s += " output"
 	}
@@ -165,10 +165,10 @@ func (fd *FileDirective) String() string {
 		return s + " no_playground"
 	}
 	if fd.Sha1Hex != "" {
-		s += "sha1:" + fd.Sha1Hex
+		s += " sha1:" + fd.Sha1Hex
 	}
 	if fd.GoPlaygroundID != "" {
-		s += "goplayground:" + fd.GoPlaygroundID
+		s += " goplayground:" + fd.GoPlaygroundID
 	}
 	return s
 }
