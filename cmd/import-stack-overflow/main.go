@@ -360,7 +360,7 @@ func importBook(docTag *DocTag, bookName string) {
 
 		dirChapter := fmt.Sprintf("%04d-%s", chapter, common.MakeURLSafe(t.Title))
 		dirPath := filepath.Join(bookTopDir, dirChapter)
-		chapterIndexPath := filepath.Join(dirPath, "index.md")
+		chapterIndexPath := filepath.Join(dirPath, "000-index.md")
 		writeIndexTxtMust(chapterIndexPath, t)
 		//fmt.Printf("%s\n", dirChapter)
 		chapter += 10

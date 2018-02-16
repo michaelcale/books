@@ -93,9 +93,9 @@ type Chapter struct {
 	ID         string
 	Book       *Book
 	ChapterDir string
-	// full path to index.md file
+	// full path to 000-index.md file
 	indexFilePath string
-	indexDoc      kvstore.Doc // content of index.md file
+	indexDoc      kvstore.Doc // content of 000-index.md file
 	Title         string      // extracted from IndexKV, used in book_index.tmpl.html
 	FileNameBase  string      // format: ch-${ID}-${Title}, used for URL and .html file name
 	Articles      []*Article
@@ -114,11 +114,11 @@ func (c *Chapter) GitHubURL() string {
 	return c.Book.GitHubURL() + "/" + c.ChapterDir
 }
 
-// GitHubEditURL returns url to edit index.md document
+// GitHubEditURL returns url to edit 000-index.md document
 func (c *Chapter) GitHubEditURL() string {
 	bookDir := filepath.Base(c.Book.destDir)
 	uri := gitHubBaseURL + "/edit/master/books/" + bookDir
-	return uri + "/" + c.ChapterDir + "/index.md"
+	return uri + "/" + c.ChapterDir + "/000-index.md"
 }
 
 // VersionsHTML returns html version of versions
@@ -292,7 +292,7 @@ func (b *Book) ArticlesCount() int {
 	for _, ch := range b.Chapters {
 		n += len(ch.Articles)
 	}
-	// each chapter has index.md which is also an article
+	// each chapter has 000-index.md which is also an article
 	n += len(b.Chapters)
 	b.cachedArticlesCount = n
 	return n
@@ -401,7 +401,7 @@ func paarseKVFileWithIncludes(path string) (kvstore.Doc, error) {
 
 func parseChapter(chapter *Chapter) error {
 	dir := filepath.Join(chapter.Book.sourceDir, chapter.ChapterDir)
-	path := filepath.Join(dir, "index.md")
+	path := filepath.Join(dir, "000-index.md")
 	chapter.indexFilePath = path
 	doc, err := paarseKVFileWithIncludes(path)
 	if err != nil {
@@ -438,7 +438,7 @@ func parseChapter(chapter *Chapter) error {
 
 		// some files are not meant to be processed here
 		switch strings.ToLower(name) {
-		case "index.md":
+		case "000-index.md":
 			continue
 		}
 		path = filepath.Join(dir, name)

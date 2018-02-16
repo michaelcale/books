@@ -469,7 +469,7 @@ pre.chroma {
     border: 1px solid #a4a4a4;
     padding: 4px 8px;
     margin: 0;
-    margin-right: -5px; /* no idea why I need this */
+    margin-right: -6px; /* no idea why I need this */
     display: inline-block;
 }
 

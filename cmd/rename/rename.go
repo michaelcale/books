@@ -105,7 +105,7 @@ func renameFilesInChapter(chapterDir string) error {
 	}
 	var names []string
 	for _, file := range files {
-		if file == "index.md" {
+		if file == "000-index.md" {
 			continue
 		}
 		names = append(names, file)
@@ -147,6 +147,7 @@ func renameBook(book string) {
 	renameChapters(bookDir, chapters)
 }
 
+// TODO: remove as this is likely one shot thing
 func renameIndexFilesAndExit() {
 	dir := filepath.Join("books", "go")
 	filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
@@ -167,9 +168,6 @@ func renameIndexFilesAndExit() {
 }
 
 func main() {
-	if true {
-		renameIndexFilesAndExit()
-	}
 	books, err := common.GetDirs("books")
 	u.PanicIfErr(err)
 	for _, book := range books {
