@@ -46,8 +46,6 @@ fmt.Println(string(bytes))
 // {"name":"Rome","temp":30}
 ```
 
-[Playground](https://play.golang.org/p/KlziJIDWPW)
-
 ## Decoding
 
 To decode a `City` struct, use `json.Unmarshal` as in the basic example:
@@ -68,5 +66,3 @@ if err := json.Unmarshal(bytes, &city); err != nil {
 fmt.Println(city)
 // {Rome 30}
 ```
-
-[Playground](https://play.golang.org/p/VHS28E-234)

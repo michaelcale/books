@@ -194,7 +194,7 @@ func parseFileDirective(line string) (*FileDirective, error) {
 		if len(s) == 0 {
 			continue
 		}
-		s = strings.TrimSpace(strings.ToLower(s))
+		s = strings.TrimSpace(s)
 		switch {
 		case s == "output":
 			res.WithOutput = true
@@ -247,7 +247,14 @@ func extractCodeSnippetsAsMarkdownLines(baseDir string, line string) ([]string, 
 	sep := "|"
 	u.PanicIf(strings.Contains(lang, sep), "lang ('%s') contains '%s'", lang, sep)
 	u.PanicIf(strings.Contains(path, sep), "path ('%s') contains '%s'", path, sep)
-	res := []string{"```" + lang + "|" + getGitHubPathForFile(path)}
+	// this line is parsed in parseCodeBlockInfo
+	s := fmt.Sprintf("%s|github|%s", lang, getGitHubPathForFile(path))
+	if directive.GoPlaygroundID != "" {
+		// alternative would be https://play.golang.org/p/ + ${id}
+		uri := "https://goplay.space/#" + directive.GoPlaygroundID
+		s += "|playground|" + uri
+	}
+	res := []string{"```" + s}
 	res = append(res, lines...)
 	res = append(res, "```")
 

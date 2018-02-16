@@ -11,4 +11,3 @@ encoding.Encode(encodedFooBar, []byte(foobar))
 fmt.Printf("%s", encodedFooBar)
 // Output: Zm9vIGJhcg==
 ```
-[Playground](https://play.golang.org/p/A5c_BSMFrQ)

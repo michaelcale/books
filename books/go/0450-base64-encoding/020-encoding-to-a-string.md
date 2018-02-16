@@ -9,4 +9,3 @@ fmt.Println(str)
 // Output: Zm9vIGJhcg==
 ```
 
-[Playground](https://play.golang.org/p/vpbKRkEtsU)

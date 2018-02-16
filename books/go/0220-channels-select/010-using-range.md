@@ -6,8 +6,6 @@ When reading multiple values from a channel, using `range` is a common pattern:
 
 @file range.go output sha1:19ae0b16e02794c207b8cd340299840413d5c499 goplayground:kM-SL7aRwXM
 
-[Playground](https://play.golang.org/p/18ODvaZub9)
-
 Using a `for range` loop is one of three ways to read values from a channel.
 
 The loop ends when the channel is closed.

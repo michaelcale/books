@@ -36,5 +36,3 @@ type Company struct {
 }
 ```
 
-[Example in Playground](https://play.golang.org/p/q8keNCcYAn)
-

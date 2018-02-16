@@ -24,8 +24,6 @@ fmt.Println(string(data))
 // "["foo","bar"]"
 ```
 
-[Playground](https://play.golang.org/p/ihOs95HToW)
-
 Here's some basic examples of encoding for built-in data types:
 
 ```go
@@ -47,7 +45,5 @@ data, _ = json.Marshal(map[string]int{"London": 18, "Rome": 30})
 fmt.Println(string(data))
 // {"London":18,"Rome":30}
 ```
-
-[Playground](https://play.golang.org/p/pcX_AGeSIz)
 
 Encoding simple variables is helpful to understand how the JSON encoding works in Go. However, in the real world, you'll likely [encode more complex data stored in structs](a-22028).

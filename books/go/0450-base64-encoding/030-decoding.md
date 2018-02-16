@@ -22,4 +22,3 @@ fmt.Printf("`%s`", decoded)
 // Output: `foo bar`
 ```
 
-[Playground](https://play.golang.org/p/J5qxlJpaCL)

@@ -29,8 +29,6 @@ func main() {
 }
 ```
 
-[Playground](https://play.golang.org/p/MfBhvhNMa-)
-
 ## Embedding
 
 In the previous example, `Request` is an embedded field. Composition can also be achieved by embedding a different type. This is useful, for example, to decorate a Struct with more functionality. For example, continuing with the Resource example, we want a function that formats the content of the Resource field to prefix it with `http://` or `https://`. We have two options: create the new methods on AuthenticatedRequest or **embed** it from a different struct:
@@ -72,5 +70,3 @@ func main() {
 Look that the `AuthenticatedRequest` that has a `ResourceFormatter` embedded struct.
 
 **But** the downside of it is that you cannot access objects outside of your composition. So `ResourceFormatter` cannot access members from `AuthenticatedRequest`.
-
-[Playground](https://play.golang.org/p/Ngl3D8UW5I)

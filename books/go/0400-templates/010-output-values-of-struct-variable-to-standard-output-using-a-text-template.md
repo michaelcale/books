@@ -34,5 +34,3 @@ func main() {
     }
 }
 ```
-
-[Playground](https://play.golang.org/p/HwaxzuwO7A)

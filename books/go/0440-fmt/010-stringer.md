@@ -32,5 +32,3 @@ func main() {
     // output: John Doe <johndoe@example.com>
 }
 ```
-
-[Playground](https://play.golang.org/p/Cew5S4nl94)

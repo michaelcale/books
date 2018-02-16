@@ -13,5 +13,3 @@ if err != nil {
 fmt.Printf("%s", decoded)
 // Output: n,,
 ```
-
-[Playground](https://play.golang.org/p/h2qngYncRs)

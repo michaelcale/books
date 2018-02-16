@@ -9,8 +9,6 @@ A common solution for this is to use a [sync.WaitGroup]( http://golang.org/pkg/s
 
 @file waiting_for_goroutines.go output sha1:232512714a4b2adcb99a7edd243ab6acab9bf040 goplayground:8DqdlC1x5fs
 
-[Playground](https://play.golang.org/p/64vfZSXXHv)
-
 WaitGroup usage in order of execution:
 
  1. Declaration of global variable. Making it global is the easiest way to make it visible to all functions and methods.

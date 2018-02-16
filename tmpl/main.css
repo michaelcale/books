@@ -450,16 +450,34 @@ pre.chroma {
     right: 0;
 }
 
-.code-box-file-name {
-    border: 1px solid #e5e5e5;
-    padding: 2px 4px;
+.code-box-github {
+    border: 1px solid #a4a4a4;
+    padding: 4px 8px;
+    margin: 0;
+    display: inline-block;
 }
 
-.code-box-file-name a {
+.code-box-github a {
     text-decoration: none;
 }
 
-.code-box-file-name a:hover {
+.code-box-github a:hover {
+    text-decoration: underline;
+}
+
+.code-box-playground {
+    border: 1px solid #a4a4a4;
+    padding: 4px 8px;
+    margin: 0;
+    margin-right: -5px; /* no idea why I need this */
+    display: inline-block;
+}
+
+.code-box-playground a {
+    text-decoration: none;
+}
+
+.code-box-playground a:hover {
     text-decoration: underline;
 }
 

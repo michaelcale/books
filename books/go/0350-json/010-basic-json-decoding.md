@@ -26,8 +26,6 @@ fmt.Println(data)
 map[London:18 Rome:30]
 ```
 
-[Playground](https://play.golang.org/p/CjplBCptH8)
-
 Notice how in the example above we knew in advance both the type of the key and the value. But this is not always the case. In fact, in most cases the JSON contains mixed value types.
 
 ```go
@@ -47,8 +45,6 @@ fmt.Println(temp) // 30
 city := data["city"].(string)
 fmt.Println(city) // "Rome"
 ```
-
-[Playground](https://play.golang.org/p/SawE86QKRt)
 
 In the last example above we used a generic map to store the decoded value. We must use a `map[string]interface{}` because we know that the keys are strings, but we don't know the type of their values in advance.
 

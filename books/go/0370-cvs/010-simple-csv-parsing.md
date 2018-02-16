@@ -38,4 +38,3 @@ post with id 2 is titled "second time": "My\nsecond\nentry."
 2009/11/10 23:00:00 EOF
 ```
 
-[Playground](https://play.golang.org/p/d2E6-CGGIe).

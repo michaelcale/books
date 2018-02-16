@@ -61,7 +61,7 @@ import (
 )
 ```
 
-Above example imports `fmt` into the global namespace and lets you call, for example, `Printf` directly: [Playground](https://play.golang.org/p/CT2V79T7h3)
+Above example imports `fmt` into the global namespace and lets you call, for example, `Printf`.
 
 If you import a package but don't use any of it's exported names, the Go compiler will print an error-message. To circumvent this, you can set the alias to the underscore:
 

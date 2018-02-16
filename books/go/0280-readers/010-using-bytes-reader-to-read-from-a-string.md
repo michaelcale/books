@@ -17,5 +17,3 @@ if err != nil {
 
 fmt.Printf("Read %d bytes: %s", n, bs)
 ```
-
-[Playground](https://play.golang.org/p/cRSRKwKcXr)

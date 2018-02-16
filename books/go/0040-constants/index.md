@@ -12,4 +12,3 @@ Constants can be used like variable, except for the fact that the value cannot b
 
 @file index_2.go output sha1:52ef5d6bf9bb944f7c51c3277067be7e02d1919b goplayground:jBjzn1DX-H2
 
-[Playground](https://play.golang.org/p/MI48yM88dE)

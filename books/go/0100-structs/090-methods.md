@@ -6,8 +6,6 @@ Struct methods are functions attached to structs:
 
 @file methods.go output sha1:aff9579292ce1e92613e9fd085e90f71e6278acc goplayground:xp3FjKhUefO
 
-[Playground](https://play.golang.org/p/I5e3yOaRcI)
-
 The only difference is the addition of the method receiver.
 
 It may be declared either as an instance of the type or a pointer to an instance of the type.

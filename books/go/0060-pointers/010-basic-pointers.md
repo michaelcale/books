@@ -10,5 +10,3 @@ Go supports [pointers](http://en.wikipedia.org/wiki/Pointer_(computer_programmin
 Once these functions are defined, you can do the following:
 
 @file basic_pointers2.go output sha1:1cbdd11710c2a36136fa34fb32b5e3a6c9165fc2 goplayground:KBmkLD8MbUZ
-
-[Playground](https://play.golang.org/p/KdE4TBbUL2)

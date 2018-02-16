@@ -62,6 +62,4 @@ Output:
 {Total:1 Links:{Next:https://api.twitch.tv/kraken/channels/foo/subscriptions?direction=ASC&limit=25&offset=25} Subs:[{Created:2011-11-23T02:53:17Z User:{Name:bar ID:123456}}]}
 ```
 
-[Playground](https://play.golang.org/p/bSNc758imH)
-
 For the general case see also [encoding and decoding go structs](a-22028).

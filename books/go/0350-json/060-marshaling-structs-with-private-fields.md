@@ -12,8 +12,6 @@ type MyStruct struct {
 }
 ```
 
-[Playground](https://play.golang.org/p/Zk94Il2ANZ)
-
 Now you want to `Marshal()` this struct into valid JSON for storage in something like etcd. However, since `uuid` in not exported, the `json.Marshal()` skips it. What to do? Use an anonymous struct and the `json.MarshalJSON()` interface! Here's an example:
 
 ```go
@@ -36,5 +34,3 @@ func (m MyStruct) MarshalJSON() ([]byte, error {
     return j, nil
 }
 ```
-
-[Playground](https://play.golang.org/p/Bv2k9GgbzE)

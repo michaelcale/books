@@ -38,4 +38,3 @@ You can also use a `for` loop over slices with `range`. The first variable is th
         fmt.Println("Index: " + index + " Value: " + value)  // Prints "Index: 0 Value: 5" (and continues until end of slice)
     }
 
-[Playground](https://play.golang.org/p/l9M34jbOla)

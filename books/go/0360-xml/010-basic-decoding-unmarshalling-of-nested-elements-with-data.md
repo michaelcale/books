@@ -36,5 +36,3 @@ func main() {
     fmt.Println(obj.Child2.Cdata1)
 }
 ```
-
-[Playground](https://play.golang.org/p/yQrZPNTaWo)

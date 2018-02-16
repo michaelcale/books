@@ -29,7 +29,7 @@ for idx, val := range s {
 // 1 0
 // 2 0
 ```
-[Run it on play.golang.org](https://play.golang.org/p/E1OoWPDjwW)
+
 
 You cannot access elements beyond the length of a slice, even if the index is within capacity:
 ```
