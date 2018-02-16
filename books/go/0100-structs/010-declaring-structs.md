@@ -4,7 +4,7 @@ Id: 1254
 ---
 A basic struct is declared as follows:
 
-@file declaring_structs.go output
+@file declaring_structs.go output sha1:4ecaedf9b0c9c347afebac3d046cee4d9b4bfee6 goplayground:iF8rNujJcx6
 
 Each value is called a field.
 

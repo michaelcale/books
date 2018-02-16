@@ -17,5 +17,5 @@ It's called a hash table in C++.
 <!-- TODO: chapter about map[string]interface{}, mention why and JSON -->
 
 Basics of maps:
-@file index.go output
+@file index.go output sha1:04c33cb1a904ceed4f184abe1882ba87fc5df24b goplayground:HhAI0bJJHIz
 

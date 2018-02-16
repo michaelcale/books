@@ -25,7 +25,7 @@ You can query the type at runtime using:
 
 Basic example:
 
-@file index.go output
+@file index.go output sha1:d0df50dae2e229e7436bc7bfb0d158624fc1830b goplayground:ScwPsMsm6tT
 
 <!-- TODO: how interface is implemented -->
 

@@ -21,7 +21,7 @@ Most functions that operate on streams of binary data (e.g. json decoder) take `
 
 Here's how to define and implement a simple interface:
 
-@file index.go output
+@file index.go output sha1:4211ae2b94a999a48fd954197938d1b8dec96086 goplayground:ba83kFxk4Yg
 
 Unlike most other languages, interfaces are satisfied implicitly.
 

@@ -13,4 +13,4 @@ Unlike classes in C++ or Java, structs don't implement inheritance. You can achi
 
 Basics of structs:
 
-@file index.go output
+@file index.go output sha1:c886c9f347e340614c5a903c68b3a586d0f448df goplayground:9KlRF2XbUbG

@@ -11,7 +11,7 @@ It's convenient but also makes it possible to not fully implement an interface b
 
 There's a way to a compile-type check for that:
 
-@file verify_type_implements_interface.go output allow_error
+@file verify_type_implements_interface.go output allow_error sha1:f7d4f9350f9cd725e1a6a70adf8b0d14e3f43130 goplayground:eusjQ3VGlm3
 
 Our intent was for `MyReadCloser` to implement `io.ReadCloser` interface.
 

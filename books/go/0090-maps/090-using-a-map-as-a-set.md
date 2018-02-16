@@ -7,4 +7,4 @@ Some languages have a native structure for sets. To make a set in Go, it's best 
 
 For example, with strings:
 
-@file maps_as_sets.go output
+@file maps_as_sets.go output sha1:9356d0423461567e7128b60aea266d356ef7e33b goplayground:CCCOYYSl2R0
