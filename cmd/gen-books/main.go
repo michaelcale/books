@@ -15,15 +15,17 @@ import (
 )
 
 var (
-	flgAnalytics      string
-	flgPreview        bool
-	allBookDirs       []string
-	soUserIDToNameMap map[int]string
+	flgAnalytics          string
+	flgPreview            bool
+	flgUpdateGoPlayground bool
+	allBookDirs           []string
+	soUserIDToNameMap     map[int]string
 )
 
 func parseFlags() {
 	flag.StringVar(&flgAnalytics, "analytics", "", "google analytics code")
-	flag.BoolVar(&flgPreview, "preview", false, "if true, will start watching for file changes and re-build everything")
+	flag.BoolVar(&flgPreview, "preview", false, "if true will start watching for file changes and re-build everything")
+	flag.BoolVar(&flgUpdateGoPlayground, "update-go-playground", false, "if true will upgrade links to go playground")
 	flag.Parse()
 }
 
@@ -159,6 +161,12 @@ func main() {
 
 	if false {
 		genTwitterImagesAndExit()
+	}
+
+	if flgUpdateGoPlayground {
+		goBookDir := filepath.Join("books", "go")
+		updateGoPlaygroundLinks(goBookDir)
+		os.Exit(0)
 	}
 
 	booksToImport := getBooksToImport(getBookDirs())

@@ -144,13 +144,16 @@ func getGitHubPathForFile(path string) string {
 // FileDirective describes result of parsing
 // @file verify_type_implements_interface.go output allow_error
 type FileDirective struct {
-	FileName   string
-	WithOutput bool
-	AllowError bool
+	FileName     string
+	WithOutput   bool
+	AllowError   bool
+	NoPlayground bool
+	Sha1Hex      string
+	PlaygroundID string
 }
 
 // parseFileDirective parses line like:
-// @file ${fileName} [output] [allow_error]
+// @file ${fileName} [output] [allow_error] [no_playground] [noplayground] [sha1:${sha1}] [playground:${playgroundID}]
 // into FileDirective
 func parseFileDirective(line string) (*FileDirective, error) {
 	line = strings.TrimSpace(line)
@@ -170,11 +173,32 @@ func parseFileDirective(line string) (*FileDirective, error) {
 		if len(s) == 0 {
 			continue
 		}
-		if s == "output" {
+		s = strings.TrimSpace(strings.ToLower(s))
+		switch {
+		case s == "output":
 			res.WithOutput = true
-		} else if s == "allow_error" {
+		case s == "allow_error":
 			res.AllowError = true
-		} else {
+		case s == "no_playground" || s == "noplayground":
+			res.NoPlayground = true
+		case strings.HasPrefix(s, "sha1:"):
+			parts := strings.Split(s, ":")
+			if len(parts) != 2 {
+				return nil, fmt.Errorf("invalid sha1 in '%s'", line)
+			}
+			sha1Hex := parts[1]
+			// 20 bytes * 2 bytes per char in hex encoding
+			if len(sha1Hex) != 40 {
+				return nil, fmt.Errorf("invalid sha1: in '%s'", line)
+			}
+			res.Sha1Hex = sha1Hex
+		case strings.HasPrefix(s, "playground:"):
+			parts := strings.Split(s, ":")
+			if len(parts) != 2 {
+				return nil, fmt.Errorf("invalid playground: in '%s'", line)
+			}
+			res.PlaygroundID = parts[1]
+		default:
 			return nil, fmt.Errorf("invalid @file line: '%s', unknown option '%s'", line, s)
 		}
 	}
