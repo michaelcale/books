@@ -14,6 +14,29 @@ body {
     margin: 20px;
 }
 
+td { vertical-align: top; }
+
+th:not(:first-child):not(:last-child), td:not(:first-child):not(:last-child) {
+    padding: 0 10px;
+}
+
+th {
+    vertical-align: bottom;
+}
+thead th {
+    border-bottom: 1px solid #ccc;
+}
+
+tbody tr td.with-decimal {
+padding-left:10px !important;
+padding-right:0px !important;
+}
+
+tbody tr td.decimal {
+padding-left:0 !important;
+padding-right:10px !important;
+}
+
 /* h1 by default is 2em, we want something smaller */
 h1.hdr {
     font-size: 0.8em;
@@ -161,11 +184,12 @@ or use grid for top-header instead of flexbox.
 .img-cover {
     width: 256px;
     height: 363px;
-    transition: all .3s ease-in-out;
+    transition: all .1s ease-in-out;
 }
 
 .img-cover:hover {
     transform: scale(1.05);
+    border: 1px solid blue;
 }
 
 .book-img-cover-wrapper {

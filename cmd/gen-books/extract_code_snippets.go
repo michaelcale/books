@@ -181,7 +181,8 @@ func parseFileDirective(line string) (*FileDirective, error) {
 	return res, nil
 }
 
-// baseDir is books/go/
+// ${baseDir} is books/go/
+// loads a source file whose name is in ${line} and
 func extractCodeSnippetsAsMarkdownLines(baseDir string, line string) ([]string, error) {
 	// line is:
 	// @file ${fileName} [output]
