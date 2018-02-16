@@ -7,7 +7,7 @@ Id: 2490
 
 A common solution for this is to use a [sync.WaitGroup]( http://golang.org/pkg/sync/#WaitGroup) object.
 
-@file waiting_for_goroutines.go output
+@file waiting_for_goroutines.go output sha1:232512714a4b2adcb99a7edd243ab6acab9bf040 goplayground:8DqdlC1x5fs
 
 [Playground](https://play.golang.org/p/64vfZSXXHv)
 

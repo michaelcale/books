@@ -4,7 +4,7 @@ Id: 1259
 ---
 Single channel, single goroutine, one write, one read.
 
-@file hello_world.go output
+@file hello_world.go output sha1:7aededafa20ee64b054e297dba52899ad6f981ed goplayground:xvDzGNpqDKm
 
 [Playground](https://play.golang.org/p/t-5U31vPcb)
 

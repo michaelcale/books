@@ -10,6 +10,6 @@ Each stack's function will exit and run deferred calls until the panic is handle
 
 If this occurs, the argument provided to panic and a stack trace will be printed to `stderr`.
 
-@file panic.go output allow_error
+@file panic.go output allow_error sha1:5e65dd660e05b7f47e92b93e4f4ad81c4298b874 goplayground:5CytKt20bZO
 
 `panic` accepts any type as its parameter.

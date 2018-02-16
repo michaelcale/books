@@ -9,7 +9,7 @@ This is similar to classes in languages like Java or C++.
 
 Basics of methods:
 
-@file index.go output
+@file index.go output sha1:1016a0f355a0ac8b453d890bca63087c3783311f goplayground:c9MI-O2pvLt
 
 In the above example method `PrintFullName` takes a reciver named `p` of type `*Person`.
 
@@ -23,7 +23,7 @@ In Go, the rule for naming reciver is:
 
 Method receiver can be either a value and a pointer.
 
-@file index2.go output
+@file index2.go output sha1:18e4acb218010b37cc87e48b475ede8d9df4b6b7 goplayground:2KGrg2M4pj2
 
 As you can see, wehn `p` is of type `Person`, we can call both methods defined for `Person` and `*Person`. Go will automatically convert reciever `Person` to `*Person`.
 

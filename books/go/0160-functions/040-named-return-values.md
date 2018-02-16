@@ -7,7 +7,7 @@ An empty `return` statement can then be used to return their current values. Thi
 
 Naked return statements should be used only in short functions as they harm readability in longer functions:
 
-@file named_return_values.go output
+@file named_return_values.go output sha1:02946dc012fe64e4490cdc382b63d9024efe929a goplayground:s3zX6fDUijB
 
 Two important things must be noted:
 

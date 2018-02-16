@@ -10,7 +10,7 @@ To coordinate work between goroutines Go has channels, which are thread-safe que
 
 Here's an example of using worker pool of goroutines and coordinating their work with channels:
 
-@file index.go output
+@file index.go output sha1:a4d1d5f37a28cb84a230fafab06e96384f1560f1 goplayground:7BD9mDiG0Uu
 
 There's a lot to unpack here.
 

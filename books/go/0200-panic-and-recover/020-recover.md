@@ -14,4 +14,4 @@ The `recover()` call will return the argument provided to the initial panic, if 
 
 If the program is not currently panicking, `recover()` will return `nil`.
 
-@file recover.go output allow_error
+@file recover.go output allow_error sha1:ba674277f82c6107183ec396d126a5e8986aef8d goplayground:bDVlskHRjxL

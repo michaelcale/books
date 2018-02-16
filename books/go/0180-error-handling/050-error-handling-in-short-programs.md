@@ -24,4 +24,4 @@ PanicIfErr(err)
 
 Implementation of such helper:
 
-@file errors_in_short_programs.go output allow_error
+@file errors_in_short_programs.go output allow_error sha1:b71b4c3a3d33c20785aa36fd6d66156649a8b5d8 goplayground:v2lHFqenkOG

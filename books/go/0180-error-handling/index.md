@@ -4,7 +4,7 @@ Id: 785
 ---
 Basic error handling:
 
-@file index.go output
+@file index.go output sha1:9c8715b3eb9ca0804554ce63dd9547adf96d3515 goplayground:kwfvcaObxRJ
 
 **Important notes about error handling:**
 
