@@ -5,7 +5,7 @@ Id: 29829
 
 Go's standard library implements C-style string formatting in [`fmt`](https://golang.org/pkg/fmt/) package.
 
-@file formatting_text.go output
+@file formatting_text.go output sha1:8320ec396f0bcaa1ef717aad667081c2df7991ea goplayground:j5SLVfc6RdI
 
 First argument to `fmt.Sprintf` is formatting string which tells how to format subsequent argument. Following are values that will be formatted.
 

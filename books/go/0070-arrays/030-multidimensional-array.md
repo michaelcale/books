@@ -15,8 +15,8 @@ To access this kind of array, for the last example, searching for the value of 2
 
 Some examples following:
 
-@file multidimension_array.go output
+@file multidimension_array.go output sha1:6f6d04c233a8797b3f8e844dd90333e9b113a6c7 goplayground:50YPzcT_N8u
 
-@file multidimension_array2.go
+@file multidimension_array2.go sha1:36bc4a283726d10519e47ffb3718bbcd3b612de1 goplayground:ZOrLrGfZfW7
 
-@file multidimension_array3.go
+@file multidimension_array3.go sha1:8700f6b7766aa277534f63def9cd8a1cbe4e8a21 goplayground:iTvnKtbjN9L

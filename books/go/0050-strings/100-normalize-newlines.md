@@ -23,4 +23,4 @@ Finally you can write code that handles all newline endings. Inevitably, such co
 
 ## Normalize newlines
 
-@file normalize_newlines.go
+@file normalize_newlines.go sha1:e3dca9882e255dd24a96b8b2e7f3a688d731cdcf goplayground:Yo5PIBjvZ3A

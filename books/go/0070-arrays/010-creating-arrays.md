@@ -9,6 +9,6 @@ Creating a new array looks like `var array = [size]Type`, replacing `size` by a 
 
 Just below it's a code example showing the different way to create an array in Go.
 
-@file creating_arrays.go output
+@file creating_arrays.go output sha1:41073e023bad52902324f22742030dcb397b3777 goplayground:GrPLrDE2Gdt
 
 [Playground](https://play.golang.org/p/7oPdlN8xt8)

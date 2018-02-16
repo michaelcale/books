@@ -10,10 +10,10 @@ To access a value, you have to do something like this: `arrayName[index]`, repla
 
 For example:
 
-@file array_indexes.go output
+@file array_indexes.go output sha1:33f5350a8cc56ec861d63ae233ab9295f6a9914d goplayground:6XD0m-9WltV
 
 
 To set or modify a value in the array, the way is the same.
 Example:
 
-@file array_indexes2.go output
+@file array_indexes2.go output sha1:85b388de6ff2dcc3fbe68828164dbb4fdd96860d goplayground:ynkxqipMcV7

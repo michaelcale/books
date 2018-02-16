@@ -11,4 +11,4 @@ A [zero value](a-6069) of a pointer is `nil`.
 
 Basics of pointers:
 
-@file index.go output
+@file index.go output sha1:75e8c923b28ace7ef669c63f68cdbd6102399ff3 goplayground:XSdbT3RvDMQ

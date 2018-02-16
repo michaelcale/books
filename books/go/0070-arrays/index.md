@@ -15,4 +15,4 @@ Arrays are passed by value which means that passing array argument to a function
 
 Array basics:
 
-@file index.go output
+@file index.go output sha1:8ae8a8a7dc7cf2756dc2744232f4140f9bb7d633 goplayground:7Vg96smORkS

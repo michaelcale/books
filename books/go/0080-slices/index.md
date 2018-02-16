@@ -19,4 +19,4 @@ The difference between capacity and length is how many elements we can append to
 
 Basic of slices:
 
-@file index.go output
+@file index.go output sha1:0aad3a082470e1c324f760dbf3b616843908d2b2 goplayground:nuqqi6Y0fF6

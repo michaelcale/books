@@ -15,7 +15,7 @@ Additionally, functions in standard library that involve converting characters t
 
 Basic string usage:
 
-@file index.go output
+@file index.go output sha1:643856e224099ead3e2fc62a2e3c19ee17f62374 goplayground:RgP9gvhvXqF
 
 Important standard library packages for working on strings:
 * [strings](https://golang.org/pkg/strings/) implements string searching, splitting, case conversions
