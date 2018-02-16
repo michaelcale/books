@@ -8,4 +8,4 @@ It's a different order than C. On the plus side it's more consistent and complex
 
 Various ways of defining variables:
 
-@file index.go
+@file index.go sha1:c5376b5c0af2a38a2df19b3291e56cac3dbb0aee goplayground:PJNJ3ya8wsL

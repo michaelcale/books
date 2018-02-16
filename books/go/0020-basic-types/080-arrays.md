@@ -11,7 +11,7 @@ A slice is growable and implemented as a view into its underlying array.
 
 Array basics:
 
-@file arrays.go output
+@file arrays.go output sha1:8824b8dc01bf1d44d35c30053c7a4fb2d049c257 goplayground:sg72vy6F-ci
 
 [Zero value](a-6069) of array is array where all values have zero value.
 

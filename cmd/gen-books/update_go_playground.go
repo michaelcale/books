@@ -189,7 +189,7 @@ func updateGoPlaygroundLinks(dir string) {
 	fmt.Printf("updateGoPlaygroundLinks() started\n")
 	timeStart := time.Now()
 	markdownFiles := loadMarkdownFiles(dir)
-	max := 2
+	max := 10
 	for _, mf := range markdownFiles {
 		wasChanged := false
 		for _, ef := range mf.EmbeddedSourceFiles {
@@ -212,8 +212,8 @@ func updateGoPlaygroundLinks(dir string) {
 			err := ioutil.WriteFile(mf.Path, mf.Data(), 0644)
 			u.PanicIfErr(err)
 			fmt.Printf("Wrote updated '%s'\n", mf.Path)
+			max--
 		}
-		max--
 		if max <= 0 {
 			goto Exit
 		}

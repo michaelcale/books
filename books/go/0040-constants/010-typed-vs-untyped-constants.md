@@ -6,4 +6,4 @@ As explained in [type casting](a-80100098), Go doesn't perform implicit type cas
 
 Untyped constants make using integer types easier:
 
-@file typed_vs_untyped.go
+@file typed_vs_untyped.go sha1:88b121cf473f0f36d06b3077d5654db977fd15a4 goplayground:imG00fNjMPa

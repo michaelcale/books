@@ -11,6 +11,6 @@ This is different than languages like Python, C#, Java or Swift where strings ar
 
 Basic string usage:
 
-@file strings.go output
+@file strings.go output sha1:91eac3e77ac970a27ff925b024315c74e8623ef6 goplayground:4dk4tTa9LPi
 
 Learn more about [strings](ch-9666).

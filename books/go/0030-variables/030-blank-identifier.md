@@ -12,9 +12,9 @@ A blank identifier can be assigned a value of any type, and is most commonly use
 
 **Multiple Return Values**
 
-@file blank_identifier.go output
+@file blank_identifier.go output sha1:a9c22c5a4db87bfdaac2f74c3d56fa108f94fe84 goplayground:q5i3MnL_qBO
 
 **Using `range`**
 
-@file blank_identifier_2.go output
+@file blank_identifier_2.go output sha1:13781d48412168b4f7f8fbb1c9c0b373bd023c36 goplayground:c9m512EHc2p
 

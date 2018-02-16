@@ -29,5 +29,5 @@ The values of zero type are unsurprising:
 
 Said differently:
 
-@file zero_values.go output
+@file zero_values.go output sha1:7bed196df8157c429f9c3ad7801b0e69f53485e5 goplayground:9B0IqtjU0RF
 
