@@ -18,5 +18,5 @@ This is a job for bufferred channels.
 
 By allowing producer to proceed independently of the consumer we can speed up some scenarios.
 
-@file buffered.go output
+@file buffered.go output sha1:5b8c9ab73348e82432090937388cb2ab02a36ecd goplayground:D_dv_uhNYBR
 

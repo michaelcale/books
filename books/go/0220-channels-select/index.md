@@ -10,7 +10,7 @@ For that reason we talk about sending values to a channel (`ch <- value`) and re
 
 Basic of channels:
 
-@file index.go output
+@file index.go output sha1:5c34ffb9f92451fe53fcfb05de6b620b2afb31ee goplayground:4XuAXmrbElQ
 
 A [zero value](a-6069) of a channel is `nil` so the first thing to do is to create a channel with `make(chan ${type})`.
 

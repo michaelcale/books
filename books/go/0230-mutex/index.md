@@ -14,7 +14,7 @@ Another way to ensure exclusive access to data by goroutines is to use mutexes.
 
 Here's a basic pattern that uses a map for a cache and ensure exclusive access to a map by locking.
 
-@file index.go output
+@file index.go output sha1:6507399efba68176abf2eeb6e4fc71b0312aa36e goplayground:QlyPp-d8av8
 
 Notice that a zero-value of `sync.Mutex` is a valid mutex. You don't need to initialize a mutex.
 

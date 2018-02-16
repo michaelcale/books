@@ -4,7 +4,7 @@ Id: 4134
 ---
 When reading multiple values from a channel, using `range` is a common pattern:
 
-@file range.go output
+@file range.go output sha1:19ae0b16e02794c207b8cd340299840413d5c499 goplayground:kM-SL7aRwXM
 
 [Playground](https://play.golang.org/p/18ODvaZub9)
 

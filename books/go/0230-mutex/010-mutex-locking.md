@@ -14,4 +14,4 @@ It follows the following rules:
 
 Here's a cache variant that uses read-write lock:
 
-@file rwlock.go output
+@file rwlock.go output sha1:ca40aabb9f1852ae977bc6020a13ade42d4d0b75 goplayground:HEsolwLu-0d

@@ -8,4 +8,4 @@ Sometimes you want to limit time waiting for a value on a channel.
 
 It's possible with `select`:
 
-@file timeout.go output
+@file timeout.go output sha1:1a3592bd922445233dfa604d927c9b5ca39fcc46 goplayground:kWFgA_-fMgN
