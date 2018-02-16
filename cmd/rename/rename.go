@@ -147,7 +147,29 @@ func renameBook(book string) {
 	renameChapters(bookDir, chapters)
 }
 
+func renameIndexFilesAndExit() {
+	dir := filepath.Join("books", "go")
+	filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
+		if info.IsDir() {
+			return nil
+		}
+		name := filepath.Base(path)
+		if name != "index.md" {
+			return nil
+		}
+		dir := filepath.Dir(path)
+		newPath := filepath.Join(dir, "000-"+name)
+		out, err := gitRename(newPath, path)
+		u.PanicIfErr(err, "gitRename failed with '%s', output: '%s'", err, out)
+		return nil
+	})
+	os.Exit(0)
+}
+
 func main() {
+	if true {
+		renameIndexFilesAndExit()
+	}
 	books, err := common.GetDirs("books")
 	u.PanicIfErr(err)
 	for _, book := range books {
