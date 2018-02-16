@@ -47,10 +47,29 @@
     <div id="search-results"></div>
 
     <div class="content-wrapper">
-        <div class="hdr"><a href="/" class="breadcrumbs__item">Books</a><a href="{{.Book.URL}}" class="breadcrumbs__item">Essential {{.Book.Title}}</a><a href="{{.Chapter.URL}}">{{.Chapter.Title}}</a></div>
+        <div class="hdr">
+            <a href="/" class="breadcrumbs__item">Books</a><a href="{{.Book.URL}}" class="breadcrumbs__item">Essential {{.Book.Title}}</a><a href="{{.Chapter.URL}}">{{.Chapter.Title}}</a>
+        </div>
 
         <div class="article">
-            <h1>{{.Title}}</h1>
+            <div class="article-hdr">
+                <div class="article-contribute">
+                    <div class="contribute-btn">
+                        <a href="{{.GitHubEditURL}}" target="_blank">{{.GitHubText}}</a>
+                    </div>
+                    <div class="contribute-btn">
+                        &nbsp;
+                        &bull;
+                        &nbsp;
+                   </div>
+                    <div class="contribute-btn">
+                            <a href="{{.GitHubIssueURL}}" target="_blank">File Issue</a>
+                        </div>
+                    </div>
+                <div>
+                    <h1>{{.Title}}</h1>
+                </div>
+            </div>
             {{ .BodyHTML }}
         </div>
 
@@ -85,7 +104,7 @@
             Share "{{.Book.TitleLong}}" <a href="https://twitter.com/intent/tweet?text={{.Book.ShareOnTwitterText}}&url={{.Book.CanonnicalURL}}&via=kjk">on Twitter</a>
         </div>
         <div>
-            <a href="{{.GitHubEditURL}}" target="_blank">{{.GitHubText}}</a>
+            <!-- right side. Used to be 'edit github' url -->
         </div>
     </div>
 

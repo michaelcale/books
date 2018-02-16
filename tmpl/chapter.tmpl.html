@@ -50,7 +50,24 @@
         <div class="hdr"><a href="/" class="breadcrumbs__item">Books</a><a href="{{.Book.URL}}">Essential {{.Book.Title}}</a></div>
 
         <div class="article">
-            <h1>{{.Title}}</h1>
+            <div class="article-hdr">
+                <div class="article-contribute">
+                    <div class="contribute-btn">
+                        <a href="{{.GitHubEditURL}}" target="_blank">{{.GitHubText}}</a>
+                    </div>
+                    <div class="contribute-btn">
+                        &nbsp;
+                        &bull;
+                        &nbsp;
+                    </div>
+                    <div class="contribute-btn">
+                            <a href="{{.GitHubIssueURL}}" target="_blank">File Issue</a>
+                        </div>
+                    </div>
+                <div>
+                    <h1>{{.Title}}</h1>
+                </div>
+            </div>
 
             {{if .ContributorsHTML}}
             <h2>Contributors</h2>

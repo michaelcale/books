@@ -76,9 +76,18 @@ func (a *Article) GitHubURL() string {
 }
 
 // GitHubEditURL returns url to editing this article on GitHub
-// TODO: verify it's the right noe
+// same as GitHubURL because we don't want to automatically fork
+// the repo as would happen if we used /edit/ url
 func (a *Article) GitHubEditURL() string {
-	return strings.Replace(a.GitHubURL(), "/blob/master/", "/edit/master/", -1)
+	return a.GitHubURL()
+}
+
+// GitHubIssueURL returns link for reporting an issue about an article on githbu
+// https://github.com/essentialbooks/books/issues/new?title=${title}&body=${body}&labels=docs"
+func (a *Article) GitHubIssueURL() string {
+	title := fmt.Sprintf("Issue for article '%s'", a.Title)
+	body := fmt.Sprintf("From URL: %s\nFile: %s\n", a.CanonnicalURL(), a.GitHubEditURL())
+	return gitHubBaseURL + fmt.Sprintf("/issues/new?title=%s&body=%s&labels=docs", title, body)
 }
 
 func (a *Article) destFilePath() string {
@@ -104,6 +113,17 @@ type Chapter struct {
 	AnalyticsCode string
 }
 
+// URL is used in book_index.tmpl.html
+func (c *Chapter) URL() string {
+	// /essential/go/ch-4023-parsing-command-line-arguments-and-flags
+	return fmt.Sprintf("/essential/%s/%s", c.Book.FileNameBase, c.FileNameBase)
+}
+
+// CanonnicalURL returns full url including host
+func (c *Chapter) CanonnicalURL() string {
+	return fullURLBase + c.URL()
+}
+
 // GitHubText returns text we display in GitHub box
 func (c *Chapter) GitHubText() string {
 	return "Edit on GitHub"
@@ -117,8 +137,20 @@ func (c *Chapter) GitHubURL() string {
 // GitHubEditURL returns url to edit 000-index.md document
 func (c *Chapter) GitHubEditURL() string {
 	bookDir := filepath.Base(c.Book.destDir)
-	uri := gitHubBaseURL + "/edit/master/books/" + bookDir
+	uri := gitHubBaseURL + "/blob/master/books/" + bookDir
 	return uri + "/" + c.ChapterDir + "/000-index.md"
+}
+
+// GitHubIssueURL returns link for reporting an issue about an article on githbu
+// https://github.com/essentialbooks/books/issues/new?title=${title}&body=${body}&labels=docs"
+func (c *Chapter) GitHubIssueURL() string {
+	title := fmt.Sprintf("Issue for chapter '%s'", c.Title)
+	body := fmt.Sprintf("From URL: %s\nFile: %s\n", c.CanonnicalURL(), c.GitHubEditURL())
+	return gitHubBaseURL + fmt.Sprintf("/issues/new?title=%s&body=%s&labels=docs", title, body)
+}
+
+func (c *Chapter) destFilePath() string {
+	return filepath.Join(destEssentialDir, c.Book.FileNameBase, c.FileNameBase+".html")
 }
 
 // VersionsHTML returns html version of versions
@@ -128,21 +160,6 @@ func (c *Chapter) VersionsHTML() template.HTML {
 		s = ""
 	}
 	return template.HTML(s)
-}
-
-// URL is used in book_index.tmpl.html
-func (c *Chapter) URL() string {
-	// /essential/go/ch-4023-parsing-command-line-arguments-and-flags
-	return fmt.Sprintf("/essential/%s/%s", c.Book.FileNameBase, c.FileNameBase)
-}
-
-// CanonnicalURL returns full url including host
-func (c *Chapter) CanonnicalURL() string {
-	return fullURLBase + c.URL()
-}
-
-func (c *Chapter) destFilePath() string {
-	return filepath.Join(destEssentialDir, c.Book.FileNameBase, c.FileNameBase+".html")
 }
 
 // TODO: get rid of IntroductionHTML, SyntaxHTML etc., convert to just Body in markdown format

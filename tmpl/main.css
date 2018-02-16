@@ -308,6 +308,16 @@ or use grid for top-header instead of flexbox.
     background-color: #f1f1f1;
 }
 
+.article-contribute {
+    font-size: 0.8em;
+    float: right;
+}
+
+.contribute-btn {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+}
 
 .article {
     border: 1px solid ligthgray;
