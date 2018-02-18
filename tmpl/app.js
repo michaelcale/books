@@ -215,27 +215,31 @@ function span(s, cls) {
 }
 
 // create HTML to highlight part of s starting at idx and with length len
-function hilightSearchResult(s, matches) {
-  // TODO: handle multiple matches
-  var idx = matches[0][0];
-  var len = matches[0][1];
-  var s1 = s.substring(0, idx);
-  var s2 = s.substring(idx, idx + len);
-  var s3 = s.substring(idx + len);
-  var a = [s1, s2, s3];
-  var n = a.length;
-  var isHighlighted;
+function hilightSearchResult(txt, matches) {
+  var prevIdx = 0;
+  var n = matches.length;
   var res = "";
+  var s = "";
   // alternate non-higlighted and highlihted strings
-  // this allows for future showing of multiple highlights
   for (var i = 0; i < n; i++) {
-    s = a[i];
-    isHighlighted = i % 2 == 0; // they alternate
-    if (isHighlighted) {
+    var el = matches[i];
+    var idx = el[0];
+    var len = el[1];
+
+    var nonHilightLen = idx - prevIdx;
+    if (nonHilightLen > 0) {
+      s = txt.substring(prevIdx, prevIdx + nonHilightLen);
       res += span(s);
-    } else {
-      res += span(s, "hili");
     }
+    s = txt.substring(idx, idx + len);
+    res += span(s, "hili");
+    prevIdx = idx + len;
+  }
+  var txtLen = txt.length;
+  nonHilightLen = txtLen - prevIdx;
+  if (nonHilightLen > 0) {
+    s = txt.substring(prevIdx, prevIdx + nonHilightLen);
+    res += span(s);
   }
   return res;
 }
