@@ -13,8 +13,8 @@ import (
 /*
 Generates a javascript file that looks like:
 
-gBookTocSearchData = [
-	["${chapter or aticle id"}, "${title}", "${synonim 1}", "${synanonim 2}", ...],
+gBookToc = [
+	[${chapter or aticle id}, ${parentIdx}, ${title}, ${synonim 1}, ${synonim 2}, ...],
 ];
 
 It's saved in wwww/essential/${bookname}/toc_search.js
@@ -27,22 +27,27 @@ Also, have original and lower-cased version of the string. We search lower-cased
 but show the original. That avoids lowercasing during search.
 */
 
-// TODO: add synonyms
 func genBookTOCSearchMust(book *Book) {
-	var toc [][]string
+	var toc [][]interface{}
 	for _, chapter := range book.Chapters {
 		title := strings.TrimSpace(chapter.Title)
-		a := []string{chapter.FileNameBase, title}
+		a := []interface{}{chapter.FileNameBase, 0, title}
 		toc = append(toc, a)
+		chapIdx := len(toc) - 1
 		for _, article := range chapter.Articles {
 			title := strings.TrimSpace(article.Title)
-			a := []string{article.FileNameBase, title}
+			a := []interface{}{article.FileNameBase, chapIdx, title}
+			for _, syn := range article.SearchSynonyms {
+				a = append(a, syn)
+			}
 			toc = append(toc, a)
+
+			// TODO: add entries for #, ## and ### elements in the article
 		}
 	}
 	d, err := json.MarshalIndent(toc, "", "  ")
 	u.PanicIfErr(err)
-	s := "gBookTocSearchData = " + string(d) + ";"
+	s := "gBookToc = " + string(d) + ";"
 	d = []byte(s)
 	path := filepath.Join(destEssentialDir, book.FileNameBase, "toc_search.js")
 	u.CreateDirForFile(path)

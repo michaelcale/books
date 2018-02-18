@@ -6,7 +6,7 @@ Go uses goroutines for concurrency. Simplifying, they are like threads.
 
 Gorutines execute independently but they share memory space. In other words, they all see global variables.
 
-To coordinate work between goroutines Go has channels, which are thread-safe queues.
+To coordinate work between goroutines Go provides channels, which are thread-safe queues.
 
 Here's an example of using worker pool of goroutines and coordinating their work with channels:
 

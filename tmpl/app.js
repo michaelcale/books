@@ -3,7 +3,7 @@ var currentState = {
   searchInputFocused: false,
   searchResults: [],
   // index within searchResults array, -1 means not selected
-  selectedSearchResult: -1,
+  selectedSearchResultIdx: -1,
 };
 
 var currentSearchTerm = "";
@@ -24,131 +24,29 @@ if (!Object.is) {
   };
 }
 
-var rebuildUITimer = null;
-function triggerUIRebuild() {
-  rebuildUITimer = null;
-  rebuildUIFromState();
+// accessor functions for items in gBookToc array:
+// 	[${chapter or aticle url}, ${parentIdx}, ${title}, ${synonim 1}, ${synonim 2}, ...],
+// as generated in gen_book_toc_search.go and stored in books/${book}/toc_search.js
+function tocItemURL(item) {
+  return item[0];
 }
 
-function requestRebuildUI(now) {
-  // debounce the requests
-  if (rebuildUITimer != null) {
-    window.cancelAnimationFrame(rebuildUITimer);
-    rebuildUITimer = null;
-  }
-  if (now) {
-    triggerUIRebuild();
-  } else {
-    window.requestAnimationFrame(triggerUIRebuild);
-  }
+function tocItemParentIdx(item) {
+  return item[1];
 }
 
-function setState(newState, now=false) {
-  var vOld, vNew;
-  var stateChanged = false;
-  for (var k in newState) {
-    vOld = currentState[k];
-    vNew = newState[k];
-    if (stateChanged) {
-      // avoid calling areValuesEqual if we're updating the state anyway
-      currentState[k] = vNew;
-    } else if (!Object.is(vOld, vNew)) {
-      stateChanged = true;
-      currentState[k] = vNew;
-    }
-  }
-  if (stateChanged) {
-    requestRebuildUI(now);
-  }
+function tocItemTitle(item) {
+  return item[2];
 }
 
-function isChapterOrArticle(s) {
-  return s.startsWith("ch-") || s.startsWith("a-");
-}
-
-function navigateToSearchResult(idx) {
-  var loc = window.location.pathname;
-  var parts = loc.split("/");
-  var lastIdx = parts.length - 1;
-  var lastEl = parts[lastIdx];
-  var selected = currentState.searchResults[idx];
-  var el = selected[0];
-  var uri = el[0];
-  if (isChapterOrArticle(lastEl)) {
-    parts[lastIdx] = uri;
-  } else {
-    parts.push(uri);
-  }
-  loc = parts.join("/");
-  clearSearchResults();
-  window.location = loc;
-}
-
-function onEnter(ev) {
-  var selIdx = currentState.selectedSearchResult;
-  if (selIdx == -1) {
-    return;
-  }
-  navigateToSearchResult(selIdx);
-}
-
-function onKeySlash(ev) {
-  setState({
-    searchInputFocused: true
-  });
-  ev.preventDefault();
-}
-
-function onEscape(ev) {
-  setState({
-    searchInputFocused: false
-  });
-  ev.preventDefault();
-}
-
-function onUpDown(ev) {
-  var dir = (ev.key == "ArrowUp") ? -1 : 1;
-  var results = currentState.searchResults;
-  var n = results.length;
-  var selIdx = currentState.selectedSearchResult;
-  if (n <= 0 || selIdx < 0) {
-    return;
-  }
-  var newIdx = selIdx + dir;
-  if (newIdx >= 0 && newIdx < n) {
-    setState({
-      selectedSearchResult: newIdx
-    });
-    ev.preventDefault();
-  }
-}
-
-function onKeyDown(ev) {
-  // console.log(ev);
-  if (ev.key == "/") {
-    onKeySlash(ev);
-    return;
-  }
-
-  if (ev.key == "Escape") {
-    onEscape(ev);
-    return;
-  }
-
-  if (ev.key == "Enter") {
-    onEnter(ev);
-    return;
-  }
-
-  if (ev.key == "ArrowUp" || ev.key == "ArrowDown") {
-    onUpDown(ev);
-    return;
-  }
+// all searchable items: title + search synonyms
+function tocItemSearchable(item) {
+  return item.slice(2);
 }
 
 // from https://github.com/component/escape-html/blob/master/index.js
 var matchHtmlRegExp = /["'&<>]/;
-function escapeHtml(string) {
+function escapeHTML(string) {
   var str = "" + string;
   var match = matchHtmlRegExp.exec(str);
 
@@ -194,7 +92,7 @@ function escapeHtml(string) {
 }
 
 // splits a string in two parts at a given index
-// ("foobar", 2) = ["fo", "obar"]
+// ("foobar", 2) => ["fo", "obar"]
 function splitStringAt(s, idx) {
   var res = ["", ""];
   if (idx == 0) {
@@ -206,12 +104,163 @@ function splitStringAt(s, idx) {
   return res;
 }
 
-function span(s, cls) {
-  s = escapeHtml(s);
-  if (!cls) {
-    return "<span>" + s + "</span>";
+function tagOpen(name, cls, id) {
+  var s = "<" + name;
+  if (cls) {
+    s += " " + attr("class", cls);
   }
-  return "<span class='" + cls + "'>" + s + "</span>";
+  if (id) {
+    s += " " + attr("id", id);
+  }
+  return s + ">";
+}
+
+function tagClose(tagName) {
+  return "</" + tagName + ">";
+}
+
+function inTag(tagName, contentHTML, cls, id) {
+  return tagOpen(tagName, cls, id) + contentHTML + tagClose(tagName);
+}
+
+function inTagRaw(tagName, content, cls, id) {
+  var contentHTML = escapeHTML(content);
+  return tagOpen(tagName, cls, id) + contentHTML + tagClose(tagName);
+}
+function attr(name, val) {
+  return name + "='" + val + "'";
+}
+
+function span(s, cls) {
+  return inTagRaw("span", s, cls);
+}
+
+function div(html, opt) {
+  return inTag("div", html, opt && opt.cls, opt && opt.id)
+}
+
+var rebuildUITimer = null;
+function triggerUIRebuild() {
+  rebuildUITimer = null;
+  rebuildUIFromState();
+}
+
+function requestRebuildUI(now) {
+  // debounce the requests
+  if (rebuildUITimer != null) {
+    window.cancelAnimationFrame(rebuildUITimer);
+    rebuildUITimer = null;
+  }
+  if (now) {
+    triggerUIRebuild();
+  } else {
+    window.requestAnimationFrame(triggerUIRebuild);
+  }
+}
+
+function setState(newState, now=false) {
+  var vOld, vNew;
+  var stateChanged = false;
+  for (var k in newState) {
+    vOld = currentState[k];
+    vNew = newState[k];
+    if (stateChanged) {
+      // avoid calling areValuesEqual if we're updating the state anyway
+      currentState[k] = vNew;
+    } else if (!Object.is(vOld, vNew)) {
+      stateChanged = true;
+      currentState[k] = vNew;
+    }
+  }
+  if (stateChanged) {
+    requestRebuildUI(now);
+  }
+}
+
+function isChapterOrArticleURL(s) {
+  return s.startsWith("ch-") || s.startsWith("a-");
+}
+
+function navigateToSearchResult(idx) {
+  var loc = window.location.pathname;
+  var parts = loc.split("/");
+  var lastIdx = parts.length - 1;
+  var lastURL = parts[lastIdx];
+  var selected = currentState.searchResults[idx];
+  var tocItem = selected.tocItem;
+
+  // either replace chapter/article url or append to book url
+  var uri = tocItemURL(tocItem);
+  if (isChapterOrArticleURL(lastURL)) {
+    parts[lastIdx] = uri;
+  } else {
+    parts.push(uri);
+  }
+  loc = parts.join("/");
+  clearSearchResults();
+  window.location = loc;
+}
+
+function onEnter(ev) {
+  var selIdx = currentState.selectedSearchResultIdx;
+  if (selIdx == -1) {
+    return;
+  }
+  navigateToSearchResult(selIdx);
+}
+
+function onKeySlash(ev) {
+  setState({
+    searchInputFocused: true
+  });
+  ev.preventDefault();
+}
+
+function onEscape(ev) {
+  setState({
+    searchInputFocused: false
+  });
+  ev.preventDefault();
+}
+
+function onUpDown(ev) {
+  var dir = (ev.key == "ArrowUp") ? -1 : 1;
+  var results = currentState.searchResults;
+  var n = results.length;
+  var selIdx = currentState.selectedSearchResultIdx;
+  if (n <= 0 || selIdx < 0) {
+    return;
+  }
+  var newIdx = selIdx + dir;
+  if (newIdx >= 0 && newIdx < n) {
+    setState({
+      selectedSearchResultIdx: newIdx
+    });
+    ev.preventDefault();
+  }
+}
+
+function onKeyDown(ev) {
+  // console.log(ev);
+  if (ev.key == "/") {
+    onKeySlash(ev);
+    return;
+  }
+
+  if (ev.key == "Escape") {
+    onEscape(ev);
+    return;
+  }
+
+  if (ev.key == "Enter") {
+    onEnter(ev);
+    return;
+  }
+
+  if (ev.key == "ArrowUp" || ev.key == "ArrowDown") {
+    onUpDown(ev);
+    return;
+  }
 }
 
 // create HTML to highlight part of s starting at idx and with length len
@@ -244,38 +293,24 @@ function hilightSearchResult(txt, matches) {
   return res;
 }
 
-function attr(name, val) {
-  return name + "='" + val + "'";
+/* results is array of items:
+{
+  tocItem: [],
+  term: "",
+  match: [[idx, len], ...],
 }
+*/
 
-function tagOpen(name, cls, id) {
-  var s = "<" + name;
-  if (cls) {
-    s += " " + attr("class", cls);
-  }
-  if (id) {
-    s += " " + attr("id", id);
-  }
-  return s + ">";
-}
-
-function div(html, opt) {
-  var s = tagOpen("div", opt && opt.cls, opt && opt.id);
-  return s + html + "</div>";
-}
-
-// results is in format:
-// [uri, title, match idx, match len];
 function buildResultsHTML(results, selectedIdx) {
   var a = [];
   var n = results.length;
   for (var i = 0; i < n; i++) {
     var r = results[i];
-    var el = r[0];
-    var title = el[1];
-    var matches = r[1];
+    var tocItem = r.tocItem;
+    var term = r.term;
+    var matches = r.match;
 
-    var html = hilightSearchResult(title, matches);
+    var html = hilightSearchResult(term, matches);
     var opt = {
       id: "search-result-no-" + i,
       cls: "search-result",
@@ -317,7 +352,7 @@ function scrollIntoViewIfOutOfView(el) {
 function rebuildSearchResultsUI() {
   var html;
   var results = currentState.searchResults;
-  var selectedIdx = currentState.selectedSearchResult;
+  var selectedIdx = currentState.selectedSearchResultIdx;
   var el = document.getElementById("search-results");
   var blurOverlay = document.getElementById("blur-overlay");
   if (results.length == 0) {
@@ -376,7 +411,7 @@ function clearSearchResults() {
   currentSearchTerm = "";
   setState({
     searchResults: [],
-    selectedSearchResult: -1
+    selectedSearchResultIdx: -1
   });
 }
 
@@ -416,17 +451,23 @@ function sortSearchMatches(a) {
   return a;
 }
 
-// returns an array of [[idx, len], ...]
-// searchTerms might be an empty array
+// searches s for toFind and toFindArr.
+// returns null if no match
+// returns array of [idx, len] position in $s where $toFind or $toFindArr matches
 function searchMatch(s, toFind, toFindArr) {
   s = s.toLowerCase();
+
+  // try exact match
   var idx = s.indexOf(toFind);
   if (idx != -1) {
     return [[idx, toFind.length]];
   }
+
+  // now see if matches for search for AND of components in toFindArr
   if (!toFindArr) {
     return null;
   }
+
   var n = toFindArr.length;
   var res = Array(n)
   for (var i = 0; i < n; i++) {
@@ -438,6 +479,30 @@ function searchMatch(s, toFind, toFindArr) {
     res[i] = [idx, toFind.length];
   }
   return sortSearchMatches(res);
+}
+
+/*
+returns null if no match
+returns: {
+  term: "",
+  match: [[idx, len], ...]
+}
+*/
+function searchMatchMulti(toSearchArr, toFind) {
+  var toFindArr = toFind.split(" ").filter(notEmptyString);
+  var n = toSearchArr.length;
+  for (var i = 0; i < n; i++) {
+    var toSearch = toSearchArr[i];
+    var match = searchMatch(toSearch, toFind, toFindArr);
+    if (match) {
+      return {
+        term: toSearch,
+        match: match,
+        tocItem: null, // will be filled later
+      }
+    }
+  }
+  return null;
 }
 
 function notEmptyString(s) {
@@ -452,31 +517,31 @@ function doSearch(searchTerm) {
   if (searchTerm == currentSearchTerm) {
     return;
   }
+  searchTerm = searchTerm.toLowerCase();
   currentSearchTerm = searchTerm;
   if (searchTerm.length == 0) {
     clearSearchResults();
     return;
   }
 
-  searchTerm = searchTerm.toLowerCase();
-  var searchTerms = searchTerm.split(" ").filter(notEmptyString);
-
   console.log("search for:", searchTerm);
-  var a = gBookTocSearchData; // loaded via toc_search.js
+  var a = gBookToc; // loaded via toc_search.js, generated in gen_book_toc_search.go
   var n = a.length;
   var res = [];
   for (var i = 0; i < n && res.length < maxSearchResults; i++) {
-    var el = a[i];
-    var match = searchMatch(el[1], searchTerm, searchTerms);
+    var tocItem = a[i];
+    var searchable = tocItemSearchable(tocItem);
+    var match = searchMatchMulti(searchable, searchTerm);
     if (!match) {
       continue;
     }
-    res.push([el, match]);
+    match.tocItem = tocItem;
+    res.push(match);
   }
   console.log("search results:", res);
   setState({
     searchResults: res,
-    selectedSearchResult: 0
+    selectedSearchResultIdx: 0
   });
 }
 
@@ -529,7 +594,7 @@ function onClick(ev) {
   var idx = findEnclosingResultNode(el);
   if (idx < 0) {
     setState({
-      selectedSearchResult: -1,
+      selectedSearchResultIdx: -1,
     })
     console.log("stopped propagation");
     ev.stopPropagation();
@@ -551,7 +616,7 @@ function onMouseMove(ev) {
   }
   //console.log("ev.target:", el, "id:", el.id, "idx:", idx);
   setState({
-    selectedSearchResult: idx,
+    selectedSearchResultIdx: idx,
   }, true);
   ev.stopPropagation();
 }
