@@ -118,13 +118,49 @@ func copyCoversMust() {
 	copyFilesRecur(filepath.Join("www", "covers"), "covers", shouldCopyImage)
 }
 
+func getAlmostMaxProcs() int {
+	// leave some juice for other programs
+	nProcs := runtime.NumCPU() - 2
+	if nProcs < 1 {
+		return 1
+	}
+	return nProcs
+}
+
+func genSelectedBooks(bookDirs []string) {
+	fmt.Printf("genSelectedBooks: %+v\n", bookDirs)
+	timeStart := time.Now()
+
+	var books []*Book
+	for _, bookName := range bookDirs {
+		book, err := parseBook(bookName)
+		maybePanicIfErr(err)
+		if err != nil {
+			continue
+		}
+		book.sem = make(chan bool, getAlmostMaxProcs())
+		books = append(books, book)
+	}
+	fmt.Printf("Parsed books in %s\n", time.Since(timeStart))
+
+	copyToWwwMaybeMust(filepath.Join("tmpl", "main.css"))
+	copyToWwwMaybeMust(filepath.Join("tmpl", "app.js"))
+	genIndex(books)
+	genIndexGrid(books)
+	genAbout()
+
+	for _, book := range books {
+		genBook(book)
+	}
+	fmt.Printf("Used %d procs, finished generating all books in %s\n", getAlmostMaxProcs(), time.Since(timeStart))
+}
+
 func genAllBooks() {
 	timeStart := time.Now()
 
 	copyCoversMust()
 
-	// leave one for other programs
-	nProcs := runtime.GOMAXPROCS(-1) - 1
+	nProcs := getAlmostMaxProcs()
 
 	var books []*Book
 	for _, bookName := range allBookDirs {

@@ -59,12 +59,32 @@ func copyToWwwMaybeMust(path string) {
 	fmt.Printf("Copied %s => %s\n", path, dst)
 }
 
+// data related to handling re-generation of book if source files change
+// we respond to file system change notifications but want to debounce
+// regeneration because they are expensive and operations like rename
+// generate several notifications in a row
 var (
-	muRegen       sync.Mutex
-	nextRegenSeq  int32
-	booksToRegen  []string
+	muRegen sync.Mutex
+	// sequence number used debounce generation
+	nextRegenSeq int32
+	// books to regenerate since last regeneration
+	booksToRegen map[string]struct{}
+	// if true, regenerate all books
 	regenAllBooks bool
 )
+
+// path is books/${book}/${chapter}/${article}
+func getBookDirFromPath(path string) string {
+	path = toUnixPath(path)
+	if !strings.HasPrefix(path, "books/") {
+		fmt.Printf("getBookDirFromPath('%s') => ''\n", path)
+		return ""
+	}
+	path = strings.TrimPrefix(path, "books/")
+	// now the path is "go/${chapter}/${article}.md"
+	parts := strings.Split(path, "/")
+	return parts[0]
+}
 
 func handleFileChange(path string) {
 	fmt.Printf("handleFileChange: %s\n", path)
@@ -90,11 +110,15 @@ func handleFileChange(path string) {
 	nextRegenSeq++
 	if strings.HasSuffix(path, ".tmpl.html") {
 		regenAllBooks = true
-	} else if strings.HasSuffix(path, ".md") {
-		// TODO: figure out which book is it and add to booksToRegen
 	} else {
-		// most likely a directory moved
-		// TODO: figure out which book is it and add to booksToRegen
+		// we assume it's either .md file change or a directory rename
+		book := getBookDirFromPath(path)
+		if book != "" {
+			if booksToRegen == nil {
+				booksToRegen = make(map[string]struct{})
+			}
+			booksToRegen[book] = struct{}{}
+		}
 	}
 
 	// wait a bit before regenerating books. this allows to collapse
@@ -109,16 +133,24 @@ func handleFileChange(path string) {
 			return
 		}
 
-		//localRegenAllBooks := regenAllBooks
+		var localBooksToRegen []string
+		for book := range booksToRegen {
+			localBooksToRegen = append(localBooksToRegen, book)
+		}
+
+		localRegenAllBooks := regenAllBooks
+
 		regenAllBooks = false
-		//localBooksToRegen := booksToRegen
 		booksToRegen = nil
 		muRegen.Unlock()
 
 		clearErrors()
-		// TODO: use localRegenAllBooks and localBooksToRegen
 		unloadTemplates() // for reloading of templates from disk
-		genAllBooks()
+		if localRegenAllBooks {
+			genAllBooks()
+		} else {
+			genSelectedBooks(localBooksToRegen)
+		}
 		printAndClearErrors()
 	}(nextRegenSeq)
 }

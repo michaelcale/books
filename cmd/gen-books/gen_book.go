@@ -32,6 +32,7 @@ var (
 
 func unloadTemplates() {
 	indexTmpl = nil
+	indexGridTmpl = nil
 	bookIndexTmpl = nil
 	chapterTmpl = nil
 	articleTmpl = nil

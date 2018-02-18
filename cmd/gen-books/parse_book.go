@@ -7,11 +7,11 @@ import (
 	"net/url"
 	"os"
 	"path/filepath"
-	"runtime"
 	"sort"
 	"strconv"
 	"strings"
 	"sync"
+	"time"
 
 	"github.com/essentialbooks/books/pkg/common"
 	"github.com/essentialbooks/books/pkg/kvstore"
@@ -568,6 +568,8 @@ func ensureUniqueIds(book *Book) {
 }
 
 func parseBook(bookName string) (*Book, error) {
+	timeStart := time.Now()
+	fmt.Printf("Parsing book %s\n", bookName)
 	bookNameSafe := common.MakeURLSafe(bookName)
 	srcDir := filepath.Join("books", bookNameSafe)
 	book := &Book{
@@ -584,8 +586,7 @@ func parseBook(bookName string) (*Book, error) {
 		return nil, err
 	}
 
-	// leave one for other programs
-	nProcs := runtime.GOMAXPROCS(-1) - 1
+	nProcs := getAlmostMaxProcs()
 
 	sem := make(chan bool, nProcs)
 	var wg sync.WaitGroup
@@ -637,6 +638,6 @@ func parseBook(bookName string) (*Book, error) {
 
 	ensureUniqueIds(book)
 
-	fmt.Printf("Book '%s' %d chapters, %d articles\n", bookName, len(chapters), book.ArticlesCount())
+	fmt.Printf("Book '%s' %d chapters, %d articles, finished parsing in %s\n", bookName, len(chapters), book.ArticlesCount(), time.Since(timeStart))
 	return book, err2
 }

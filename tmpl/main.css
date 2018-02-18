@@ -340,8 +340,8 @@ or use grid for top-header instead of flexbox.
 .article h4,
 .article h5 {
     color: #1481b8;
-    border-left: solid 8px #d9eaf2;
-    padding-left: 8px;
+    /* border-left: solid 8px #d9eaf2;
+    padding-left: 8px; */
 
 }
 
