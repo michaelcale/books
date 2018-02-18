@@ -15,7 +15,6 @@ Using [`strings.Index`](https://golang.org/pkg/strings/#Index):
 Above we searched from the beginning of the string. We can also search from end using [`strings.LastIndex`](https://golang.org/pkg/strings/#LastIndex):
 
 @file finding_strings2.go output sha1:9fa45203c4ae55075c6b726b2692c813240971e9 goplayground:iyxoEzHw4p7
-```
 
 ## Find all occurences of a substring
 
