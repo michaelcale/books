@@ -332,6 +332,14 @@ or use grid for top-header instead of flexbox.
     background-color: #f5f2f0;
 }
 
+.article h1,
+.article h2,
+.article h3,
+.article h4,
+.article h5 {
+    color: #1481b8;
+}
+
 hr.toc-sep {
     border: 1px solid rgba(1,1,1,0.1);
     border-style: dashed;
