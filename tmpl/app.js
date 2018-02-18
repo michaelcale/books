@@ -72,7 +72,8 @@ function navigateToSearchResult(idx) {
   var lastIdx = parts.length - 1;
   var lastEl = parts[lastIdx];
   var selected = currentState.searchResults[idx];
-  var uri = selected[0];
+  var el = selected[0];
+  var uri = el[0];
   if (isChapterOrArticle(lastEl)) {
     parts[lastIdx] = uri;
   } else {
@@ -106,13 +107,13 @@ function onEscape(ev) {
 }
 
 function onUpDown(ev) {
+  var dir = (ev.key == "ArrowUp") ? -1 : 1;
   var results = currentState.searchResults;
   var n = results.length;
   var selIdx = currentState.selectedSearchResult;
   if (n <= 0 || selIdx < 0) {
     return;
   }
-  var dir = (ev.key == "ArrowUp") ? -1 : 1;
   var newIdx = selIdx + dir;
   if (newIdx >= 0 && newIdx < n) {
     setState({
@@ -214,7 +215,10 @@ function span(s, cls) {
 }
 
 // create HTML to highlight part of s starting at idx and with length len
-function hilightSearchResult(s, idx, len) {
+function hilightSearchResult(s, matches) {
+  // TODO: handle multiple matches
+  var idx = matches[0][0];
+  var len = matches[0][1];
   var s1 = s.substring(0, idx);
   var s2 = s.substring(idx, idx + len);
   var s3 = s.substring(idx + len);
@@ -263,10 +267,11 @@ function buildResultsHTML(results, selectedIdx) {
   var n = results.length;
   for (var i = 0; i < n; i++) {
     var r = results[i];
-    var title = r[1];
-    var idx = r[2];
-    var len = r[3];
-    var html = hilightSearchResult(title, idx, len);
+    var el = r[0];
+    var title = el[1];
+    var matches = r[1];
+
+    var html = hilightSearchResult(title, matches);
     var opt = {
       id: "search-result-no-" + i,
       cls: "search-result",
@@ -373,6 +378,71 @@ function clearSearchResults() {
 
 var maxSearchResults = 25;
 
+// el is [idx, len]
+// sort by idx.
+// if idx is the same, sort by reverse len
+// (i.e. bigger len is first)
+function sortSearchByIdx(el1, el2) {
+  var res = el1[0] - el2[0];
+  if (res == 0) {
+    res = el2[1] - el1[1];
+  }
+  return res;
+}
+
+// [[idx, len], ...]
+// sort by idx, if there is an overlap, drop overlapped elements
+function sortSearchMatches(a) {
+  if (a.length < 2) {
+    return a;
+  }
+  a.sort(sortSearchByIdx);
+  var lastIdx = a[0][0] + a[0][1]; // start + len
+  var n = a.length;
+  var res = [a[0]];
+  for (var i = 1; i < n; i++) {
+    var el = a[i];
+    var idx = el[0];
+    var len = el[1];
+    if (idx >= lastIdx) {
+      res.push(el);
+      lastIdx = idx + len;
+    }
+  }
+  return a;
+}
+
+// returns an array of [[idx, len], ...]
+// searchTerms might be an empty array
+function searchMatch(s, toFind, toFindArr) {
+  s = s.toLowerCase();
+  var idx = s.indexOf(toFind);
+  if (idx != -1) {
+    return [[idx, toFind.length]];
+  }
+  if (!toFindArr) {
+    return null;
+  }
+  var n = toFindArr.length;
+  var res = Array(n)
+  for (var i = 0; i < n; i++) {
+    toFind = toFindArr[i];
+    idx = s.indexOf(toFind);
+    if (idx == -1) {
+      return null;
+    }
+    res[i] = [idx, toFind.length];
+  }
+  return sortSearchMatches(res);
+}
+
+function notEmptyString(s) {
+  return s.length > 0;
+}
+
+// if search term is multiple words like "blank id",
+// we search for both the exact match and if we match all
+// terms ("blank", "id") separately
 function doSearch(searchTerm) {
   searchTerm = searchTerm.trim();
   if (searchTerm == currentSearchTerm) {
@@ -383,21 +453,21 @@ function doSearch(searchTerm) {
     clearSearchResults();
     return;
   }
-  var toFind = searchTerm.toLowerCase();
-  console.log("search for:", toFind);
+
+  searchTerm = searchTerm.toLowerCase();
+  var searchTerms = searchTerm.split(" ").filter(notEmptyString);
+
+  console.log("search for:", searchTerm);
   var a = gBookTocSearchData; // loaded via toc_search.js
   var n = a.length;
   var res = [];
   for (var i = 0; i < n && res.length < maxSearchResults; i++) {
     var el = a[i];
-    var title = el[1].toLowerCase();
-    var idx = title.indexOf(toFind);
-    if (idx == -1) {
+    var match = searchMatch(el[1], searchTerm, searchTerms);
+    if (!match) {
       continue;
     }
-    var uri = el[0];
-    var resEl = [uri, el[1], idx, toFind.length];
-    res.push(resEl);
+    res.push([el, match]);
   }
   console.log("search results:", res);
   setState({
