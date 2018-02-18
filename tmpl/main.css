@@ -332,12 +332,17 @@ or use grid for top-header instead of flexbox.
     background-color: #f5f2f0;
 }
 
+/* styling inspired by http://gameprogrammingpatterns.com/dirty-flag.html#local-and-world-transforms
+*/
 .article h1,
 .article h2,
 .article h3,
 .article h4,
 .article h5 {
     color: #1481b8;
+    border-left: solid 8px #d9eaf2;
+    padding-left: 8px;
+
 }
 
 hr.toc-sep {
