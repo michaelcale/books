@@ -340,27 +340,28 @@ function rebuildSearchResultsUI() {
   var html;
   var results = currentState.searchResults;
   var selectedIdx = currentState.selectedSearchResultIdx;
-  var el = document.getElementById("search-results");
+  var searchWindow = document.getElementById("search-results-window");
   var blurOverlay = document.getElementById("blur-overlay");
+  var searchResults = document.getElementById("search-results");
   if (results.length == 0) {
     if (currentSearchTerm == "") {
-      el.style.display = "none";
+      searchWindow.style.display = "none";
       blurOverlay.style.display = "none";
     } else {
-      el.style.display = "block";
+      searchWindow.style.display = "block";
       blurOverlay.style.display = "block";
       html =
         "<div class='no-search-results'>No search results for '" +
         currentSearchTerm +
         "'</div>";
-      el.innerHTML = html;
+        searchResults.innerHTML = html;
     }
     return;
   }
-  el.style.display = "block";
+  searchWindow.style.display = "block";
   blurOverlay.style.display = "block";
   html = buildResultsHTML(results, selectedIdx);
-  el.innerHTML = html;
+  searchResults.innerHTML = html;
 
   // ensure element is scrolled into view
   window.requestAnimationFrame(() => {
