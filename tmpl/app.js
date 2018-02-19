@@ -181,14 +181,6 @@ function isChapterOrArticleURL(s) {
   return s.startsWith("ch-") || s.startsWith("a-");
 }
 
-function isChapterOrArticlePage() {
-  var loc = window.location.pathname;
-  if (loc.indexOf("/ch-") != -1) {
-    return true;
-  }
-  return loc.indexOf("/a-") != -1;
-}
-
 function navigateToSearchResult(idx) {
   var loc = window.location.pathname;
   var parts = loc.split("/");
@@ -692,7 +684,13 @@ function start() {
   document.addEventListener("click", onClick, false);
 }
 
-if (isChapterOrArticlePage()) {
+// we don't want to run javascript on about etc. pages
+function isAppPage() {
+  var loc = window.location.pathname;
+  return loc.indexOf("essential/") != -1
+}
+
+if (isAppPage()) {
   // we don't want this in e.g. about page
   document.addEventListener("DOMContentLoaded", start);
 }
@@ -833,12 +831,13 @@ function define(prefix, icons) {
   }
 }
 
-var icons = {
+var icons_regular = {
   "edit": [576, 512, [], "f044", "M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"],
+  "star": [576, 512, [], "f005", "M528.1 171.5L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5 105.7-103c19-18.5 8.5-50.8-17.7-54.6zM388.6 312.3l23.7 138.4L288 385.4l-124.3 65.3 23.7-138.4-100.6-98 139-20.2 62.2-126 62.2 126 139 20.2-100.6 98z"],
 };
 
 bunker(function () {
-  define('far', icons);
+  define('far', icons_regular);
 });
 
 var icons_brands = {
