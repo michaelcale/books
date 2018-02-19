@@ -145,6 +145,7 @@ func genSelectedBooks(bookDirs []string) {
 
 	copyToWwwMaybeMust(filepath.Join("tmpl", "main.css"))
 	copyToWwwMaybeMust(filepath.Join("tmpl", "app.js"))
+	copyToWwwMaybeMust(filepath.Join("tmpl", "font-awesome.min.js"))
 	genIndex(books)
 	genIndexGrid(books)
 	genAbout()

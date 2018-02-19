@@ -8,6 +8,7 @@
 
     <title>About Essential Programming Books project</title>
     <link href="/main.css" rel="stylesheet">
+
     {{ if .AnalyticsCode }}
     <script async src="https://www.googletagmanager.com/gtag/js?id={{.AnalyticsCode}}"></script>
     <script>
@@ -17,11 +18,17 @@
         gtag('config', '{{.AnalyticsCode}}');
     </script>
     {{ end }}
+    <script src="/font-awesome.min.js"></script>
+    <script src="/app.js"></script>
 </head>
 
 <body>
     <h1>
-        <a href="/" class="breadcrumbs__item">Books</a>About this project</h1>
+        <a href="/" class="breadcrumbs__item about-home-link">
+            <i class="fas fa-home"></i>
+        </a>
+        About this project
+    </h1>
 
     <p>
         This project is a continuation of Stack Overflow Documentation, which

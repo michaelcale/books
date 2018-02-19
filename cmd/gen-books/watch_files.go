@@ -104,6 +104,13 @@ func handleFileChange(path string) {
 		return
 	}
 
+	if strings.HasSuffix(path, "font-awesome.min.js") {
+		clearErrors()
+		copyToWwwMaybeMust(filepath.Join("tmpl", "font-awesome.min.js"))
+		printAndClearErrors()
+		return
+	}
+
 	muRegen.Lock()
 	defer muRegen.Unlock()
 

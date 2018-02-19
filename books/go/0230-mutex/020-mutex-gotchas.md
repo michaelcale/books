@@ -1,5 +1,6 @@
 ---
 Title: Mutex gotchas
+SearcH: Mutex pitfalls
 Id: 801000u9
 ---
 A copy of `sync.Mutex` variable starts with the same state as original mutex but is not the same mutex.

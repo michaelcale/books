@@ -32,6 +32,7 @@
         gtag('config', '{{.AnalyticsCode}}');
     </script>
     {{ end }}
+    <script src="/font-awesome.min.js"></script>
     <script src="{{.TocSearchJSURL}}"></script>
     <script src="/app.js"></script>
 
@@ -47,7 +48,7 @@
     <div id="search-results"></div>
 
     <div class="content-wrapper">
-        <h1 class="hdr"><a href="/" class="breadcrumbs__item">Books</a>{{.TitleLong}}</h1>
+        <h1 class="hdr"><a href="/" class="breadcrumbs__item"><i class="fas fa-home"></i></a>{{.TitleLong}}</h1>
 
         <div class="book-img-cover-wrapper">
             <img class="book-img-cover" src="{{.CoverURL}}">
@@ -83,11 +84,15 @@
     <div id="bottom-footer">
         <div>Maintained by <a href="https://blog.kowalczyk.info" target="_blank">Krzysztof Kowalczyk</a>
         </div>
+
         <div class="share-me">
-            Share "{{.TitleLong}}" <a href="https://twitter.com/intent/tweet?text={{.ShareOnTwitterText}}&url={{.CanonnicalURL}}&via=kjk">on Twitter</a>
+            <a href="https://twitter.com/intent/tweet?text={{.ShareOnTwitterText}}&url={{.CanonnicalURL}}&via=kjk">Share <b>{{.TitleLong}}</b> on <i class="fab fa-twitter"></i></a>
         </div>
+
         <div>
-            <a href="{{.GitHubURL}}" target="_blank">{{.GitHubText}}</a>
+            <a href="{{.GitHubURL}}" target="_blank">
+                <i class="fas fa-edit"></i>
+                {{.GitHubText}}</a>
         </div>
     </div>
 

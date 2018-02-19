@@ -33,6 +33,7 @@
         gtag('config', '{{.AnalyticsCode}}');
     </script>
     {{ end }}
+    <script src="/font-awesome.min.js"></script>
     <script src="{{.Book.TocSearchJSURL}}"></script>
     <script src="/app.js"></script>
 </head>
@@ -48,14 +49,16 @@
 
     <div class="content-wrapper">
         <div class="hdr">
-            <a href="/" class="breadcrumbs__item">Books</a><a href="{{.Book.URL}}" class="breadcrumbs__item">Essential {{.Book.Title}}</a><a href="{{.Chapter.URL}}">{{.Chapter.Title}}</a>
+            <a href="/" class="breadcrumbs__item"><i class="fas fa-home"></i></a><a href="{{.Book.URL}}" class="breadcrumbs__item">Essential {{.Book.Title}}</a><a href="{{.Chapter.URL}}">{{.Chapter.Title}}</a>
         </div>
 
         <div class="article">
             <div class="article-hdr">
                 <div class="article-contribute">
                     <div class="contribute-btn">
-                        <a href="{{.GitHubEditURL}}" target="_blank">{{.GitHubText}}</a>
+                        <a href="{{.GitHubEditURL}}" target="_blank">
+                            <i class="fas fa-edit"></i>
+                            {{.GitHubText}}</a>
                     </div>
                     <div class="contribute-btn">
                         &nbsp;
@@ -101,7 +104,7 @@
             Maintained by <a href="https://blog.kowalczyk.info" target="_blank">Krzysztof Kowalczyk</a>
         </div>
         <div class="share-me">
-            Share "{{.Book.TitleLong}}" <a href="https://twitter.com/intent/tweet?text={{.Book.ShareOnTwitterText}}&url={{.Book.CanonnicalURL}}&via=kjk">on Twitter</a>
+            <a href="https://twitter.com/intent/tweet?text={{.Book.ShareOnTwitterText}}&url={{.Book.CanonnicalURL}}&via=kjk">Share <b>{{.Book.TitleLong}}</b> on <i class="fab fa-twitter"></i></a>
         </div>
         <div>
             <!-- right side. Used to be 'edit github' url -->

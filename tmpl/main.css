@@ -1,136 +1,138 @@
 body {
+  /* font-family: 'Open Sans', sans; */
 
-    /* font-family: 'Open Sans', sans; */
+  /* stack overflow font */
+  /* font-family: Arial,"Helvetica Neue",Helvetica,sans-serif; */
 
-    /* stack overflow font */
-    /* font-family: Arial,"Helvetica Neue",Helvetica,sans-serif; */
+  /* github font see http://markdotto.com/2018/02/07/github-system-fonts/ */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
-    /* github font see http://markdotto.com/2018/02/07/github-system-fonts/ */
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 16px;
+  color: rgb(35, 35, 35);
 
-    font-size: 16px;
-    color: rgb(35, 35, 35);
-
-    margin: 20px;
+  margin: 20px;
 }
 
-td { vertical-align: top; }
+td {
+  vertical-align: top;
+}
 
-th:not(:first-child):not(:last-child), td:not(:first-child):not(:last-child) {
-    padding: 0 10px;
+th:not(:first-child):not(:last-child),
+td:not(:first-child):not(:last-child) {
+  padding: 0 10px;
 }
 
 th {
-    vertical-align: bottom;
+  vertical-align: bottom;
 }
 thead th {
-    border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
 }
 
 tbody tr td.with-decimal {
-padding-left:10px !important;
-padding-right:0px !important;
+  padding-left: 10px !important;
+  padding-right: 0px !important;
 }
 
 tbody tr td.decimal {
-padding-left:0 !important;
-padding-right:10px !important;
+  padding-left: 0 !important;
+  padding-right: 10px !important;
 }
 
 /* h1 by default is 2em, we want something smaller */
 h1.hdr {
-    font-size: 0.8em;
+  font-size: 0.8em;
 }
 
 div.hdr {
-    font-size: 0.8em;
+  font-size: 0.8em;
 }
 
 .light {
-    color: gray;
+  color: gray;
 }
 
 .chap-no {
-    color: lightslategray;
-    display: inline-block;
-    width: 2em;
+  color: lightslategray;
+  display: inline-block;
+  width: 2em;
 }
 
 .is-current {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .mt32 {
-    margin-top: 32px;
+  margin-top: 32px;
 }
 .mt16 {
-    margin-top: 16px;
+  margin-top: 16px;
 }
 
 .fs0p8em {
-    font-size: 0.8em;
+  font-size: 0.8em;
 }
 
-
 .book-name {
-    padding-right: 32px;
+  padding-right: 32px;
 }
 
 table.book-list th {
-    padding-right: 16px;
+  padding-right: 16px;
 }
 
 .article blockquote {
-    border-left: 2px solid rgb(74, 117, 236);
-    padding-left: 8px;
-    margin-left: 16px;
+  border-left: 2px solid rgb(74, 117, 236);
+  padding-left: 8px;
+  margin-left: 16px;
 }
 
 .toc-article {
-    padding-left: 1em;
+  padding-left: 1em;
 }
 
 .toc-header {
-    margin-top: 16px;
-    padding-bottom: 8px;
-    font-size: 1em;
-    font-weight: bold;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: fit-content;
+  margin-top: 16px;
+  padding-bottom: 8px;
+  font-size: 1em;
+  font-weight: bold;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: fit-content;
 }
 
 a {
-    color: #4183c4;
-    text-decoration: none;
+  color: #4183c4;
+  text-decoration: none;
 }
 
 a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 a.blue {
-    color: rgb(138, 178, 219);
+  color: rgb(138, 178, 219);
 }
 
 a.blue:hover {
-    color: #4183c4;
+  color: #4183c4;
 }
 
 #top-header {
-    position: fixed;
-    z-index: 2;
-    top: 0px;
-    /* same as body margin */
-    left: 20px;
-    right: 20px;
-    height: 32px;
-    /* background-color: lightcyan; */
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 2px solid lightgray;
+  position: fixed;
+  z-index: 2;
+  top: 0px;
+  /* same as body margin */
+  left: 20px;
+  right: 20px;
+  height: 32px;
+  /* background-color: lightcyan; */
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid lightgray;
 }
 
 /*
@@ -139,202 +141,201 @@ input field is centered. We could also center with fixed positioning
 or use grid for top-header instead of flexbox.
 */
 .top-header-left {
-    width: 160px;
+  width: 160px;
 }
 
 .top-header-right {
-    width: 160px;
+  width: 160px;
 }
 
 #bottom-footer {
-    position: fixed;
-    bottom: 0px;
-    left: 20px;
-    right: 20px;
-    height: 28px;
-    background-color: white;
-    border-top: 1px solid lightgray;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.8em;
+  position: fixed;
+  bottom: 0px;
+  left: 20px;
+  right: 20px;
+  height: 28px;
+  background-color: white;
+  border-top: 1px solid lightgray;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8em;
 }
 
 .content-wrapper {
-    /* make space for top-header */
-    margin-top: 40px;
-    /* make space for bottom-footer */
-    margin-bottom: 36px;
+  /* make space for top-header */
+  margin-top: 40px;
+  /* make space for bottom-footer */
+  margin-bottom: 36px;
 }
 
 .covers {
-    padding-top: 16px;
-    padding-right: 32px;
-    padding-left: 32px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
+  padding-top: 16px;
+  padding-right: 32px;
+  padding-left: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .cover-img-wrapper {
-    margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 
 .img-cover {
-    width: 256px;
-    height: 363px;
-    transition: all .1s ease-in-out;
+  width: 256px;
+  height: 363px;
+  transition: all 0.1s ease-in-out;
 }
 
 .img-cover:hover {
-    transform: scale(1.05);
-    border: 1px solid blue;
+  transform: scale(1.05);
+  border: 1px solid blue;
 }
 
 .book-img-cover-wrapper {
-    display: flex;
-    justify-content: center;
-    padding-top: 8px;
-    padding-bottom: 8px;
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 .book-img-cover {
-    width: 20%;
-    height: 20%;
+  width: 20%;
+  height: 20%;
 }
 
 #blur-overlay {
-    display: none;
-    z-index: 10;
-    background-color: rgba(0,0,0,.4);
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+  display: none;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 #search-input {
-    width: 50vw;
-    font-size: 14px;
-    padding: 2px 8px;
-    border-radius: .25rem;
-    background-color: white;
-    filter: opacity(1);
-    border: 1px solid rgba(0,0,0,.15);
-    box-shadow: inset 0 0 0 0 transparent;
-    outline: 0;
-    z-index: 25;
+  width: 50vw;
+  font-size: 14px;
+  padding: 2px 8px;
+  border-radius: 0.25rem;
+  background-color: white;
+  filter: opacity(1);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 0 0 0 transparent;
+  outline: 0;
+  z-index: 25;
 }
 
 /* no blue border when focused */
 #search-input:focus {
-    /* border: 1px solid lightskyblue; */
-    border: 1px solid #aaaaaa;
+  /* border: 1px solid lightskyblue; */
+  border: 1px solid #aaaaaa;
 }
 
 #search-results {
-    position: fixed;
-    top: 28px;
-    width: 74vw;
-    left: 13vw; /* (100 - 74) / 2 */
-    right: 13vw;
-    border: 1px solid black;
+  position: fixed;
+  top: 28px;
+  width: 74vw;
+  left: 13vw; /* (100 - 74) / 2 */
+  right: 13vw;
+  border: 1px solid black;
 
-    border-radius: .25rem;
-    border: 1px solid #aaaaaa;
-    z-index: 25;
+  border-radius: 0.25rem;
+  border: 1px solid #aaaaaa;
+  z-index: 25;
 
-    /* min-height: 320px; */
-    max-height: 75vh;
-    background-color: white;
-    display: none;
-    padding: 4px 8px;
-    line-height: 1.3em;
-    cursor: pointer;
-    overflow-y: scroll;
-    overflow-x: hidden;
+  /* min-height: 320px; */
+  max-height: 75vh;
+  background-color: white;
+  display: none;
+  padding: 4px 8px;
+  line-height: 1.3em;
+  cursor: pointer;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .search-result-selected {
-    background-color:#EEEEEE;
+  background-color: #eeeeee;
 }
 
 .search-result-in {
-    font-size: 0.7em;
-    color:#1481b8;
+  font-size: 0.7em;
+  color: #1481b8;
 }
 
 .no-search-results {
-    padding-top: 48px;
-    padding-bottom: 48px;
-    margin-left: auto;
-    margin-right: auto;
-    /* background-color: #dddddd; */
-    text-align: center;
+  padding-top: 48px;
+  padding-bottom: 48px;
+  margin-left: auto;
+  margin-right: auto;
+  /* background-color: #dddddd; */
+  text-align: center;
 }
 
 /* higlight search results with yellow-ish background */
 .hili {
-    /* font-weight: bold; */
-    /*padding: 1px 2px; */
-    /* background: #ffeb3b; */
-    background: rgba(255,235,59, 0.6);
-    /* border-radius: 2px; */
-    /* font-weight: bold; */
-    /* background-color: lightskyblue; */
+  /* font-weight: bold; */
+  /*padding: 1px 2px; */
+  /* background: #ffeb3b; */
+  background: rgba(255, 235, 59, 0.6);
+  /* border-radius: 2px; */
+  /* font-weight: bold; */
+  /* background-color: lightskyblue; */
 }
 
-
 .github-link {
-    font-size: 0.8em;
-    position: fixed;
-    right: 18px;
-    top: 62px;
-    padding: 4px 8px;
-    border: 1px solid #666;
+  font-size: 0.8em;
+  position: fixed;
+  right: 18px;
+  top: 62px;
+  padding: 4px 8px;
+  border: 1px solid #666;
 }
 
 .github-link:hover {
-    background-color: #f1f1f1;
+  background-color: #f1f1f1;
 }
 
 .github-link-small {
-    font-size: 0.6em;
-    position: fixed;
-    right: 18px;
-    top: 38px;
-    padding: 4px 8px;
-    border: 1px solid #666;
+  font-size: 0.6em;
+  position: fixed;
+  right: 18px;
+  top: 38px;
+  padding: 4px 8px;
+  border: 1px solid #666;
 }
 
 .github-link-small:hover {
-    background-color: #f1f1f1;
+  background-color: #f1f1f1;
 }
 
 .article-contribute {
-    font-size: 0.8em;
-    float: right;
+  font-size: 0.8em;
+  float: right;
 }
 
 .contribute-btn {
-    position: relative;
-    display: inline-block;
-    vertical-align: middle;
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .article {
-    border: 1px solid ligthgray;
+  border: 1px solid ligthgray;
 }
 
 .article_title {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .article code {
-    background-color: #f8f8f8;
-    background-color: #f5f2f0;
+  background-color: #f8f8f8;
+  background-color: #f5f2f0;
 }
 
 /* styling inspired by http://gameprogrammingpatterns.com/dirty-flag.html#local-and-world-transforms
@@ -344,238 +345,837 @@ or use grid for top-header instead of flexbox.
 .article h3,
 .article h4,
 .article h5 {
-    color: #1481b8;
-    /* border-left: solid 8px #d9eaf2;
+  color: #1481b8;
+  /* border-left: solid 8px #d9eaf2;
     padding-left: 8px; */
-
 }
 
 hr.toc-sep {
-    border: 1px solid rgba(1,1,1,0.1);
-    border-style: dashed;
-    margin-top: 24px;
-    margin-bottom: 8px;
+  border: 1px solid rgba(1, 1, 1, 0.1);
+  border-style: dashed;
+  margin-top: 24px;
+  margin-bottom: 8px;
 }
 
 .chapter-toc {
-    background-color: white;
-    padding-top: 1em;
+  background-color: white;
+  padding-top: 1em;
 }
 
 .chapters-toc {
-    /* font-size: 0.8em; */
-    columns: 6; /* for sizes over 1200px */
+  /* font-size: 0.8em; */
+  columns: 6; /* for sizes over 1200px */
 }
 
 .view-switch {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: fit-content;
-    margin-top: 8px;
-    margin-bottom: 8px;
-    font-size: 0.9em;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: fit-content;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-size: 0.9em;
 }
 
 /* TODO: possibly tweak those breakpoints e.g. add a column every 240px? */
 @media (max-width: 1600px) {
-    .chapters-toc {
-        columns: 5;
-    }
+  .chapters-toc {
+    columns: 5;
+  }
 }
 
 @media (max-width: 1280px) {
-    .chapters-toc {
-        columns: 4;
-    }
+  .chapters-toc {
+    columns: 4;
+  }
 }
 
 @media (max-width: 960px) {
-    .chapters-toc {
-        columns: 3;
-    }
+  .chapters-toc {
+    columns: 3;
+  }
 }
 
 @media (max-width: 640px) {
-    .chapters-toc {
-        columns: 2;
-    }
+  .chapters-toc {
+    columns: 2;
+  }
 }
 
 @media (max-width: 320px) {
-    .chapters-toc {
-        columns: 1;
-    }
+  .chapters-toc {
+    columns: 1;
+  }
 }
 
 .article-chapter-toc {
-    background-color: white;
-    margin-top: 16px;
-    filter: opacity(0.6)
+  background-color: white;
+  margin-top: 16px;
+  filter: opacity(0.6);
 }
 
 .article-chapter-toc:hover {
-    filter: opacity(1)
+  filter: opacity(1);
 }
 
-
 .article-article-toc {
-    padding-top: 8px;
-    padding-left: 8px;
+  padding-top: 8px;
+  padding-left: 8px;
 }
 
 .breadcrumbs__item:after {
-    content: "\2192";
-    font-family: Lucida Grande,Lucida Sans Unicode,Arial,Helvetica,sans-serif;
-    color: #a9a9a9;
-    display: inline-block;
-    margin: 0 9px 0 7px;
+  content: "\2192";
+  font-family: Lucida Grande, Lucida Sans Unicode, Arial, Helvetica, sans-serif;
+  color: #a9a9a9;
+  display: inline-block;
+  margin: 0 9px 0 7px;
 }
 
 .hcenter {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: fit-content;
 }
 
 /* dim toc on a book chapter page, to de-emphasize it visually, until user
    hovers over the element */
 .chapter-toc-wrapper {
-    filter: opacity(0.6);
+  filter: opacity(0.6);
 }
 
 .chapter-toc-wrapper:hover {
-    filter: opacity(1)
+  filter: opacity(1);
 }
 
 .chapters-toc-item {
-    /* background-color: #fcfcfc; */
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
+  /* background-color: #fcfcfc; */
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 pre.chroma {
-    display: block;
-    overflow-x: auto;
-    padding: 0.5em;
-    background-color: #fdfdfd;
-    color: #657b83;
-    border: 1px solid #e5e5e5;
-    overflow-x: visible;
-    font-size: 85%;
-    tab-size: 2;
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background-color: #fdfdfd;
+  color: #657b83;
+  border: 1px solid #e5e5e5;
+  overflow-x: visible;
+  font-size: 85%;
+  tab-size: 2;
+}
+
+a.about-home-link {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover.about-home-link {
+    color: black;
+    text-decoration: none;
 }
 
 /* this allows to position child absolutely */
 .code-box {
-    position: relative;
+  position: relative;
 }
 
 /* box that potentially displays file name linking to github and 'run' button for playground */
 .code-box-nav {
-    position: absolute;
-    top: 0;
-    right: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .code-box-github {
-    border: 1px solid #a4a4a4;
-    padding: 4px 8px;
-    margin: 0;
-    display: inline-block;
+  border: 1px solid #a4a4a4;
+  padding: 4px 8px;
+  margin: 0;
+  display: inline-block;
 }
 
 .code-box-github a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .code-box-github a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .code-box-playground {
-    border: 1px solid #a4a4a4;
-    padding: 4px 8px;
-    margin: 0;
-    margin-right: -6px; /* no idea why I need this */
-    display: inline-block;
+  border: 1px solid #a4a4a4;
+  padding: 4px 8px;
+  margin: 0;
+  margin-right: -6px; /* no idea why I need this */
+  display: inline-block;
 }
 
 .code-box-playground a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .code-box-playground a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
-/* Background */ .chroma { color: #272822; background-color: #fafafa }
-/* Error */ .chroma .err { color: #960050; background-color: #dfdfdf }
-/* LineTableTD */ .chroma .lntd { vertical-align: top; padding: 0; margin: 0; border: 0; }
-/* LineTable */ .chroma .lntable { border-spacing: 0; padding: 0; margin: 0; border: 0; width: 100%; overflow: auto; display: block; }
-/* LineHighlight */ .chroma .hl { display: block; width: 100% }
-/* LineNumbersTable */ .chroma .lnt { margin-right: 0.4em; padding: 0 0.4em 0 0.4em; display: block; }
-/* LineNumbers */ .chroma .ln { margin-right: 0.4em; padding: 0 0.4em 0 0.4em; }
-/* Keyword */ .chroma .k { color: #00a8c8 }
-/* KeywordConstant */ .chroma .kc { color: #00a8c8 }
-/* KeywordDeclaration */ .chroma .kd { color: #00a8c8 }
-/* KeywordNamespace */ .chroma .kn { color: #f92672 }
-/* KeywordPseudo */ .chroma .kp { color: #00a8c8 }
-/* KeywordReserved */ .chroma .kr { color: #00a8c8 }
-/* KeywordType */ .chroma .kt { color: #00a8c8 }
-/* Name */ .chroma .n { color: #111111 }
-/* NameAttribute */ .chroma .na { color: #75af00 }
-/* NameBuiltin */ .chroma .nb { color: #111111 }
-/* NameBuiltinPseudo */ .chroma .bp { color: #111111 }
-/* NameClass */ .chroma .nc { color: #75af00 }
-/* NameConstant */ .chroma .no { color: #00a8c8 }
-/* NameDecorator */ .chroma .nd { color: #75af00 }
-/* NameEntity */ .chroma .ni { color: #111111 }
-/* NameException */ .chroma .ne { color: #75af00 }
-/* NameFunction */ .chroma .nf { color: #75af00 }
-/* NameFunctionMagic */ .chroma .fm { color: #111111 }
-/* NameLabel */ .chroma .nl { color: #111111 }
-/* NameNamespace */ .chroma .nn { color: #111111 }
-/* NameOther */ .chroma .nx { color: #75af00 }
-/* NameProperty */ .chroma .py { color: #111111 }
-/* NameTag */ .chroma .nt { color: #f92672 }
-/* NameVariable */ .chroma .nv { color: #111111 }
-/* NameVariableClass */ .chroma .vc { color: #111111 }
-/* NameVariableGlobal */ .chroma .vg { color: #111111 }
-/* NameVariableInstance */ .chroma .vi { color: #111111 }
-/* NameVariableMagic */ .chroma .vm { color: #111111 }
-/* Literal */ .chroma .l { color: #ae81ff }
-/* LiteralDate */ .chroma .ld { color: #d88200 }
-/* LiteralString */ .chroma .s { color: #d88200 }
-/* LiteralStringAffix */ .chroma .sa { color: #d88200 }
-/* LiteralStringBacktick */ .chroma .sb { color: #d88200 }
-/* LiteralStringChar */ .chroma .sc { color: #d88200 }
-/* LiteralStringDelimiter */ .chroma .dl { color: #d88200 }
-/* LiteralStringDoc */ .chroma .sd { color: #d88200 }
-/* LiteralStringDouble */ .chroma .s2 { color: #d88200 }
-/* LiteralStringEscape */ .chroma .se { color: #8045ff }
-/* LiteralStringHeredoc */ .chroma .sh { color: #d88200 }
-/* LiteralStringInterpol */ .chroma .si { color: #d88200 }
-/* LiteralStringOther */ .chroma .sx { color: #d88200 }
-/* LiteralStringRegex */ .chroma .sr { color: #d88200 }
-/* LiteralStringSingle */ .chroma .s1 { color: #d88200 }
-/* LiteralStringSymbol */ .chroma .ss { color: #d88200 }
-/* LiteralNumber */ .chroma .m { color: #ae81ff }
-/* LiteralNumberBin */ .chroma .mb { color: #ae81ff }
-/* LiteralNumberFloat */ .chroma .mf { color: #ae81ff }
-/* LiteralNumberHex */ .chroma .mh { color: #ae81ff }
-/* LiteralNumberInteger */ .chroma .mi { color: #ae81ff }
-/* LiteralNumberIntegerLong */ .chroma .il { color: #ae81ff }
-/* LiteralNumberOct */ .chroma .mo { color: #ae81ff }
-/* Operator */ .chroma .o { color: #f92672 }
-/* OperatorWord */ .chroma .ow { color: #f92672 }
-/* Punctuation */ .chroma .p { color: #111111 }
-/* Comment */ .chroma .c { color: #75715e }
-/* CommentHashbang */ .chroma .ch { color: #75715e }
-/* CommentMultiline */ .chroma .cm { color: #75715e }
-/* CommentSingle */ .chroma .c1 { color: #75715e }
-/* CommentSpecial */ .chroma .cs { color: #75715e }
-/* CommentPreproc */ .chroma .cp { color: #75715e }
-/* CommentPreprocFile */ .chroma .cpf { color: #75715e }
-/* GenericEmph */ .chroma .ge { font-style: italic }
-/* GenericStrong */ .chroma .gs { font-weight: bold }
+/*
+Source higligh from chroma https://github.com/alecthomas/chroma
+*/
+.chroma {
+  color: #272822;
+  background-color: #fafafa;
+}
+.chroma .err {
+  color: #960050;
+  background-color: #dfdfdf;
+}
+.chroma .lntd {
+  vertical-align: top;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+.chroma .lntable {
+  border-spacing: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  width: 100%;
+  overflow: auto;
+  display: block;
+}
+.chroma .hl {
+  display: block;
+  width: 100%;
+}
+.chroma .lnt {
+  margin-right: 0.4em;
+  padding: 0 0.4em 0 0.4em;
+  display: block;
+}
+.chroma .ln {
+  margin-right: 0.4em;
+  padding: 0 0.4em 0 0.4em;
+}
+.chroma .k {
+  color: #00a8c8;
+}
+.chroma .kc {
+  color: #00a8c8;
+}
+.chroma .kd {
+  color: #00a8c8;
+}
+.chroma .kn {
+  color: #f92672;
+}
+.chroma .kp {
+  color: #00a8c8;
+}
+.chroma .kr {
+  color: #00a8c8;
+}
+.chroma .kt {
+  color: #00a8c8;
+}
+.chroma .n {
+  color: #111111;
+}
+.chroma .na {
+  color: #75af00;
+}
+.chroma .nb {
+  color: #111111;
+}
+.chroma .bp {
+  color: #111111;
+}
+.chroma .nc {
+  color: #75af00;
+}
+.chroma .no {
+  color: #00a8c8;
+}
+.chroma .nd {
+  color: #75af00;
+}
+.chroma .ni {
+  color: #111111;
+}
+.chroma .ne {
+  color: #75af00;
+}
+.chroma .nf {
+  color: #75af00;
+}
+.chroma .fm {
+  color: #111111;
+}
+.chroma .nl {
+  color: #111111;
+}
+.chroma .nn {
+  color: #111111;
+}
+.chroma .nx {
+  color: #75af00;
+}
+.chroma .py {
+  color: #111111;
+}
+.chroma .nt {
+  color: #f92672;
+}
+.chroma .nv {
+  color: #111111;
+}
+.chroma .vc {
+  color: #111111;
+}
+.chroma .vg {
+  color: #111111;
+}
+.chroma .vi {
+  color: #111111;
+}
+.chroma .vm {
+  color: #111111;
+}
+.chroma .l {
+  color: #ae81ff;
+}
+.chroma .ld {
+  color: #d88200;
+}
+.chroma .s {
+  color: #d88200;
+}
+.chroma .sa {
+  color: #d88200;
+}
+.chroma .sb {
+  color: #d88200;
+}
+.chroma .sc {
+  color: #d88200;
+}
+.chroma .dl {
+  color: #d88200;
+}
+.chroma .sd {
+  color: #d88200;
+}
+.chroma .s2 {
+  color: #d88200;
+}
+.chroma .se {
+  color: #8045ff;
+}
+.chroma .sh {
+  color: #d88200;
+}
+.chroma .si {
+  color: #d88200;
+}
+.chroma .sx {
+  color: #d88200;
+}
+.chroma .sr {
+  color: #d88200;
+}
+.chroma .s1 {
+  color: #d88200;
+}
+.chroma .ss {
+  color: #d88200;
+}
+.chroma .m {
+  color: #ae81ff;
+}
+.chroma .mb {
+  color: #ae81ff;
+}
+.chroma .mf {
+  color: #ae81ff;
+}
+.chroma .mh {
+  color: #ae81ff;
+}
+.chroma .mi {
+  color: #ae81ff;
+}
+.chroma .il {
+  color: #ae81ff;
+}
+.chroma .mo {
+  color: #ae81ff;
+}
+.chroma .o {
+  color: #f92672;
+}
+.chroma .ow {
+  color: #f92672;
+}
+.chroma .p {
+  color: #111111;
+}
+.chroma .c {
+  color: #75715e;
+}
+.chroma .ch {
+  color: #75715e;
+}
+.chroma .cm {
+  color: #75715e;
+}
+.chroma .c1 {
+  color: #75715e;
+}
+.chroma .cs {
+  color: #75715e;
+}
+.chroma .cp {
+  color: #75715e;
+}
+.chroma .cpf {
+  color: #75715e;
+}
+.chroma .ge {
+  font-style: italic;
+}
+.chroma .gs {
+  font-weight: bold;
+}
+
+/*
+https://github.com/FortAwesome/Font-Awesome/blob/master/svg-with-js/css/fa-svg-with-js.css
+*/
+/*!
+ * Font Awesome Free 5.0.6 by @fontawesome - http://fontawesome.com
+ * License - http://fontawesome.com/license (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+svg:not(:root).svg-inline--fa {
+  overflow: visible;
+}
+
+.svg-inline--fa {
+  display: inline-block;
+  font-size: inherit;
+  height: 1em;
+  overflow: visible;
+  vertical-align: -0.125em;
+}
+
+.svg-inline--fa.fa-lg {
+  vertical-align: -0.225em;
+}
+
+.svg-inline--fa.fa-w-1 {
+  width: 0.0625em;
+}
+.svg-inline--fa.fa-w-2 {
+  width: 0.125em;
+}
+.svg-inline--fa.fa-w-3 {
+  width: 0.1875em;
+}
+.svg-inline--fa.fa-w-4 {
+  width: 0.25em;
+}
+.svg-inline--fa.fa-w-5 {
+  width: 0.3125em;
+}
+.svg-inline--fa.fa-w-6 {
+  width: 0.375em;
+}
+.svg-inline--fa.fa-w-7 {
+  width: 0.4375em;
+}
+.svg-inline--fa.fa-w-8 {
+  width: 0.5em;
+}
+.svg-inline--fa.fa-w-9 {
+  width: 0.5625em;
+}
+.svg-inline--fa.fa-w-10 {
+  width: 0.625em;
+}
+.svg-inline--fa.fa-w-11 {
+  width: 0.6875em;
+}
+.svg-inline--fa.fa-w-12 {
+  width: 0.75em;
+}
+.svg-inline--fa.fa-w-13 {
+  width: 0.8125em;
+}
+.svg-inline--fa.fa-w-14 {
+  width: 0.875em;
+}
+.svg-inline--fa.fa-w-15 {
+  width: 0.9375em;
+}
+.svg-inline--fa.fa-w-16 {
+  width: 1em;
+}
+.svg-inline--fa.fa-w-17 {
+  width: 1.0625em;
+}
+.svg-inline--fa.fa-w-18 {
+  width: 1.125em;
+}
+.svg-inline--fa.fa-w-19 {
+  width: 1.1875em;
+}
+.svg-inline--fa.fa-w-20 {
+  width: 1.25em;
+}
+.svg-inline--fa.fa-pull-left {
+  margin-right: 0.3em;
+  width: auto;
+}
+.svg-inline--fa.fa-pull-right {
+  margin-left: 0.3em;
+  width: auto;
+}
+.svg-inline--fa.fa-border {
+  height: 1.5em;
+}
+.svg-inline--fa.fa-li {
+  width: 2em;
+}
+.svg-inline--fa.fa-fw {
+  width: 1.25em;
+}
+
+.fa-layers svg.svg-inline--fa {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.fa-layers {
+  display: inline-block;
+  height: 1em;
+  position: relative;
+  text-align: center;
+  vertical-align: -0.125em;
+  width: 1em;
+}
+.fa-layers svg.svg-inline--fa {
+  -webkit-transform-origin: center center;
+  transform-origin: center center;
+}
+
+.fa-layers-text,
+.fa-layers-counter {
+  display: inline-block;
+  position: absolute;
+  text-align: center;
+}
+
+.fa-layers-text {
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  -webkit-transform-origin: center center;
+  transform-origin: center center;
+}
+
+.fa-layers-counter {
+  background-color: #ff253a;
+  border-radius: 1em;
+  color: #fff;
+  height: 1.5em;
+  line-height: 1;
+  max-width: 5em;
+  min-width: 1.5em;
+  overflow: hidden;
+  padding: 0.25em;
+  right: 0;
+  text-overflow: ellipsis;
+  top: 0;
+  -webkit-transform: scale(0.25);
+  transform: scale(0.25);
+  -webkit-transform-origin: top right;
+  transform-origin: top right;
+}
+
+.fa-layers-bottom-right {
+  bottom: 0;
+  right: 0;
+  top: auto;
+  -webkit-transform: scale(0.25);
+  transform: scale(0.25);
+  -webkit-transform-origin: bottom right;
+  transform-origin: bottom right;
+}
+
+.fa-layers-bottom-left {
+  bottom: 0;
+  left: 0;
+  right: auto;
+  top: auto;
+  -webkit-transform: scale(0.25);
+  transform: scale(0.25);
+  -webkit-transform-origin: bottom left;
+  transform-origin: bottom left;
+}
+
+.fa-layers-top-right {
+  right: 0;
+  top: 0;
+  -webkit-transform: scale(0.25);
+  transform: scale(0.25);
+  -webkit-transform-origin: top right;
+  transform-origin: top right;
+}
+
+.fa-layers-top-left {
+  left: 0;
+  right: auto;
+  top: 0;
+  -webkit-transform: scale(0.25);
+  transform: scale(0.25);
+  -webkit-transform-origin: top left;
+  transform-origin: top left;
+}
+
+.fa-lg {
+  font-size: 1.33333em;
+  line-height: 0.75em;
+  vertical-align: -0.0667em;
+}
+
+.fa-xs {
+  font-size: 0.75em;
+}
+
+.fa-sm {
+  font-size: 0.875em;
+}
+
+.fa-1x {
+  font-size: 1em;
+}
+
+.fa-2x {
+  font-size: 2em;
+}
+
+.fa-3x {
+  font-size: 3em;
+}
+
+.fa-4x {
+  font-size: 4em;
+}
+
+.fa-5x {
+  font-size: 5em;
+}
+
+.fa-6x {
+  font-size: 6em;
+}
+
+.fa-7x {
+  font-size: 7em;
+}
+
+.fa-8x {
+  font-size: 8em;
+}
+
+.fa-9x {
+  font-size: 9em;
+}
+
+.fa-10x {
+  font-size: 10em;
+}
+
+.fa-fw {
+  text-align: center;
+  width: 1.25em;
+}
+
+.fa-ul {
+  list-style-type: none;
+  margin-left: 2.5em;
+  padding-left: 0;
+}
+.fa-ul > li {
+  position: relative;
+}
+
+.fa-li {
+  left: -2em;
+  position: absolute;
+  text-align: center;
+  width: 2em;
+  line-height: inherit;
+}
+
+.fa-border {
+  border: solid 0.08em #eee;
+  border-radius: 0.1em;
+  padding: 0.2em 0.25em 0.15em;
+}
+
+.fa-pull-left {
+  float: left;
+}
+
+.fa-pull-right {
+  float: right;
+}
+
+.fa.fa-pull-left,
+.fas.fa-pull-left,
+.far.fa-pull-left,
+.fal.fa-pull-left,
+.fab.fa-pull-left {
+  margin-right: 0.3em;
+}
+
+.fa.fa-pull-right,
+.fas.fa-pull-right,
+.far.fa-pull-right,
+.fal.fa-pull-right,
+.fab.fa-pull-right {
+  margin-left: 0.3em;
+}
+
+.fa-spin {
+  -webkit-animation: fa-spin 2s infinite linear;
+  animation: fa-spin 2s infinite linear;
+}
+
+.fa-pulse {
+  -webkit-animation: fa-spin 1s infinite steps(8);
+  animation: fa-spin 1s infinite steps(8);
+}
+
+@-webkit-keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+.fa-rotate-90 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.fa-rotate-180 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.fa-rotate-270 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
+  -webkit-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
+
+.fa-flip-horizontal {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";
+  -webkit-transform: scale(-1, 1);
+  transform: scale(-1, 1);
+}
+
+.fa-flip-vertical {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
+  -webkit-transform: scale(1, -1);
+  transform: scale(1, -1);
+}
+
+.fa-flip-horizontal.fa-flip-vertical {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
+  -webkit-transform: scale(-1, -1);
+  transform: scale(-1, -1);
+}
+
+:root .fa-rotate-90,
+:root .fa-rotate-180,
+:root .fa-rotate-270,
+:root .fa-flip-horizontal,
+:root .fa-flip-vertical {
+  -webkit-filter: none;
+  filter: none;
+}
+
+.fa-stack {
+  display: inline-block;
+  height: 2em;
+  position: relative;
+  width: 2em;
+}
+
+.fa-stack-1x,
+.fa-stack-2x {
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.svg-inline--fa.fa-stack-1x {
+  height: 1em;
+  width: 1em;
+}
+
+.svg-inline--fa.fa-stack-2x {
+  height: 2em;
+  width: 2em;
+}
+
+.fa-inverse {
+  color: #fff;
+}
+
+.sr-only {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+.sr-only-focusable:active,
+.sr-only-focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}

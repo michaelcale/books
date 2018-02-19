@@ -1,5 +1,6 @@
 ---
 Title: Defer gotchas
+Search: Defer pitfalls
 Id: rd6000ub
 ---
 
