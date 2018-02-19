@@ -28,7 +28,6 @@ type Article struct {
 	IsCurrent bool // only used when part of Siblings
 
 	sourceFilePath string // path of the file from which we've read the article
-	AnalyticsCode  string
 }
 
 // Book retuns book this article belongs to

@@ -28,8 +28,6 @@ type Book struct {
 	defaultLang         string // default programming language for programming examples
 	knownUrls           []string
 
-	AnalyticsCode string
-
 	// for concurrency
 	sem chan bool
 	wg  sync.WaitGroup

@@ -16,7 +16,10 @@ const (
 )
 
 var ( // directory where generated .html files for books are
-	destEssentialDir = filepath.Join(destDir, "essential")
+	destEssentialDir  = filepath.Join(destDir, "essential")
+	pathAppJS         = "/s/app.js"
+	pathFontAwesomeJS = "/s/font-awesome.min.js"
+	pathMainCSS       = "/s/main.css"
 )
 
 var (
@@ -98,15 +101,21 @@ func execTemplateToFileMaybeMust(name string, data interface{}, path string) {
 
 func genIndex(books []*Book) {
 	d := struct {
-		Books         []*Book
-		GitHubText    string
-		GitHubURL     string
-		AnalyticsCode string
+		Books             []*Book
+		GitHubText        string
+		GitHubURL         string
+		AnalyticsCode     string
+		PathAppJS         string
+		PathFontAwesomeJS string
+		PathMainCSS       string
 	}{
-		Books:         books,
-		GitHubText:    "GitHub",
-		GitHubURL:     gitHubBaseURL,
-		AnalyticsCode: flgAnalytics,
+		Books:             books,
+		GitHubText:        "GitHub",
+		GitHubURL:         gitHubBaseURL,
+		AnalyticsCode:     flgAnalytics,
+		PathAppJS:         pathAppJS,
+		PathFontAwesomeJS: pathFontAwesomeJS,
+		PathMainCSS:       pathMainCSS,
 	}
 	path := filepath.Join(destDir, "index.html")
 	execTemplateToFileMaybeMust("index.tmpl.html", d, path)
@@ -114,11 +123,17 @@ func genIndex(books []*Book) {
 
 func genIndexGrid(books []*Book) {
 	d := struct {
-		Books         []*Book
-		AnalyticsCode string
+		Books             []*Book
+		AnalyticsCode     string
+		PathAppJS         string
+		PathFontAwesomeJS string
+		PathMainCSS       string
 	}{
-		Books:         books,
-		AnalyticsCode: flgAnalytics,
+		Books:             books,
+		AnalyticsCode:     flgAnalytics,
+		PathAppJS:         pathAppJS,
+		PathFontAwesomeJS: pathFontAwesomeJS,
+		PathMainCSS:       pathMainCSS,
 	}
 	path := filepath.Join(destDir, "index-grid.html")
 	execTemplateToFileMaybeMust("index-grid.tmpl.html", d, path)
@@ -126,16 +141,35 @@ func genIndexGrid(books []*Book) {
 
 func genAbout() {
 	d := struct {
-		AnalyticsCode string
+		AnalyticsCode     string
+		PathAppJS         string
+		PathFontAwesomeJS string
+		PathMainCSS       string
 	}{
-		AnalyticsCode: flgAnalytics,
+		AnalyticsCode:     flgAnalytics,
+		PathAppJS:         pathAppJS,
+		PathFontAwesomeJS: pathFontAwesomeJS,
+		PathMainCSS:       pathMainCSS,
 	}
 	path := filepath.Join(destDir, "about.html")
 	execTemplateToFileMaybeMust("about.tmpl.html", d, path)
 }
 
 func genBookArticle(article *Article) {
-	article.AnalyticsCode = flgAnalytics
+
+	d := struct {
+		*Article
+		AnalyticsCode     string
+		PathAppJS         string
+		PathFontAwesomeJS string
+		PathMainCSS       string
+	}{
+		Article:           article,
+		AnalyticsCode:     flgAnalytics,
+		PathAppJS:         pathAppJS,
+		PathFontAwesomeJS: pathFontAwesomeJS,
+		PathMainCSS:       pathMainCSS,
+	}
 	// TODO: move as a method on Article
 	if article.BodyHTML == "" {
 		defLang := getDefaultLangForBook(article.Book().Title)
@@ -143,7 +177,7 @@ func genBookArticle(article *Article) {
 		article.BodyHTML = template.HTML(html)
 	}
 	path := article.destFilePath()
-	execTemplateToFileSilentMaybeMust("article.tmpl.html", article, path)
+	execTemplateToFileSilentMaybeMust("article.tmpl.html", d, path)
 }
 
 func genBookChapter(chapter *Chapter, currNo int) {
@@ -152,13 +186,20 @@ func genBookChapter(chapter *Chapter, currNo int) {
 	}
 
 	path := chapter.destFilePath()
-	chapter.AnalyticsCode = flgAnalytics
 	d := struct {
 		*Chapter
-		CurrentChapterNo int
+		CurrentChapterNo  int
+		AnalyticsCode     string
+		PathAppJS         string
+		PathFontAwesomeJS string
+		PathMainCSS       string
 	}{
-		Chapter:          chapter,
-		CurrentChapterNo: currNo,
+		Chapter:           chapter,
+		CurrentChapterNo:  currNo,
+		AnalyticsCode:     flgAnalytics,
+		PathAppJS:         pathAppJS,
+		PathFontAwesomeJS: pathFontAwesomeJS,
+		PathMainCSS:       pathMainCSS,
 	}
 	execTemplateToFileSilentMaybeMust("chapter.tmpl.html", d, path)
 }
@@ -175,8 +216,21 @@ func genBook(book *Book) {
 	}
 
 	path := filepath.Join(book.destDir, "index.html")
-	book.AnalyticsCode = flgAnalytics
-	execTemplateToFileSilentMaybeMust("book_index.tmpl.html", book, path)
+	d := struct {
+		Book              *Book
+		AnalyticsCode     string
+		PathAppJS         string
+		PathFontAwesomeJS string
+		PathMainCSS       string
+	}{
+		Book:              book,
+		AnalyticsCode:     flgAnalytics,
+		PathAppJS:         pathAppJS,
+		PathFontAwesomeJS: pathFontAwesomeJS,
+		PathMainCSS:       pathMainCSS,
+	}
+
+	execTemplateToFileSilentMaybeMust("book_index.tmpl.html", d, path)
 
 	for i, chapter := range book.Chapters {
 		book.sem <- true

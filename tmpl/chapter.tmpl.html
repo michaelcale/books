@@ -22,7 +22,7 @@
     <meta property="og:image" content="{{.Book.CoverTwitterFullURL}}">
 
     <title>{{.Title}}</title>
-    <link href="/main.css" rel="stylesheet">
+    <link href="{{.PathMainCSS}}" rel="stylesheet">
     {{ if .AnalyticsCode }}
     <script async src="https://www.googletagmanager.com/gtag/js?id={{.AnalyticsCode}}"></script>
     <script>
@@ -32,9 +32,9 @@
         gtag('config', '{{.AnalyticsCode}}');
     </script>
     {{ end }}
-    <script src="/font-awesome.min.js"></script>
+    <script src="{{.PathFontAwesomeJS}}"></script>
     <script src="{{.Book.TocSearchJSURL}}"></script>
-    <script src="/app.js"></script>
+    <script src="{{.PathAppJS}}"></script>
 </head>
 
 <body>

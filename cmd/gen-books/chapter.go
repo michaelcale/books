@@ -23,8 +23,6 @@ type Chapter struct {
 	FileNameBase  string      // format: ch-${ID}-${Title}, used for URL and .html file name
 	Articles      []*Article
 	No            int
-
-	AnalyticsCode string
 }
 
 // URL is used in book_index.tmpl.html

@@ -143,9 +143,9 @@ func genSelectedBooks(bookDirs []string) {
 	}
 	fmt.Printf("Parsed books in %s\n", time.Since(timeStart))
 
-	copyToWwwMaybeMust(filepath.Join("tmpl", "main.css"))
-	copyToWwwMaybeMust(filepath.Join("tmpl", "app.js"))
-	copyToWwwMaybeMust(filepath.Join("tmpl", "font-awesome.min.js"))
+	copyToWwwStaticMaybeMust(filepath.Join("tmpl", "main.css"))
+	copyToWwwStaticMaybeMust(filepath.Join("tmpl", "app.js"))
+	copyToWwwStaticMaybeMust(filepath.Join("tmpl", "font-awesome.min.js"))
 	genIndex(books)
 	genIndexGrid(books)
 	genAbout()
@@ -175,9 +175,9 @@ func genAllBooks() {
 	}
 	fmt.Printf("Parsed books in %s\n", time.Since(timeStart))
 
-	copyToWwwMaybeMust(filepath.Join("tmpl", "main.css"))
-	copyToWwwMaybeMust(filepath.Join("tmpl", "app.js"))
-	copyToWwwMaybeMust(filepath.Join("tmpl", "font-awesome.min.js"))
+	copyToWwwStaticMaybeMust(filepath.Join("tmpl", "main.css"))
+	copyToWwwStaticMaybeMust(filepath.Join("tmpl", "app.js"))
+	copyToWwwStaticMaybeMust(filepath.Join("tmpl", "font-awesome.min.js"))
 	genIndex(books)
 	genIndexGrid(books)
 	genAbout()

@@ -52,9 +52,9 @@ func copyFileMaybeMust(dst, src string) {
 	maybePanicIfErr(err)
 }
 
-func copyToWwwMaybeMust(path string) {
+func copyToWwwStaticMaybeMust(path string) {
 	name := filepath.Base(path)
-	dst := filepath.Join("www", name)
+	dst := filepath.Join("www", "s", name)
 	copyFileMaybeMust(dst, path)
 	fmt.Printf("Copied %s => %s\n", path, dst)
 }
@@ -92,21 +92,21 @@ func handleFileChange(path string) {
 	// those happen fast so we can just do them
 	if strings.HasSuffix(path, "main.css") {
 		clearErrors()
-		copyToWwwMaybeMust(filepath.Join("tmpl", "main.css"))
+		copyToWwwStaticMaybeMust(filepath.Join("tmpl", "main.css"))
 		printAndClearErrors()
 		return
 	}
 
 	if strings.HasSuffix(path, "app.js") {
 		clearErrors()
-		copyToWwwMaybeMust(filepath.Join("tmpl", "app.js"))
+		copyToWwwStaticMaybeMust(filepath.Join("tmpl", "app.js"))
 		printAndClearErrors()
 		return
 	}
 
 	if strings.HasSuffix(path, "font-awesome.min.js") {
 		clearErrors()
-		copyToWwwMaybeMust(filepath.Join("tmpl", "font-awesome.min.js"))
+		copyToWwwStaticMaybeMust(filepath.Join("tmpl", "font-awesome.min.js"))
 		printAndClearErrors()
 		return
 	}

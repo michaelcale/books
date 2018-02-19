@@ -7,7 +7,7 @@
     <meta name="referrer" content="always">
 
     <title>About Essential Programming Books project</title>
-    <link href="/main.css" rel="stylesheet">
+    <link href="{{.PathMainCSS}}" rel="stylesheet">
 
     {{ if .AnalyticsCode }}
     <script async src="https://www.googletagmanager.com/gtag/js?id={{.AnalyticsCode}}"></script>
@@ -18,8 +18,8 @@
         gtag('config', '{{.AnalyticsCode}}');
     </script>
     {{ end }}
-    <script src="/font-awesome.min.js"></script>
-    <script src="/app.js"></script>
+    <script src="{{.PathFontAwesomeJS}}"></script>
+    <script src="{{.PathAppJS}}"></script>
 </head>
 
 <body>

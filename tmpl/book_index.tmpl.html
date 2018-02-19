@@ -8,21 +8,21 @@
 
     <meta name="twitter:card" value="summary">
     <meta name="twitter:site" content="@kjk">
-    <meta name="twitter:title" content="{{.TitleLong}}">
+    <meta name="twitter:title" content="{{.Book.TitleLong}}">
     <!-- do something else for description -->
-    <meta name="twitter:description" content="{{.TitleLong}}">
+    <meta name="twitter:description" content="{{.Book.TitleLong}}">
     <meta name="twitter:creator" content="@kjk">
-    <meta name="twitter:image" content="{{.CoverTwitterFullURL}}">
+    <meta name="twitter:image" content="{{.Book.CoverTwitterFullURL}}">
     <!-- do something else for title -->
-    <meta property="og:title" content="{{.TitleLong}}">
+    <meta property="og:title" content="{{.Book.TitleLong}}">
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="{{.CanonnicalURL}}" />
+    <meta property="og:url" content="{{.Book.CanonnicalURL}}" />
     <!-- do something else for description -->
-    <meta property="og:description" content="{{.TitleLong}}">
-    <meta property="og:image" content="{{.CoverTwitterFullURL}}">
+    <meta property="og:description" content="{{.Book.TitleLong}}">
+    <meta property="og:image" content="{{.Book.CoverTwitterFullURL}}">
 
-    <title>{{.TitleLong}}</title>
-    <link href="/main.css" rel="stylesheet">
+    <title>{{.Book.TitleLong}}</title>
+    <link href="{{.PathMainCSS}}" rel="stylesheet">
     {{ if .AnalyticsCode }}
     <script async src="https://www.googletagmanager.com/gtag/js?id={{.AnalyticsCode}}"></script>
     <script>
@@ -32,16 +32,16 @@
         gtag('config', '{{.AnalyticsCode}}');
     </script>
     {{ end }}
-    <script src="/font-awesome.min.js"></script>
-    <script src="{{.TocSearchJSURL}}"></script>
-    <script src="/app.js"></script>
+    <script src="{{.PathFontAwesomeJS}}"></script>
+    <script src="{{.Book.TocSearchJSURL}}"></script>
+    <script src="{{.PathAppJS}}"></script>
 
 </head>
 
 <body>
     <div id="top-header">
         <div class="top-header-left"><a href="/">Essential Books</a></div>
-        <input id="search-input" placeholder="Search {{.TitleLong}}. Tip: press '/'.">
+        <input id="search-input" placeholder="Search {{.Book.TitleLong}}. Tip: press '/'.">
         <div class="top-header-right"><!-- Right Side--></div>
     </div>
 
@@ -55,15 +55,15 @@
     </div>
 
         <div class="content-wrapper">
-        <h1 class="hdr"><a href="/" class="breadcrumbs__item"><i class="fas fa-home"></i></a>{{.TitleLong}}</h1>
+        <h1 class="hdr"><a href="/" class="breadcrumbs__item"><i class="fas fa-home"></i></a>{{.Book.TitleLong}}</h1>
 
         <div class="book-img-cover-wrapper">
-            <img class="book-img-cover" src="{{.CoverURL}}">
+            <img class="book-img-cover" src="{{.Book.CoverURL}}">
        </div>
 
         <div class="toc-header">Chapters</div>
         <div class="chapters-toc">
-            {{range .Chapters}}
+            {{range .Book.Chapters}}
             <div class="chapters-toc-item">
                 <!-- <span class="chap-no">{{.No}}</span>-->
                 <a href="{{.URL}}">{{.Title}}</a></div>
@@ -73,7 +73,7 @@
         <div class="toc-header">Table Of Contents</div>
 
         <div>
-            {{range .Chapters}}
+            {{range .Book.Chapters}}
             <div id="chap-{{.No}}">
                 <!-- <span class="chap-no">{{.No}}.</span> -->
                 <a href="{{.URL}}">{{.Title}}</a></div>
@@ -93,13 +93,13 @@
         </div>
 
         <div class="share-me">
-            <a href="https://twitter.com/intent/tweet?text={{.ShareOnTwitterText}}&url={{.CanonnicalURL}}&via=kjk">Share <b>{{.TitleLong}}</b> on <i class="fab fa-twitter"></i></a>
+            <a href="https://twitter.com/intent/tweet?text={{.Book.ShareOnTwitterText}}&url={{.Book.CanonnicalURL}}&via=kjk">Share <b>{{.Book.TitleLong}}</b> on <i class="fab fa-twitter"></i></a>
         </div>
 
         <div>
-            <a href="{{.GitHubURL}}" target="_blank">
+            <a href="{{.Book.GitHubURL}}" target="_blank">
                 <i class="fas fa-edit"></i>
-                {{.GitHubText}}</a>
+                {{.Book.GitHubText}}</a>
         </div>
     </div>
 

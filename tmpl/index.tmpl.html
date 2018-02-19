@@ -7,7 +7,7 @@
     <meta name="referrer" content="always">
 
     <title>Essential Programming Books</title>
-    <link href="/main.css" rel="stylesheet">
+    <link href="{{.PathMainCSS}}" rel="stylesheet">
     {{ if .AnalyticsCode }}
     <script async src="https://www.googletagmanager.com/gtag/js?id={{.AnalyticsCode}}"></script>
     <script>
@@ -17,6 +17,9 @@
         gtag('config', '{{.AnalyticsCode}}');
     </script>
     {{ end }}
+
+    <script src="{{.PathFontAwesomeJS}}"></script>
+    <script src="{{.PathAppJS}}"></script>
 </head>
 
 <body>
@@ -33,6 +36,7 @@
         <table class="book-list">
             <thead>
             <tr class="header">
+                <th></th>
                 <th class="book-name">Book</th>
                 <th>Chapters</th>
                 <th>Articles</th>
@@ -42,6 +46,9 @@
             <tbody>
                 {{range .Books}}
                 <tr>
+                    <td>
+                        <i class="far fa-star"></i>
+                    </td>
                     <td class="book-name"><a href="{{.URL}}">{{.Title}}</a></td>
                     <td class="light">{{ .ChaptersCount }}</td>
                     <td class="light">{{ .ArticlesCount}}</td>
