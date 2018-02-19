@@ -261,6 +261,11 @@ or use grid for top-header instead of flexbox.
     background-color:#EEEEEE;
 }
 
+.search-result-in {
+    font-size: 0.7em;
+    color:#1481b8;
+}
+
 .no-search-results {
     padding-top: 48px;
     padding-bottom: 48px;

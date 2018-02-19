@@ -76,6 +76,7 @@ func shiftLines(lines []string) {
 	}
 }
 
+// removes empty lines from the beginning and end of the array
 func trimEmptyLines(lines []string) []string {
 	for len(lines) > 0 && len(lines[0]) == 0 {
 		lines = lines[1:]
@@ -106,6 +107,9 @@ func extractCodeSnippets(path string) ([]string, error) {
 				return nil, fmt.Errorf("file '%s': '%s' without start line", path, showEndLine)
 			}
 			inShow = false
+			// add a separation line between show sections.
+			// should be the right thing more often than not
+			res = append(res, "")
 			continue
 		}
 		if inShow {

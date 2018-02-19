@@ -191,5 +191,4 @@ func genBook(book *Book) {
 	book.wg.Wait()
 
 	fmt.Printf("Generated %s, %d chapters, %d articles in %s\n", book.Title, len(book.Chapters), book.ArticlesCount(), time.Since(timeStart))
-	//genBookTOCJSONMust(book)
 }

@@ -201,68 +201,6 @@ function navigateToSearchResult(idx) {
   window.location = loc;
 }
 
-function onEnter(ev) {
-  var selIdx = currentState.selectedSearchResultIdx;
-  if (selIdx == -1) {
-    return;
-  }
-  navigateToSearchResult(selIdx);
-}
-
-function onKeySlash(ev) {
-  setState({
-    searchInputFocused: true
-  });
-  ev.preventDefault();
-}
-
-function onEscape(ev) {
-  setState({
-    searchInputFocused: false
-  });
-  ev.preventDefault();
-}
-
-function onUpDown(ev) {
-  var dir = (ev.key == "ArrowUp") ? -1 : 1;
-  var results = currentState.searchResults;
-  var n = results.length;
-  var selIdx = currentState.selectedSearchResultIdx;
-  if (n <= 0 || selIdx < 0) {
-    return;
-  }
-  var newIdx = selIdx + dir;
-  if (newIdx >= 0 && newIdx < n) {
-    setState({
-      selectedSearchResultIdx: newIdx
-    });
-    ev.preventDefault();
-  }
-}
-
-function onKeyDown(ev) {
-  // console.log(ev);
-  if (ev.key == "/") {
-    onKeySlash(ev);
-    return;
-  }
-
-  if (ev.key == "Escape") {
-    onEscape(ev);
-    return;
-  }
-
-  if (ev.key == "Enter") {
-    onEnter(ev);
-    return;
-  }
-
-  if (ev.key == "ArrowUp" || ev.key == "ArrowDown") {
-    onUpDown(ev);
-    return;
-  }
-}
-
 // create HTML to highlight part of s starting at idx and with length len
 function hilightSearchResult(txt, matches) {
   var prevIdx = 0;
@@ -293,6 +231,36 @@ function hilightSearchResult(txt, matches) {
   return res;
 }
 
+// return true if term is a search synonym inside tocItem
+function isMatchSynonym(tocItem, term) {
+  term = term.toLowerCase()
+  var title = tocItemTitle(tocItem).toLowerCase();
+  return title != term;
+}
+
+function getParentTitle(tocItem) {
+  var parentIdx = tocItemParentIdx(tocItem);
+  if (parentIdx == -1) {
+    return null;
+  }
+  var parent = gBookToc[parentIdx];
+  return tocItemTitle(parent);
+}
+
+// if search matched synonym returns "${chapterTitle} / ${articleTitle}"
+// otherwise empty string
+function getArticlePath(tocItem, term) {
+  if (!isMatchSynonym(tocItem, term)) {
+    return null;
+  }
+  var title = tocItemTitle(tocItem);
+  var parentTitle = getParentTitle(tocItem);
+  if (parentTitle == "") {
+    return title;
+  }
+  return parentTitle + " / " + title;
+}
+
 /* results is array of items:
 {
   tocItem: [],
@@ -300,7 +268,6 @@ function hilightSearchResult(txt, matches) {
   match: [[idx, len], ...],
 }
 */
-
 function buildResultsHTML(results, selectedIdx) {
   var a = [];
   var n = results.length;
@@ -311,6 +278,18 @@ function buildResultsHTML(results, selectedIdx) {
     var matches = r.match;
 
     var html = hilightSearchResult(term, matches);
+    var articlePath = getArticlePath(tocItem, term);
+    if (articlePath) {
+      var s = "in: " + articlePath;
+      html += " " + inTagRaw("span", s, "search-result-in")
+    } else {
+      var parentTitle = getParentTitle(tocItem)
+      if (parentTitle) {
+        var s = "in: " + parentTitle;
+        html += " " + inTagRaw("span", s, "search-result-in")
+      }
+    }
+
     var opt = {
       id: "search-result-no-" + i,
       cls: "search-result",
@@ -374,6 +353,9 @@ function rebuildSearchResultsUI() {
 
   // ensure element is scrolled into view
   window.requestAnimationFrame(() => {
+    if (selectedIdx < 0) {
+      return;
+    }
     var id = "search-result-no-" + selectedIdx;
     var el = document.getElementById(id);
     scrollIntoViewIfOutOfView(el);
@@ -579,7 +561,7 @@ function getIdxFromSearchResultElementId(id) {
 function findEnclosingResultNode(el) {
   while (el) {
     var idx = getIdxFromSearchResultElementId(el.id);
-    if (idx > 0) {
+    if (idx >= 0) {
       return idx;
     }
     el = el.parentNode;
@@ -590,19 +572,15 @@ function findEnclosingResultNode(el) {
 // if search result item is
 function onClick(ev) {
   var el = ev.target;
-  console.log("el:", el);
   var idx = findEnclosingResultNode(el);
+  console.log("el:", el, "idx:", idx);
   if (idx < 0) {
     setState({
       selectedSearchResultIdx: -1,
     })
-    console.log("stopped propagation");
-    ev.stopPropagation();
     return;
   }
-  if (idx >= 0) {
-    navigateToSearchResult(idx);
-  }
+  navigateToSearchResult(idx);
   ev.stopPropagation();
 }
 
@@ -621,6 +599,68 @@ function onMouseMove(ev) {
   ev.stopPropagation();
 }
 
+function onEnter(ev) {
+  var selIdx = currentState.selectedSearchResultIdx;
+  if (selIdx == -1) {
+    return;
+  }
+  navigateToSearchResult(selIdx);
+}
+
+function onKeySlash(ev) {
+  setState({
+    searchInputFocused: true
+  });
+  ev.preventDefault();
+}
+
+function onEscape(ev) {
+  setState({
+    searchInputFocused: false
+  });
+  ev.preventDefault();
+}
+
+function onUpDown(ev) {
+  var dir = (ev.key == "ArrowUp") ? -1 : 1;
+  var results = currentState.searchResults;
+  var n = results.length;
+  var selIdx = currentState.selectedSearchResultIdx;
+  if (n <= 0 || selIdx < 0) {
+    return;
+  }
+  var newIdx = selIdx + dir;
+  if (newIdx >= 0 && newIdx < n) {
+    setState({
+      selectedSearchResultIdx: newIdx
+    });
+    ev.preventDefault();
+  }
+}
+
+function onKeyDown(ev) {
+  // console.log(ev);
+  if (ev.key == "/") {
+    onKeySlash(ev);
+    return;
+  }
+
+  if (ev.key == "Escape") {
+    onEscape(ev);
+    return;
+  }
+
+  if (ev.key == "Enter") {
+    onEnter(ev);
+    return;
+  }
+
+  if (ev.key == "ArrowUp" || ev.key == "ArrowDown") {
+    onUpDown(ev);
+    return;
+  }
+}
+
 function onSearchInputChanged(ev) {
   var s = ev.target.value;
   var fn = doSearch.bind(this, s);
@@ -634,7 +674,7 @@ function start() {
   var el = getSearchInputElement();
   el.addEventListener("input", onSearchInputChanged, true);
   document.addEventListener("mousemove", onMouseMove, true);
-  document.addEventListener("click", onClick, true);
+  document.addEventListener("click", onClick, false);
 }
 
 // parsed and DOM ready but before loading external resources like images or stylesheets

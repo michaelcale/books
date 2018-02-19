@@ -1,6 +1,6 @@
 ---
 Title: Integers
-Search: int, ints
+Search: ints
 Id: rd6000kf
 ---
 Go has fixed-size signed and unsigned integers:

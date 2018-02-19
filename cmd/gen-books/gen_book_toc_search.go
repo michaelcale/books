@@ -31,16 +31,17 @@ func genBookTOCSearchMust(book *Book) {
 	var toc [][]interface{}
 	for _, chapter := range book.Chapters {
 		title := strings.TrimSpace(chapter.Title)
-		a := []interface{}{chapter.FileNameBase, 0, title}
-		toc = append(toc, a)
+		tocItem := []interface{}{chapter.FileNameBase, -1, title}
+		toc = append(toc, tocItem)
 		chapIdx := len(toc) - 1
+		u.PanicIf(chapIdx < 0)
 		for _, article := range chapter.Articles {
 			title := strings.TrimSpace(article.Title)
-			a := []interface{}{article.FileNameBase, chapIdx, title}
+			tocItem = []interface{}{article.FileNameBase, chapIdx, title}
 			for _, syn := range article.SearchSynonyms {
-				a = append(a, syn)
+				tocItem = append(tocItem, syn)
 			}
-			toc = append(toc, a)
+			toc = append(toc, tocItem)
 
 			// TODO: add entries for #, ## and ### elements in the article
 		}

@@ -1,6 +1,5 @@
 ---
 Title: Booleans
-Search: bool
 Id: rd6000m1
 ---
 Value of type `bool` can be `true` or `false`.
