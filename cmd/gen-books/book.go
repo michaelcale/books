@@ -72,7 +72,7 @@ func (b *Book) ShareOnTwitterText() string {
 
 // TocSearchJSURL returns data for searching titles of chapters/articles
 func (b *Book) TocSearchJSURL() string {
-	return b.URL() + "/toc_search.js"
+	return b.URL() + "toc_search.js"
 }
 
 // CoverURL returns url to cover image
