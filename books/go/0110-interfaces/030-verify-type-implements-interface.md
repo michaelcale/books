@@ -27,4 +27,4 @@ We tried to assign `*MyReadCloser` type to variable of type `io.ReadCloser`.
 
 Since `*MyReadCloser` doesn't implement `Close` method, the compiler detected this is an invalid assignement at compile time.
 
-We assigned the value to [blank identifier](29103) `_` because we don't actually use that variable for anything.
+We assigned the value to [blank identifier](a-29103) `_` because we don't actually use that variable for anything.
