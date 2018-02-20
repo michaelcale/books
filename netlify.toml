@@ -4,8 +4,3 @@
 
 [Build]
   Publish = ""
-
-[[headers]]
-  for = "/s/*"
-  [headers.values]
-    Cache-Control = "max-age=31536000"
