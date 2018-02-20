@@ -212,6 +212,7 @@ func isBlacklistedForGetOutput(path string) bool {
 	return false
 
 }
+
 func getOutputCb(path string, info os.FileInfo, err error) error {
 	if err != nil {
 		return err

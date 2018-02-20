@@ -2,3 +2,4 @@ cmd/gen-books/gen-books
 cmd/import-stack-overflow/import-stack-overflow
 www/
 netlifyctl-debug.log
+cached_output/

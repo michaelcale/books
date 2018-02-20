@@ -267,9 +267,9 @@ func extractCodeSnippetsAsMarkdownLines(baseDir string, line string) ([]string, 
 		return res, nil
 	}
 
-	out, err := getOutput(path)
+	out, err := getCachedOutput(path)
 	if err != nil && !directive.AllowError {
-		fmt.Printf("getOutput('%s'): error '%s', output: '%s'\n", path, err, out)
+		fmt.Printf("getCachedOutput('%s'): error '%s', output: '%s'\n", path, err, out)
 		maybePanicIfErr(err)
 		return res, err
 	}

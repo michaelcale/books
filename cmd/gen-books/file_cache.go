@@ -8,6 +8,8 @@ import (
 	"strings"
 	"sync"
 	"time"
+
+	"github.com/kjk/u"
 )
 
 // FileContent describes a file and its content
@@ -17,6 +19,16 @@ type FileContent struct {
 	ModTime time.Time
 	Content []byte
 	Lines   []string
+
+	sha1HexCached string
+}
+
+// Sha1Hex returns sha1 of the content
+func (f *FileContent) Sha1Hex() string {
+	if f.sha1HexCached == "" {
+		f.sha1HexCached = u.Sha1HexOfBytes(f.Content)
+	}
+	return f.sha1HexCached
 }
 
 var (
@@ -72,21 +84,20 @@ func loadFileCached(path string) (*FileContent, error) {
 	return cacheFileIfChanged(path, nil)
 }
 
-func cacheFilesCb(path string, info os.FileInfo, err error) error {
-	if err != nil {
-		return err
-	}
-	if info.IsDir() {
-		return nil
-	}
-	_, err = cacheFileIfChanged(path, info)
-	return err
-}
-
 func cacheFilesInDir(dir string) error {
 	timeStart := time.Now()
 	defer func() {
 		fmt.Printf("cacheFilesInDir '%s' took %s\n", dir, time.Since(timeStart))
 	}()
-	return filepath.Walk(dir, cacheFilesCb)
+	res := filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+		if info.IsDir() {
+			return nil
+		}
+		_, err = cacheFileIfChanged(path, info)
+		return err
+	})
+	return res
 }
