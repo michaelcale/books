@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -52,11 +53,36 @@ func copyFileMaybeMust(dst, src string) {
 	maybePanicIfErr(err)
 }
 
-func copyToWwwStaticMaybeMust(path string) {
-	name := filepath.Base(path)
+// "foo.js" => "foo-${sha1}.js"
+func nameToSha1Name(name, sha1Hex string) string {
+	ext := filepath.Ext(name)
+	n := len(name)
+	s := name[:n-len(ext)]
+	return s + "-" + sha1Hex[:8] + ext
+}
+
+func copyToWwwStaticMaybeMust(srcName string) {
+	var dstPtr *string
+	switch srcName {
+	case "main.css":
+		dstPtr = &pathMainCSS
+	case "app.js":
+		dstPtr = &pathAppJS
+	case "font-awesome.min.js":
+		dstPtr = &pathFontAwesomeJS
+	default:
+		u.PanicIf(true, "unknown srcName '%s'", srcName)
+	}
+	src := filepath.Join("tmpl", srcName)
+	d, err := ioutil.ReadFile(src)
+	u.PanicIfErr(err)
+	sha1Hex := u.Sha1HexOfBytes(d)
+	name := nameToSha1Name(srcName, sha1Hex)
 	dst := filepath.Join("www", "s", name)
-	copyFileMaybeMust(dst, path)
-	fmt.Printf("Copied %s => %s\n", path, dst)
+	err = ioutil.WriteFile(dst, d, 0644)
+	u.PanicIfErr(err)
+	*dstPtr = dst[len("www"):]
+	fmt.Printf("Copied %s => %s\n", src, dst)
 }
 
 // data related to handling re-generation of book if source files change
@@ -90,23 +116,11 @@ func handleFileChange(path string) {
 	fmt.Printf("handleFileChange: %s\n", path)
 
 	// those happen fast so we can just do them
-	if strings.HasSuffix(path, "main.css") {
+	name := filepath.Base(path)
+	switch name {
+	case "main.css", "app.js", "font-awesome.min.js":
 		clearErrors()
-		copyToWwwStaticMaybeMust(filepath.Join("tmpl", "main.css"))
-		printAndClearErrors()
-		return
-	}
-
-	if strings.HasSuffix(path, "app.js") {
-		clearErrors()
-		copyToWwwStaticMaybeMust(filepath.Join("tmpl", "app.js"))
-		printAndClearErrors()
-		return
-	}
-
-	if strings.HasSuffix(path, "font-awesome.min.js") {
-		clearErrors()
-		copyToWwwStaticMaybeMust(filepath.Join("tmpl", "font-awesome.min.js"))
+		copyToWwwStaticMaybeMust(name)
 		printAndClearErrors()
 		return
 	}

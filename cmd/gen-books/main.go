@@ -143,9 +143,9 @@ func genSelectedBooks(bookDirs []string) {
 	}
 	fmt.Printf("Parsed books in %s\n", time.Since(timeStart))
 
-	copyToWwwStaticMaybeMust(filepath.Join("tmpl", "main.css"))
-	copyToWwwStaticMaybeMust(filepath.Join("tmpl", "app.js"))
-	copyToWwwStaticMaybeMust(filepath.Join("tmpl", "font-awesome.min.js"))
+	copyToWwwStaticMaybeMust("main.css")
+	copyToWwwStaticMaybeMust("app.js")
+	copyToWwwStaticMaybeMust("font-awesome.min.js")
 	genIndex(books)
 	genIndexGrid(books)
 	genAbout()
@@ -175,9 +175,9 @@ func genAllBooks() {
 	}
 	fmt.Printf("Parsed books in %s\n", time.Since(timeStart))
 
-	copyToWwwStaticMaybeMust(filepath.Join("tmpl", "main.css"))
-	copyToWwwStaticMaybeMust(filepath.Join("tmpl", "app.js"))
-	copyToWwwStaticMaybeMust(filepath.Join("tmpl", "font-awesome.min.js"))
+	copyToWwwStaticMaybeMust("main.css")
+	copyToWwwStaticMaybeMust("app.js")
+	copyToWwwStaticMaybeMust("font-awesome.min.js")
 	genIndex(books)
 	genIndexGrid(books)
 	genAbout()
@@ -269,7 +269,9 @@ func main() {
 		allBookDirs = append(allBookDirs, bookInfo.NewName())
 	}
 	loadSOUserMappingsMust()
+
 	os.RemoveAll("www")
+	createDirMust(filepath.Join("www", "s"))
 
 	if flgPreview {
 		go updateGoDeps()
