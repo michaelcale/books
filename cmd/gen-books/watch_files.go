@@ -115,21 +115,19 @@ func getBookDirFromPath(path string) string {
 func handleFileChange(path string) {
 	fmt.Printf("handleFileChange: %s\n", path)
 
-	// those happen fast so we can just do them
 	name := filepath.Base(path)
 	switch name {
 	case "main.css", "app.js", "font-awesome.min.js":
 		clearErrors()
 		copyToWwwStaticMaybeMust(name)
 		printAndClearErrors()
-		return
 	}
 
 	muRegen.Lock()
 	defer muRegen.Unlock()
 
 	nextRegenSeq++
-	if strings.HasSuffix(path, ".tmpl.html") {
+	if strings.HasPrefix(path, "tmpl") {
 		regenAllBooks = true
 	} else {
 		// we assume it's either .md file change or a directory rename

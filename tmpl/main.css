@@ -354,6 +354,10 @@ or use grid for top-header instead of flexbox.
 
 .article {
   border: 1px solid ligthgray;
+
+  width: 660px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .article_title {
@@ -486,7 +490,9 @@ pre.chroma {
   padding: 0.5em;
   background-color: #fdfdfd;
   color: #657b83;
-  border: 1px solid #e5e5e5;
+  /* border: 1px solid #e5e5e5; */
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
   overflow-x: visible;
   font-size: 85%;
   tab-size: 2;
