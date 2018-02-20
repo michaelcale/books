@@ -28,7 +28,24 @@ if (!Object.is) {
 // 	[${chapter or aticle url}, ${parentIdx}, ${title}, ${synonim 1}, ${synonim 2}, ...],
 // as generated in gen_book_toc_search.go and stored in books/${book}/toc_search.js
 function tocItemURL(item) {
-  return item[0];
+  while (true) {
+    var uri = item[0];
+    if (uri != "") {
+      return uri;
+    }
+    item = tocItemParent(item);
+    if (!item) {
+      return "";
+    }
+  }
+}
+
+function tocItemParent(item) {
+  var idx = tocItemParentIdx(item);
+  if (idx == -1) {
+    return null;
+  }
+  return gBookToc[idx];
 }
 
 function tocItemParentIdx(item) {
