@@ -155,11 +155,13 @@ func fixupHTMLCodeBlock(s string, info *CodeBlockInfo) string {
 </div>`, info.GitHubURI, fileName)
 	}
 
-	html := fmt.Sprintf(`<div class="code-box">
-%s
-<div class="code-box-nav">
+	html := fmt.Sprintf(`
+<div class="code-box">
 	%s
-	%s
+	<div class="code-box-nav">
+		%s
+		%s
+	</div>
 </div>`, s, playgroundPart, gitHubPart)
 	return html
 }
