@@ -33,7 +33,7 @@ func dumpKV(doc kvstore.Doc) {
 }
 
 func parseArticle(path string) (*Article, error) {
-	doc, err := paarseKVFileWithIncludes(path)
+	doc, err := parseKVFileWithIncludes(path)
 	if err != nil {
 		fmt.Printf("Error parsing KV file: '%s'\n", path)
 		maybePanicIfErr(err)
@@ -102,28 +102,31 @@ func buildArticleSiblings(articles []*Article) {
 // Parses @file ${fileName} directives and replaces them
 // with the content of the file
 func processFileIncludes(path string) ([]string, error) {
-	lines, err := common.ReadFileAsLines(path)
+	fc, err := loadFileCached(path)
 	if err != nil {
 		return nil, err
 	}
-	var res []string
+	lines := fc.Lines
+	nLines := len(lines)
+	res := make([]string, 0, nLines)
 	for _, line := range lines {
-		if strings.HasPrefix(line, "@file ") {
-			//fmt.Printf("processFileIncludes('%s'\n", path)
-			lines2, err := extractCodeSnippetsAsMarkdownLines(filepath.Dir(path), line)
-			if err != nil {
-				fmt.Printf("processFileIncludes: error '%s'\n", err)
-				return nil, err
-			}
-			res = append(res, lines2...)
-		} else {
+		if !strings.HasPrefix(line, "@file") {
 			res = append(res, line)
+			continue
 		}
+
+		//fmt.Printf("processFileIncludes('%s'\n", path)
+		lines2, err := extractCodeSnippetsAsMarkdownLines(filepath.Dir(path), line)
+		if err != nil {
+			fmt.Printf("processFileIncludes: error '%s'\n", err)
+			return nil, err
+		}
+		res = append(res, lines2...)
 	}
 	return res, nil
 }
 
-func paarseKVFileWithIncludes(path string) (kvstore.Doc, error) {
+func parseKVFileWithIncludes(path string) (kvstore.Doc, error) {
 	lines, err := processFileIncludes(path)
 	if err == nil {
 		return kvstore.ParseKVLines(lines)
@@ -136,7 +139,7 @@ func parseChapter(chapter *Chapter) error {
 	dir := filepath.Join(chapter.Book.sourceDir, chapter.ChapterDir)
 	path := filepath.Join(dir, "000-index.md")
 	chapter.indexFilePath = path
-	doc, err := paarseKVFileWithIncludes(path)
+	doc, err := parseKVFileWithIncludes(path)
 	if err != nil {
 		fmt.Printf("Error parsing KV file: '%s'\n", path)
 		maybePanicIfErr(err)
@@ -193,8 +196,9 @@ func soContributorURL(userID int, userName string) string {
 }
 
 func loadSoContributorsMust(book *Book, path string) {
-	lines, err := common.ReadFileAsLines(path)
+	fc, err := loadFileCached(path)
 	u.PanicIfErr(err)
+	lines := fc.Lines
 	var contributors []SoContributor
 	for _, line := range lines {
 		id, err := strconv.Atoi(line)

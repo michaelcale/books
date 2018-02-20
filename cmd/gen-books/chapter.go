@@ -8,6 +8,11 @@ import (
 	"github.com/essentialbooks/books/pkg/kvstore"
 )
 
+var (
+	// empty but not nil
+	emptyStringSlice = make([]string, 0)
+)
+
 // Chapter represents a book chapter
 type Chapter struct {
 	// stable, globally unique (across all bookd) id
@@ -23,6 +28,11 @@ type Chapter struct {
 	FileNameBase  string      // format: ch-${ID}-${Title}, used for URL and .html file name
 	Articles      []*Article
 	No            int
+
+	cachedHTML template.HTML
+
+	// for search we extract headings from markdown source
+	cachedHeadings []string
 }
 
 // URL is used in book_index.tmpl.html
@@ -65,6 +75,39 @@ func (c *Chapter) destFilePath() string {
 	return filepath.Join(destEssentialDir, c.Book.FileNameBase, c.FileNameBase+".html")
 }
 
+// HTML retruns html version of Body: field
+func (c *Chapter) HTML() template.HTML {
+	if c.cachedHTML != "" {
+		return c.cachedHTML
+	}
+	s, err := c.indexDoc.GetValue("Body")
+	if err != nil {
+		return template.HTML("")
+	}
+	html := markdownToHTML([]byte(s), "", c.Book)
+	c.cachedHTML = template.HTML(html)
+	return c.cachedHTML
+}
+
+// Headings returns headings in markdown file
+func (c *Chapter) Headings() []string {
+	if c.cachedHeadings != nil {
+		return c.cachedHeadings
+	}
+	s, err := c.indexDoc.GetValue("Body")
+	if err != nil {
+		return emptyStringSlice
+	}
+	headings := parseHeadingsFromMarkdown([]byte(s))
+	if headings == nil {
+		headings = emptyStringSlice
+	}
+	c.cachedHeadings = headings
+	return headings
+}
+
+// TODO: get rid of IntroductionHTML, SyntaxHTML etc., convert to just Body in markdown format
+
 // VersionsHTML returns html version of versions
 func (c *Chapter) VersionsHTML() template.HTML {
 	s, err := c.indexDoc.GetValue("VersionsHtml")
@@ -72,18 +115,6 @@ func (c *Chapter) VersionsHTML() template.HTML {
 		s = ""
 	}
 	return template.HTML(s)
-}
-
-// TODO: get rid of IntroductionHTML, SyntaxHTML etc., convert to just Body in markdown format
-
-// BodyHTML retruns html version of Body: field
-func (c *Chapter) BodyHTML() template.HTML {
-	s, err := c.indexDoc.GetValue("Body")
-	if err != nil {
-		return template.HTML("")
-	}
-	html := markdownToHTML([]byte(s), "", c.Book)
-	return template.HTML(html)
 }
 
 // IntroductionHTML retruns html version of Introduction:

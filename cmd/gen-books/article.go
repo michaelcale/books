@@ -22,6 +22,9 @@ type Article struct {
 	// TODO: we should convert all HTML content to markdown
 	BodyHTML template.HTML
 
+	// for search we extract headings from markdown source
+	cachedHeadings []string
+
 	// for generating toc of a chapter, all articles that belong to the same
 	// chapter as this article
 	Siblings  []Article
@@ -33,6 +36,29 @@ type Article struct {
 // Book retuns book this article belongs to
 func (a *Article) Book() *Book {
 	return a.Chapter.Book
+}
+
+// HTML returns html content of the article
+func (a *Article) HTML() template.HTML {
+	if a.BodyHTML == "" {
+		defLang := getDefaultLangForBook(a.Book().Title)
+		html := markdownToHTML([]byte(a.BodyMarkdown), defLang, a.Book())
+		a.BodyHTML = template.HTML(html)
+	}
+	return a.BodyHTML
+}
+
+// Headings returns headings in markdown file
+func (a *Article) Headings() []string {
+	if a.cachedHeadings != nil {
+		return a.cachedHeadings
+	}
+	headings := parseHeadingsFromMarkdown([]byte(a.BodyMarkdown))
+	if headings == nil {
+		headings = emptyStringSlice
+	}
+	a.cachedHeadings = headings
+	return headings
 }
 
 // URL returns url of .html file with this article

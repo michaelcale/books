@@ -228,3 +228,32 @@ func markdownToHTML(d []byte, defaultLang string, book *Book) string {
 	res := policy.SanitizeBytes(unsafe)
 	return string(res)
 }
+
+func getTextRecur(node ast.Node) string {
+	if text, ok := node.(*ast.Text); ok {
+		return string(text.Literal)
+	}
+	s := ""
+	for _, child := range node.GetChildren() {
+		s += getTextRecur(child)
+	}
+	return s
+}
+
+func parseHeadingsFromMarkdown(d []byte) []string {
+	var res []string
+	astRoot := markdown.Parse(d, nil)
+	ast.WalkFunc(astRoot, func(node ast.Node, entering bool) ast.WalkStatus {
+		if entering {
+			if heading, ok := node.(*ast.Heading); ok {
+				s := getTextRecur(heading)
+				s = strings.TrimSpace(s)
+				if len(s) > 0 {
+					res = append(res, s)
+				}
+			}
+		}
+		return ast.GoToNext
+	})
+	return res
+}

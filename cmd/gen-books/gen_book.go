@@ -170,12 +170,7 @@ func genBookArticle(article *Article) {
 		PathFontAwesomeJS: pathFontAwesomeJS,
 		PathMainCSS:       pathMainCSS,
 	}
-	// TODO: move as a method on Article
-	if article.BodyHTML == "" {
-		defLang := getDefaultLangForBook(article.Book().Title)
-		html := markdownToHTML([]byte(article.BodyMarkdown), defLang, article.Book())
-		article.BodyHTML = template.HTML(html)
-	}
+
 	path := article.destFilePath()
 	execTemplateToFileSilentMaybeMust("article.tmpl.html", d, path)
 }

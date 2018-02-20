@@ -6,7 +6,6 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/essentialbooks/books/pkg/common"
 	"github.com/kjk/u"
 )
 
@@ -88,11 +87,13 @@ func trimEmptyLines(lines []string) []string {
 }
 
 func extractCodeSnippets(path string) ([]string, error) {
-	lines, err := common.ReadFileAsLines(path)
+	fc, err := loadFileCached(path)
 	if err != nil {
 		return nil, err
 	}
-	var res []string
+	lines := fc.Lines
+	nLines := len(lines)
+	res := make([]string, 0, nLines)
 	inShow := false
 	for _, line := range lines {
 		if isShowStart(line) {

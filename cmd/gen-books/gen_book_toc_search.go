@@ -35,6 +35,13 @@ func genBookTOCSearchMust(book *Book) {
 		toc = append(toc, tocItem)
 		chapIdx := len(toc) - 1
 		u.PanicIf(chapIdx < 0)
+
+		headings := chapter.Headings()
+		for _, heading := range headings {
+			tocItem = []interface{}{"", chapIdx, heading}
+			toc = append(toc, tocItem)
+		}
+
 		for _, article := range chapter.Articles {
 			title := strings.TrimSpace(article.Title)
 			tocItem = []interface{}{article.FileNameBase, chapIdx, title}
@@ -43,7 +50,12 @@ func genBookTOCSearchMust(book *Book) {
 			}
 			toc = append(toc, tocItem)
 
-			// TODO: add entries for #, ## and ### elements in the article
+			headings := article.Headings()
+			articleIdx := len(toc) - 1
+			for _, heading := range headings {
+				tocItem = []interface{}{"", articleIdx, heading}
+				toc = append(toc, tocItem)
+			}
 		}
 	}
 	d, err := json.MarshalIndent(toc, "", "  ")

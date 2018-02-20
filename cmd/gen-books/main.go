@@ -203,8 +203,47 @@ func timeFileCacheAndExit() {
 	os.Exit(0)
 }
 
+func isBlacklistedForGetOutput(path string) bool {
+	name := filepath.Base(path)
+	switch name {
+	case "timed_loop.go":
+		return true
+	}
+	return false
+
+}
+func getOutputCb(path string, info os.FileInfo, err error) error {
+	if err != nil {
+		return err
+	}
+	if info.IsDir() {
+		return nil
+	}
+	if !strings.HasSuffix(path, ".go") {
+		return nil
+	}
+	if isBlacklistedForGetOutput(path) {
+		return nil
+	}
+	//fmt.Printf("%s\n", path)
+	getOutput(path)
+	return nil
+}
+
+func timeGetOutputAndExit() {
+	timeStart := time.Now()
+	dir := filepath.Join("books", "go")
+	filepath.Walk(dir, getOutputCb)
+	fmt.Printf("caching %d files in %s took %s\n", len(filePathToFileContent), dir, time.Since(timeStart))
+	os.Exit(0)
+}
+
 func main() {
 	parseFlags()
+
+	if false {
+		timeGetOutputAndExit()
+	}
 
 	if false {
 		timeFileCacheAndExit()
@@ -236,6 +275,8 @@ func main() {
 	} else {
 		updateGoDeps()
 	}
+
+	cacheFilesInDir("books")
 
 	genAllBooks()
 	if flgPreview {

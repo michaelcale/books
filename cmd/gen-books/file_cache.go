@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -67,6 +68,10 @@ func cacheFileIfChanged(path string, info os.FileInfo) (*FileContent, error) {
 	return fc, nil
 }
 
+func loadFileCached(path string) (*FileContent, error) {
+	return cacheFileIfChanged(path, nil)
+}
+
 func cacheFilesCb(path string, info os.FileInfo, err error) error {
 	if err != nil {
 		return err
@@ -79,5 +84,9 @@ func cacheFilesCb(path string, info os.FileInfo, err error) error {
 }
 
 func cacheFilesInDir(dir string) error {
+	timeStart := time.Now()
+	defer func() {
+		fmt.Printf("cacheFilesInDir '%s' took %s\n", dir, time.Since(timeStart))
+	}()
 	return filepath.Walk(dir, cacheFilesCb)
 }
