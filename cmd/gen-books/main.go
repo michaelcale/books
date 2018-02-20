@@ -194,8 +194,21 @@ func loadSOUserMappingsMust() {
 	u.PanicIfErr(err)
 }
 
+func timeFileCacheAndExit() {
+	timeStart := time.Now()
+	dir := filepath.Join("books", "go")
+	err := cacheFilesInDir(dir)
+	u.PanicIfErr(err)
+	fmt.Printf("caching %d files in %s took %s\n", len(filePathToFileContent), dir, time.Since(timeStart))
+	os.Exit(0)
+}
+
 func main() {
 	parseFlags()
+
+	if false {
+		timeFileCacheAndExit()
+	}
 
 	if false {
 		genTwitterImagesAndExit()

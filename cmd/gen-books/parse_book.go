@@ -56,6 +56,7 @@ func parseArticle(path string) (*Article, error) {
 	}
 	titleSafe := common.MakeURLSafe(article.Title)
 
+	// handle search synonyms
 	synonyms := doc.GetValueSilent("Search", "")
 	synonyms = strings.TrimSpace(synonyms)
 	if len(synonyms) > 0 {
@@ -75,12 +76,11 @@ func parseArticle(path string) (*Article, error) {
 	}
 	s, err := doc.GetValue("BodyHtml")
 	article.BodyHTML = template.HTML(s)
-	if err == nil {
-		return article, nil
+	if err != nil {
+		dumpKV(doc)
+		return nil, fmt.Errorf("parseArticle('%s'), err: '%s'", path, err)
 	}
-	// on parsing error, dump the doc
-	dumpKV(doc)
-	return nil, fmt.Errorf("parseArticle('%s'), err: '%s'", path, err)
+	return article, nil
 }
 
 func buildArticleSiblings(articles []*Article) {
