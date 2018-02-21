@@ -1,5 +1,5 @@
 ---
-Title: Formatting time
+Title: Format time
 Id: 801000j5
 ---
 

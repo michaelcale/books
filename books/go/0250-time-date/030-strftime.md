@@ -1,5 +1,5 @@
 ---
-Title: Formatting and parsing time with strftime
+Title: Format and parse time with strftime
 Id: 80100032
 ---
 
