@@ -11,7 +11,7 @@ Major types in the package:
 
 ## Get current time and date
 
-`now := time.Now()`.
+`now := time.Now()`
 
 ## Construct a time and date at a given moment in time
 
@@ -19,19 +19,19 @@ Major types in the package:
 
 `loc` must be provided and represents time zone. Use `time.UTC` variable for UTC time zone.
 
-## Compare two time value for equality
+## Compare two times for equality
 
-`areEqual = t1.Equal(t2)`
+`areEqual := t1.Equal(t2)`
 
 ## Add duration to time
 
-`now = now.Add(5 * time.Second + time.Millisecond * 100)`
+`newTime := now.Add(5 * time.Second + time.Millisecond * 100)`
 
 Time values are immutable. `Add` returns a new value.
 
 ## Substract duration from time
 
-`now = now.Add(-6 * time.Second)`
+`newTime := now.Add(-6 * time.Second)`
 
 To substract 6 seconds we add -6 seconds.
 
