@@ -1,7 +1,6 @@
 ---
 Title: Comparing Time
 Id: 32577
-Score: 0
 ---
 Sometime you will need to know, with 2 dates objects, if there are corresponding to the same date, or find which date is after the other.
 
