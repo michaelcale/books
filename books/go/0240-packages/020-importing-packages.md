@@ -73,11 +73,8 @@ import (
 
 This can be useful if you don't access this package directly but need it's `init` functions to run.
 
-Note:
+**Note:**
 
 As the package names are based on the folder structure, any changes in the folder names & import references (including case sensitivity) will cause a compile time error "case-insensitive import collision" in Linux & OS-X, which is difficult to trace and fix (the error message is kinda cryptic for mere mortals as it tries to convey the opposite - that, the comparison failed due to case sensitivity).
 
 ex: "path/to/Package1" vs "path/to/package1"
-
-Live example:
-https://github.com/akamai-open/AkamaiOPEN-edgegrid-golang/issues/2
