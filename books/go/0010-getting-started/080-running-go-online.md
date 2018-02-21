@@ -1,10 +1,8 @@
 ---
-Title: Running Go in online playground
+Title: Run Go in online playground
 Id: 27470
 ---
-## The Go Playground
-
-To test small snippets of Go code, you can use [Playground](https://play.golang.org).
+To test small snippets of Go code, you can use [The Go Playground](https://play.golang.org) or nicer [The Go Play Space](https://goplay.space/).
 
 Playground has some limitations:
 * it only supports standard library. You can't use third party libraries

@@ -1,5 +1,5 @@
 ---
-Title: Installing Go compiler
+Title: Install Go toolchain
 Id: 20381
 ---
 There are 2 production quality compilers:
@@ -8,13 +8,13 @@ There are 2 production quality compilers:
 
 This article describes installing gc compiler.
 
-## Installing on Windows
+## Install on Windows
 
 Download `.msi` installer from [https://golang.org/dl/](https://golang.org/dl/) and run it.
 
 Read [setting up Windows environment](a-rd600086).
 
-## Installing on Mac OS
+## Install on Mac OS
 
 ### Using official binaries
 
@@ -27,7 +27,7 @@ Download `.pkg` installer from [https://golang.org/dl/](https://golang.org/dl/) 
 
 Read [setting up Mac environment](a-rd600058).
 
-## On Ubuntu
+## Install on Ubuntu
 
 ### Using Ubuntu provided pacakge
 
@@ -64,6 +64,6 @@ $ rm go1.9.3.linux-amd64.tar.gz
 
 Read [setting up Unix environment](a-rd6000f2).
 
-## Other OSes
+## Install on other OSes
 
 Follow [official instructions](https://golang.org/doc/install).
