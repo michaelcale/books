@@ -1,7 +1,8 @@
+---
 Title: go fmt
 Search: gofmt
 Id: 17008
-Body:
+---
 To keep code consistent and eliminate arguments over code formatting, Go includes `go fmt` tool.
 
 To format a file: `go fmt main.go`

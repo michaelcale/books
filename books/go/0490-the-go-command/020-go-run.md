@@ -1,6 +1,7 @@
+---
 Title: go run
 Id: 17005
-Body:
+---
 `go run` will run a program without creating an executable file. Mostly useful for development. `run` will only execute packages whose *package name* is **main**.
 
 To demonstrate, we will use a simple Hello World example `main.go`:

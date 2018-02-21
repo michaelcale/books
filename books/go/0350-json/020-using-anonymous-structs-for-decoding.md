@@ -1,7 +1,8 @@
+---
 Title: Using anonymous structs for decoding
 Id: 7911
 Score: 2
-Body:
+---
 The goal with using anonymous structs is to decode only the information we care about without littering our app with types that are used only in a single function.
 
 ```go

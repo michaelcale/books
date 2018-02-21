@@ -1,7 +1,8 @@
+---
 Title: Encoding/Decoding using Go structs
 Id: 22028
 Score: 0
-Body:
+---
 Let's assume we have the following `struct` that defines a `City` type:
 
 ```go

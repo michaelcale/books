@@ -3,7 +3,6 @@ Title: Testing Interface Implementation
 Id: 9653
 Score: 0
 ---
-
 In Go interfaces are satisfied implicitly. You don't have to declare that a type is supposed to implement a given interface.
 
 It's convenient but also makes it possible to not fully implement an interface by mistake and compiler has no way of detecting that.

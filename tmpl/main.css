@@ -516,7 +516,8 @@ a:hover.about-home-link {
 /* box that potentially displays file name linking to github and 'run' button for playground */
 .code-box-nav {
   position: absolute;
-  top: 0;
+  font-size: 0.7em;
+  bottom: 0;
   right: 0;
 }
 
@@ -539,7 +540,7 @@ a:hover.about-home-link {
   border: 1px solid #a4a4a4;
   padding: 4px 8px;
   margin: 0;
-  margin-right: -6px; /* no idea why I need this */
+  margin-right: -4px; /* no idea why I need this */
   display: inline-block;
 }
 

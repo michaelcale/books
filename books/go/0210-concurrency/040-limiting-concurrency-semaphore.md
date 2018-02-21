@@ -16,7 +16,7 @@ A buferred channel is a natural semaphore.
 
 Here's an example of using a channel acting as a semaphore to limit number of gouroutines active at any given time:
 
-@file limit_with_semaphore.go output
+@file limit_with_semaphore.go output sha1:04794d86e54ca971a32e096a6b1ad936f3566d29 goplayground:HLtenC1w2yO
 
 We use technique described in [waiting for goroutines to finish](a-2490) to wait for all tasks to finish.
 

@@ -267,8 +267,8 @@ func extractCodeSnippetsAsMarkdownLines(baseDir string, line string) ([]string, 
 		return res, nil
 	}
 
-	out, err := getCachedOutput(path)
-	if err != nil && !directive.AllowError {
+	out, err := getCachedOutput(path, directive.AllowError)
+	if err != nil {
 		fmt.Printf("getCachedOutput('%s'): error '%s', output: '%s'\n", path, err, out)
 		maybePanicIfErr(err)
 		return res, err
@@ -292,12 +292,67 @@ func getGoOutput(path string) (string, error) {
 	return string(out), err
 }
 
-// it executes a code file and captures the output
-func getOutput(path string) (string, error) {
-	ext := strings.ToLower(filepath.Ext(path))
+func getRunCmdOutput(path string, runCmd string) (string, error) {
+	// TODO: should handle quoted args:
+	// go run "quoted arg" non-quoted-arg
+	parts := strings.Split(runCmd, " ")
+	exeName := parts[0]
+	parts = parts[1:]
+	var parts2 []string
+	// remove empty lines and replace variables
+	for _, part := range parts {
+		if len(part) == 0 {
+			continue
+		}
+		switch part {
+		case "$file":
+			part = path
+		}
+		parts2 = append(parts2, part)
+	}
+	//fmt.Printf("getRunCmdOutput: running '%s' with args '%#v'\n", exeName, parts2)
+	cmd := exec.Command(exeName, parts2...)
+	out, err := cmd.CombinedOutput()
+	//fmt.Printf("getRunCmdOutput: out:\n%s\n", string(out))
+	return string(out), err
+}
 
+// finds ":run ${cmd}" directive embedded in the file
+// and returns ${cmd} part or empty string if not found
+func findRunCmd(lines []string) string {
+	for _, line := range lines {
+		if idx := strings.Index(line, ":run "); idx != -1 {
+			s := line[idx+len(":run "):]
+			return strings.TrimSpace(s)
+		}
+	}
+	return ""
+}
+
+func stripCurrentPathFromOutput(s string) string {
+	path, err := filepath.Abs(".")
+	u.PanicIfErr(err)
+	return strings.Replace(s, path, "", -1)
+}
+
+// it executes a code file and captures the output
+// optional runCmd says
+func getOutput(path string) (string, error) {
+	fc, err := loadFileCached(path)
+	if err != nil {
+		return "", err
+	}
+	if runCmd := findRunCmd(fc.Lines); runCmd != "" {
+		//fmt.Printf("Found :run cmd '%s' in '%s'\n", runCmd, path)
+		s, err := getRunCmdOutput(path, runCmd)
+		return stripCurrentPathFromOutput(s), err
+	}
+
+	// do default
+	ext := strings.ToLower(filepath.Ext(path))
 	if ext == ".go" {
-		return getGoOutput(path)
+		s, err := getGoOutput(path)
+		return stripCurrentPathFromOutput(s), err
 	}
 	return "", fmt.Errorf("getOutpu(%s): files with extension '%s' are not supported", path, ext)
 }

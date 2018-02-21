@@ -15,9 +15,12 @@ func cachedOutputPath(sha1Hex string) string {
 	return filepath.Join("cached_output", sha1Hex)
 }
 
-// for a given file, get cached output
-// this is the most expensive part of rebuilding books
-func getCachedOutput(path string) (string, error) {
+// for a given file, get output of executing this command
+// We cache this as it is the most expensive part of rebuilding books
+// If allowError is true, we silence an error from executed command
+// This is useful when e.g. executing "go run" on a program that is
+// intentionally not valid.
+func getCachedOutput(path string, allowError bool) (string, error) {
 	fc, err := loadFileCached(path)
 	if err != nil {
 		return "", err
@@ -32,7 +35,10 @@ func getCachedOutput(path string) (string, error) {
 	// fmt.Printf("loadFileCached('%s') failed with '%s'\n", outputPath, err)
 	s, err := getOutput(path)
 	if err != nil {
-		return "", err
+		if !allowError {
+			return "", err
+		}
+		err = nil
 	}
 	d := []byte(s)
 	outputPath = cachedOutputPath(sha1Hex)

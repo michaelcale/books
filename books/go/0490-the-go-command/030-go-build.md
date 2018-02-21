@@ -1,6 +1,7 @@
+---
 Title: go build
 Id: 17006
-Body:
+---
 `go build` will compile a program into an executable file.
 
 To demonstrate, we will use a simple Hello World example main.go:

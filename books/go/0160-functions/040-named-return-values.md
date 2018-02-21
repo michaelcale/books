@@ -1,6 +1,7 @@
+---
 Title: Named return values
 Id: 1253
-Body:
+---
 Return values can be assigned to a local variable.
 
 An empty `return` statement can then be used to return their current values. This is known as *"naked"* return.

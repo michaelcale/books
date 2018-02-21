@@ -1,7 +1,8 @@
+---
 Title: Convert color image to grayscale
 Id: 31693
 Score: 0
-Body:
+---
 Some digital image processing algorithm such as edge detection, information carried by the image intensity (i.e. grayscale value) is sufficient. Using color information (`R, G, B` channel) may provides slightly better result, but the algorithm complexity will be increased. Thus, in this case, we need to convert the color image to grayscale image prior to applying such algorithm.
 
 The following code is an example of converting arbitrary image to 8-bit grayscale image. The image is retrieved from remote location using `net/http` package, converted to grayscale, and finally saved as PNG image.
