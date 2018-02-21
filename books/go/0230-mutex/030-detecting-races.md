@@ -20,7 +20,7 @@ This examples shows that memory for variable `n` is corrupted because the final 
 
 It also shows that instrumentation added with `-race` can catch memory corruption and points out which part of program caused the corruption.
 
-## When to use -race
+## When to use `-race`
 
 Additional instrumentation added by `-race` flag makes the program slower so it's not usually used when compiling shipping binaries.
 

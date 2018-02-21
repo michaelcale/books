@@ -237,6 +237,9 @@ func getTextRecur(node ast.Node) string {
 	if text, ok := node.(*ast.Text); ok {
 		return string(text.Literal)
 	}
+	if code, ok := node.(*ast.Code); ok {
+		return string(code.Literal)
+	}
 	s := ""
 	for _, child := range node.GetChildren() {
 		s += getTextRecur(child)
