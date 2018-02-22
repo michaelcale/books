@@ -5,7 +5,7 @@ Id: 29810
 
 Parsing is the reverse of formatting:
 
-@file parse.go output
+@file parse.go output sha1:9c78eef645bc8e3c88d7544e9c097d3fb74a8917 goplayground:qu8wtR6QSLt
 
 Parsing template uses the same style as [formatting](a-801000j5).
 

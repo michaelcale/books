@@ -14,7 +14,7 @@ Here's a program with intentional data races.
 
 When you run it with `go run -race data_race.go` the runtime will notice memory corruption.
 
-@file data_race.go output allow_error sha1:a17e6fefdae6210f476f0fe7b43cb9be4c5969d1 goplayground:K4m0O9jGLZe
+@file data_race.go output allow_error sha1:86a300bf5d91df01d58fd9509f905e93dbef934d goplayground:fy_-Ws0cm98
 
 This examples shows that memory for variable `n` is corrupted because the final value of `n` is not what we expect.
 

@@ -7,7 +7,7 @@ Most languages inherited time formatting method from `strftime` function C libra
 
 Go designers came up with arguably more intuitive way of time parsing and formatting where you show a template of how you want the result to look like:
 
-@file format.go output
+@file format.go output sha1:2d56dbcf8e6e21620c5979ec9259843764022f4f goplayground:B_uLdROWGO6
 
 Formatting string is an arbitrary string with some parts being replaced by the data from `time.Time` value:
 
