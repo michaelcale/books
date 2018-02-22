@@ -17,6 +17,8 @@ Unfortunately, when it comes to parsing things are not as good. There are two pa
 
 but they both are cgo-wrappers around C libraries, which makes them more finicky to build, especially on Windows.
 
+<!-- TODO: mention https://github.com/bmuller/arrow or write my own library that does both parsing and formatting -->
+
 ## List of `strftime` directives
 
 |Code|Meaning|Example|
@@ -52,3 +54,5 @@ but they both are cgo-wrappers around C libraries, which makes them more finicky
 |%x|Locale’s appropriate date representation.|09/30/13|
 |%X|Locale’s appropriate time representation.|07:06:05|
 |%%|A literal '%' character.|%|
+
+You can also use http://www.strfti.me/ service to help you build `strfrtime` formatting strings.
