@@ -3,7 +3,7 @@ Title: Format time like strftime
 Id: 80100032
 ---
 
-Some prefer `strftime` style of formatting parse values. This is not provided by standard library but there are [several libraries](https://godoc.org/?q=strftime) implementing it.
+If you prefer `strftime` style of formatting time values (as used in Python or Ruby) or porting code that uses that style, you can use one of [several libraries](https://godoc.org/?q=strftime).
 
 Here's an example using `github.com/jehiah/go-strftime` package:
 
