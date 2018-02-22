@@ -14,20 +14,28 @@ body {
   margin: 20px;
 }
 
-td {
-  vertical-align: top;
+
+tr:nth-child(even) {
+  background-color: #eee;
 }
+
+.article table {
+  font-size: 0.85em;
+}
+
+td, th {
+  padding: .5em 1em;
+  text-align: left;
+  /* vertical-align: top; */
+}
+
+/*th {
+  vertical-align: bottom;
+}*/
 
 th:not(:first-child):not(:last-child),
 td:not(:first-child):not(:last-child) {
   padding: 0 10px;
-}
-
-th {
-  vertical-align: bottom;
-}
-thead th {
-  border-bottom: 1px solid #ccc;
 }
 
 tbody tr td.with-decimal {
