@@ -52,4 +52,4 @@ The big features missing from `flag` package:
 
 Your options are:
 * [raw access to cmd-line arguments](a-14047)
-* use a library like [cobra](a-14046)
+* use a [third party library](a-14046)
