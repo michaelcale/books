@@ -2,7 +2,6 @@
 Title: Interfaces
 Id: 1221
 ---
-
 An interface describes a set of methods on a type.
 
 It's similar to `interface` type in C#.

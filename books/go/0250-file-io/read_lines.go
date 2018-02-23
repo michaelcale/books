@@ -30,7 +30,7 @@ func ReadLines(filePath string) ([]string, error) {
 }
 
 func main() {
-	path := filepath.Join("books", "go", "0250-file-io", "index.go")
+	path := filepath.Join("books", "go", "0250-file-io", "read_lines.go")
 	lines, err := ReadLines(path)
 	if err != nil {
 		log.Fatalf("ReadLines failed with '%s'\n", err)
