@@ -207,6 +207,12 @@ func main() {
 	parseFlags()
 
 	if false {
+		updateGoDeps()
+		//updateGoDepsInFile("books/go/0250-time-date/strftime.go")
+		os.Exit(0)
+	}
+
+	if false {
 		genTwitterImagesAndExit()
 	}
 
@@ -232,12 +238,7 @@ func main() {
 	err := ioutil.WriteFile(path, []byte(netlifyHeaders), 0644)
 	u.PanicIfErr(err)
 
-	if flgPreview {
-		go updateGoDeps()
-	} else {
-		updateGoDeps()
-	}
-
+	updateGoDeps()
 	cacheFilesInDir("books")
 
 	genAllBooks()

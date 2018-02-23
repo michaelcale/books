@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"html/template"
+	"path"
 	"path/filepath"
 	"strings"
 )
@@ -71,7 +72,7 @@ func (a *Article) URL() string {
 
 // CanonnicalURL returns full url including host
 func (a *Article) CanonnicalURL() string {
-	return fullURLBase + a.URL()
+	return path.Join(siteBaseURL, a.URL())
 }
 
 // GitHubText returns text we display in GitHub box

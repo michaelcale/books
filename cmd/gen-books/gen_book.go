@@ -31,6 +31,7 @@ var (
 	aboutTmpl     *template.Template
 
 	gitHubBaseURL = "https://github.com/essentialbooks/books"
+	siteBaseURL   = "https://www.programming-books.io"
 )
 
 func unloadTemplates() {

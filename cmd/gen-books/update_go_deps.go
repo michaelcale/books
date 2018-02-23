@@ -20,7 +20,7 @@ This is meant to be run once on startup.
 */
 
 var (
-	updatedImports map[string]bool
+	updatedImports = make(map[string]bool)
 )
 
 // TODO: white-list more domains (gitlab? google's domain, gopkg)
@@ -76,7 +76,6 @@ func updateGoDepsInFile(path string) {
 func updateGoDeps() {
 	timeStart := time.Now()
 	fmt.Printf("udpateGoDeps() start\n")
-	updatedImports = make(map[string]bool)
 	dir := filepath.Join("books", "go")
 	walkFunc := func(path string, info os.FileInfo, err error) error {
 		if err != nil {

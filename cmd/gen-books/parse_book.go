@@ -18,10 +18,6 @@ import (
 	"github.com/kjk/u"
 )
 
-const (
-	fullURLBase = "https://www.programming-books.io"
-)
-
 var (
 	defTitle = "No Title"
 )

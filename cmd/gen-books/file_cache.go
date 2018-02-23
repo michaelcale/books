@@ -32,13 +32,9 @@ func (f *FileContent) Sha1Hex() string {
 }
 
 var (
-	filePathToFileContent map[string]*FileContent
+	filePathToFileContent = make(map[string]*FileContent)
 	muFileCache           sync.Mutex
 )
-
-func init() {
-	filePathToFileContent = make(map[string]*FileContent)
-}
 
 func cacheFile(path string, info os.FileInfo) (*FileContent, error) {
 	d, err := ioutil.ReadFile(path)

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"path"
 	"path/filepath"
 	"sync"
 )
@@ -60,7 +61,7 @@ func (b *Book) URL() string {
 
 // CanonnicalURL returns full url including host
 func (b *Book) CanonnicalURL() string {
-	return fullURLBase + b.URL()
+	return path.Join(siteBaseURL, b.URL())
 }
 
 // ShareOnTwitterText returns text for sharing on twitter
@@ -81,13 +82,14 @@ func (b *Book) CoverURL() string {
 
 // CoverFullURL returns a URL for the cover including host
 func (b *Book) CoverFullURL() string {
-	return fullURLBase + b.CoverURL()
+	return path.Join(siteBaseURL, b.CoverURL())
 }
 
 // CoverTwitterFullURL returns a URL for the cover including host
 func (b *Book) CoverTwitterFullURL() string {
 	coverName := langToCover[b.titleSafe]
-	return fullURLBase + fmt.Sprintf("/covers/twitter/%s.png", coverName)
+	coverURL := fmt.Sprintf("/covers/twitter/%s.png", coverName)
+	return path.Join(siteBaseURL, coverURL)
 }
 
 // ArticlesCount returns total number of articles
