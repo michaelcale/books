@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/google/shlex"
 	"github.com/kjk/u"
 )
 
@@ -293,9 +294,11 @@ func getGoOutput(path string) (string, error) {
 }
 
 func getRunCmdOutput(path string, runCmd string) (string, error) {
-	// TODO: should handle quoted args:
-	// go run "quoted arg" non-quoted-arg
-	parts := strings.Split(runCmd, " ")
+	parts, err := shlex.Split(runCmd)
+	maybePanicIfErr(err)
+	if err != nil {
+		return "", err
+	}
 	exeName := parts[0]
 	parts = parts[1:]
 	var parts2 []string
