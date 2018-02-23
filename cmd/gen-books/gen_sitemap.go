@@ -33,9 +33,18 @@ func addSitemapURL(uri string) {
 	muSitemapURLS.Unlock()
 }
 
+const (
+	sitemapTmpl = `User-agent: *
+Disallow:
+
+Sitemap: %s
+`
+)
+
+// http://www.advancedhtml.co.uk/robots-sitemaps.htm
 func writeRobots() {
 	sitemapURL := urlJoin(siteBaseURL, "sitemap.txt")
-	robotsTxt := fmt.Sprintf("Sitemap: %s\n", sitemapURL)
+	robotsTxt := fmt.Sprintf(sitemapTmpl, sitemapURL)
 	robotsTxtPath := filepath.Join("www", "robots.txt")
 	err := ioutil.WriteFile(robotsTxtPath, []byte(robotsTxt), 0644)
 	u.PanicIfErr(err)
