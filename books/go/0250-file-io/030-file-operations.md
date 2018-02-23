@@ -7,6 +7,7 @@ TODO:
 * get file size
 * get information about a file
 * check if a file exists
+* delete a file
 * rename a file
 * remove a file
 * copy a file
