@@ -9,15 +9,7 @@
     <title>About Essential Programming Books project</title>
     <link href="{{.PathMainCSS}}" rel="stylesheet">
 
-    {{ if .AnalyticsCode }}
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{.AnalyticsCode}}"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', '{{.AnalyticsCode}}');
-    </script>
-    {{ end }}
+    {{ .Analytics }}
     <script src="{{.PathFontAwesomeJS}}" defer></script>
     <script src="{{.PathAppJS}}" defer></script>
 </head>

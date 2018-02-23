@@ -22,14 +22,9 @@
     <meta property="og:image" content="{{.Book.CoverTwitterFullURL}}">
 
     <title>{{.PageTitle}}</title>
-    <link href="{{.PathMainCSS}}" rel="stylesheet"> {{ if .AnalyticsCode }}
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{.AnalyticsCode}}"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', '{{.AnalyticsCode}}');
-    </script> {{ end }}
+    <link href="{{.PathMainCSS}}" rel="stylesheet">
+
+    {{ .Analytics }}
     <script src="{{.PathFontAwesomeJS}}" defer></script>
     <script src="{{.Book.TocSearchJSURL}}" defer></script>
     <script src="{{.PathAppJS}}" defer></script>

@@ -6,18 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="referrer" content="always">
 
-    <title>Essential Programming Books</title>
-    <link href="{{.PathMainCSS}}" rel="stylesheet">
-    {{ if .AnalyticsCode }}
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{.AnalyticsCode}}"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', '{{.AnalyticsCode}}');
-    </script>
-    {{ end }}
+    <title>Essential Programming Books Covers View</title>
+    <meta name="description" content="Essential Programming Books, covers view.">
 
+    <link href="{{.PathMainCSS}}" rel="stylesheet">
+
+    {{ .Analytics }}
     <script src="{{.PathFontAwesomeJS}}" defer></script>
     <script src="{{.PathAppJS}}" defer></script>
 </head>

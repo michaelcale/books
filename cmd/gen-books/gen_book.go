@@ -105,7 +105,7 @@ func genIndex(books []*Book) {
 		Books             []*Book
 		GitHubText        string
 		GitHubURL         string
-		AnalyticsCode     string
+		Analytics         template.HTML
 		PathAppJS         string
 		PathFontAwesomeJS string
 		PathMainCSS       string
@@ -113,7 +113,7 @@ func genIndex(books []*Book) {
 		Books:             books,
 		GitHubText:        "GitHub",
 		GitHubURL:         gitHubBaseURL,
-		AnalyticsCode:     flgAnalytics,
+		Analytics:         googleAnalytics,
 		PathAppJS:         pathAppJS,
 		PathFontAwesomeJS: pathFontAwesomeJS,
 		PathMainCSS:       pathMainCSS,
@@ -125,13 +125,13 @@ func genIndex(books []*Book) {
 func genIndexGrid(books []*Book) {
 	d := struct {
 		Books             []*Book
-		AnalyticsCode     string
+		Analytics         template.HTML
 		PathAppJS         string
 		PathFontAwesomeJS string
 		PathMainCSS       string
 	}{
 		Books:             books,
-		AnalyticsCode:     flgAnalytics,
+		Analytics:         googleAnalytics,
 		PathAppJS:         pathAppJS,
 		PathFontAwesomeJS: pathFontAwesomeJS,
 		PathMainCSS:       pathMainCSS,
@@ -142,12 +142,12 @@ func genIndexGrid(books []*Book) {
 
 func genAbout() {
 	d := struct {
-		AnalyticsCode     string
+		Analytics         template.HTML
 		PathAppJS         string
 		PathFontAwesomeJS string
 		PathMainCSS       string
 	}{
-		AnalyticsCode:     flgAnalytics,
+		Analytics:         googleAnalytics,
 		PathAppJS:         pathAppJS,
 		PathFontAwesomeJS: pathFontAwesomeJS,
 		PathMainCSS:       pathMainCSS,
@@ -161,13 +161,13 @@ func genArticle(article *Article) {
 
 	d := struct {
 		*Article
-		AnalyticsCode     string
+		Analytics         template.HTML
 		PathAppJS         string
 		PathFontAwesomeJS string
 		PathMainCSS       string
 	}{
 		Article:           article,
-		AnalyticsCode:     flgAnalytics,
+		Analytics:         googleAnalytics,
 		PathAppJS:         pathAppJS,
 		PathFontAwesomeJS: pathFontAwesomeJS,
 		PathMainCSS:       pathMainCSS,
@@ -187,14 +187,14 @@ func genChapter(chapter *Chapter, currNo int) {
 	d := struct {
 		*Chapter
 		CurrentChapterNo  int
-		AnalyticsCode     string
+		Analytics         template.HTML
 		PathAppJS         string
 		PathFontAwesomeJS string
 		PathMainCSS       string
 	}{
 		Chapter:           chapter,
 		CurrentChapterNo:  currNo,
-		AnalyticsCode:     flgAnalytics,
+		Analytics:         googleAnalytics,
 		PathAppJS:         pathAppJS,
 		PathFontAwesomeJS: pathFontAwesomeJS,
 		PathMainCSS:       pathMainCSS,
@@ -216,13 +216,13 @@ func genBook(book *Book) {
 	path := filepath.Join(book.destDir, "index.html")
 	d := struct {
 		Book              *Book
-		AnalyticsCode     string
+		Analytics         template.HTML
 		PathAppJS         string
 		PathFontAwesomeJS string
 		PathMainCSS       string
 	}{
 		Book:              book,
-		AnalyticsCode:     flgAnalytics,
+		Analytics:         googleAnalytics,
 		PathAppJS:         pathAppJS,
 		PathFontAwesomeJS: pathFontAwesomeJS,
 		PathMainCSS:       pathMainCSS,

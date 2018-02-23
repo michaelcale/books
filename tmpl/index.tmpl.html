@@ -7,17 +7,11 @@
     <meta name="referrer" content="always">
 
     <title>Essential Programming Books</title>
-    <link href="{{.PathMainCSS}}" rel="stylesheet">
-    {{ if .AnalyticsCode }}
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{.AnalyticsCode}}"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', '{{.AnalyticsCode}}');
-    </script>
-    {{ end }}
+    <meta name="description" content="Essential Programming Books.">
 
+    <link href="{{.PathMainCSS}}" rel="stylesheet">
+
+    {{ .Analytics }}
     <script src="{{.PathFontAwesomeJS}}" defer></script>
     <script src="{{.PathAppJS}}" defer></script>
 </head>

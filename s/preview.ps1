@@ -10,5 +10,5 @@ go build -o gen-books
 Set-Location -Path ../..
 exitIfFailed
 
-./cmd/gen-books/gen-books -preview
+./cmd/gen-books/gen-books -preview  -analytics UA-113489735-1
 Remove-Item -Force -ErrorAction SilentlyContinue ./cmd/gen-books/gen-books

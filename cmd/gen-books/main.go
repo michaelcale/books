@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"html/template"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -20,6 +21,7 @@ var (
 	flgUpdateGoPlayground bool
 	allBookDirs           []string
 	soUserIDToNameMap     map[int]string
+	googleAnalytics       template.HTML
 )
 
 const (
@@ -31,11 +33,27 @@ const (
 `
 )
 
+const (
+	googleAnalyticsTmpl = `<script async src="https://www.googletagmanager.com/gtag/js?id=%s"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '%s');
+    </script>
+`
+)
+
 func parseFlags() {
 	flag.StringVar(&flgAnalytics, "analytics", "", "google analytics code")
 	flag.BoolVar(&flgPreview, "preview", false, "if true will start watching for file changes and re-build everything")
 	flag.BoolVar(&flgUpdateGoPlayground, "update-go-playground", false, "if true will upgrade links to go playground")
 	flag.Parse()
+
+	if flgAnalytics != "" {
+		s := fmt.Sprintf(googleAnalyticsTmpl, flgAnalytics, flgAnalytics)
+		googleAnalytics = template.HTML(s)
+	}
 }
 
 func dirFromBook(book *common.Book) string {
