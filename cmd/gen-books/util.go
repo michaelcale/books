@@ -9,6 +9,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"runtime"
+	"strings"
 
 	"github.com/kjk/u"
 )
@@ -87,4 +88,19 @@ func getDirsRecur(dir string) ([]string, error) {
 		}
 	}
 	return toVisit, nil
+}
+
+// "foo" + "bar" = "foo/bar", only one "/"
+func urlJoin(s1, s2 string) string {
+	if strings.HasSuffix(s1, "/") {
+		if strings.HasPrefix(s2, "/") {
+			return s1 + s2[1:]
+		}
+		return s1 + s2
+	}
+
+	if strings.HasPrefix(s2, "/") {
+		return s1 + s2
+	}
+	return s1 + "/" + s2
 }

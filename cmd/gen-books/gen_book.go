@@ -157,6 +157,7 @@ func genAbout() {
 }
 
 func genBookArticle(article *Article) {
+	addSitemapURL(article.CanonnicalURL())
 
 	d := struct {
 		*Article
@@ -177,6 +178,7 @@ func genBookArticle(article *Article) {
 }
 
 func genBookChapter(chapter *Chapter, currNo int) {
+	addSitemapURL(chapter.CanonnicalURL())
 	for _, article := range chapter.Articles {
 		genBookArticle(article)
 	}
@@ -227,6 +229,8 @@ func genBook(book *Book) {
 	}
 
 	execTemplateToFileSilentMaybeMust("book_index.tmpl.html", d, path)
+
+	addSitemapURL(book.CanonnicalURL())
 
 	for i, chapter := range book.Chapters {
 		book.sem <- true

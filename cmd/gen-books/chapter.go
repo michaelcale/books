@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"html/template"
-	"path"
 	"path/filepath"
 
 	"github.com/essentialbooks/books/pkg/kvstore"
@@ -44,7 +43,7 @@ func (c *Chapter) URL() string {
 
 // CanonnicalURL returns full url including host
 func (c *Chapter) CanonnicalURL() string {
-	return path.Join(siteBaseURL, c.URL())
+	return urlJoin(siteBaseURL, c.URL())
 }
 
 // GitHubText returns text we display in GitHub box

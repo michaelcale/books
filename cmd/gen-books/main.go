@@ -167,7 +167,7 @@ func genSelectedBooks(bookDirs []string) {
 
 func genAllBooks() {
 	timeStart := time.Now()
-
+	clearSitemapURLS()
 	copyCoversMust()
 
 	nProcs := getAlmostMaxProcs()
@@ -194,6 +194,7 @@ func genAllBooks() {
 	for _, book := range books {
 		genBook(book)
 	}
+	writeSitemap()
 	fmt.Printf("Used %d procs, finished generating all books in %s\n", nProcs, time.Since(timeStart))
 }
 
