@@ -2,8 +2,13 @@
 Title: File I/O
 Id: 1033
 ---
+Go has a very robust support for file system handling.
+
+A program that opens a file, reads the whole content and closes the file:
+
+@file index.go output noplayground
+
 ## Syntax
-- file, err := os.Open(*name*) // Opens a file in read-only mode. A non-nil error is returned if the file could not be opened.
 - file, err := os.Create(*name*) // Creates or opens a file if it already exists in write-only mode. The file is overwritten to if it already exists. A non-nil error is returned if the file could not be opened.
 - file, err := os.OpenFile(*name*, *flags*, *perm*) // Opens a file in the mode specified by the flags. A non-nil error is returned if the file could not be opened.
 - data, err := ioutil.ReadFile(*name*) // Reads the entire file and returns it. A non-nil error is returned if the entire file could not be read.
