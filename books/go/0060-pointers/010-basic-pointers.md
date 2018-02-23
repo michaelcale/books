@@ -1,9 +1,12 @@
 ---
 Title: Basic pointers
 Id: 4054
-Score: 2
 ---
-Go supports [pointers](http://en.wikipedia.org/wiki/Pointer_(computer_programming)), allowing you to pass references to values and records within your program.
+Go has pointers, like C++. A pointer to a variable is address of that variable in memory.
+
+Unlike C++, Go doesn't have pointer arithmetic i.e. you can't add or substract from pointers.
+
+A [zero value](a-6069) of a pointer is `nil`.
 
 @file basic_pointers.go sha1:5ee2d40950b73fb33e918f167ea37c90ef32ab15 goplayground:ow_bL9e30Ad
 
