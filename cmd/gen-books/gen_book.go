@@ -156,7 +156,7 @@ func genAbout() {
 	execTemplateToFileMaybeMust("about.tmpl.html", d, path)
 }
 
-func genBookArticle(article *Article) {
+func genArticle(article *Article) {
 	addSitemapURL(article.CanonnicalURL())
 
 	d := struct {
@@ -177,10 +177,10 @@ func genBookArticle(article *Article) {
 	execTemplateToFileSilentMaybeMust("article.tmpl.html", d, path)
 }
 
-func genBookChapter(chapter *Chapter, currNo int) {
+func genChapter(chapter *Chapter, currNo int) {
 	addSitemapURL(chapter.CanonnicalURL())
 	for _, article := range chapter.Articles {
-		genBookArticle(article)
+		genArticle(article)
 	}
 
 	path := chapter.destFilePath()
@@ -236,7 +236,7 @@ func genBook(book *Book) {
 		book.sem <- true
 		book.wg.Add(1)
 		go func(idx int, chap *Chapter) {
-			genBookChapter(chap, idx)
+			genChapter(chap, idx)
 			book.wg.Done()
 			<-book.sem
 		}(i+1, chapter)

@@ -20,6 +20,11 @@ import (
 
 var (
 	defTitle = "No Title"
+
+	bookDirToName = map[string]string{
+		"go": "Go",
+		"Go": "Go",
+	}
 )
 
 func dumpKV(doc kvstore.Doc) {
@@ -283,8 +288,11 @@ func ensureUniqueIds(book *Book) {
 	book.knownUrls = urls
 }
 
-func parseBook(bookName string) (*Book, error) {
+func parseBook(bookDir string) (*Book, error) {
 	timeStart := time.Now()
+	bookName := bookDir
+	bookName, ok := bookDirToName[bookDir]
+	u.PanicIf(!ok, "no book name from dir '%s'", bookDir)
 	fmt.Printf("Parsing book %s\n", bookName)
 	bookNameSafe := common.MakeURLSafe(bookName)
 	srcDir := filepath.Join("books", bookNameSafe)

@@ -101,6 +101,12 @@ func (a *Article) GitHubIssueURL() string {
 	return gitHubBaseURL + fmt.Sprintf("/issues/new?title=%s&body=%s&labels=docs", title, body)
 }
 
+// PageTitle returns title for the page
+// We want this to be unique for SEO purposes
+func (a *Article) PageTitle() string {
+	return a.Title + " in chapter '" + a.Chapter.Title + "'"
+}
+
 func (a *Article) destFilePath() string {
 	return filepath.Join(destEssentialDir, a.Book().FileNameBase, a.FileNameBase+".html")
 }
