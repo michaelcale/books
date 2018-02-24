@@ -81,7 +81,7 @@ func copyToWwwStaticMaybeMust(srcName string) {
 	dst := filepath.Join("www", "s", name)
 	err = ioutil.WriteFile(dst, d, 0644)
 	u.PanicIfErr(err)
-	*dstPtr = dst[len("www"):]
+	*dstPtr = filepath.ToSlash(dst[len("www"):])
 	fmt.Printf("Copied %s => %s\n", src, dst)
 }
 

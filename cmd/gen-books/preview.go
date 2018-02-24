@@ -31,10 +31,11 @@ func fileForURI(uri string) string {
 
 func handleIndex(w http.ResponseWriter, r *http.Request) {
 	uri := r.URL.Path
-	fmt.Printf("%s\n", uri)
-	path := fileForURI(uri)
+	uriLocal := filepath.FromSlash(uri)
+	fmt.Printf("uri: '%s', fromSlash: '%s'\n", uri, uriLocal)
+	path := fileForURI(uriLocal)
 	if path == "" {
-		fmt.Printf("Didn't find file for '%s'\n", uri)
+		fmt.Printf("Didn't find file for '%s'\n", uriLocal)
 		http.NotFound(w, r)
 		return
 	}
@@ -58,7 +59,7 @@ func makeHTTPServer() *http.Server {
 
 func startPreview() {
 	httpSrv := makeHTTPServer()
-	httpSrv.Addr = ":8080"
+	httpSrv.Addr = "127.0.0.1:8080"
 
 	go func() {
 		err := httpSrv.ListenAndServe()
@@ -70,7 +71,7 @@ func startPreview() {
 		fmt.Printf("HTTP server shutdown gracefully\n")
 	}()
 	fmt.Printf("Started listening on %s\n", httpSrv.Addr)
-	openBrowser("http://localhost:8080")
+	openBrowser("http://127.0.0.1:8080")
 
 	go rebuildOnChanges()
 

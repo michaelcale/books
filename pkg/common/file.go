@@ -73,6 +73,7 @@ func ReadFileAsLines(path string) ([]string, error) {
 	if err != nil {
 		return nil, err
 	}
+	d = NormalizeNewlines(d)
 	s := string(d)
 	res := strings.Split(s, "\n")
 	return res, nil

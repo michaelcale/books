@@ -1,4 +1,5 @@
 cmd/gen-books/gen-books
+cmd/gen-books/gen-books.exe
 cmd/import-stack-overflow/import-stack-overflow
 www/
 netlifyctl-debug.log
