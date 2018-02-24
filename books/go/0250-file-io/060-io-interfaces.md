@@ -10,7 +10,7 @@ Thanks to `io.Reader` interface we can write code that operates on any type that
 
 Having, for example, a JSON decoder operate on `io.Reader` is more powerful than JSON decoder that can only work on files.
 
-For maximum flexibility, when possible you should write functions that operate on interfaces like `io.Reader` or `io.Writer` and not concrete types like `*os.File`.
+For maximum flexibility, when possible you should write functions that operate on least specific interfaces like `io.Reader` or `io.Writer` and not concrete types like `*os.File`.
 
 ## `io.Reader`
 
@@ -90,3 +90,4 @@ type Seeker interface {
 
 `io.Seeker` allows seeking within the stream. If you can seek, you can also implement `io.ReaderAt` and `io.WriterAt`.
 
+<!-- TODO: composite interface -->
