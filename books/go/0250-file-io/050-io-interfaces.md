@@ -2,7 +2,7 @@
 Title: I/O related interfaces
 Id: 801000b6
 ---
-Go standard library defines several [interfaces](a-1221) related to i/o.
+Go standard library defines several [interfaces](ch-1221) related to i/o.
 
 They are crucial for abstracting i/o operation from the concrete object.
 
