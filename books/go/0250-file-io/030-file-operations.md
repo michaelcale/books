@@ -56,7 +56,7 @@ if err != nil {
 
 ## Copy a file
 
-@file file_copy.go
+@file file_copy.go sha1:2f3f1dbd0d3c95b473802cbc841610f161f8193d goplayground:Mr3njneW17O
 
 Writing a generic function for copying files is tricky and it's impossible to write a function that serves all use cases.
 

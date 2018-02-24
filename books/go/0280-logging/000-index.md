@@ -21,7 +21,7 @@ fmt.Fprintf(os.Stderr, "Logging to %s\n", "stderr")
 
 Standard package [`log`](https://golang.org/pkg/log/) offers more functionality:
 
-@file log.go output
+@file log.go output sha1:7ec653b436ede6b3ad152a355b3e35c556119cf9 goplayground:T6IHD0uxEsC
 
 Compared to `fmt.Printf`, `log.Printf`:
 * by default logs to stderr (`os.Stderr`)
@@ -42,10 +42,10 @@ if err != nil {
 
 Log package allows changing where the log output is sent. We can log to a file:
 
-@file log_file.go
+@file log_file.go sha1:0dd5e3acabedd5087ef46852fb9848cb76a8bb71 goplayground:thVsmxVof2c
 
 ## Logging to
 
 When running on Unix, we might log to syslog:
 
-@file log_syslog.go
+@file log_syslog.go sha1:f2aca065f394259d2a04e0ceab84e363493112dd goplayground:qENpElxIRMS
