@@ -7,5 +7,5 @@ Id: 23356
 
 An `exec.Cmd` cannot be reused after calling its `Run`, `Output` or `CombinedOutput` methods.
 
-@file reuse_cmd.go outptu
+@file reuse_cmd.go output allow_error noplayground
 

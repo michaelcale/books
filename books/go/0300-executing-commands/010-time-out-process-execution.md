@@ -5,7 +5,7 @@ Id: 3521
 
 There's no guarantee that a process will finish running so you might want to add a timeout.
 
-@file time_out.go output
+@file time_out.go output noplayground
 
 Before calling `cmd.Wait()` we use `time.AfterFunc()` to kill the process after a timeout expired.
 

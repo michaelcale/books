@@ -12,11 +12,11 @@ The simplest usage is:
 * call `cmd.CombinedOutput()` to execute the cmd and get combined stdout and stderr
 * to get only stdout, call `cmd.Output()`
 
-@file index.go output
+@file index.go output noplayground
 
 ## More advanced command execution
 
-@file index2.go output
+@file index2.go output noplayground
 
 This is functionally the same as the above example but we use a more fine-grained control.
 
