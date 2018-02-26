@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
-	"path/filepath"
 )
 
 func exitIfError(err error) {
@@ -17,7 +16,7 @@ func exitIfError(err error) {
 
 func main() {
 	// :show start
-	path := filepath.Join("books", "go", "0250-file-io", "index.go")
+	path := "index.go"
 	f, err := os.Open(path)
 	exitIfError(err)
 	defer f.Close()

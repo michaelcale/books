@@ -288,7 +288,9 @@ func extractCodeSnippetsAsMarkdownLines(baseDir string, line string) ([]string, 
 
 // runs `go run ${path}` and returns captured output`
 func getGoOutput(path string) (string, error) {
-	cmd := exec.Command("go", "run", path)
+	dir, fileName := filepath.Split(path)
+	cmd := exec.Command("go", "run", fileName)
+	cmd.Dir = dir
 	out, err := cmd.CombinedOutput()
 	return string(out), err
 }
@@ -302,6 +304,8 @@ func getRunCmdOutput(path string, runCmd string) (string, error) {
 	exeName := parts[0]
 	parts = parts[1:]
 	var parts2 []string
+	srcDir, srcFileName := filepath.Split(path)
+
 	// remove empty lines and replace variables
 	for _, part := range parts {
 		if len(part) == 0 {
@@ -309,12 +313,13 @@ func getRunCmdOutput(path string, runCmd string) (string, error) {
 		}
 		switch part {
 		case "$file":
-			part = path
+			part = srcFileName
 		}
 		parts2 = append(parts2, part)
 	}
 	//fmt.Printf("getRunCmdOutput: running '%s' with args '%#v'\n", exeName, parts2)
 	cmd := exec.Command(exeName, parts2...)
+	cmd.Dir = srcDir
 	out, err := cmd.CombinedOutput()
 	//fmt.Printf("getRunCmdOutput: out:\n%s\n", string(out))
 	return string(out), err

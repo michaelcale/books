@@ -8,9 +8,8 @@ import (
 
 // :show start
 func main() {
-	dir := filepath.Join("books", "go", "0250-file-io")
 	nShown := 0
-	err := filepath.Walk(dir, func(path string, fi os.FileInfo, err error) error {
+	err := filepath.Walk(".", func(path string, fi os.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}

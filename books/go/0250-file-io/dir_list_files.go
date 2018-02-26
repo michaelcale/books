@@ -4,12 +4,11 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
-	"path/filepath"
 )
 
 // :show start
 func main() {
-	dir := filepath.Join("books", "go", "0250-file-io")
+	dir := "."
 	fileInfos, err := ioutil.ReadDir(dir)
 	if err != nil {
 		log.Fatalf("ioutil.ReadDir('%s') failed with '%s'\n", dir, err)

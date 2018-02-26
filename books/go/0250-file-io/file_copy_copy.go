@@ -37,9 +37,6 @@ func CopyFile(dst, src string) error {
 // :show end
 
 func main() {
-	//src := filepath.Join("books", "go", "0250-file-io", "file_copy.go")
-	//dst := filepath.Join("books", "go", "0250-file-io", "file_copy_copy.go")
-
 	src := "file_copy.go"
 	dst := "file_copy_copy.go"
 	err := CopyFile(dst, src)

@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"os"
-	"path/filepath"
 )
 
 // :show start
@@ -32,8 +31,7 @@ func printExists(path string) {
 	}
 }
 func main() {
-	path := filepath.Join("books", "go", "0250-file-io", "file_exists.go")
-	printExists(path)
+	printExists("file_exists.go")
 	printExists("non-existent-file.txt")
 }
 

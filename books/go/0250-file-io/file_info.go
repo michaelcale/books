@@ -4,14 +4,12 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"path/filepath"
 )
 
 // :show start
 
 func main() {
-	path := filepath.Join("books", "go", "0250-file-io", "file_info.go")
-	st, err := os.Stat(path)
+	st, err := os.Stat("file_info.go")
 	if err != nil {
 		log.Fatalf("GetFileSize failed with '%s'\n", err)
 	}
