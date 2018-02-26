@@ -8,11 +8,6 @@ import (
 	"time"
 )
 
-const (
-	processFinished = 1
-	processStopped  = 2
-)
-
 func main() {
 	// :show start
 	cmd := exec.Command("go", "version")
