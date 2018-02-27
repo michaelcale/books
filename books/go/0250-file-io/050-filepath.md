@@ -54,8 +54,7 @@ dir := filepath.Dir(path)
 ## Get file extension
 
 ```go
-path := filepath.Join("dir", "file.txt")
-ext := filepath.Dir(path)
+ext := filepath.Ext("file.txt")
 // ext = ".txt"
 ```
 
