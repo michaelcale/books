@@ -264,22 +264,16 @@ or use grid for top-header instead of flexbox.
   left: 13vw; /* (100 - 74) / 2 */
   right: 13vw;
 
-  /*
-  border: 1px solid black;
-  border-radius: 0.25rem;
-  border-radius: 12px;
-  */
-
   border: 1px solid #aaaaaa;
   z-index: 25;
 
   /* min-height: 320px; */
   background-color: white;
   display: none;
-  max-height: 75vh;
 }
 
 #search-results {
+  max-height: 70vh;
   padding: 4px 8px;
   line-height: 1.3em;
   cursor: pointer;

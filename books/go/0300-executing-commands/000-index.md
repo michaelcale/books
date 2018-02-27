@@ -1,8 +1,8 @@
 ---
 Title: Executing commands
+Search: Start process, execute process
 Id: 1097
 ---
-
 Package `exec` in standard library is a cross-platform way to launch processes, capture their output and more.
 
 ## Basic command execution
