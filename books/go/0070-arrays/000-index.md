@@ -5,7 +5,7 @@ Id: 390
 
 Arrays in Go have fixed sized. They can't grow.
 
-Because of that arrays in Go are used rarely. Instead [slices](ch-733) are used in most cases.
+Because of that arrays in Go are used rarely. Instead [slices](a-733) are used in most cases.
 
 [Zero value](a-6069) of array is array where all values have zero value.
 

@@ -18,13 +18,21 @@
 
 <body>
     <div id="top-header">
-        <div>Essential Books</div>
-        <div><!-- Right Side--></div>
+        <div class="top-header-left"><a href="/">Essential Books</a></div>
+        <div>
+            <a href="https://github.com/essentialbooks/books" target="_blank">
+                <i class="fab fa-github"></i>
+                GitHub</a>
+        </div>
     </div>
 
     <div class="content-wrapper" style="margin-top: 52px;">
         <h1 class="hcenter">Essential Programming Books</h1>
-        <div class="hcenter smaller"><a href="/about">about this project</a></div>
+        <div class="hcenter smaller">
+            <a href="/about">about this project</a>
+            &middot;
+            <a href="/feedback">feedback</a>
+        </div>
         <div class="view-switch">View: list &middot; <a href="/index-grid">covers</a></div>
 
         <table class="book-list">
@@ -61,7 +69,7 @@
     <div id="bottom-footer">
         <div>Maintained by <a href="https://blog.kowalczyk.info" target="_blank">Krzysztof Kowalczyk</a></div>
         <div>
-            <a href="{{.GitHubURL}}" target="_blank">{{.GitHubText}}</a>
+            <!-- right side -->
         </div>
     </div>
 

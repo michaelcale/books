@@ -20,10 +20,10 @@ This ensures you don't leak goroutines.
 
 @file close3.go output sha1:2f2778e77c917d68a9a6ae0a7f51904cfb0634dd goplayground:CtXiCamXQFr
 
-**Closing channel twice [panics](ch-4350):**
+**Closing channel twice [panics](a-4350):**
 
 @file close4.go output allow_error sha1:d57ed196ecf819fe95ebe0aeb5557c97a115ce2a goplayground:ApSna0RUYjp
 
-**Sending to closed channel [panics](ch-4350).**
+**Sending to closed channel [panics](a-4350).**
 
 @file close5.go output allow_error sha1:fa33388968966773ecdccb154c0a2b8bd94dad96 goplayground:D9p7YgUVKM1

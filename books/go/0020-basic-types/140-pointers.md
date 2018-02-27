@@ -13,4 +13,4 @@ Pointer basics:
 
 [Zero value](a-6069) of a pointer is nil.
 
-Learn more about [pointers](ch-1239).
+Learn more about [pointers](a-1239).

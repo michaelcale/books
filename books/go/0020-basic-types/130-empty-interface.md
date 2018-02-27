@@ -16,4 +16,4 @@ Empty interface is also how you implement a union type in Go.
 
 [Zero value](a-6069) of empty interface is nil.
 
-Learn more about [empty interfaces](ch-der300hf).
+Learn more about [empty interfaces](a-der300hf).

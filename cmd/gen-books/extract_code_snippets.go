@@ -145,6 +145,8 @@ func getLangFromFileExt(fileName string) string {
 	switch ext {
 	case ".go":
 		return "go"
+	case ".json":
+		return "js"
 	}
 	fmt.Printf("Couldn't deduce language from file name '%s'\n", fileName)
 	// TODO: more languages

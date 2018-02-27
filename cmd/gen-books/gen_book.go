@@ -23,24 +23,23 @@ var ( // directory where generated .html files for books are
 )
 
 var (
-	indexTmpl     *template.Template
-	indexGridTmpl *template.Template
-	bookIndexTmpl *template.Template
-	chapterTmpl   *template.Template
-	articleTmpl   *template.Template
-	aboutTmpl     *template.Template
+	templateNames = []string{
+		"index.tmpl.html",
+		"index-grid.tmpl.html",
+		"book_index.tmpl.html",
+		"chapter.tmpl.html",
+		"article.tmpl.html",
+		"about.tmpl.html",
+		"feedback.tmpl.html",
+	}
+	templates = make([]*template.Template, len(templateNames))
 
 	gitHubBaseURL = "https://github.com/essentialbooks/books"
 	siteBaseURL   = "https://www.programming-books.io"
 )
 
 func unloadTemplates() {
-	indexTmpl = nil
-	indexGridTmpl = nil
-	bookIndexTmpl = nil
-	chapterTmpl = nil
-	articleTmpl = nil
-	aboutTmpl = nil
+	templates = make([]*template.Template, len(templateNames))
 }
 
 func tmplPath(name string) string {
@@ -65,20 +64,13 @@ func loadTemplateHelperMaybeMust(name string, ref **template.Template) *template
 
 func loadTemplateMaybeMust(name string) *template.Template {
 	var ref **template.Template
-	switch name {
-	case "index.tmpl.html":
-		ref = &indexTmpl
-	case "index-grid.tmpl.html":
-		ref = &indexGridTmpl
-	case "book_index.tmpl.html":
-		ref = &bookIndexTmpl
-	case "chapter.tmpl.html":
-		ref = &chapterTmpl
-	case "article.tmpl.html":
-		ref = &articleTmpl
-	case "about.tmpl.html":
-		ref = &aboutTmpl
-	default:
+	for i, tmplName := range templateNames {
+		if tmplName == name {
+			ref = &templates[i]
+			break
+		}
+	}
+	if ref == nil {
 		log.Fatalf("unknown template '%s'\n", name)
 	}
 	return loadTemplateHelperMaybeMust(name, ref)
@@ -140,6 +132,23 @@ func genIndexGrid(books []*Book) {
 	execTemplateToFileMaybeMust("index-grid.tmpl.html", d, path)
 }
 
+func genFeedback() {
+	d := struct {
+		Analytics         template.HTML
+		PathAppJS         string
+		PathFontAwesomeJS string
+		PathMainCSS       string
+	}{
+		Analytics:         googleAnalytics,
+		PathAppJS:         pathAppJS,
+		PathFontAwesomeJS: pathFontAwesomeJS,
+		PathMainCSS:       pathMainCSS,
+	}
+	fmt.Printf("writing feedback.html\n")
+	path := filepath.Join(destDir, "feedback.html")
+	execTemplateToFileMaybeMust("feedback.tmpl.html", d, path)
+}
+
 func genAbout() {
 	d := struct {
 		Analytics         template.HTML
@@ -152,6 +161,7 @@ func genAbout() {
 		PathFontAwesomeJS: pathFontAwesomeJS,
 		PathMainCSS:       pathMainCSS,
 	}
+	fmt.Printf("writing about.html\n")
 	path := filepath.Join(destDir, "about.html")
 	execTemplateToFileMaybeMust("about.tmpl.html", d, path)
 }

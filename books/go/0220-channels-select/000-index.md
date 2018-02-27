@@ -40,9 +40,9 @@ The first 3 sends will finish immediately, the 4th will block until a value is r
 
 You can [close](a-rd6000v9) a channel with `close(chan)`.
 
-Closing channel twice [panics](ch-4350).
+Closing channel twice [panics](a-4350).
 
-Sending to closed channel [panics](ch-4350).
+Sending to closed channel [panics](a-4350).
 
 A receive from closed channels returns zero value immediately.
 

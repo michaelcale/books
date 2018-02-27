@@ -13,6 +13,6 @@ Map basics:
 
 [Zero value](a-6069) of map is nil.
 
-Learn more about [maps](ch-732).
+Learn more about [maps](a-732).
 
 

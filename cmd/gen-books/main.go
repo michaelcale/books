@@ -180,6 +180,7 @@ func genSelectedBooks(bookDirs []string) {
 	genIndex(books)
 	genIndexGrid(books)
 	genAbout()
+	genFeedback()
 
 	for _, book := range books {
 		genBook(book)
@@ -212,6 +213,7 @@ func genAllBooks() {
 	genIndex(books)
 	genIndexGrid(books)
 	genAbout()
+	genFeedback()
 
 	for _, book := range books {
 		genBook(book)

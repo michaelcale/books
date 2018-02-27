@@ -13,4 +13,4 @@ Basic string usage:
 
 @file strings.go output sha1:91eac3e77ac970a27ff925b024315c74e8623ef6 goplayground:4dk4tTa9LPi
 
-Learn more about [strings](ch-9666).
+Learn more about [strings](a-9666).

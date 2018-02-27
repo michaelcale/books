@@ -10,4 +10,4 @@ Channel basics:
 
 [Zero value](a-6069) of a channel is nil.
 
-Learn more about [channels](ch-1263).
+Learn more about [channels](a-1263).

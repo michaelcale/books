@@ -6,7 +6,7 @@ In Go goroutines share memory.
 
 It's good for performance but modyfing the same memory from multiple goroutines is not safe. It can lead to data races and crashes.
 
-One way to avoid that is by using [channels](ch-1263) to transfer exclusive ownership of data.
+One way to avoid that is by using [channels](a-1263) to transfer exclusive ownership of data.
 
 This is Go's motto: *do not communicate by sharing memory; instead, share memory by communicating.*
 

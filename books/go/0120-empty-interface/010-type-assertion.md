@@ -3,7 +3,7 @@ Title: Type assertion
 Id: 25362
 Score: 0
 ---
-At compile time, when you have a variable whose type is [interface](ch-1221) (including [empty interface](ch-der300hf)) you don't know what is the real, underlying type.
+At compile time, when you have a variable whose type is [interface](a-1221) (including [empty interface](a-der300hf)) you don't know what is the real, underlying type.
 
 You can access underlying type at runtime using type assertion.
 

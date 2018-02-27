@@ -32,7 +32,7 @@ func fileForURI(uri string) string {
 func handleIndex(w http.ResponseWriter, r *http.Request) {
 	uri := r.URL.Path
 	uriLocal := filepath.FromSlash(uri)
-	fmt.Printf("uri: '%s', fromSlash: '%s'\n", uri, uriLocal)
+	fmt.Printf("uri: '%s'\n", uri)
 	path := fileForURI(uriLocal)
 	if path == "" {
 		fmt.Printf("Didn't find file for '%s'\n", uriLocal)

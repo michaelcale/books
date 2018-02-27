@@ -2,7 +2,7 @@
 Title: Empty interface
 Id: der300hf
 ---
-Technically speaking, an empty interface (`interface{}`) is an [interface](ch-1221) with no methods.
+Technically speaking, an empty interface (`interface{}`) is an [interface](a-1221) with no methods.
 
 What follows from that is that every type conforms to `interface{}`.
 

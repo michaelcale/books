@@ -3,7 +3,7 @@ Title: Panic and recover
 Search: exception handling
 Id: 4350
 ---
-This chapter assumes knowledge of [defer](ch-2795).
+This chapter assumes knowledge of [defer](a-2795).
 
 In Go `panic` and `recover` are technically similar to exception handling in languages like C#, Java or Python.
 
@@ -13,4 +13,4 @@ However, while those other languages often use exception handling for flow contr
 
 It should only be used in [truly exceptional cases](a-rd6000v3).
 
-For ordinary error handling, read chapter on [error handling](ch-785).
+For ordinary error handling, read chapter on [error handling](a-785).

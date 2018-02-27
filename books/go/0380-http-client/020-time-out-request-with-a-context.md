@@ -40,4 +40,4 @@ defer resp.Body.Close()
 
 ## Further Reading
 
-For more information on the `context` read [chapter on context](ch-2743).
+For more information on the `context` read [chapter on context](a-2743).

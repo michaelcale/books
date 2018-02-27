@@ -11,4 +11,4 @@ Struct basics:
 
 [Zero value](a-6069) of `struct` is a struct whose fields are set to thier respective zero values.
 
-Learn more about [structs](ch-374).
+Learn more about [structs](a-374).

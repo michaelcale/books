@@ -15,4 +15,4 @@ Array basics:
 
 [Zero value](a-6069) of array is array where all values have zero value.
 
-Learn more about [arrays](ch-390).
+Learn more about [arrays](a-390).

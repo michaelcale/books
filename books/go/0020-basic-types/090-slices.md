@@ -9,4 +9,4 @@ A slice is a view into underlying [array](a-rd60004c).
 
 [Zero value](a-6069) of slice is nil.
 
-Learn more about [slices](ch-733).
+Learn more about [slices](a-733).
