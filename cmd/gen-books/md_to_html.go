@@ -207,7 +207,8 @@ func markdownToUnsafeHTML(md []byte, defaultLang string, book *Book) []byte {
 		parser.Autolink |
 		parser.Strikethrough |
 		parser.SpaceHeadings |
-		parser.NoEmptyLineBeforeBlock
+		parser.NoEmptyLineBeforeBlock |
+		parser.AutoHeadingIDs
 	parser := parser.NewWithExtensions(extensions)
 
 	htmlFlags := mdhtml.Smartypants |
