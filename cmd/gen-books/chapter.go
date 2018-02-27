@@ -25,7 +25,7 @@ type Chapter struct {
 	indexFilePath string
 	indexDoc      kvstore.Doc // content of 000-index.md file
 	Title         string      // extracted from IndexKV, used in book_index.tmpl.html
-	FileNameBase  string      // format: ch-${ID}-${Title}, used for URL and .html file name
+	FileNameBase  string      // format: a-${ID}-${Title}, used for URL and .html file name
 	Articles      []*Article
 	No            int
 
@@ -37,7 +37,7 @@ type Chapter struct {
 
 // URL is used in book_index.tmpl.html
 func (c *Chapter) URL() string {
-	// /essential/go/ch-4023-parsing-command-line-arguments-and-flags
+	// /essential/go/a-4023-parsing-command-line-arguments-and-flags
 	return fmt.Sprintf("/essential/%s/%s", c.Book.FileNameBase, c.FileNameBase)
 }
 

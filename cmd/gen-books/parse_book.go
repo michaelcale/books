@@ -161,7 +161,7 @@ func parseChapter(chapter *Chapter) error {
 	}
 
 	titleSafe := common.MakeURLSafe(chapter.Title)
-	chapter.FileNameBase = fmt.Sprintf("ch-%s-%s", chapter.ID, titleSafe)
+	chapter.FileNameBase = fmt.Sprintf("a-%s-%s", chapter.ID, titleSafe)
 	fileInfos, err := ioutil.ReadDir(dir)
 	var articles []*Article
 	for _, fi := range fileInfos {
@@ -253,7 +253,7 @@ func genContributorsChapter(book *Book) *Chapter {
 		Book:         book,
 		indexDoc:     doc,
 		Title:        "Contributors",
-		FileNameBase: "ch-contributors",
+		FileNameBase: "a-contributors",
 		No:           999,
 	}
 	return ch

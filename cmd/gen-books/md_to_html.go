@@ -54,7 +54,7 @@ func htmlHighlight(w io.Writer, source, lang, defaultLang string) error {
 }
 
 func isArticleOrChapterLink(s string) bool {
-	return strings.HasPrefix(s, "a-") || strings.HasPrefix(s, "ch-")
+	return strings.HasPrefix(s, "a-")
 }
 
 var didPrint = false
@@ -168,7 +168,7 @@ func fixupHTMLCodeBlock(htmlCode string, info *CodeBlockInfo) string {
 	return html
 }
 
-// knownUrls is a list of chapter/article urls in the form "a-20381-installing", "ch-198-getting-started"
+// knownUrls is a list of chapter/article urls in the form "a-20381-installing"
 func makeRenderHookCodeBlock(defaultLang string, book *Book) mdhtml.RenderNodeFunc {
 	return func(w io.Writer, node ast.Node, entering bool) (ast.WalkStatus, bool) {
 
