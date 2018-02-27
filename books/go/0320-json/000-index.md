@@ -2,13 +2,13 @@
 Title: JSON
 Id: 994
 ---
-Package `json` in Go standard library provides functionality for serializing data as JSON and parsing JSON into data.
+Package [`encoding/json`]((https://godoc.org/encoding/xml)) in Go standard library provides functionality for serializing data as JSON and parsing JSON into data.
 
 ## Serialize a struct as JSON
 
 @file index.go output sha1:a91894315e1a06003e4862d5fbc12003cfcd20fd goplayground:T6_VXCMeO3r
 
-Both `json.Marshal` and `json.MarshalIndent` take [`interface{}`](ch-der300hf) as first argument. That means that we can pass any Go value, it'll be wrapped into `interface{}` with their type.
+Both `json.Marshal` and `json.MarshalIndent` take [`interface{}`](ch-der300hf) as first argument. We can pass any Go value, it'll be wrapped into `interface{}` with their type.
 
 Marshaller will use reflection to to inspect passed value and encode it as JSON strings.
 
@@ -30,7 +30,7 @@ When serializing structs, passing the value and a pointer to it generates the sa
 
 Passing a pointer is more efficient becase passing by value creates unnecessary copy.
 
-`json.MarshallIndent` allows for pretty-printing of nested structures. It's less efficient but creates a result that is easier for humans to read.
+`json.MarshallIndent` allows for pretty-printing of nested structures. It's less efficient but the result is easier for humans to read.
 
 ## Parse JSON into a Go struct
 
