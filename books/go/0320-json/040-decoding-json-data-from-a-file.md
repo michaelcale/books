@@ -1,75 +1,14 @@
 ---
-Title: Decoding JSON data from a file
+Title: Decoding JSON from a file
 Id: 6628
-Score: 1
 ---
-JSON data can also be read from files.
+We can decode JSON data from a file on disk or, more broadly, any `io.Reader`, like a network connection.
 
 Let's assume we have a file called `data.json` with the following content:
 
-```js
-[
-    {
-        "Name" : "John Doe",
-        "Standard" : 4
-    },
-    {
-        "Name" : "Peter Parker",
-        "Standard" : 11
-    },
-    {
-        "Name" : "Bilbo Baggins",
-        "Standard" : 150
-    }
-]
-```
+@file data.json
 
 The following example reads the file and decodes the content:
 
-```go
-package main
+@file decode_from_file.go output noplayground
 
-import (
-    "encoding/json"
-    "fmt"
-    "log"
-    "os"
-)
-
-type Student struct {
-    Name     string
-    Standard int `json:"Standard"`
-}
-
-func main() {
-    // open the file pointer
-    studentFile, err := os.Open("data.json")
-    if err != nil {
-        log.Fatal(err)
-    }
-    defer studentFile.Close()
-
-    // create a new decoder
-    var studentDecoder *json.Decoder = json.NewDecoder(studentFile)
-    if err != nil {
-        log.Fatal(err)
-    }
-
-    // initialize the storage for the decoded data
-    var studentList []Student
-
-    // decode the data
-    err = studentDecoder.Decode(&studentList)
-    if err != nil {
-        log.Fatal(err)
-    }
-
-    for i, student := range studentList {
-        fmt.Println("Student", i+1)
-        fmt.Println("Student name:", student.Name)
-        fmt.Println("Student standard:", student.Standard)
-    }
-}
-```
-
-The file `data.json` must be in the same directory of the Go executable program. Read [Go File I/O documentation](ch-1033) for more information on how to work with files in Go.

@@ -1,9 +1,29 @@
 ---
-Title: Marshaling structs with private fields
+Title: Custom JSON marshaling
 Id: 14194
-Score: 0
 ---
-As a good developer you have created following struct with both exported and unexported fields:
+
+## Writing custom JSON marshalling
+
+Sometimes a type doesn't have an obvious mapping to JSON.
+
+How would you serialize `time.Time`? There are so many possibilities.
+
+Go provides a default JSON mapping for `time.Time`. We can implement custom marshaller for user-defined types like structs.
+
+For existing types we can define a new (but compatible) type.
+
+Here's a custom marshalling and unmarshaling for `time.Time` that only serializes year/month/date part:
+
+@file custom_marshal.go output
+
+Notice that receiver type of `UnmashalJSON` is a pointer to the type.
+
+This is necessary for changes to persist outside the function itself.
+
+## Marshaling structs with private fields
+
+Consider a struct with both exported and unexported fields:
 
 ```go
 type MyStruct struct {
@@ -12,25 +32,30 @@ type MyStruct struct {
 }
 ```
 
-Now you want to `Marshal()` this struct into valid JSON for storage in something like etcd. However, since `uuid` in not exported, the `json.Marshal()` skips it. What to do? Use an anonymous struct and the `json.MarshalJSON()` interface! Here's an example:
+Imagine you want to `Marshal()` this struct into valid JSON for storage in something like etcd.
+
+However, since `uuid` in not exported, the `json.Marshal()` skips it.
+
+To marshal private fields without making them public we can use a custom marshaller:
+
+@file marshal_private.go output
+
+## Custom marshaling behind the scenes
+
+How does custom marshaling works?
+
+Package JSON defines 2 interfaces: [`Marshaler`](https://golang.org/pkg/encoding/json/#Marshaler) and [`Unmarshaler`](https://golang.org/pkg/encoding/json/#Unmarshaler).
 
 ```go
-type MyStruct struct {
-    uuid string
-    Name string
+type Marshaler interface {
+    MarshalJSON() ([]byte, error)
 }
 
-func (m MyStruct) MarshalJSON() ([]byte, error {
-    j, err := json.Marshal(struct {
-        Uuid string
-        Name string
-    }{
-        Uuid: m.uuid,
-        Name: m.Name,
-    })
-    if err != nil {
-           return nil, err
-    }
-    return j, nil
+type Unmarshaler interface {
+    UnmarshalJSON([]byte) error
 }
 ```
+
+By implementing those functions we make our type conform to `Marshaler` or `Unmarshaler` interface.
+
+JSON encoder / decoder checks if the value being encoded conforms to those interfaces and will call those functions instead of executing default logic.
