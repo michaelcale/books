@@ -2,7 +2,7 @@
 Title: Portable file path operations
 Id: rd6000ld
 ---
-Unfortunately different operating systems have different rules about how file paths.
+Unfortunately different operating systems have different rules about the format of file paths.
 
 For example, on Unix and Mac OS, path separator character is `/` and on Windows it's `\`.
 
