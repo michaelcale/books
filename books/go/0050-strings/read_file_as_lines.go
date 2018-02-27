@@ -22,7 +22,7 @@ func ReadFileAsLines(path string) ([]string, error) {
 // :show end
 
 func main() {
-	path := "books/go/0050-strings/read_file_as_lines.go"
+	path := "read_file_as_lines.go"
 	lines, err := ReadFileAsLines(path)
 	if err != nil {
 		log.Fatalf("ReadFileAsLines() failed with '%s'\n", err)
