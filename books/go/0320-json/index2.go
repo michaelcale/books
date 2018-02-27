@@ -25,7 +25,6 @@ var jsonStr = `{
 func main() {
 	// :show start
 	var p Person
-	p.Occupation = "lost"
 	err := json.Unmarshal([]byte(jsonStr), &p)
 	if err != nil {
 		log.Fatalf("json.Unmarshal failed with '%s'\n", err)

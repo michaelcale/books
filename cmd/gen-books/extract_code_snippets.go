@@ -68,6 +68,10 @@ func shiftLines(lines []string) {
 	if maxTabPrefix != 1024 {
 		toRemove = maxTabPrefix
 	}
+	if toRemove == 0 {
+		return
+	}
+
 	for i, line := range lines {
 		if len(line) == 0 {
 			continue
@@ -88,13 +92,15 @@ func trimEmptyLines(lines []string) []string {
 }
 
 func extractCodeSnippets(path string) ([]string, error) {
+	fmt.Printf("extractCodeSnippets: %s\n", path)
+
 	fc, err := loadFileCached(path)
 	if err != nil {
 		return nil, err
 	}
 	lines := fc.Lines
-	nLines := len(lines)
-	res := make([]string, 0, nLines)
+	var res [][]string
+	var curr []string
 	inShow := false
 	for _, line := range lines {
 		if isShowStart(line) {
@@ -109,21 +115,29 @@ func extractCodeSnippets(path string) ([]string, error) {
 				return nil, fmt.Errorf("file '%s': '%s' without start line", path, showEndLine)
 			}
 			inShow = false
-			// add a separation line between show sections.
-			// should be the right thing more often than not
-			res = append(res, "")
+			if len(curr) > 0 {
+				res = append(res, curr)
+			}
+			curr = nil
 			continue
 		}
 		if inShow {
-			res = append(res, line)
+			curr = append(curr, line)
 		}
 	}
 	// if there are no show: markings, assume we want to show the whole file
 	if len(res) == 0 {
 		return trimEmptyLines(lines), nil
 	}
-	shiftLines(res)
-	return trimEmptyLines(res), nil
+	var all []string
+	for _, lines := range res {
+		shiftLines(lines)
+		all = append(all, lines...)
+		// add a separation line between show sections.
+		// should be the right thing more often than not
+		all = append(all, "")
+	}
+	return trimEmptyLines(all), nil
 }
 
 func getLangFromFileExt(fileName string) string {
