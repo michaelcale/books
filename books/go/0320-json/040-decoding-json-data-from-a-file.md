@@ -6,7 +6,7 @@ We can decode JSON data from a file on disk or, more broadly, any `io.Reader`, l
 
 Let's assume we have a file called `data.json` with the following content:
 
-@file data.json
+@file data.json sha1:b41ee65b22ed3032dcd719a660c5cc38878714ff goplayground:coNDIaB0MYm
 
 The following example reads the file and decodes the content:
 

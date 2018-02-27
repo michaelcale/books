@@ -6,7 +6,7 @@ Package [`encoding/xml`](https://godoc.org/encoding/xml) in Go standard library 
 
 ## Serialize a struct as XML
 
-@file index.go output
+@file index.go output sha1:b79884448d22013646eb2c6a46097d188c9ac10c goplayground:Klo84laKIF0
 
 Both `xml.Marshal` and `xml.MarshalIndent` take [`interface{}`](ch-der300hf) as first argument. We can pass any Go value and it'll be wrapped into `interface{}` with their type.
 
@@ -34,7 +34,7 @@ Passing a pointer is more efficient becase passing by value creates unnecessary 
 
 ## Parse XML into a Go struct
 
-@file index2.go output
+@file index2.go output sha1:e08744bc021e4d568e1e7ffe83533b4b292039cf goplayground:6TeIISoehvE
 
 Parsing is the opposite of serializing.
 

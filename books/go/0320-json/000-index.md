@@ -34,7 +34,7 @@ Passing a pointer is more efficient becase passing by value creates unnecessary 
 
 ## Parse JSON into a Go struct
 
-@file index2.go output sha1:a0b35c7e84267c7dde399c37bf865f0f7aa7ddce goplayground:vj3mLU96A36
+@file index2.go output sha1:1adbbe8fa6abf4c08bf821b2b3e7db1c82ace85d goplayground:CllMvV6twjM
 
 Parsing is the opposite of serializing.
 
