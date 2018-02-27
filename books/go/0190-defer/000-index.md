@@ -23,7 +23,7 @@ In the above example, `defer f.Close()` ensures that `f.Close()` will be called 
 
 Placing `f.Close()` right after `os.Open()` makes it easier to audit the code and ensure `Close` is always called, even if there are multiple exit points in the function.
 
-If deffered code is more complicated, you can use a function literal:
+If deferred code is more complicated, you can use a function literal:
 
 ```go
 func foo() {
