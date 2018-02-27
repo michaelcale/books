@@ -15,9 +15,9 @@ type SoContributor struct {
 
 // Book represents a book
 type Book struct {
-	Title          string // used in index.tmpl.html
+	Title          string // "Go", "jQuery" etcc
 	titleSafe      string
-	TitleLong      string // used in book_index.tmpl.html
+	TitleLong      string // "Essential Go", "Essential jQuery" etc.
 	FileNameBase   string
 	Chapters       []*Chapter
 	sourceDir      string // dir where source markdown files are
