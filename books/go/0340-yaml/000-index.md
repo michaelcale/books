@@ -12,9 +12,9 @@ There is no package in Go standard library for hanlding YAML format but there ar
 
 ## Reading YAML file into a Go struct
 
-@file data.yml
+@file data.yml noplayground
 
-@file yaml_deserialize.go output
+@file yaml_deserialize.go output noplayground
 
 YAML decoding is very similar to [JSON decoding](994).
 
@@ -26,7 +26,7 @@ It's best to create explicit mappings using `yaml` struct tags. I only omitted t
 
 ## Writing Go struct to YAML file
 
-@file yaml_serialize.go output
+@file yaml_serialize.go output sha1:c69c304984394d3765680a32c6573bc4e1faaeed goplayground:dGHkgP4rNQ4
 
 `yaml.Marshal` takes interface{} as an argument. You can pass any Go value, it’ll be wrapped into interface{} with their type.
 
