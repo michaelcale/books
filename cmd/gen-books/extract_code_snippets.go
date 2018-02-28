@@ -148,6 +148,11 @@ func getLangFromFileExt(fileName string) string {
 		return "go"
 	case ".json":
 		return "js"
+	case ".csv":
+		// note: chroma doesn't have csv lexer
+		return "text"
+	case ".yml":
+		return "yaml"
 	}
 	fmt.Printf("Couldn't deduce language from file name '%s'\n", fileName)
 	// TODO: more languages

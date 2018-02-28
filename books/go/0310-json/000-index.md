@@ -6,7 +6,7 @@ Package [`encoding/json`]((https://godoc.org/encoding/xml)) in Go standard libra
 
 ## Serialize a struct as JSON
 
-@file index.go output sha1:a91894315e1a06003e4862d5fbc12003cfcd20fd goplayground:T6_VXCMeO3r
+@file json_serialize.go output sha1:a91894315e1a06003e4862d5fbc12003cfcd20fd goplayground:T6_VXCMeO3r
 
 Both `json.Marshal` and `json.MarshalIndent` take [`interface{}`](a-der300hf) as first argument. We can pass any Go value, it'll be wrapped into `interface{}` with their type.
 
@@ -34,7 +34,7 @@ Passing a pointer is more efficient becase passing by value creates unnecessary 
 
 ## Parse JSON into a Go struct
 
-@file index2.go output sha1:1adbbe8fa6abf4c08bf821b2b3e7db1c82ace85d goplayground:CllMvV6twjM
+@file json_deserialize.go output sha1:1adbbe8fa6abf4c08bf821b2b3e7db1c82ace85d goplayground:CllMvV6twjM
 
 Parsing is the opposite of serializing.
 
