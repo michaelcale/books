@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os/exec"
 	"path/filepath"
+	"strconv"
 	"strings"
 
 	"github.com/google/shlex"
@@ -92,7 +93,7 @@ func trimEmptyLines(lines []string) []string {
 }
 
 func extractCodeSnippets(path string) ([]string, error) {
-	fmt.Printf("extractCodeSnippets: %s\n", path)
+	//fmt.Printf("extractCodeSnippets: %s\n", path)
 
 	fc, err := loadFileCached(path)
 	if err != nil {
@@ -169,6 +170,7 @@ type FileDirective struct {
 	FileName       string
 	WithOutput     bool
 	AllowError     bool
+	LineLimit      int
 	NoPlayground   bool
 	Sha1Hex        string
 	GoPlaygroundID string
@@ -191,6 +193,9 @@ func (fd *FileDirective) String() string {
 	}
 	if fd.GoPlaygroundID != "" {
 		s += " goplayground:" + fd.GoPlaygroundID
+	}
+	if fd.LineLimit != 0 {
+		s += " limit:" + strconv.Itoa(fd.LineLimit)
 	}
 	return s
 }
@@ -241,6 +246,16 @@ func parseFileDirective(line string) (*FileDirective, error) {
 				return nil, fmt.Errorf("invalid playground: in '%s'", line)
 			}
 			res.GoPlaygroundID = parts[1]
+		case strings.HasPrefix(s, "limit:"):
+			parts := strings.Split(s, ":")
+			if len(parts) != 2 {
+				return nil, fmt.Errorf("invalid limit: in '%s'", line)
+			}
+			n, err := strconv.Atoi(parts[1])
+			if err != nil {
+				return nil, fmt.Errorf("invalid limit: in '%s'", line)
+			}
+			res.LineLimit = n
 		default:
 			return nil, fmt.Errorf("invalid @file line: '%s', unknown option '%s'", line, s)
 		}
@@ -275,6 +290,12 @@ func extractCodeSnippetsAsMarkdownLines(baseDir string, line string) ([]string, 
 		// alternative would be https://play.golang.org/p/ + ${id}
 		uri := "https://goplay.space/#" + directive.GoPlaygroundID
 		s += "|playground|" + uri
+	}
+	if directive.LineLimit != 0 {
+		n := directive.LineLimit
+		if n < len(lines) {
+			lines = lines[:n]
+		}
 	}
 	res := []string{"```" + s}
 	res = append(res, lines...)
