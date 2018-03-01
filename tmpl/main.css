@@ -48,12 +48,7 @@ tbody tr td.decimal {
   padding-right: 10px !important;
 }
 
-/* h1 by default is 2em, we want something smaller */
-h1.hdr {
-  font-size: 0.8em;
-}
-
-div.hdr {
+.article-top-hdr {
   font-size: 0.8em;
 }
 
@@ -344,19 +339,10 @@ or use grid for top-header instead of flexbox.
 }
 
 .article-contribute {
-  font-size: 0.8em;
   float: right;
 }
 
-.contribute-btn {
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
-}
-
 .article {
-  border: 1px solid ligthgray;
-
   width: 660px;
   margin-left: auto;
   margin-right: auto;
@@ -381,6 +367,10 @@ or use grid for top-header instead of flexbox.
   color: #1481b8;
   /* border-left: solid 8px #d9eaf2;
     padding-left: 8px; */
+}
+
+h1.title {
+  margin-top: 10px;
 }
 
 hr.toc-sep {

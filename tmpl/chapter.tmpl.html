@@ -24,9 +24,7 @@
     <title>{{.Title}}</title>
     <meta name="description" content="{{.Title}}">
 
-    <link href="{{.PathMainCSS}}" rel="stylesheet">
-
-    {{ .Analytics }}
+    <link href="{{.PathMainCSS}}" rel="stylesheet"> {{ .Analytics }}
     <script src="{{.PathFontAwesomeJS}}" defer></script>
     <script src="{{.Book.TocSearchJSURL}}" defer></script>
     <script src="{{.PathAppJS}}" defer></script>
@@ -35,9 +33,15 @@
 <body>
     {{$currChapterNo:=.CurrentChapterNo}}
     <div id="top-header">
-        <div class="top-header-left"><a href="/">Essential Books</a></div>
+        <div class="top-header-left">
+            <a href="/">
+                <i class="fas fa-home"></i> Essential Books</a>
+        </div>
+
         <input id="search-input" placeholder="Search Essential {{.Book.Title}}. Tip: press '/'.">
-        <div class="top-header-right"><!-- Right Side--></div>
+        <div class="top-header-right">
+            <!-- Right Side-->
+        </div>
     </div>
 
     <div id="search-results-window">
@@ -50,69 +54,51 @@
     </div>
 
     <div class="content-wrapper">
-        <div class="hdr"><a href="/" class="breadcrumbs__item"><i class="fas fa-home"></i></a><a href="{{.Book.URL}}">Essential {{.Book.Title}}</a></div>
-
         <div class="article">
-            <div class="article-hdr">
-                <div class="article-contribute">
-                    <div class="contribute-btn">
-                        <a href="{{.GitHubEditURL}}" target="_blank">
-                            <i class="fas fa-edit"></i>
-                            {{.GitHubText}}</a>
-                    </div>
-                    <div class="contribute-btn">
-                        &nbsp;
-                        &nbsp;
-                    </div>
-                    <div class="contribute-btn">
-                        <a href="{{.GitHubIssueURL}}" target="_blank">
-                            <i class="fab fa-github"></i>
-                            File Issue</a>
-                        </div>
-                    </div>
-                <div>
-                    <h1>{{.Title}}</h1>
-                </div>
+            <div class="article-top-hdr">
+                <span>
+                    <a href="{{.Book.URL}}">Essential {{.Book.Title}}</a>
+                </span>
+                <span class="article-contribute">
+                    <a href="{{.GitHubEditURL}}" target="_blank">
+                        <i class="fas fa-edit"></i>
+                        {{.GitHubText}}
+                    </a>
+                    &nbsp; &nbsp;
+                    <a href="{{.GitHubIssueURL}}" target="_blank">
+                        <i class="fab fa-github"></i>
+                        File Issue</a>
+                </span>
             </div>
+
+            <h1 class="title">{{.Title}}</h1>
 
             {{if .ContributorsHTML}}
             <h2>Contributors</h2>
             <div>
                 {{.ContributorsHTML}}
             </div>
-            {{end}}
-
-            {{if .VersionsHTML}}
+            {{end}} {{if .VersionsHTML}}
             <h2>Versions</h2>
             <div>
                 {{.VersionsHTML}}
             </div>
-            {{end}}
-
-            {{if .IntroductionHTML}}
+            {{end}} {{if .IntroductionHTML}}
             <h2>Introduction</h2>
             <div>
                 {{.IntroductionHTML}}
             </div>
-            {{end}}
-
-            {{if .SyntaxHTML}}
+            {{end}} {{if .SyntaxHTML}}
             <h2>Syntax</h2>
             <div>
                 {{.SyntaxHTML}}
             </div>
-            {{end}}
-
-            {{if .RemarksHTML}}
+            {{end}} {{if .RemarksHTML}}
             <h2>Remarks</h2>
             <div>
                 {{.RemarksHTML}}
             </div>
-            {{end}}
-
-            {{if .HTML}}
-                {{.HTML}}
-            {{end}}
+            {{end}} {{if .HTML}} {{.HTML}} {{end}}
 
             <div class="chapter-toc">
                 {{range .Articles}}
@@ -130,34 +116,37 @@
             <div class="toc-header">{{.Book.TitleLong}}</div>
 
             <div class="chapters-toc">
-            {{range .Book.Chapters}}
-                {{if eq $currChapterNo .No}}
-                    <div class="chapters-toc-item">
-                        <!-- <span class="chap-no">{{.No}}</span>  -->
-                        <span class="is-current">{{.Title}}</span>
-                    </div>
+                {{range .Book.Chapters}} {{if eq $currChapterNo .No}}
+                <div class="chapters-toc-item">
+                    <!-- <span class="chap-no">{{.No}}</span>  -->
+                    <span class="is-current">{{.Title}}</span>
+                </div>
                 {{else}}
-                    <div class="chapters-toc-item">
-                        <!-- <span class="chap-no">{{.No}}</span> -->
-                        <a href="{{.URL}}">{{.Title}}</a>
-                    </div>
-                {{end}}
-            {{end}}
+                <div class="chapters-toc-item">
+                    <!-- <span class="chap-no">{{.No}}</span> -->
+                    <a href="{{.URL}}">{{.Title}}</a>
+                </div>
+                {{end}} {{end}}
             </div>
         </div>
     </div>
 
     <div id="bottom-footer">
-        <div>Maintained by <a href="https://blog.kowalczyk.info" target="_blank">Krzysztof Kowalczyk</a>
+        <div>Maintained by
+            <a href="https://blog.kowalczyk.info" target="_blank">Krzysztof Kowalczyk</a>
         </div>
         <div class="share-me">
-            <a href="https://twitter.com/intent/tweet?text={{.Book.ShareOnTwitterText}}&url={{.Book.CanonnicalURL}}&via=kjk">Share <b>{{.Book.TitleLong}}</b> on <i class="fab fa-twitter"></i></a>
+            <a href="https://twitter.com/intent/tweet?text={{.Book.ShareOnTwitterText}}&url={{.Book.CanonnicalURL}}&via=kjk">Share
+                <b>{{.Book.TitleLong}}</b> on
+                <i class="fab fa-twitter"></i>
+            </a>
         </div>
         <div>
-                <!-- right side. Used to be 'edit github' url -->
+            <!-- right side. Used to be 'edit github' url -->
         </div>
     </div>
 
     <div id="blur-overlay"></div>
 </body>
+
 </html>

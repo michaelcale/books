@@ -24,9 +24,7 @@
     <title>{{.Book.TitleLong}} - a free {{.Book.Title}} programming book</title>
     <meta name="description" content="'{{.Book.TitleLong}}' is a free programming book about {{.Book.Title}}">
 
-    <link href="{{.PathMainCSS}}" rel="stylesheet">
-
-    {{ .Analytics }}
+    <link href="{{.PathMainCSS}}" rel="stylesheet"> {{ .Analytics }}
     <script src="{{.PathFontAwesomeJS}}" defer></script>
     <script src="{{.Book.TocSearchJSURL}}" defer></script>
     <script src="{{.PathAppJS}}" defer></script>
@@ -35,9 +33,14 @@
 
 <body>
     <div id="top-header">
-        <div class="top-header-left"><a href="/">Essential Books</a></div>
+        <div class="top-header-left">
+            <a href="/">
+                <i class="fas fa-home"></i> Essential Books</a>
+        </div>
         <input id="search-input" placeholder="Search {{.Book.TitleLong}}. Tip: press '/'.">
-        <div class="top-header-right"><!-- Right Side--></div>
+        <div class="top-header-right">
+            <!-- Right Side-->
+        </div>
     </div>
 
     <div id="search-results-window">
@@ -49,19 +52,19 @@
         </div>
     </div>
 
-        <div class="content-wrapper">
-        <h1 class="hdr"><a href="/" class="breadcrumbs__item"><i class="fas fa-home"></i></a>{{.Book.TitleLong}}</h1>
+    <div class="content-wrapper">
 
         <div class="book-img-cover-wrapper">
             <img class="book-img-cover" src="{{.Book.CoverURL}}">
-       </div>
+        </div>
 
         <div class="toc-header">Chapters</div>
         <div class="chapters-toc">
             {{range .Book.Chapters}}
             <div class="chapters-toc-item">
                 <!-- <span class="chap-no">{{.No}}</span>-->
-                <a href="{{.URL}}">{{.Title}}</a></div>
+                <a href="{{.URL}}">{{.Title}}</a>
+            </div>
             {{end}}
         </div>
 
@@ -71,12 +74,14 @@
             {{range .Book.Chapters}}
             <div id="chap-{{.No}}">
                 <!-- <span class="chap-no">{{.No}}.</span> -->
-                <a href="{{.URL}}">{{.Title}}</a></div>
+                <a href="{{.URL}}">{{.Title}}</a>
+            </div>
             <div>
                 {{range .Articles}}
                 <div class="toc-article">
                     <!-- <span class="chap-no">{{.No}}.</span> -->
-                    <a href="{{.URL}}">{{.Title}}</a></div>
+                    <a href="{{.URL}}">{{.Title}}</a>
+                </div>
                 {{end}}
             </div>
             {{end}}
@@ -84,11 +89,15 @@
     </div>
 
     <div id="bottom-footer">
-        <div>Maintained by <a href="https://blog.kowalczyk.info" target="_blank">Krzysztof Kowalczyk</a>
+        <div>Maintained by
+            <a href="https://blog.kowalczyk.info" target="_blank">Krzysztof Kowalczyk</a>
         </div>
 
         <div class="share-me">
-            <a href="https://twitter.com/intent/tweet?text={{.Book.ShareOnTwitterText}}&url={{.Book.CanonnicalURL}}&via=kjk">Share <b>{{.Book.TitleLong}}</b> on <i class="fab fa-twitter"></i></a>
+            <a href="https://twitter.com/intent/tweet?text={{.Book.ShareOnTwitterText}}&url={{.Book.CanonnicalURL}}&via=kjk">Share
+                <b>{{.Book.TitleLong}}</b> on
+                <i class="fab fa-twitter"></i>
+            </a>
         </div>
 
         <div>
@@ -100,4 +109,5 @@
 
     <div id="blur-overlay"></div>
 </body>
+
 </html>
