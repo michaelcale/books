@@ -23,9 +23,19 @@ var (
 	updatedImports = make(map[string]bool)
 )
 
-// TODO: white-list more domains (gitlab? google's domain, gopkg)
+// TODO: white-list more domains?
 func shouldUpdatePackage(name string) bool {
-	return strings.HasPrefix(name, "github.com/")
+	switch {
+	case strings.HasPrefix(name, "github.com/"):
+		return true
+	case strings.HasPrefix(name, "gopkg.in/"):
+		return true
+	case strings.HasPrefix(name, "gitlab.com/"):
+		return true
+	case strings.HasPrefix(name, "golang.org/"):
+		return true
+	}
+	return false
 }
 
 func updateImport(importSpec *ast.ImportSpec) {
