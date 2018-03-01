@@ -3,7 +3,7 @@ Title: HTTP Client
 Id: 1422
 ---
 
-Package 'net/http' in Go standard library provides functionality to make HTTP network requests.
+Package [`net/http`](https://golang.org/pkg/net/http/) in Go standard library provides functionality to make HTTP network requests.
 
 In the examples we use [httpbin.org](http://httpbin.org/) which is a clever service that can return specific HTTP responses, which is useful for demonstrating various aspects of HTTP protocol.
 

@@ -72,15 +72,8 @@
 
             <h1 class="title">{{.Title}}</h1>
             {{ .HTML }}
-        </div>
 
-        <hr class="toc-sep">
-
-        <div class="article-chapter-toc">
-            <a href="{{.Chapter.URL}}">{{.Chapter.Title}}</a> /
-            <b>{{.Title}}</b>
-
-            <div class="article-article-toc">
+            <div class="chapter-toc">
                 {{range .Siblings}} {{if .IsCurrent}}
                 <div>
                     <!--<span class="chap-no">{{.No}}</span> -->
@@ -93,9 +86,9 @@
                 </div>
                 {{end}} {{end}}
             </div>
+            <p>&nbsp;</p>
         </div>
     </div>
-
     <div id="bottom-footer">
         <div>
             Maintained by
