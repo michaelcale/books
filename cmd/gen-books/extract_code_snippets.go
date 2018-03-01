@@ -265,6 +265,12 @@ func parseFileDirective(line string) (*FileDirective, error) {
 			return nil, fmt.Errorf("invalid @file line: '%s', unknown option '%s'", line, s)
 		}
 	}
+
+	// currently a playground is only supported for Go files
+	ext := strings.ToLower(res.FileName)
+	if ext != ".go" {
+		res.NoPlayground = true
+	}
 	return res, nil
 }
 

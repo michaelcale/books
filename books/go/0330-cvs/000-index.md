@@ -8,7 +8,7 @@ Package [`encoding/csv`](https://golang.org/pkg/encoding/csv/) in Go standard li
 
 Let's read stock quotes from a CSV file:
 
-@file stocks.csv sha1:72d2bd3ce332a0d9dd82e4c35fce587516234df8 goplayground:N1IPgWv9yJx limit:5
+@file stocks.csv limit:5
 
 @file read_csv.go output sha1:f7c5b98b4b69d78f0bfbfd3dc561214d4b90a0bb goplayground:hHSPtbeW5px
 
