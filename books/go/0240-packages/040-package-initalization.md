@@ -17,7 +17,7 @@ func init() {
 If you just want to run the package initialization without referencing anything from it use the following import expression.
 
 ```go
-    import _ "foo"
+import _ "foo"
 ```
 
 Package initialization function can be used to create initial state needed by code in the package.
