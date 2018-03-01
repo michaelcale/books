@@ -9,16 +9,17 @@
     <title>Essential Programming Books</title>
     <meta name="description" content="Essential Programming Books.">
 
-    <link href="{{.PathMainCSS}}" rel="stylesheet">
-
-    {{ .Analytics }}
+    <link href="{{.PathMainCSS}}" rel="stylesheet"> {{ .Analytics }}
     <script src="{{.PathFontAwesomeJS}}" defer></script>
     <script src="{{.PathAppJS}}" defer></script>
 </head>
 
 <body>
     <div id="top-header">
-        <div class="top-header-left"><a href="/">Essential Books</a></div>
+        <div class="top-header-left">
+            <a href="/">
+                <i class="fas fa-home"></i> Essential Books</a>
+        </div>
         <div>
             <a href="https://github.com/essentialbooks/books" target="_blank">
                 <i class="fab fa-github"></i>
@@ -33,19 +34,21 @@
             &middot;
             <a href="/feedback">feedback</a>
         </div>
-        <div class="view-switch">View: list &middot; <a href="/index-grid">covers</a></div>
+        <div class="view-switch">View: list &middot;
+            <a href="/index-grid">covers</a>
+        </div>
 
         <table class="book-list">
             <thead>
-            <tr class="header">
-                <!--
+                <tr class="header">
+                    <!--
                 <th></th>
                 -->
-                <th class="book-name">Book</th>
-                <th>Chapters</th>
-                <th>Articles</th>
-                <th>Contributors</th>
-            </tr>
+                    <th class="book-name">Book</th>
+                    <th>Chapters</th>
+                    <th>Articles</th>
+                    <th>Contributors</th>
+                </tr>
             </thead>
             <tbody>
                 {{range .Books}}
@@ -55,10 +58,14 @@
                         <i class="far fa-star" style="font-size: 0.8em"></i>
                     </td>
                     -->
-                    <td class="book-name"><a href="{{.URL}}">{{.Title}}</a></td>
+                    <td class="book-name">
+                        <a href="{{.URL}}">{{.Title}}</a>
+                    </td>
                     <td class="light">{{ .ChaptersCount }}</td>
                     <td class="light">{{ .ArticlesCount}}</td>
-                    <td class="light"><a href="{{.ContributorsURL}}">{{.ContributorCount}}</a></td>
+                    <td class="light">
+                        <a href="{{.ContributorsURL}}">{{.ContributorCount}}</a>
+                    </td>
                 </tr>
                 {{end}}
             </tbody>
@@ -67,11 +74,14 @@
     </div>
 
     <div id="bottom-footer">
-        <div>Maintained by <a href="https://blog.kowalczyk.info" target="_blank">Krzysztof Kowalczyk</a></div>
+        <div>Maintained by
+            <a href="https://blog.kowalczyk.info" target="_blank">Krzysztof Kowalczyk</a>
+        </div>
         <div>
             <!-- right side -->
         </div>
     </div>
 
 </body>
+
 </html>
