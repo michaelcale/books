@@ -1,34 +1,18 @@
 ---
-Title: Basic GET
+Title: HTTP POST
 Id: 4643
-Score: 8
 ---
-Perform a basic GET request and prints the contents of a site (HTML).
 
-```go
-package main
+HTTP POST sends binary data to the server.
 
-import (
-    "fmt"
-    "io/ioutil"
-    "net/http"
-)
+How this data is interpreted by the server depends on the value of `Content-Type` header.
 
-func main() {
-    resp, err := http.Get("https://example.com/")
-    if err != nil {
-        panic(err)
-    }
+## HTTP POST with url-encoded data
 
-    // It is important to defer resp.Body.Close(), else resource leaks will occur.
-    defer resp.Body.Close()
+HTTP POST is most often used to submit filled forms data in HTML page to the server.
 
-    data, err := ioutil.ReadAll(resp.Body)
-    if err != nil {
-        panic(err)
-    }
+Form data is is a dictionary of key/value pairs where key is a string and value is array of strings (most often array with a single element).
 
-    // Will print site contents (HTML) to output
-    fmt.Println(string(data))
-}
-```
+Form key/value pairs are most often sent as url-encoded data with `Content-Type` of `application/x-www-form-urlencoded`.
+
+@file http_post_url_encoded.go output noplayground

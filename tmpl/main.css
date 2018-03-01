@@ -521,6 +521,7 @@ a:hover.about-home-link {
   font-size: 0.7em;
   bottom: 0;
   right: 0;
+  background-color: white;
 }
 
 .code-box-github {
