@@ -19,7 +19,7 @@ Basic string usage:
 
 Important standard library packages for working on strings:
 * [strings](https://golang.org/pkg/strings/) implements string searching, splitting, case conversions
-* [bytes](https://golang.org/pkg/bytes/) has the same functionality as `strings` package but operating on `[]byte` byte slices
+* [bytes](https://golang.org/pkg/bytes/) has the same functionality as `strings` package but operates on `[]byte` byte slices
 * [strconv](https://golang.org/pkg/strconv/) for conversion between strings and integer and float numbers
 * [unicode/utf8](https://golang.org/pkg/unicode/utf8/) decodes from UTF-8-encoded strings and encodes into UTF-8-encoded string
 * [regexp](https://golang.org/pkg/regexp/) implements regular expressions

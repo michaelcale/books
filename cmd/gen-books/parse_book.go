@@ -169,7 +169,16 @@ func parseChapter(chapter *Chapter) error {
 			continue
 		}
 		name := fi.Name()
-		if strings.ToLower(filepath.Ext(name)) != ".md" {
+		ext := strings.ToLower(filepath.Ext(name))
+
+		// remember images to be copied in gen book phase
+		if ext == ".png" || ext == ".jpg" || ext == ".jpeg" {
+			path = filepath.Join(dir, name)
+			chapter.images = append(chapter.images, path)
+			continue
+		}
+
+		if ext != ".md" {
 			continue
 		}
 

@@ -15,8 +15,10 @@ func main() {
 	if err != nil {
 		log.Fatalf("http.NewRequest() failed with '%s'\n", err)
 	}
+
 	ctx, _ := context.WithTimeout(context.TODO(), time.Millisecond*100)
 	req = req.WithContext(ctx)
+
 	resp, err := http.DefaultClient.Do(req.WithContext(ctx))
 	if err != nil {
 		log.Fatalf("http.DefaultClient.Do() failed with:\n'%s'\n", err)

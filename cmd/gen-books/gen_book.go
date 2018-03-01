@@ -210,6 +210,12 @@ func genChapter(chapter *Chapter, currNo int) {
 		PathMainCSS:       pathMainCSS,
 	}
 	execTemplateToFileSilentMaybeMust("chapter.tmpl.html", d, path)
+
+	for _, imagePath := range chapter.images {
+		imageName := filepath.Base(imagePath)
+		dst := chapter.destImagePath(imageName)
+		copyFileMaybeMust(dst, imagePath)
+	}
 }
 
 func genBook(book *Book) {

@@ -2,25 +2,33 @@
 Title: Context
 Id: 2743
 ---
-## Syntax
-- type CancelFunc func()
-- func Background() Context
-- func TODO() Context
-- func WithCancel(parent Context) (ctx Context, cancel CancelFunc)
-- func WithDeadline(parent Context, deadline time.Time) (Context, CancelFunc)
-- func WithTimeout(parent Context, timeout time.Duration) (Context, CancelFunc)
-- func WithValue(parent Context, key interface{}, val interface{})
+Package `context` in standard library provides type `Context` which is hard to explain because it has multiple uses.
 
-## Remarks
-The `context` package (in Go 1.7) or the `golang.org/x/net/context` package (Pre 1.7) is an interface for creating contexts that can be used to carry request scoped values and deadlines across API boundaries and between services, as well as a simple implementation of said interface.
+Here are the most common uses of `context.Context`:
+* context with timeout (deadline) is a generic way to implement timeouts for functions that can possibly take a long time where we want an option to abort them if they exceed the timeout
+* context with cancellation is a generic way to cancel a goroutine
+* context with value is a way to associate arbitrary value with a context
 
-aside: the word "context" is loosely used to refer to the entire tree, or to individual leaves in the tree, eg. the actual `context.Context` values.
+## Creating a context
 
-At a high level, a context is a tree. New leaves are added to the tree when they are constructed (a `context.Context` with a parent value), and leaves are never removed from the tree. Any context has access to all of the values above it (data access only flows upwards), and if any context is canceled its children are also canceled (cancelation signals propogate downwards). The cancel signal is implemented by means of a function that returns a channel which will be closed (readable) when the context is canceled; this makes contexts a very efficient way to implement the [pipeline and cancellation concurrency pattern](https://blog.golang.org/pipelines), or timeouts.
+In most cases you'll be calling existing API that requires `context.Context`.
 
-By convention, functions that take a context have the first argument `ctx context.Context`. While this is just a convention, it's one that should be followed since many static analysis tools specifically look for this argument. Since Context is an interface, it's also possible to turn existing context-like data (values that are passed around throughout a request call chain) into a normal Go context and use them in a backwards compatible way just by implementing a few methods. Furthermore, contexts are safe for concurrent access so you can use them from many goroutines (whether they're running on parallel threads or as concurrent coroutines) without fear.
+If you don't have one, use `context.TODO()` or `context.Background()` functions to create it. See [the difference](a-901000a2).
 
-## Further Reading
+`context.Context` is an immutable (read-only) value so you can't modify it.
 
- - https://blog.golang.org/context
+To create e.g. a context with value, you call `context.WithValue()` which returns a new context that wraps existing context and adds additional information.
 
+`context.Context` is an interface so you could pass `nil` but it's not recommended.
+
+Many APIs expect non-nil value and will crash if passed `nil` so it's best to always pass one created with `context.Background()` or `context.TODO()`.
+
+There is no performance issue because those functions return shared, global variables (yay immutability!).
+
+## Using context with timeout to set timeout for HTTP requests
+
+Repeating an example from [HTTP client article](a-12209) here's a way to create a context with timeout to ensure HTTP GET request doesn't hang forever:
+
+@file ../0360-http-client/http_timeout.go output allow_error noplayground
+
+HTTP client knows how to interpret context with a timeout. You just need to create and provide it.

@@ -33,6 +33,9 @@ type Chapter struct {
 
 	// for search we extract headings from markdown source
 	cachedHeadings []string
+
+	// path for image files for this chapter in source directory
+	images []string
 }
 
 // URL is used in book_index.tmpl.html
@@ -73,6 +76,10 @@ func (c *Chapter) GitHubIssueURL() string {
 
 func (c *Chapter) destFilePath() string {
 	return filepath.Join(destEssentialDir, c.Book.FileNameBase, c.FileNameBase+".html")
+}
+
+func (c *Chapter) destImagePath(name string) string {
+	return filepath.Join(destEssentialDir, c.Book.FileNameBase, name)
 }
 
 // HTML retruns html version of Body: field

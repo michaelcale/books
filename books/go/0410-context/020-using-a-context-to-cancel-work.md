@@ -1,18 +1,27 @@
 ---
-Title: Using a context to cancel work
+Title: Writing cancellable functions
 Id: 10386
-Score: 0
 ---
-Passing a context with a timeout (or with a cancel function) to a long running function can be used to cancel that functions work:
+Using existing functions that accept cancellable context is easy.
 
-```go
-ctx, _ := context.WithTimeout(context.Background(), 200*time.Millisecond)
-for {
-    select {
-    case <-ctx.Done():
-        return ctx.Err()
-    default:
-        // Do an iteration of some long running work here!
-    }
-}
-```
+Writing a function that can be cancelled via context is much harder.
+
+When a time experies or you call cancel function returned by `context.WithCancel()` or `context.WithTimeout()`, a channel in the context is signalled.
+
+When writing a cancellable function, you have to periodically check channel returned by `context.Done()` and return immediately if it has been signalled.
+
+It does make for an awkward code:
+
+@file cancellable_function.go output
+
+For clarity, this is an artificial task.
+
+Our `longMathOp` function performs simple operation 100 times and simulates slowness by sleeping for 1 ms on every iteration.
+
+We can expect it to take ~100 ms.
+
+A `select` with `default` clause is non-blocking. If there's nothing in the `ctx.Done()` channel, we don't wait for values and immediately execute `default` part, which is where the logic of the program lives.
+
+We can see in our test that if timeout is greater that 100 ms, the function finishes.
+
+If timeout is smaller than 100 ms, `ctx.Done()` channel is signalled, we detect it in `longMathOp` and return `ctx.Err()`.
