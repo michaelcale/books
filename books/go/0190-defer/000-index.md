@@ -3,7 +3,7 @@ Title: Defer
 Id: 2795
 ---
 
-In a complicated function, it's easy to miss releasing a resource like open file handle or to unlock a mutex.
+In a complicated function, it's easy to miss releasing a resource (e.g. file handle) or to forgot to unlock a mutex.
 
 In C++ you would use RAII technique. In Go you use `defer` statement.
 
