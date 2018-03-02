@@ -266,8 +266,8 @@ func parseFileDirective(line string) (*FileDirective, error) {
 		}
 	}
 
-	// currently a playground is only supported for Go files
-	ext := strings.ToLower(res.FileName)
+	// currently only Go files suport playground
+	ext := strings.ToLower(filepath.Ext(res.FileName))
 	if ext != ".go" {
 		res.NoPlayground = true
 	}

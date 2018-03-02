@@ -88,6 +88,7 @@ func extractEmbeddedGoSourceFiles(mdPath string, lines []string) []EmbeddedGoSou
 		fileDirective, err := parseFileDirective(line)
 		u.PanicIfErr(err)
 		if fileDirective.NoPlayground {
+			//fmt.Printf("no playground: %s\n", fileDirective.FileName)
 			continue
 		}
 		filePath := filepath.Join(dir, fileDirective.FileName)
@@ -189,7 +190,7 @@ func updateGoPlaygroundLinks(dir string) {
 	fmt.Printf("updateGoPlaygroundLinks() started\n")
 	timeStart := time.Now()
 	markdownFiles := loadMarkdownFiles(dir)
-	max := 10
+	max := 100
 	for _, mf := range markdownFiles {
 		wasChanged := false
 		for _, ef := range mf.EmbeddedSourceFiles {

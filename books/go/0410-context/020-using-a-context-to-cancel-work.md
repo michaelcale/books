@@ -12,7 +12,7 @@ When writing a cancellable function, you have to periodically check channel retu
 
 It does make for an awkward code:
 
-@file cancellable_function.go output
+@file cancellable_function.go output sha1:29d550650156898244a024cf6258877b508481ed goplayground:AihF82Xoffg
 
 For clarity, this is an artificial task.
 

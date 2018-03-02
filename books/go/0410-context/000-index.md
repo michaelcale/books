@@ -13,7 +13,7 @@ Here are the most common uses of `context.Context`:
 
 In most cases you'll be calling existing API that requires `context.Context`.
 
-If you don't have one, use `context.TODO()` or `context.Background()` functions to create it. See [the difference](a-901000a2).
+If you don't have one, use `context.TODO()` or `context.Background()` functions to create it. Read about [the difference](a-901000a2).
 
 `context.Context` is an immutable (read-only) value so you can't modify it.
 

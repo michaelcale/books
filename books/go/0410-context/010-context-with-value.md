@@ -10,7 +10,7 @@ For example, at the beginning of handling a request we might check a cookie to s
 
 We can do that by using context with value:
 
-@file context_with_value.go output
+@file context_with_value.go output sha1:8d8a6526a597b72b6dd29e4b1700245eb6f26b9d goplayground:EkdcW_DuUNf
 
 For clarity of the example we only show creating a context with value and retrieving value from context.
 

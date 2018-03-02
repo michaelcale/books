@@ -6,7 +6,6 @@ import (
 )
 
 // :show start
-// User describes a user
 type User struct {
 	Name       string
 	IsLoggedIn bool
