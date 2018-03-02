@@ -37,7 +37,7 @@ func main() {
     }
     log.Printf("Image type: %T", img)
 
-    // Converting image to grayscale
+    // Convert image to grayscale
     grayImg := image.NewGray(img.Bounds())
     for y := img.Bounds().Min.Y; y < img.Bounds().Max.Y; y++ {
         for x := img.Bounds().Min.X; x < img.Bounds().Max.X; x++ {
@@ -107,7 +107,7 @@ If we want to apply different [formula/algorithms](http://journals.plos.org/plos
 then, the following snippets can be used.
 
 ```go
-// Converting image to grayscale
+// Convert image to grayscale
 grayImg := image.NewGray(img.Bounds())
 for y := img.Bounds().Min.Y; y < img.Bounds().Max.Y; y++ {
     for x := img.Bounds().Min.X; x < img.Bounds().Max.X; x++ {

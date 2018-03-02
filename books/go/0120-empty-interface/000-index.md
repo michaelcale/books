@@ -1,5 +1,6 @@
 ---
 Title: Empty interface
+Search: dynamic type
 Id: der300hf
 ---
 Technically speaking, an empty interface (`interface{}`) is an [interface](a-1221) with no methods.
