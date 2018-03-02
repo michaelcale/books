@@ -10,7 +10,7 @@ Let's read stock quotes from a CSV file:
 
 @file stocks.csv limit:5
 
-@file read_csv.go output sha1:f7c5b98b4b69d78f0bfbfd3dc561214d4b90a0bb goplayground:hHSPtbeW5px
+@file read_csv.go output noplayground
 
 As per Go best practices, CSV reader operates on `io.Reader` interface, which allows it to work on files, network connections, bytes in memory etc.
 
@@ -39,7 +39,7 @@ Reading all records at once is simpler but will use more memory, especially for 
 
 Let's now write simplified stock quotes to a CSV file:
 
-@file write_csv.go output sha1:e4cc4a9bbbdc45e551c1b96d49da6a5545c9f0f8 goplayground:KiMuRm49LPc
+@file write_csv.go output noplayground
 
 Error handling here is not trivial.
 

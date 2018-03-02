@@ -383,7 +383,8 @@ hr.toc-sep {
 .chapter-toc {
   background-color: white;
   padding-top: 1em;
-}
+  background: #f4f4f4;
+  padding: 4px 8px;}
 
 .chapters-toc {
   /* font-size: 0.8em; */
