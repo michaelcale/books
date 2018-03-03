@@ -553,63 +553,65 @@ hr.toc-sep {
   filter: opacity(1);
 }
 
-pre.chroma {
-  display: block;
-  overflow-x: auto;
-  padding: 0.5em;
-  background-color: #fdfdfd;
+/* this allows to position child absolutely */
+.code-box {
+  font-size: 85%;
+  background-color: #fafafa;
   color: #657b83;
   /* border: 1px solid #e5e5e5; */
   border-top: 1px solid #e5e5e5;
   border-bottom: 1px solid #e5e5e5;
   overflow-x: visible;
-  font-size: 85%;
-  tab-size: 2;
 }
 
-/* this allows to position child absolutely */
-.code-box {
-  position: relative;
+pre.chroma {
+  display: block;
+  overflow-x: auto;
+  tab-size: 2;
+  margin: 0px;
+  padding: 0.5em;
 }
 
 /* box that potentially displays file name linking to github and 'run' button for playground */
+.code-box {
+  padding-bottom: 2px;
+  margin-bottom: 1em;
+}
+
 .code-box-nav {
-  position: absolute;
-  font-size: 0.7em;
-  bottom: 0;
-  right: 0;
+  display: inline-block;
+  background-color: #fafafa;
+  transform: translateY(3px);
+}
+
+.code-box-nav a {
+  color: gray;
+  text-decoration: none;
+}
+
+.code-box-nav a:hover {
+  color: black;
+  text-decoration: none;
+}
+
+.code-box-playground {
+  margin: 0;
+  padding: 0px 8px;
+  display: inline-block;
+}
+
+.code-box-playground:hover {
   background-color: white;
 }
 
 .code-box-github {
-  border: 1px solid #a4a4a4;
-  padding: 4px 8px;
   margin: 0;
+  padding: 0px 8px;
   display: inline-block;
 }
 
-.code-box-github a {
-  text-decoration: none;
-}
-
-.code-box-github a:hover {
-  text-decoration: underline;
-}
-
-.code-box-playground {
-  border: 1px solid #a4a4a4;
-  padding: 4px 8px;
-  margin: 0;
-  margin-right: -4px; /* no idea why I need this */
-  display: inline-block;
-}
-
-.code-box-playground a {
-  text-decoration: none;
-}
-
-.code-box-playground a:hover {
-  text-decoration: underline;
+.code-box-github:hover {
+  background-color: white;
 }
 
 /*
