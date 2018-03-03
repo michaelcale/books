@@ -8,11 +8,6 @@ import (
 	"github.com/essentialbooks/books/pkg/kvstore"
 )
 
-var (
-	// empty but not nil
-	emptyStringSlice = make([]string, 0)
-)
-
 // Chapter represents a book chapter
 type Chapter struct {
 	// stable, globally unique (across all bookd) id
@@ -32,7 +27,7 @@ type Chapter struct {
 	cachedHTML template.HTML
 
 	// for search we extract headings from markdown source
-	cachedHeadings []string
+	cachedHeadings []HeadingInfo
 
 	// path for image files for this chapter in source directory
 	images []string
@@ -97,18 +92,15 @@ func (c *Chapter) HTML() template.HTML {
 }
 
 // Headings returns headings in markdown file
-func (c *Chapter) Headings() []string {
+func (c *Chapter) Headings() []HeadingInfo {
 	if c.cachedHeadings != nil {
 		return c.cachedHeadings
 	}
 	s, err := c.indexDoc.GetValue("Body")
 	if err != nil {
-		return emptyStringSlice
+		return nil
 	}
 	headings := parseHeadingsFromMarkdown([]byte(s))
-	if headings == nil {
-		headings = emptyStringSlice
-	}
 	c.cachedHeadings = headings
 	return headings
 }

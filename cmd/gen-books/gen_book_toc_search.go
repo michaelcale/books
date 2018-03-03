@@ -40,20 +40,27 @@ func genBookTOCSearchMust(book *Book) {
 	var toc [][]interface{}
 	for _, chapter := range book.Chapters {
 		title := strings.TrimSpace(chapter.Title)
-		tocItem := []interface{}{false, chapter.FileNameBase, -1, -1, title}
+		uri := chapter.FileNameBase
+		tocItem := []interface{}{false, uri, -1, -1, title}
 		toc = append(toc, tocItem)
 		chapIdx := len(toc) - 1
 		u.PanicIf(chapIdx < 0)
 
 		headings := chapter.Headings()
 		for _, heading := range headings {
-			tocItem = []interface{}{false, "", chapIdx, -1, heading}
+			title := heading.Text
+			id := heading.ID
+			if len(id) > 0 {
+				id = uri + "#" + id
+			}
+			tocItem = []interface{}{false, id, chapIdx, -1, title}
 			toc = append(toc, tocItem)
 		}
 
 		for _, article := range chapter.Articles {
 			title := strings.TrimSpace(article.Title)
-			tocItem = []interface{}{false, article.FileNameBase, chapIdx, -1, title}
+			uri := article.FileNameBase
+			tocItem = []interface{}{false, uri, chapIdx, -1, title}
 			for _, syn := range article.SearchSynonyms {
 				tocItem = append(tocItem, syn)
 			}
@@ -62,7 +69,12 @@ func genBookTOCSearchMust(book *Book) {
 			headings := article.Headings()
 			articleIdx := len(toc) - 1
 			for _, heading := range headings {
-				tocItem = []interface{}{false, "", articleIdx, -1, heading}
+				title := heading.Text
+				id := heading.ID
+				if len(id) > 0 {
+					id = uri + "#" + id
+				}
+				tocItem = []interface{}{false, id, articleIdx, -1, title}
 				toc = append(toc, tocItem)
 			}
 		}

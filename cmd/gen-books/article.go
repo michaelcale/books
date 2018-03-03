@@ -23,7 +23,7 @@ type Article struct {
 	BodyHTML template.HTML
 
 	// for search we extract headings from markdown source
-	cachedHeadings []string
+	cachedHeadings []HeadingInfo
 
 	// for generating toc of a chapter, all articles that belong to the same
 	// chapter as this article
@@ -49,14 +49,11 @@ func (a *Article) HTML() template.HTML {
 }
 
 // Headings returns headings in markdown file
-func (a *Article) Headings() []string {
+func (a *Article) Headings() []HeadingInfo {
 	if a.cachedHeadings != nil {
 		return a.cachedHeadings
 	}
 	headings := parseHeadingsFromMarkdown([]byte(a.BodyMarkdown))
-	if headings == nil {
-		headings = emptyStringSlice
-	}
 	a.cachedHeadings = headings
 	return headings
 }

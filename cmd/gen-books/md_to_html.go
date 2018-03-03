@@ -24,6 +24,12 @@ var (
 	highlightStyle *chroma.Style
 )
 
+// HeadingInfo describes # heading in markdown text
+type HeadingInfo struct {
+	Text string
+	ID   string
+}
+
 func init() {
 	htmlFormatter = html.New(html.WithClasses(), html.TabWidth(2))
 	u.PanicIf(htmlFormatter == nil, "couldn't create html formatter")
@@ -248,16 +254,29 @@ func getTextRecur(node ast.Node) string {
 	return s
 }
 
-func parseHeadingsFromMarkdown(d []byte) []string {
-	var res []string
-	astRoot := markdown.Parse(d, nil)
+func parseHeadingsFromMarkdown(d []byte) []HeadingInfo {
+	var res []HeadingInfo
+	extensions := parser.NoIntraEmphasis |
+		parser.Tables |
+		parser.FencedCode |
+		parser.Autolink |
+		parser.Strikethrough |
+		parser.SpaceHeadings |
+		parser.NoEmptyLineBeforeBlock |
+		parser.AutoHeadingIDs
+	parser := parser.NewWithExtensions(extensions)
+	astRoot := markdown.Parse(d, parser)
 	ast.WalkFunc(astRoot, func(node ast.Node, entering bool) ast.WalkStatus {
 		if entering {
 			if heading, ok := node.(*ast.Heading); ok {
 				s := getTextRecur(heading)
 				s = strings.TrimSpace(s)
 				if len(s) > 0 {
-					res = append(res, s)
+					h := HeadingInfo{
+						Text: s,
+						ID:   heading.HeadingID,
+					}
+					res = append(res, h)
 				}
 			}
 		}

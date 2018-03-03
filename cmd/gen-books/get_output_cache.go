@@ -36,7 +36,8 @@ func getCachedOutput(path string, allowError bool) (string, error) {
 	s, err := getOutput(path)
 	if err != nil {
 		if !allowError {
-			return "", err
+			fmt.Printf("getOutput('%s'), output is:\n%s\n", path, s)
+			return s, err
 		}
 		err = nil
 	}

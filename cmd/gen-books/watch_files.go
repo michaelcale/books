@@ -13,54 +13,6 @@ import (
 	"github.com/kjk/u"
 )
 
-var (
-	softErrorMode bool
-	errors        []string
-)
-
-func maybePanicIfErr(err error) {
-	if err == nil {
-		return
-	}
-	if !softErrorMode {
-		u.PanicIfErr(err)
-	}
-	errors = append(errors, err.Error())
-}
-
-func clearErrors() {
-	errors = nil
-}
-
-func printAndClearErrors() {
-	if len(errors) == 0 {
-		return
-	}
-	errStr := strings.Join(errors, "\n")
-	fmt.Printf("\n%d errors:\n%s\n\n", len(errors), errStr)
-	clearErrors()
-}
-
-func createDirForFileMaybeMust(path string) {
-	dir := filepath.Dir(path)
-	err := os.MkdirAll(dir, 0755)
-	maybePanicIfErr(err)
-}
-
-func copyFileMaybeMust(dst, src string) {
-	createDirForFileMaybeMust(dst)
-	err := copyFile(dst, src)
-	maybePanicIfErr(err)
-}
-
-// "foo.js" => "foo-${sha1}.js"
-func nameToSha1Name(name, sha1Hex string) string {
-	ext := filepath.Ext(name)
-	n := len(name)
-	s := name[:n-len(ext)]
-	return s + "-" + sha1Hex[:8] + ext
-}
-
 func copyToWwwStaticMaybeMust(srcName string) {
 	var dstPtr *string
 	switch srcName {
