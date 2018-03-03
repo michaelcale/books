@@ -567,6 +567,7 @@ hr.toc-sep {
   background: #f4f4f4;
   padding: 4px 8px;
   margin-left: -8px;
+  font-size: 0.9em;
 }
 
 .chapters-toc {
@@ -613,21 +614,6 @@ hr.toc-sep {
   .chapters-toc {
     columns: 1;
   }
-}
-
-.article-chapter-toc {
-  background-color: white;
-  margin-top: 16px;
-  filter: opacity(0.6);
-}
-
-.article-chapter-toc:hover {
-  filter: opacity(1);
-}
-
-.article-article-toc {
-  padding-top: 8px;
-  padding-left: 8px;
 }
 
 .breadcrumbs__item:after {

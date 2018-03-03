@@ -166,17 +166,19 @@ func genAbout() {
 	execTemplateToFileMaybeMust("about.tmpl.html", d, path)
 }
 
-func genArticle(article *Article) {
+func genArticle(article *Article, currChapNo int) {
 	addSitemapURL(article.CanonnicalURL())
 
 	d := struct {
 		*Article
+		CurrentChapterNo  int
 		Analytics         template.HTML
 		PathAppJS         string
 		PathFontAwesomeJS string
 		PathMainCSS       string
 	}{
 		Article:           article,
+		CurrentChapterNo:  currChapNo,
 		Analytics:         googleAnalytics,
 		PathAppJS:         pathAppJS,
 		PathFontAwesomeJS: pathFontAwesomeJS,
@@ -190,7 +192,7 @@ func genArticle(article *Article) {
 func genChapter(chapter *Chapter, currNo int) {
 	addSitemapURL(chapter.CanonnicalURL())
 	for _, article := range chapter.Articles {
-		genArticle(article)
+		genArticle(article, currNo)
 	}
 
 	path := chapter.destFilePath()
