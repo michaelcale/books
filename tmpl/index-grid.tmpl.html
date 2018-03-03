@@ -9,46 +9,65 @@
     <title>Essential Programming Books Covers View</title>
     <meta name="description" content="Essential Programming Books, covers view.">
 
-    <link href="{{.PathMainCSS}}" rel="stylesheet">
-
-    {{ .Analytics }}
+    <link href="{{.PathMainCSS}}" rel="stylesheet"> {{ .Analytics }}
     <script src="{{.PathFontAwesomeJS}}" defer></script>
     <script src="{{.PathAppJS}}" defer></script>
 </head>
 
-<body>
-    <div id="top-header">
-        <div class="top-header-left"><a href="/index-grid">Essential Books</a></div>
+<body class="page">
+    <header class="page__header">
+        <div class="page__header__left">
+            <a href="/">
+                <i class="fas fa-home"></i> Essential Books</a>
+        </div>
         <div>
+        </div>
+        <div class="page__header__right">
+            <!-- Right Side-->
+        </div>
+    </header>
+
+    <div class="content">
+        <div class="book-body">
+            <h1 class="hcenter">Essential Programming Books</h1>
+            <div class="hcenter smaller">
+                <a href="/about">about this project</a>
+                &middot;
+                <a href="/feedback">feedback</a>
+            </div>
+            <div class="view-switch">View:
+                <a href="/">list</a> &middot; covers</div>
+
+            <div class="covers">
+                {{range .Books}}
+                <div class="cover-img-wrapper">
+                    <a href="{{.URL}}">
+                        <img class="img-cover" src="{{.CoverURL}}">
+                    </a>
+                </div>
+                {{end}}
+            </div>
+        </div>
+    </div>
+
+    <footer class="page__footer">
+        <div class="page__footer__left">
+            Maintained by
+            <a href="https://blog.kowalczyk.info" target="_blank">Krzysztof Kowalczyk</a>
+        </div>
+
+        <div>
+            <!-- center -->
+        </div>
+
+        <div class="page__footer__right">
             <a href="https://github.com/essentialbooks/books" target="_blank">
                 <i class="fab fa-github"></i>
                 GitHub</a>
         </div>
-    </div>
+    </footer>
 
-    <div class="content-wrapper" style="margin-top: 52px;">
-        <h1 class="hcenter">Essential Programming Books</h1>
-        <div class="hcenter smaller">
-            <a href="/about">about this project</a>
-            &middot;
-            <a href="/feedback">feedback</a>
-        </div>
-        <div class="view-switch">View: <a href="/">list</a> &middot; covers</div>
-
-        <div class="covers">
-            {{range .Books}}
-            <div class="cover-img-wrapper">
-                <a href="{{.URL}}">
-                    <img class="img-cover" src="{{.CoverURL}}">
-                </a>
-            </div>
-            {{end}}
-        </div>
-    </div>
-
-    <div id="bottom-footer">
-        <div>Maintained by <a href="https://blog.kowalczyk.info" target="_blank">Krzysztof Kowalczyk</a></div>
-    </div>
 
 </body>
+
 </html>

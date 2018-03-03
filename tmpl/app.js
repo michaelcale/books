@@ -866,10 +866,15 @@ function start() {
   el.addEventListener("input", onSearchInputChanged, true);
   document.addEventListener("mousemove", onMouseMove, true);
   document.addEventListener("click", onClick, false);
-  window.onhashchange = locationHashChanged;
-  tocUnexpandAll();
-  setTocExpandedForCurrentURL();
-  createTOC();
+
+  // if this is chapter or article, we generate toc
+  var uri = getLocationLastElement();
+  if (isChapterOrArticleURL(uri)) {
+    window.onhashchange = locationHashChanged;
+    tocUnexpandAll();
+    setTocExpandedForCurrentURL();
+    createTOC();
+  }
 }
 
 // we don't want to run javascript on about etc. pages

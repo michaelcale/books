@@ -31,65 +31,64 @@
 
 </head>
 
-<body>
-    <div id="top-header">
-        <div class="top-header-left">
+<body class="page">
+    <header class="page__header">
+        <div class="page__header__left">
             <a href="/">
                 <i class="fas fa-home"></i> Essential Books</a>
         </div>
-        <input id="search-input" placeholder="Search {{.Book.TitleLong}}. Tip: press '/'.">
-        <div class="top-header-right">
+        <div>
+
+            <input id="search-input" placeholder="Search {{.Book.TitleLong}}. Tip: press '/'.">
+        </div>
+        <div class="page__header__right">
             <!-- Right Side-->
         </div>
+    </header>
+
+    <div id="toc" style="display:none">
     </div>
 
-    <div id="search-results-window">
-        <div id="search-results">
-
-        </div>
-        <div id="search-results-help">
-            &nbsp;&nbsp;&uarr; &darr; to navigate &nbsp;&nbsp;&nbsp; &crarr; to select &nbsp;&nbsp;&nbsp; Esc to close
-        </div>
-    </div>
-
-    <div class="content-wrapper">
-
-        <div class="book-img-cover-wrapper">
-            <img class="book-img-cover" src="{{.Book.CoverURL}}">
-        </div>
-
-        <div class="toc-header">Chapters</div>
-        <div class="chapters-toc">
-            {{range .Book.Chapters}}
-            <div class="chapters-toc-item">
-                <!-- <span class="chap-no">{{.No}}</span>-->
-                <a href="{{.URL}}">{{.Title}}</a>
+    <div class="content">
+        <div class="book-body">
+            <div class="book-img-cover-wrapper">
+                <img class="book-img-cover" src="{{.Book.CoverURL}}">
             </div>
-            {{end}}
-        </div>
 
-        <div class="toc-header">Table Of Contents</div>
-
-        <div>
-            {{range .Book.Chapters}}
-            <div id="chap-{{.No}}">
-                <!-- <span class="chap-no">{{.No}}.</span> -->
-                <a href="{{.URL}}">{{.Title}}</a>
-            </div>
-            <div>
-                {{range .Articles}}
-                <div class="toc-article">
-                    <!-- <span class="chap-no">{{.No}}.</span> -->
+            <div class="toc-header">Chapters</div>
+            <div class="chapters-toc">
+                {{range .Book.Chapters}}
+                <div class="chapters-toc-item">
+                    <!-- <span class="chap-no">{{.No}}</span>-->
                     <a href="{{.URL}}">{{.Title}}</a>
                 </div>
                 {{end}}
             </div>
-            {{end}}
+
+            <div class="toc-header">Table Of Contents</div>
+
+            <div>
+                {{range .Book.Chapters}}
+                <div id="chap-{{.No}}">
+                    <!-- <span class="chap-no">{{.No}}.</span> -->
+                    <a href="{{.URL}}">{{.Title}}</a>
+                </div>
+                <div>
+                    {{range .Articles}}
+                    <div class="toc-article">
+                        <!-- <span class="chap-no">{{.No}}.</span> -->
+                        <a href="{{.URL}}">{{.Title}}</a>
+                    </div>
+                    {{end}}
+                </div>
+                {{end}}
+            </div>
         </div>
     </div>
 
-    <div id="bottom-footer">
-        <div>Maintained by
+    <footer class="page__footer">
+        <div class="page__footer__left">
+            Maintained by
             <a href="https://blog.kowalczyk.info" target="_blank">Krzysztof Kowalczyk</a>
         </div>
 
@@ -100,14 +99,23 @@
             </a>
         </div>
 
-        <div>
+        <div class="page__footer__right">
             <a href="{{.Book.GitHubURL}}" target="_blank">
-                <i class="fas fa-edit"></i>
+                <i class="fab fa-github"></i>
                 {{.Book.GitHubText}}</a>
         </div>
-    </div>
+    </footer>
 
+    <!-- aboslutely positioned elements -->
+    <div id="search-results-window">
+        <div id="search-results">
+        </div>
+        <div id="search-results-help">
+            &nbsp;&nbsp;&uarr; &darr; to navigate &nbsp;&nbsp;&nbsp; &crarr; to select &nbsp;&nbsp;&nbsp; Esc to close
+        </div>
+    </div>
     <div id="blur-overlay"></div>
+
 </body>
 
 </html>

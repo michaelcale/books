@@ -52,6 +52,7 @@ body {
 
 .page__header__right {
   width: 180px;
+  text-align: right;
 }
 
 .page__footer {
@@ -73,6 +74,7 @@ body {
 
 .page__footer__right {
   min-width: 240px;
+  text-align: right;
 }
 
 .content {
@@ -119,6 +121,11 @@ body {
   padding-bottom: 16px;
   padding-left: 8px;
   padding-right: 8px;
+}
+
+.book-body {
+  width: 100vw;
+  padding: 0px 16px;
 }
 
 /* hide by default, show when small width */
@@ -259,6 +266,7 @@ tbody tr td.decimal {
 
 .book-name {
   padding-right: 32px;
+  padding-left: 0px;
 }
 
 table.book-list th {

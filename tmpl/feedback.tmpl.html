@@ -9,27 +9,26 @@
     <title>Feedback for Essential Programming Books</title>
     <link href="{{.PathMainCSS}}" rel="stylesheet"> {{ .Analytics }}
     <style type="text/css">
-    .btn {
-      font-size: 12pt;
-      /* background-color: #dbeafa; */
-      border: none;
-      padding: 4px 8px;
-      border: solid 2px #999;
-      cursor: pointer;
-    }
+        .btn {
+            font-size: 12pt;
+            /* background-color: #dbeafa; */
+            border: none;
+            padding: 4px 8px;
+            border: solid 2px #999;
+            cursor: pointer;
+        }
 
-    .btn:hover {
-      background-color: #e7e7e7;
-    }
+        .btn:hover {
+            background-color: #e7e7e7;
+        }
 
 
-    #msg-area {
-      width: 100%;
-      max-width: 720px;
-      height: 10em;
-      font-size: 11pt;
-    }
-
+        #msg-area {
+            width: 100%;
+            max-width: 720px;
+            height: 10em;
+            font-size: 11pt;
+        }
     </style>
 
     <script src="{{.PathFontAwesomeJS}}" defer></script>
@@ -37,40 +36,54 @@
 </head>
 
 <body>
-    <h1>
-        <a href="/" class="breadcrumbs__item about-home-link">
-            <i class="fas fa-home"></i>
-        </a>
-        Feedback
-    </h1>
+    <header class="page__header">
+        <div class="page__header__left">
+            <a href="/">
+                <i class="fas fa-home"></i> Essential Books</a>
+        </div>
+        <div>
+        </div>
+        <div class="page__header__right">
+            <!-- Right Side-->
+        </div>
+    </header>
+    <div class="content">
+        <div class="book-body">
 
-    <p>Here are the ways to provide feedback.</p>
+            <h1>
+                Feedback
+            </h1>
 
-    <h3>Provide feedback on individual page</h3>
-    <p>
-        If you want to provide feedback on a particular page, use "File Issue" link to open a GitHub issue for that page.
-    </p>
+            <p>Here are the ways to provide feedback.</p>
 
-    <h3>Open GitHub issue</h3>
-    <p>
-        You can
-        <a href="https://github.com/essentialbooks/books/issues">open GitHub issue</a> for the project in general.
-    </p>
+            <h3>Provide feedback on individual page</h3>
+            <p>
+                If you want to provide feedback on a particular page, use "File Issue" link to open a GitHub issue for that page.
+            </p>
 
-    <h3>Send me an e-mail</h3>
-    <p>
-        You can send me an e-mail to <a href="mailto:kkowalczyk@gmail.com">kkowalczyk@gmail.com</a>
-    </p>
+            <h3>Open GitHub issue</h3>
+            <p>
+                You can
+                <a href="https://github.com/essentialbooks/books/issues">open GitHub issue</a> for the project in general.
+            </p>
 
-    <h3>Send me a message</h3>
-    <p>You can send me a quick message. Note: I won't be able to reply unless you also include your e-mail address.</p>
-    <p>
-        <form name="contact" method="POST" netlify>
-           <textarea name="message" id="msg-area"></textarea>
-            <div netlify-recaptcha></div>
-            <button type="submit" class="btn">Send message</button>
-        </form>
-    </p>
+            <h3>Send me an e-mail</h3>
+            <p>
+                You can send me an e-mail to
+                <a href="mailto:kkowalczyk@gmail.com">kkowalczyk@gmail.com</a>
+            </p>
+
+            <h3>Send me a message</h3>
+            <p>You can send me a quick message. Note: I won't be able to reply unless you also include your e-mail address.</p>
+            <p>
+                <form name="contact" method="POST" netlify>
+                    <textarea name="message" id="msg-area"></textarea>
+                    <div netlify-recaptcha></div>
+                    <button type="submit" class="btn">Send message</button>
+                </form>
+            </p>
+        </div>
+    </div>
 
 </body>
 
