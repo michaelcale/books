@@ -30,30 +30,24 @@
     <script src="{{.PathAppJS}}" defer></script>
 </head>
 
-<body>
+<body class="page">
     {{$currChapterNo:=.CurrentChapterNo}}
-    <div id="top-header">
-        <div class="top-header-left">
+    <header class="page__header">
+        <div class="page__header__left">
             <a href="/">
                 <i class="fas fa-home"></i> Essential Books</a>
         </div>
-
-        <input id="search-input" placeholder="Search Essential {{.Book.Title}}. Tip: press '/'.">
-        <div class="top-header-right">
-            <!-- Right Side-->
+        <div>
+            <input id="search-input" placeholder="Search Essential {{.Book.Title}}. Tip: press '/'.">
         </div>
+        <div class="page__header__right">
+        </div>
+    </header>
+
+    <div id="toc">
     </div>
 
-    <div id="search-results-window">
-        <div id="search-results">
-
-        </div>
-        <div id="search-results-help">
-            &nbsp;&nbsp;&uarr; &darr; to navigate &nbsp;&nbsp;&nbsp; &crarr; to select &nbsp;&nbsp;&nbsp; Esc to close
-        </div>
-    </div>
-
-    <div class="content-wrapper">
+    <div class="content">
         <div class="article">
             <div class="article-top-hdr">
                 <span>
@@ -100,6 +94,11 @@
             </div>
             {{end}} {{if .HTML}} {{.HTML}} {{end}}
 
+            <div class="forum-link">
+                <i>Article not clear? Get help and help others in
+                    <a href="https://forum.programming-books.io">forum</a>.</i>
+            </div>
+
             <div class="chapter-toc">
                 {{range .Articles}}
                 <div>
@@ -108,31 +107,31 @@
                 </div>
                 {{end}}
             </div>
-        </div>
 
-        <hr class="toc-sep">
+            <div class="chapter-toc-wrapper">
+                <hr class="toc-sep">
+                <div class="toc-header">{{.Book.TitleLong}}</div>
 
-        <div class="chapter-toc-wrapper">
-            <div class="toc-header">{{.Book.TitleLong}}</div>
-
-            <div class="chapters-toc">
-                {{range .Book.Chapters}} {{if eq $currChapterNo .No}}
-                <div class="chapters-toc-item">
-                    <!-- <span class="chap-no">{{.No}}</span>  -->
-                    <span class="is-current">{{.Title}}</span>
+                <div class="chapters-toc">
+                    {{range .Book.Chapters}} {{if eq $currChapterNo .No}}
+                    <div class="chapters-toc-item">
+                        <!-- <span class="chap-no">{{.No}}</span>  -->
+                        <span class="is-current">{{.Title}}</span>
+                    </div>
+                    {{else}}
+                    <div class="chapters-toc-item">
+                        <!-- <span class="chap-no>{{.No}}</span> -->
+                        <a href="{{.URL}}">{{.Title}}</a>
+                    </div>
+                    {{end}} {{end}}
                 </div>
-                {{else}}
-                <div class="chapters-toc-item">
-                    <!-- <span class="chap-no">{{.No}}</span> -->
-                    <a href="{{.URL}}">{{.Title}}</a>
-                </div>
-                {{end}} {{end}}
             </div>
         </div>
     </div>
 
-    <div id="bottom-footer">
-        <div>Maintained by
+    <footer class="page__footer">
+        <div class="page__footer__left">
+            Maintained by
             <a href="https://blog.kowalczyk.info" target="_blank">Krzysztof Kowalczyk</a>
         </div>
         <div class="share-me">
@@ -141,10 +140,20 @@
                 <i class="fab fa-twitter"></i>
             </a>
         </div>
-        <div>
+        <div class="page__footer__right">
             <!-- right side. Used to be 'edit github' url -->
         </div>
+    </footer>
+
+    <!-- aboslutely positioned elements -->
+    <div id="search-results-window">
+        <div id="search-results">
+        </div>
+        <div id="search-results-help">
+            &nbsp;&nbsp;&uarr; &darr; to navigate &nbsp;&nbsp;&nbsp; &crarr; to select &nbsp;&nbsp;&nbsp; Esc to close
+        </div>
     </div>
+
 
     <div id="blur-overlay"></div>
 </body>

@@ -30,28 +30,23 @@
     <script src="{{.PathAppJS}}" defer></script>
 </head>
 
-<body>
-    <div id="top-header">
-        <div class="top-header-left">
+<body class="page">
+    <header class="page__header">
+        <div class="page__header__left">
             <a href="/">
                 <i class="fas fa-home"></i> Essential Books</a>
         </div>
-        <input id="search-input" placeholder="Search Essential {{.Book.Title}}. Tip: press '/'.">
-        <div class="top-header-right">
-            <!-- Right Side-->
+        <div>
+            <input id="search-input" placeholder="Search Essential {{.Book.Title}}. Tip: press '/'.">
         </div>
+        <div class="page__header__right">
+        </div>
+    </header>
+
+    <div id="toc">
     </div>
 
-    <div id="search-results-window">
-        <div id="search-results">
-
-        </div>
-        <div id="search-results-help">
-            &nbsp;&nbsp;&uarr; &darr; to navigate &nbsp;&nbsp;&nbsp; &crarr; to select &nbsp;&nbsp;&nbsp; Esc to close
-        </div>
-    </div>
-
-    <div class="content-wrapper">
+    <div class="content">
         <div class="article">
             <div class="article-top-hdr">
                 <span>
@@ -73,6 +68,11 @@
             <h1 class="title">{{.Title}}</h1>
             {{ .HTML }}
 
+            <div class="forum-link">
+                <i>Article not clear? Get help and help others in
+                    <a href="https://forum.programming-books.io">forum</a>.</i>
+            </div>
+
             <div class="chapter-toc">
                 {{range .Siblings}} {{if .IsCurrent}}
                 <div>
@@ -86,11 +86,11 @@
                 </div>
                 {{end}} {{end}}
             </div>
-            <p>&nbsp;</p>
         </div>
     </div>
-    <div id="bottom-footer">
-        <div>
+
+    <footer class="page__footer">
+        <div class="page__footer__left">
             Maintained by
             <a href="https://blog.kowalczyk.info" target="_blank">Krzysztof Kowalczyk</a>
         </div>
@@ -100,8 +100,17 @@
                 <i class="fab fa-twitter"></i>
             </a>
         </div>
-        <div>
+        <div class="page__footer__right">
             <!-- right side. Used to be 'edit github' url -->
+        </div>
+    </footer>
+
+    <!-- aboslutely positioned elements -->
+    <div id="search-results-window">
+        <div id="search-results">
+        </div>
+        <div id="search-results-help">
+            &nbsp;&nbsp;&uarr; &darr; to navigate &nbsp;&nbsp;&nbsp; &crarr; to select &nbsp;&nbsp;&nbsp; Esc to close
         </div>
     </div>
 

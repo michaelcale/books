@@ -17,7 +17,6 @@ type Student struct {
 
 func main() {
 	// :show start
-
 	f, err := os.Open("data.json")
 	if err != nil {
 		log.Fatal(err)
