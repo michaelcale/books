@@ -303,56 +303,6 @@ a.blue:hover {
   color: #4183c4;
 }
 
-#top-header {
-  position: fixed;
-  z-index: 2;
-  top: 0px;
-  /* same as body margin */
-  left: 20px;
-  right: 20px;
-  height: 32px;
-  /* background-color: lightcyan; */
-  background-color: white;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 2px solid lightgray;
-}
-
-/*
-we make top-header-left and top-header-right the same size so that search
-input field is centered. We could also center with fixed positioning
-or use grid for top-header instead of flexbox.
-*/
-.top-header-left {
-  width: 160px;
-}
-
-.top-header-right {
-  width: 160px;
-}
-
-#bottom-footer {
-  position: fixed;
-  bottom: 0px;
-  left: 20px;
-  right: 20px;
-  height: 28px;
-  background-color: white;
-  border-top: 1px solid lightgray;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.8em;
-}
-
-.content-wrapper {
-  /* make space for top-header */
-  margin-top: 40px;
-  /* make space for bottom-footer */
-  margin-bottom: 36px;
-}
-
 .covers {
   padding-top: 16px;
   padding-right: 32px;
@@ -496,36 +446,6 @@ or use grid for top-header instead of flexbox.
   /* background-color: lightskyblue; */
 }
 
-.github-link {
-  font-size: 0.8em;
-  position: fixed;
-  right: 18px;
-  top: 62px;
-  padding: 4px 8px;
-  border: 1px solid #666;
-}
-
-.github-link:hover {
-  background-color: #f1f1f1;
-}
-
-.github-link-small {
-  font-size: 0.6em;
-  position: fixed;
-  right: 18px;
-  top: 38px;
-  padding: 4px 8px;
-  border: 1px solid #666;
-}
-
-.github-link-small:hover {
-  background-color: #f1f1f1;
-}
-
-.article_title {
-  font-weight: bold;
-}
-
 .article code {
   background-color: #f8f8f8;
   background-color: #f5f2f0;
@@ -614,7 +534,7 @@ hr.toc-sep {
   font-family: Lucida Grande, Lucida Sans Unicode, Arial, Helvetica, sans-serif;
   color: #a9a9a9;
   display: inline-block;
-  margin: 0 9px 0 7px;
+  margin: 0 0px 0 4px;
 }
 
 .hcenter {
@@ -633,13 +553,6 @@ hr.toc-sep {
   filter: opacity(1);
 }
 
-.chapters-toc-item {
-  /* background-color: #fcfcfc; */
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
 pre.chroma {
   display: block;
   overflow-x: auto;
@@ -652,16 +565,6 @@ pre.chroma {
   overflow-x: visible;
   font-size: 85%;
   tab-size: 2;
-}
-
-a.about-home-link {
-  color: black;
-  text-decoration: none;
-}
-
-a:hover.about-home-link {
-  color: black;
-  text-decoration: none;
 }
 
 /* this allows to position child absolutely */
