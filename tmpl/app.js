@@ -858,12 +858,30 @@ function onSearchInputChanged(ev) {
   searchInputDebouncer(fn);
 }
 
+function onSearchInputFocus(ev) {
+  setState({
+      searchInputFocused: true,
+  });
+  ev.preventDefault();
+}
+
+function onSearchInputBlur(ev) {
+  setState({
+      searchInputFocused: false,
+  });
+  ev.preventDefault();
+}
+
 function start() {
   //console.log("started");
 
   document.addEventListener("keydown", onKeyDown, true);
+
   var el = getSearchInputElement();
   el.addEventListener("input", onSearchInputChanged, true);
+  el.addEventListener("focus", onSearchInputFocus, true);
+  el.addEventListener("blur", onSearchInputBlur, true);
+
   document.addEventListener("mousemove", onMouseMove, true);
   document.addEventListener("click", onClick, false);
 
