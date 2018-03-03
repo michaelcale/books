@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"net/url"
@@ -43,7 +44,8 @@ func main() {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		log.Fatalf("Request was '%s' (%d) and not OK (200)\n", resp.Status, resp.StatusCode)
+		d, _ := ioutil.ReadAll(resp.Body)
+		log.Fatalf("Request was '%s' (%d) and not OK (200). Body:\n%s\n", resp.Status, resp.StatusCode, string(d))
 	}
 
 	dec := json.NewDecoder(resp.Body)
