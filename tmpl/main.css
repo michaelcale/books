@@ -62,7 +62,7 @@ body {
   align-items: baseline;
 
   font-size: 0.8em;
-  padding: 8px 16px;
+  padding: 4px 16px;
   background-color: #f5f5f5;
 }
 
@@ -91,13 +91,26 @@ body {
   padding-right: 8px;
 
   min-width: 120px;
-  max-width: 320px;
+  max-width: 240px;
 
   font-size: 0.8em;
-  background-color: lightcyan;
+  /*background-color: lightcyan;*/
 
-  overflow-x: hidden;
+  /* filter: opacity(0.6; */
+}
+
+#toc:hover {
+  /* filter: opacity(1); */
+}
+
+#toc div {
+  white-space: nowrap;
   text-overflow: ellipsis;
+  overflow-x: hidden;
+}
+
+#toc div:hover {
+  background-color:#e5e5e5;
 }
 
 .article {
@@ -119,6 +132,7 @@ body {
   font-size: 0.8em;
   padding-bottom: 16px;
   display: block;
+  display: none; /* disabled for now */
 }
 
 @media screen and (max-width: 780px) {
@@ -137,6 +151,17 @@ body {
   }
 }
 
+#toc .lvl1 {
+  padding-left: 1em;
+}
+
+#toc .lvl2 {
+  padding-left: 2em;
+}
+
+  #toc .lvl3 {
+  padding-left: 3em;
+}
 
 /*
 .article div {
@@ -373,17 +398,20 @@ or use grid for top-header instead of flexbox.
 
 #search-input {
   width: 50vw;
-  font-size: 14px;
+  font-size: 16px;
   padding: 2px 8px;
-  border-radius: 0.35rem;
   background-color: white;
   /* filter: opacity(1); */
   /* border-color: #717274; */
   /* box-shadow: inset 0 1px 1px rgba(0,0,0,.075); */
-  border: 1px solid #a0a0a2;
+  border: 1px solid silver;
   /* box-shadow: inset 0 0 0 0 transparent; */
   outline: 0;
   z-index: 25;
+}
+
+#search-input:hover {
+  border-color: #a0a0a0;
 }
 
 #search-input::placeholder {
@@ -399,7 +427,7 @@ or use grid for top-header instead of flexbox.
 #search-input:focus {
   /* border: 1px solid lightskyblue; */
   /* border: 1px solid #aaaaaa; */
-  border-color: #717274;
+  border-color: #a0a0a0;
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
 }
 
@@ -525,11 +553,14 @@ hr.toc-sep {
   background-color: white;
   padding-top: 1em;
   background: #f4f4f4;
-  padding: 4px 8px;}
+  padding: 4px 8px;
+  margin-left: -8px;
+}
 
 .chapters-toc {
   /* font-size: 0.8em; */
   columns: 6; /* for sizes over 1200px */
+  font-size: 0.8em;
 }
 
 .view-switch {

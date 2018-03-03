@@ -12,7 +12,7 @@ func (rc *MyReadCloser) Read(d []byte) (int, error) {
 
 var _ io.ReadCloser = &MyReadCloser{}
 
+// :show end
+
 func main() {
 }
-
-// :show end

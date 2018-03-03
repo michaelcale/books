@@ -27,9 +27,25 @@ if (!Object.is) {
 // accessor functions for items in gBookToc array:
 // 	[${chapter or aticle url}, ${parentIdx}, ${title}, ${synonim 1}, ${synonim 2}, ...],
 // as generated in gen_book_toc_search.go and stored in books/${book}/toc_search.js
+
+var itemIdxIsExpanded = 0;
+var itemIdxURL = 1;
+var itemIdxParent = 2;
+var itemIdxFirstChild = 3;
+var itemIdxTitle = 4;
+var itemIdxFirstSynonym = 5;
+
+function tocItemIsExpanded(item) {
+  return item[itemIdxIsExpanded];
+}
+
+function tocItemSetIsExpanded(item, isExpanded) {
+  item[itemIdxIsExpanded] = isExpanded;
+}
+
 function tocItemURL(item) {
   while (true) {
-    var uri = item[0];
+    var uri = item[itemIdxURL];
     if (uri != "") {
       return uri;
     }
@@ -40,6 +56,14 @@ function tocItemURL(item) {
   }
 }
 
+function tocItemFirstChildIdx(item) {
+  return item[itemIdxFirstChild];
+}
+
+function tocItemHasChildren(item) {
+  return tocItemFirstChildIdx(item) != -1;
+}
+
 function tocItemParent(item) {
   var idx = tocItemParentIdx(item);
   if (idx == -1) {
@@ -48,17 +72,21 @@ function tocItemParent(item) {
   return gBookToc[idx];
 }
 
+function tocItemIsRoot(item) {
+  return tocItemParentIdx(item) == -1;
+}
+
 function tocItemParentIdx(item) {
-  return item[1];
+  return item[itemIdxParent];
 }
 
 function tocItemTitle(item) {
-  return item[2];
+  return item[itemIdxTitle];
 }
 
 // all searchable items: title + search synonyms
 function tocItemSearchable(item) {
-  return item.slice(2);
+  return item.slice(itemIdxTitle);
 }
 
 // from https://github.com/component/escape-html/blob/master/index.js
@@ -195,7 +223,14 @@ function setState(newState, now = false) {
 }
 
 function isChapterOrArticleURL(s) {
-  return s.startsWith("ch-") || s.startsWith("a-");
+  return s.startsWith("a-");
+}
+
+function getLocationLastElement() {
+  var loc = window.location.pathname;
+  var parts = loc.split("/");
+  var lastIdx = parts.length - 1;
+  return parts[lastIdx];
 }
 
 function navigateToSearchResult(idx) {
@@ -381,6 +416,107 @@ function rebuildSearchResultsUI() {
     var el = document.getElementById(id);
     scrollIntoViewIfOutOfView(el);
   });
+}
+
+function isCurrentURI(uri) {
+  var currURI = getLocationLastElement();
+  return currURI === uri;
+}
+
+function getItemsIdxForParent(parentIdx) {
+  var res = [];
+  var n = gBookToc.length;
+  for (var i = 0; i < n; i++) {
+    var tocItem = gBookToc[i];
+    if (tocItemParentIdx(tocItem) == parentIdx) {
+      res.push(i);
+    }
+  }
+  return res;
+}
+
+function buildTOCHTMLLevel(level, parentIdx) {
+  var opt = {};
+  var opt, tocItemIdx, tocItem, parent;
+  var itemsIdx = getItemsIdxForParent(parentIdx);
+  if (itemsIdx.length == 0) {
+    return "";
+  }
+  var html = "";
+  var n = itemsIdx.length;
+  for (var i = 0; i < n; i++) {
+    tocItemIdx = itemsIdx[i];
+    tocItem = gBookToc[tocItemIdx];
+    opt.cls = "lvl" + level;
+    var title = tocItemTitle(tocItem);
+    var uri = tocItemURL(tocItem);
+    if (false && isCurrentURI(uri)) {
+      html += div(escapeHTML(title), opt);
+    } else {
+
+      // var arrow = "&#x25B8; "; // http://graphemica.com/%E2%96%B8
+      var arrow = "&#x25BA; "
+      if (tocItemIsExpanded(tocItem)) {
+        //arrow = "&#x25BE; "; // http://graphemica.com/%E2%96%BE
+        arrow = "&#x25BC; ";
+      }
+
+      if (!tocItemHasChildren(tocItem)) {
+        arrow = "";
+      }
+
+      var elA = '<a href="' + uri + '">' + arrow + title + "</a>";
+      html += div(elA, opt);
+      if (tocItemIsExpanded(tocItem)) {
+        var htmlChild = buildTOCHTMLLevel(level+1, tocItemIdx);
+        html += htmlChild;
+      }
+     }
+  }
+  return html;
+}
+
+function buildTOCHTML() {
+  return buildTOCHTMLLevel(0, -1);
+}
+
+function setIsExpandedUpwards(i) {
+  var tocItem = gBookToc[i];
+  tocItemSetIsExpanded(tocItem, true);
+  tocItem = tocItemParent(tocItem);
+  while (tocItem != null) {
+    tocItemSetIsExpanded(tocItem, true);
+    tocItem = tocItemParent(tocItem);
+  }
+}
+
+function setTocExpandedForCurrentURL() {
+  var currURI = getLocationLastElement();
+  var tocItem, i, uri;
+  var n = gBookToc.length;
+  for (i = 0; i < n; i++) {
+    tocItem  = gBookToc[i];
+    tocItemSetIsExpanded(tocItem, false);
+  }
+
+  for (i = 0; i < n; i++) {
+    tocItem  = gBookToc[i];
+    uri = tocItemURL(tocItem);
+    if (uri === currURI) {
+      setIsExpandedUpwards(i);
+      return;
+    }
+  }
+}
+
+function createTOC() {
+  var el = document.getElementById("toc");
+  if (!el) {
+    console.log("no #article-toc found");
+    return;
+  }
+  var html = buildTOCHTML();
+  el.innerHTML = html;
 }
 
 function getSearchInputElement() {
@@ -699,6 +835,8 @@ function start() {
   el.addEventListener("input", onSearchInputChanged, true);
   document.addEventListener("mousemove", onMouseMove, true);
   document.addEventListener("click", onClick, false);
+  setTocExpandedForCurrentURL();
+  createTOC();
 }
 
 // we don't want to run javascript on about etc. pages

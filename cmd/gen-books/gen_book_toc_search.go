@@ -14,12 +14,12 @@ import (
 Generates a javascript file that looks like:
 
 gBookToc = [
-	[${chapter or aticle id}, ${parentIdx}, ${title}, ${synonim 1}, ${synonim 2}, ...],
+	[${is_expanded}, ${chapter or aticle id}, ${parentIdx}, ${childIdx}, ${title}, ${synonym 1}, ${synonym 2}, ...],
 ];
 
 It's saved in wwww/essential/${bookname}/toc_search.js
 
-TODO: optimize this as a one long string to search instead of multiple strings
+Maybe: optimize this as a one long string to search instead of multiple strings
 in an array. Use 0 to separate chapter/article. Use 1 to separate title
 from synonims.
 
@@ -27,24 +27,33 @@ Also, have original and lower-cased version of the string. We search lower-cased
 but show the original. That avoids lowercasing during search.
 */
 
+const (
+	itemIdxIsExpanded   = 0
+	itemIdxURL          = 1
+	itemIdxParent       = 2
+	itemIdxFirstChild   = 3
+	itemIdxTitle        = 4
+	itemIdxFirstSynonym = 5
+)
+
 func genBookTOCSearchMust(book *Book) {
 	var toc [][]interface{}
 	for _, chapter := range book.Chapters {
 		title := strings.TrimSpace(chapter.Title)
-		tocItem := []interface{}{chapter.FileNameBase, -1, title}
+		tocItem := []interface{}{false, chapter.FileNameBase, -1, -1, title}
 		toc = append(toc, tocItem)
 		chapIdx := len(toc) - 1
 		u.PanicIf(chapIdx < 0)
 
 		headings := chapter.Headings()
 		for _, heading := range headings {
-			tocItem = []interface{}{"", chapIdx, heading}
+			tocItem = []interface{}{false, "", chapIdx, -1, heading}
 			toc = append(toc, tocItem)
 		}
 
 		for _, article := range chapter.Articles {
 			title := strings.TrimSpace(article.Title)
-			tocItem = []interface{}{article.FileNameBase, chapIdx, title}
+			tocItem = []interface{}{false, article.FileNameBase, chapIdx, -1, title}
 			for _, syn := range article.SearchSynonyms {
 				tocItem = append(tocItem, syn)
 			}
@@ -53,11 +62,24 @@ func genBookTOCSearchMust(book *Book) {
 			headings := article.Headings()
 			articleIdx := len(toc) - 1
 			for _, heading := range headings {
-				tocItem = []interface{}{"", articleIdx, heading}
+				tocItem = []interface{}{false, "", articleIdx, -1, heading}
 				toc = append(toc, tocItem)
 			}
 		}
 	}
+
+	// set first child idx from parent idx
+	for i, tocItem := range toc {
+		parentIdx := tocItem[itemIdxParent].(int)
+		if parentIdx != -1 {
+			parentTocItem := toc[parentIdx]
+			idx := parentTocItem[itemIdxFirstChild].(int)
+			if idx == -1 {
+				parentTocItem[itemIdxFirstChild] = i
+			}
+		}
+	}
+
 	d, err := json.MarshalIndent(toc, "", "  ")
 	u.PanicIfErr(err)
 	s := "gBookToc = " + string(d) + ";"
