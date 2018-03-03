@@ -2,7 +2,7 @@
 Title: Emulating enums
 Id: 801000c4
 ---
-Go deesn't have a syntax for enumerations but you can emulate it with constants and a naming scheme.
+Go doesn't have a syntax for enumerations, but you can emulate it with constants and a naming scheme.
 
 Consider a C++ enum:
 ```c++

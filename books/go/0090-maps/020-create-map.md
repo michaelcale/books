@@ -20,7 +20,7 @@ The same code, but with Variable types:
 
 You can also include your own structs in a map:
 
-You can use custom types as value:
+You can use custom types as the value:
 
     // Custom struct types
     type Person struct {

@@ -2,7 +2,7 @@
 Title: Basic pointers
 Id: 4054
 ---
-Go has pointers, like C++. A pointer to a variable is address of that variable in memory.
+Go has pointers, like C++. A pointer to a variable is the address of that variable in memory.
 
 Unlike C++, Go doesn't have pointer arithmetic i.e. you can't add or substract from pointers.
 

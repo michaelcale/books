@@ -2,16 +2,16 @@
 Title: Remove elements from slice
 Id: 3420
 ---
-If you need to remove one or more elements from a slice, or if you need to work with a sub slice of another existing one; you can use the following method.
+If you need to remove one or more elements from a slice, or if you need to work with a sub-slice of an existing slice; you can use the following method.
 
-> Following examples uses slice of int, but that works with all type of slice.
+> The following examples use a slice of type int, but will work for all types of slice.
 
-So for that, we need a slice, from witch we will remove some elements:
+So, we need a slice from which we will remove some elements:
 
     slice := []int{1, 2, 3, 4, 5, 6}
     // > [1 2 3 4 5 6]
 
-We need also the indexes of elements to remove:
+We also need the indexes of the elements to remove:
 
     // index of first element to remove (corresponding to the '3' in the slice)
     var first = 2
@@ -39,7 +39,7 @@ And so we can "slice" the slice, removing undesired elements:
     newSlice4 := slice[:2 + copy(slice[2:], slice[5:])]
     // > [1 2 6]
 
-To remove only one element, just have to put the index of this element as the first AND as the last index to remove, just like that:
+To remove only one element, just put the index of this element as the first AND as the last index to remove, like this:
 
     var indexToRemove = 3
     newSlice5 := append(slice[:indexToRemove], slice[indexToRemove+1:]...)
@@ -58,7 +58,7 @@ And you can also remove elements from the beginning of the slice:
     newSlice6 := slice[last+1:]
     // > [6]
 
-You can also removing some elements from the end of the slice:
+You can also remove some elements from the end of the slice:
 
     newSlice7 := append(slice[:first], slice[first+1:len(slice)-1]...)
     // > [1 2]
@@ -67,5 +67,5 @@ You can also removing some elements from the end of the slice:
     newSlice7 := slice[:first]
     // > [1 2]
 
-> If the new slice have to contains exactly the same elements than the first one, you can use the same thing but with `last := first-1`.
-(This can be useful in case of your indexes are previously computed)
+> If the new slice has to contain exactly the same elements as the first one, you can use the same thing but with `last := first-1`.
+(This can be useful in cases where your indexes are previously computed)

@@ -2,7 +2,7 @@
 Title: Create a slice
 Id: 4807
 ---
-Slices are the typical way go programmers store lists of data.
+Slices are the typical way Go programmers store lists of data.
 
 To declare a slice variable use the `[]Type` syntax.
 
@@ -12,7 +12,7 @@ To declare and initialize a slice variable in one line use the `[]Type{values}` 
 
     var a []int = []int{3, 1, 4, 1, 5, 9}
 
-Another way to initialize a slice is with the `make` function. It three arguments: the `Type` of the slice (or [map][ch-732]), the `length`, and the `capacity`.
+Another way to initialize a slice is with the `make` function. It takes three arguments: the `Type` of the slice (or [map][ch-732]), the `length`, and the `capacity`.
 
     a := make([]int, 0, 5)
 

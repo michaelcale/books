@@ -8,7 +8,7 @@ Basics:
 
 @file iota.go output sha1:a8b1274df4bb37c5d29db536bbf026e89f600e17 goplayground:Hom7xSeu2_V
 
-`iota` sets the value of `Low` to 0 and instructs the compiler following constants have increasing numeric values.
+`iota` sets the value of `Low` to 0 and instructs the compiler that the following constants have increasing numeric values.
 
 
 ## Creating bitmask values with `iota`
@@ -23,7 +23,7 @@ The value of `iota` is still incremented for every entry in a constant list even
 
 @file iota_3.go output sha1:85d09c78773f11dadfcb5b117979571188019251 goplayground:QXKxVfUW9e-
 
-it will also be incremented even if no constant is created at all, meaning the empty identifier can be used to skip values entirely:
+It will also be incremented even if no constant is created at all, meaning the empty identifier can be used to skip values entirely:
 
 @file iota_4.go output sha1:73888bb42c8811dfa670abcb058a736e93999a9e goplayground:60ov9hRLZK1
 

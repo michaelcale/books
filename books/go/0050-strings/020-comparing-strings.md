@@ -9,7 +9,7 @@ Id: 29828
 
 Comparison is performed on raw bytes.
 
-This works as you would expect for ascii (i.e. english) text but might not be what you mean when strings used mixed case (e.g. "abba" is > "Zorro") or use letters from non-english alphabets.
+This works as you would expect for ascii (i.e. english) text but might not be what you want when strings use mixed case (e.g. "abba" is > "Zorro") or use letters from non-english alphabets.
 
 ## Compare with `strings.Compare`
 

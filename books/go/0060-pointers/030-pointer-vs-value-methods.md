@@ -32,4 +32,4 @@ To learn more about pointer and value methods, visit the [Go Spec section on Met
 
 _Note 1: The parenthesis (`()`) around `*p` and `&f` before selectors like `.Bar` are there for grouping purposes, and must be kept._
 
-_Note 2: Although pointers can be converted to values (and vice-versa) when they are the receivers for a method, they are_ not _automattically converted to each other when they are arguments inside of a function._
+_Note 2: Although pointers can be converted to values (and vice-versa) when they are the receivers for a method, they are_ not _automatically converted to each other when they are arguments inside of a function._

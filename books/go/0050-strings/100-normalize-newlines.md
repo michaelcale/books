@@ -15,9 +15,9 @@ There are 3 common ways to represent a newline.
 
 When splitting strings into lines you have to decide how you'll handle this.
 
-You can assume that your code will only see e.g. Unix style line ending and only handle "\n", This won't work on files with Mac ending at all and files with Windows ending will have CR character in them.
+You can assume that your code will only see e.g. Unix style line endings and only handle "\n", but this won't work at all on files with Mac line endings and files with Windows line endings will have a CR character in them.
 
-A simple way to handle multiple newline representations is to normalize newlines and then operate on normalized version.
+A simple way to handle multiple newline representations is to normalize the newlines and then operate on the normalized version.
 
 Finally you can write code that handles all newline endings. Inevitably, such code is a bit more complicated.
 

@@ -3,21 +3,21 @@ Title: Format text
 Id: 29829
 ---
 
-Go's standard library implements C-style string formatting in [`fmt`](https://golang.org/pkg/fmt/) package.
+Go's standard library implements C-style string formatting in the [`fmt`](https://golang.org/pkg/fmt/) package.
 
 @file formatting_text.go output sha1:8320ec396f0bcaa1ef717aad667081c2df7991ea goplayground:j5SLVfc6RdI
 
-First argument to `fmt.Sprintf` is formatting string which tells how to format subsequent argument. Following are values that will be formatted.
+The first argument to `fmt.Sprintf` is a formatting string which defines how to format subsequent arguments. Subsequent arguments are the values that will be formatted.
 
 `fmt.Sprintf` creates a formatted string.
 
-For covenience, there's also:
-* `fmt.Fprintf(w io.Writer, string format, args... interface{})`, which will write formatted string to a given writer
-* `fmt.Pritnf(format string, args.. interface{})` which writes formatted string to `os.Stdout`.
+For convenience, there's also:
+* `fmt.Fprintf(w io.Writer, string format, args... interface{})`, which will write a formatted string to a given writer
+* `fmt.Pritnf(format string, args.. interface{})` which writes a formatted string to `os.Stdout`.
 
 <!-- TODO: more examples for goal-oriented -->
 
-The function `Sprintf` formats the string in the first parameter replacing the verbs with the value of the values in the next parameters and returns the result. Like `Sprintf`, the function `Printf` also formats but instead of returning the result it prints the string.
+The function `Sprintf` formats the string in the first parameter, replacing the verbs with the values of the subsequent parameters and returns the result. Like `Sprintf`, the function `Printf` also formats but instead of returning the result it prints the string.
 
 ## List of string formatting verbs
 

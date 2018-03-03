@@ -10,7 +10,7 @@ Accessing a non-existent key will return a nil slice as a value. Since nil slice
     m["key1"] = append(m["key1"], 1)
     // len(m["key1"]) == 1
 
-Deleting a key from map sets the key back to a nil slice:
+Deleting a key from a map sets the key back to a nil slice:
 
     delete(m, "key1")
     // m["key1"] == nil

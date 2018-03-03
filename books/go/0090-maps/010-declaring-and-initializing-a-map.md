@@ -10,7 +10,7 @@ You define a map using the keyword `map`, followed by the types of its keys and 
     // Keys are strings, values are ints.
     var m2 map[string]int // initialized to nil
 
-Maps are reference types, and once defined they have a [_zero value_ of `nil`](a-2485). Writes to nil maps will [panic](a-4350) and reads will always return the zero value.
+Maps are reference types, and once defined they have a [_zero value_ of `nil`](a-2485). Writes to nil maps will cause a [panic](a-4350) and reads will always return the zero value.
 
 To initialize a map, use the [`make`](https://golang.org/pkg/builtin/#make) function:
 

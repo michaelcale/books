@@ -2,7 +2,7 @@
 Title: Blank identifier
 Id: 29103
 ---
-To help avoid mistakes, Go compiler doesn't allow unused variables.
+To help avoid mistakes, the Go compiler doesn't allow unused variables.
 
 However, there are some situations when you don't need to use a value stored in a variable.
 

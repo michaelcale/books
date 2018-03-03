@@ -16,10 +16,10 @@ k2 := m["bar"]  // returns "" since that is the value stored in the map
 k3 := m["nop"]  // returns "" since the key does not exist, and "" is the string type's zero value
 ```
 
-To differentiate between empty values and non-existent keys, you can use the second returned value of the map access (using like `value, hasKey := map["key"]`).
+To differentiate between empty values and non-existent keys, you can use the second returned value of the map access (for example `value, hasKey := map["key"]`).
 
 This second value is `boolean` typed, and will be:
-- `true` when the value is in the map,
+- `true` when the value exists in the map,
 - `false` when the map does not contains the given key.
 
 Look at the following example:

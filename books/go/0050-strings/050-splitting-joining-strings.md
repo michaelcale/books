@@ -9,7 +9,7 @@ TODO: write me
 
 ## Join a string using `strings.Join`
 
-TOOD: write me
+TODO: write me
 
 * [`strings.Split`](https://golang.org/pkg/strings/#Split)
 

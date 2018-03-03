@@ -2,7 +2,7 @@
 Title: Read text file line by line
 Id: 5eq100ld
 ---
-Often we need to read a file line by by lines.
+Often we need to read a file line by line.
 
 ## Read file into memory and split into lines
 

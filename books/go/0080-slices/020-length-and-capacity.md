@@ -4,7 +4,7 @@ Id: 3561
 ---
 Slices have both length and capacity.  The length of a slice is the number of elements *currently* in the slice, while the capacity is the number of elements the slice *can hold* before needing to be reallocated.
 
-When creating a slice using the built-in `make()` function, you can specify its length, and optionally its capacity. If the capacity is not explicitly specified, it will be the specified length.
+When creating a slice using the built-in `make()` function, you can specify its length, and optionally its capacity. If the capacity is not explicitly specified, it will default to the value of the specified length.
 ```
 var s = make([]int, 3, 5) // length 3, capacity 5
 ```
