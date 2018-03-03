@@ -96,6 +96,12 @@ body {
   max-width: 240px;
 
   font-size: 0.8em;
+  line-height: 1.3em;
+}
+
+#toc a {
+  color: #646464;
+  color: #686868;
 }
 
 #toc div {
@@ -557,10 +563,12 @@ hr.toc-sep {
 .code-box {
   font-size: 85%;
   background-color: #fafafa;
-  color: #657b83;
+  /* color: #657b83; */
   /* border: 1px solid #e5e5e5; */
+  /*
   border-top: 1px solid #e5e5e5;
   border-bottom: 1px solid #e5e5e5;
+  */
   overflow-x: visible;
 }
 
