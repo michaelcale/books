@@ -107,7 +107,9 @@
 
                     {{range .Articles}}
                     <div>
-                        <!-- <span class="chap-no">{{.No}}</span> -->
+                        <!--
+                            <span class="chap-no">{{.No}}</span>
+                        -->
                         <a href="{{.URL}}">{{.Title}}</a>
                     </div>
                     {{end}}
@@ -125,12 +127,12 @@
                 <div class="chapters-toc">
                     {{range .Book.Chapters}} {{if eq $currChapterNo .No}}
                     <div class="chapters-toc-item">
-                        <!-- <span class="chap-no">{{.No}}</span>  -->
+                        <span class="chap-no">{{.No}}</span>
                         <span class="is-current">{{.Title}}</span>
                     </div>
                     {{else}}
                     <div class="chapters-toc-item">
-                        <!-- <span class="chap-no>{{.No}}</span> -->
+                        <span class="chap-no">{{.No}}</span>
                         <a href="{{.URL}}">{{.Title}}</a>
                     </div>
                     {{end}} {{end}}

@@ -96,13 +96,6 @@ body {
   max-width: 240px;
 
   font-size: 0.8em;
-  /*background-color: lightcyan;*/
-
-  /* filter: opacity(0.6; */
-}
-
-#toc:hover {
-  /* filter: opacity(1); */
 }
 
 #toc div {
@@ -124,7 +117,7 @@ body {
 }
 
 .book-body {
-  width: 100vw;
+  max-width: 100vw;
   padding: 0px 16px;
 }
 
