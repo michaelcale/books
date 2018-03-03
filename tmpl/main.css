@@ -605,6 +605,8 @@ pre.chroma {
 .code-box-playground {
   margin: 0;
   padding: 0px 8px;
+  background: white;
+  margin-right: 8px;
   display: inline-block;
 }
 
@@ -616,6 +618,7 @@ pre.chroma {
   margin: 0;
   padding: 0px 8px;
   display: inline-block;
+  background: white;
 }
 
 .code-box-github:hover {
