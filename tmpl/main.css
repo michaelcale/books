@@ -126,6 +126,10 @@ body {
   display: none;
 }
 
+.bold {
+  font-weight: bold;
+}
+
 /* TODO: setup forum */
 .forum-link {
   color: gray;
