@@ -6,7 +6,7 @@ Variables in Go are always initialized with a known value even if not explicitly
 
 Each Go type has a zero value.
 
-Variables that are not explicitly initialized (assigned an explicit value) have value equal to zero value for their type.
+Variables that are not explicitly initialized (assigned an explicit value) will have a value equal to the zero value for their type.
 
 This is different from C/C++, where variables that are not explicitly assigned have undefined values.
 

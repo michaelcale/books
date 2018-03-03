@@ -16,7 +16,7 @@ go tool tour
 
 The two commands above will start web-servers with documentation similar to what is found online [here](https://golang.org/doc/) and [here](https://tour.golang.org/) respectively.
 
-For quick reference check from command-line, eg for fmt.Print:
+You can also use `godoc` for quick reference. For example, to see documentation for fmt.Print:
 
 ```sh
 godoc cmd/fmt Print
@@ -24,7 +24,7 @@ godoc cmd/fmt Print
 go doc fmt Print
 ```
 
-General help is also available from command-line:
+General help is also available from the command-line:
 
 ```sh
 go help [command]

@@ -2,7 +2,7 @@
 Title: Basic types
 Id: rd6000o3
 ---
-Go supports all the basic types you would expect from statically typed language:
+Go supports all the basic types that you would expect from a statically typed language:
 * booleans
 * fixed-sized signed and unsigned integers
 * floating-point numbers

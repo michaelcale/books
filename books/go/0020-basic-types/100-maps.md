@@ -3,9 +3,9 @@ Title: Maps
 Search: dictionary, dictionaries, hash table, hash tables
 Id: rd600050
 ---
-A map is a mapping from value of one type to value of another type.
+A map is a mapping from a value of one type to a value of another type.
 
-Another languages call them dictionaries (Python) or hash tables (C++).
+Other languages call them dictionaries (Python) or hash tables (C++).
 
 Map basics:
 

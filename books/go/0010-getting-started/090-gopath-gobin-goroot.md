@@ -4,11 +4,11 @@ Id: 14406
 ---
 ## `GOPATH`
 
-It's important to understand the effect of `GOPATH` environment variable.
+It's important to understand the effect of the `GOPATH` environment variable.
 
 If you come from other programming languages, you're probably used to placing source code anywhere in the file system.
 
-Go tools expects a certain layout of the source code.
+Go tools expect a certain layout of the source code.
 
 `GOPATH` is the root of the workspace and contains the following folders:
 

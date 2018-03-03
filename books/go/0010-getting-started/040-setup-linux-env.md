@@ -4,11 +4,11 @@ Id: rd6000f2
 ---
 After installing the compiler you need to configure [`GOPATH`](a-14406) environment variable.
 
-```sh
-mkdir -p $HOME/go
-```
+Since Go 1.8, the `GOPATH` environment variable has the default value of `$HOME/go`, so you can skip setting it.
 
-Add following two lines at the end of the `~/.bashrc` file
+Create the go directory with `mkdir $HOME/go`.
+
+Add the following two lines at the end of your `~/.bashrc` file
 
 ```sh
 export GOPATH=$HOME/go

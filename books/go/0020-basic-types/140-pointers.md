@@ -3,7 +3,7 @@ Title: Pointers
 Id: 801000gd
 ---
 
-A pointer to a type is address of the value of that type in memory.
+A pointer to a type is the address of the value of that type in memory.
 
 Unlike C, Go doesn't have pointer arithmetic. You can take an address of a variable but you can't add or substract from a pointer.
 

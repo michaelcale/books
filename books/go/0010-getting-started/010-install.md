@@ -4,7 +4,7 @@ Id: 20381
 ---
 There are 2 production quality compilers:
 * gc, the official compiler
-* [gccgo](https://golang.org/doc/install/gccgo). It's also created by the Go project, but is not used as ofent as gc.
+* [gccgo](https://golang.org/doc/install/gccgo). Also created by the Go project, but not used as often as gc.
 
 This article describes installing gc compiler.
 
@@ -22,7 +22,7 @@ Download `.pkg` installer from [https://golang.org/dl/](https://golang.org/dl/) 
 
 ### Using Homebrew
 
-* if you don't have Homebrew installed, install it following [instructions](https://brew.sh/)
+* if you don't have Homebrew installed, install it following the [instructions](https://brew.sh/)
 * `brew install go`
 
 Read [setting up Mac environment](a-rd600058).
@@ -36,13 +36,13 @@ $ sudo apt-get update
 $ sudo apt-get install go
 ```
 
-Note that packages provided by Ubuntu are often outdated. A new version of Go is released every 6 months and Ubuntu distribution moves at slower pace.
+Note that packages provided by Ubuntu are often outdated. A new version of Go is released every 6 months but Ubuntu distribution moves at a slower pace.
 
-For that reason we recommend installing binary packages.
+For that reason we recommend installing the binary packages.
 
 ### Using binary packages
 
-Those instructions work on pretty much every Linux distribution:
+These instructions work on pretty much every Linux distribution:
 
 ```sh
 $ sudo apt-get update
@@ -50,7 +50,7 @@ $ sudo apt-get install -y build-essential git curl wget
 $ wget https://storage.googleapis.com/golang/go<versions>.gz
 ```
 
-You can find the version lists [here](https://golang.org/doc/install).
+You can find the version list [here](https://golang.org/doc/install).
 
 ```sh
 # To install go1.9.3 use

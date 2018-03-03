@@ -3,7 +3,7 @@ Title: Arrays
 Search: array
 Id: rd60004c
 ---
-Arrays in Go have fixed sized. They can't grow.
+Arrays in Go have a fixed sized. They can't grow.
 
 They are used rarely. Instead in most cases we use [slices](a-rd6000rd).
 
