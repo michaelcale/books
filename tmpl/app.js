@@ -181,7 +181,12 @@ function span(s, cls) {
 }
 
 function div(html, opt) {
-  return inTag("div", html, opt && opt.cls, opt && opt.id);
+  var classes = opt.classes || [];
+  if (opt.cls) {
+    classes.push(cls);
+  }
+  var cls = classes.join(" ");
+  return inTag("div", html, cls, opt && opt.id);
 }
 
 var rebuildUITimer = null;
@@ -351,10 +356,10 @@ function buildResultsHTML(results, selectedIdx) {
 
     var opt = {
       id: "search-result-no-" + i,
-      cls: "search-result"
+      classes: ["search-result"],
     };
     if (i == selectedIdx) {
-      opt.cls += " search-result-selected";
+      opt.classes.push("search-result-selected");
     }
     var s = div(html, opt);
     a.push(s);
@@ -451,9 +456,10 @@ function buildTOCHTMLLevel(level, parentIdx) {
   for (var i = 0; i < n; i++) {
     tocItemIdx = itemsIdx[i];
     tocItem = gBookToc[tocItemIdx];
-    opt.cls = "lvl" + level;
+    opt.classes = ["lvl" + level];
     var title = tocItemTitle(tocItem);
     var uri = tocItemURL(tocItem);
+
     // var arrow = "&#x25B8; "; // http://graphemica.com/%E2%96%B8
     var arrow = "&#x25BA; ";
     if (tocItemIsExpanded(tocItem)) {
@@ -466,11 +472,7 @@ function buildTOCHTMLLevel(level, parentIdx) {
     }
 
     if (tocItemIsExpanded(tocItem)) {
-      if (opt.cls == "") {
-        opt.cls = "bold";
-      } else {
-        opt.cls += " bold";
-      }
+      opt.classes.push("bold");
     }
     var el = '<a href="' + uri + '">' + arrow + title + "</a>";
     el = div(el, opt);
