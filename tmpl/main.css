@@ -201,7 +201,56 @@ body {
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
 }
 
-/* for very small screens (i.e. phones) remove rarely needed elements */
+#search-results-window {
+  position: fixed;
+  top: 28px;
+  width: 74vw;
+  left: 13vw; /* (100 - 74) / 2 */
+  right: 13vw;
+
+  border: 1px solid #aaaaaa;
+  z-index: 25;
+
+  /* min-height: 320px; */
+  background-color: white;
+  display: none;
+}
+
+#search-results {
+  max-height: 70vh;
+  padding: 4px 8px;
+  line-height: 1.3em;
+  cursor: pointer;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+#search-results-help {
+  color: #717274;
+  background-color: #f9f9f9;
+  padding: 8px 8px;
+  font-size: 0.7em;
+}
+
+.search-result-selected {
+  background-color: #eeeeee;
+}
+
+.search-result-in {
+  font-size: 0.7em;
+  color: #1481b8;
+}
+
+.no-search-results {
+  padding-top: 48px;
+  padding-bottom: 48px;
+  margin-left: auto;
+  margin-right: auto;
+  /* background-color: #dddddd; */
+  text-align: center;
+}
+
+/* for very small screens (i.e. phones) remove rarely needed elements and other tweaks */
 @media screen and (max-width: 500px) {
   .page__footer {
     display: none;
@@ -224,6 +273,15 @@ body {
   .content {
     padding-left: 4px;
     padding-right: 4px;
+  }
+  #search-results-window {
+    width: 90vw;
+    left: 5vw; /* (100 - 90) / 2 */
+    right: 5vw;
+  }
+
+  #search-results {
+    max-height: 80vh;
   }
 }
 
@@ -421,55 +479,6 @@ a.blue:hover {
   bottom: 0;
   left: 0;
   right: 0;
-}
-
-#search-results-window {
-  position: fixed;
-  top: 28px;
-  width: 74vw;
-  left: 13vw; /* (100 - 74) / 2 */
-  right: 13vw;
-
-  border: 1px solid #aaaaaa;
-  z-index: 25;
-
-  /* min-height: 320px; */
-  background-color: white;
-  display: none;
-}
-
-#search-results {
-  max-height: 70vh;
-  padding: 4px 8px;
-  line-height: 1.3em;
-  cursor: pointer;
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
-
-#search-results-help {
-  color: #717274;
-  background-color: #f9f9f9;
-  padding: 8px 8px;
-  font-size: 0.7em;
-}
-
-.search-result-selected {
-  background-color: #eeeeee;
-}
-
-.search-result-in {
-  font-size: 0.7em;
-  color: #1481b8;
-}
-
-.no-search-results {
-  padding-top: 48px;
-  padding-bottom: 48px;
-  margin-left: auto;
-  margin-right: auto;
-  /* background-color: #dddddd; */
-  text-align: center;
 }
 
 /* higlight search results with yellow-ish background */
