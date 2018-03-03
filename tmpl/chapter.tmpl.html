@@ -100,9 +100,11 @@
             </div>
 
             <div class="chapter-toc">
+                {{if .Articles}}
                 <div>
                     <b>{{.Chapter.Title}}/</b>
                 </div>
+                {{end}}
                 <div style="padding-left: 16px">
 
                     {{range .Articles}}
