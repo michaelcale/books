@@ -555,24 +555,27 @@ function getSearchInputElement() {
 }
 
 function setSearchInputFocus() {
-  // console.log("setSearchInputFocus:", currentState.searchInputFocused);
   var el = getSearchInputElement();
   var wantsFocus = currentState.searchInputFocused;
   var isFocused = document.activeElement === el;
+  //console.log("wantsFocus:", wantsFocus, "isFocused:", isFocused);
+  if (!wantsFocus) {
+    el.value = "";
+  }
   if (isFocused == wantsFocus) {
     return;
   }
+  el.value = "";
   if (wantsFocus) {
-    el.value = "";
     el.focus();
   } else {
-    el.value = "";
     el.blur();
     clearSearchResults();
   }
 }
 
 function rebuildUIFromState() {
+  //console.log("rebuildUIFromState");
   setSearchInputFocus();
   rebuildSearchResultsUI();
 }
@@ -760,6 +763,12 @@ function findEnclosingResultNode(el) {
 // if search result item is
 function onClick(ev) {
   var el = ev.target;
+  if (el.id === "blur-overlay") {
+    dismissSearch();
+    ev.stopPropagation();
+    return;
+  }
+
   var idx = findEnclosingResultNode(el);
   // console.log("el:", el, "idx:", idx);
   if (idx < 0) {
@@ -772,6 +781,14 @@ function onClick(ev) {
   ev.stopPropagation();
 }
 
+function dismissSearch() {
+  clearSearchResults();
+  setState({
+    selectedSearchResultIdx: -1,
+    searchInputFocused: false,
+  }, true);
+}
+
 // when we're over elements with id "search-result-no-${id}", set this one
 // as selected element
 function onMouseMove(ev) {
@@ -781,12 +798,9 @@ function onMouseMove(ev) {
     return;
   }
   //console.log("ev.target:", el, "id:", el.id, "idx:", idx);
-  setState(
-    {
+  setState({
       selectedSearchResultIdx: idx
-    },
-    true
-  );
+  });
   ev.stopPropagation();
 }
 
@@ -806,9 +820,7 @@ function onKeySlash(ev) {
 }
 
 function onEscape(ev) {
-  setState({
-    searchInputFocused: false
-  });
+  dismissSearch();
   ev.preventDefault();
 }
 
