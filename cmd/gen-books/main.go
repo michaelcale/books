@@ -176,7 +176,6 @@ func genSelectedBooks(bookDirs []string) {
 
 	copyToWwwStaticMaybeMust("main.css")
 	copyToWwwStaticMaybeMust("app.js")
-	copyToWwwStaticMaybeMust("font-awesome.min.js")
 	genIndex(books)
 	genIndexGrid(books)
 	genAbout()
@@ -209,7 +208,6 @@ func genAllBooks() {
 
 	copyToWwwStaticMaybeMust("main.css")
 	copyToWwwStaticMaybeMust("app.js")
-	copyToWwwStaticMaybeMust("font-awesome.min.js")
 	genIndex(books)
 	genIndexGrid(books)
 	genAbout()

@@ -20,8 +20,6 @@ func copyToWwwStaticMaybeMust(srcName string) {
 		dstPtr = &pathMainCSS
 	case "app.js":
 		dstPtr = &pathAppJS
-	case "font-awesome.min.js":
-		dstPtr = &pathFontAwesomeJS
 	default:
 		u.PanicIf(true, "unknown srcName '%s'", srcName)
 	}
@@ -69,7 +67,7 @@ func handleFileChange(path string) {
 
 	name := filepath.Base(path)
 	switch name {
-	case "main.css", "app.js", "font-awesome.min.js":
+	case "main.css", "app.js":
 		clearErrors()
 		copyToWwwStaticMaybeMust(name)
 		printAndClearErrors()

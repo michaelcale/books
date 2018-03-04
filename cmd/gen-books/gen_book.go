@@ -16,10 +16,9 @@ const (
 )
 
 var ( // directory where generated .html files for books are
-	destEssentialDir  = filepath.Join(destDir, "essential")
-	pathAppJS         = "/s/app.js"
-	pathFontAwesomeJS = "/s/font-awesome.min.js"
-	pathMainCSS       = "/s/main.css"
+	destEssentialDir = filepath.Join(destDir, "essential")
+	pathAppJS        = "/s/app.js"
+	pathMainCSS      = "/s/main.css"
 )
 
 var (
@@ -94,21 +93,19 @@ func execTemplateToFileMaybeMust(name string, data interface{}, path string) {
 
 func genIndex(books []*Book) {
 	d := struct {
-		Books             []*Book
-		GitHubText        string
-		GitHubURL         string
-		Analytics         template.HTML
-		PathAppJS         string
-		PathFontAwesomeJS string
-		PathMainCSS       string
+		Books       []*Book
+		GitHubText  string
+		GitHubURL   string
+		Analytics   template.HTML
+		PathAppJS   string
+		PathMainCSS string
 	}{
-		Books:             books,
-		GitHubText:        "GitHub",
-		GitHubURL:         gitHubBaseURL,
-		Analytics:         googleAnalytics,
-		PathAppJS:         pathAppJS,
-		PathFontAwesomeJS: pathFontAwesomeJS,
-		PathMainCSS:       pathMainCSS,
+		Books:       books,
+		GitHubText:  "GitHub",
+		GitHubURL:   gitHubBaseURL,
+		Analytics:   googleAnalytics,
+		PathAppJS:   pathAppJS,
+		PathMainCSS: pathMainCSS,
 	}
 	path := filepath.Join(destDir, "index.html")
 	execTemplateToFileMaybeMust("index.tmpl.html", d, path)
@@ -116,17 +113,15 @@ func genIndex(books []*Book) {
 
 func genIndexGrid(books []*Book) {
 	d := struct {
-		Books             []*Book
-		Analytics         template.HTML
-		PathAppJS         string
-		PathFontAwesomeJS string
-		PathMainCSS       string
+		Books       []*Book
+		Analytics   template.HTML
+		PathAppJS   string
+		PathMainCSS string
 	}{
-		Books:             books,
-		Analytics:         googleAnalytics,
-		PathAppJS:         pathAppJS,
-		PathFontAwesomeJS: pathFontAwesomeJS,
-		PathMainCSS:       pathMainCSS,
+		Books:       books,
+		Analytics:   googleAnalytics,
+		PathAppJS:   pathAppJS,
+		PathMainCSS: pathMainCSS,
 	}
 	path := filepath.Join(destDir, "index-grid.html")
 	execTemplateToFileMaybeMust("index-grid.tmpl.html", d, path)
@@ -134,15 +129,13 @@ func genIndexGrid(books []*Book) {
 
 func genFeedback() {
 	d := struct {
-		Analytics         template.HTML
-		PathAppJS         string
-		PathFontAwesomeJS string
-		PathMainCSS       string
+		Analytics   template.HTML
+		PathAppJS   string
+		PathMainCSS string
 	}{
-		Analytics:         googleAnalytics,
-		PathAppJS:         pathAppJS,
-		PathFontAwesomeJS: pathFontAwesomeJS,
-		PathMainCSS:       pathMainCSS,
+		Analytics:   googleAnalytics,
+		PathAppJS:   pathAppJS,
+		PathMainCSS: pathMainCSS,
 	}
 	fmt.Printf("writing feedback.html\n")
 	path := filepath.Join(destDir, "feedback.html")
@@ -151,15 +144,13 @@ func genFeedback() {
 
 func genAbout() {
 	d := struct {
-		Analytics         template.HTML
-		PathAppJS         string
-		PathFontAwesomeJS string
-		PathMainCSS       string
+		Analytics   template.HTML
+		PathAppJS   string
+		PathMainCSS string
 	}{
-		Analytics:         googleAnalytics,
-		PathAppJS:         pathAppJS,
-		PathFontAwesomeJS: pathFontAwesomeJS,
-		PathMainCSS:       pathMainCSS,
+		Analytics:   googleAnalytics,
+		PathAppJS:   pathAppJS,
+		PathMainCSS: pathMainCSS,
 	}
 	fmt.Printf("writing about.html\n")
 	path := filepath.Join(destDir, "about.html")
@@ -171,18 +162,16 @@ func genArticle(article *Article, currChapNo int) {
 
 	d := struct {
 		*Article
-		CurrentChapterNo  int
-		Analytics         template.HTML
-		PathAppJS         string
-		PathFontAwesomeJS string
-		PathMainCSS       string
+		CurrentChapterNo int
+		Analytics        template.HTML
+		PathAppJS        string
+		PathMainCSS      string
 	}{
-		Article:           article,
-		CurrentChapterNo:  currChapNo,
-		Analytics:         googleAnalytics,
-		PathAppJS:         pathAppJS,
-		PathFontAwesomeJS: pathFontAwesomeJS,
-		PathMainCSS:       pathMainCSS,
+		Article:          article,
+		CurrentChapterNo: currChapNo,
+		Analytics:        googleAnalytics,
+		PathAppJS:        pathAppJS,
+		PathMainCSS:      pathMainCSS,
 	}
 
 	path := article.destFilePath()
@@ -198,18 +187,16 @@ func genChapter(chapter *Chapter, currNo int) {
 	path := chapter.destFilePath()
 	d := struct {
 		*Chapter
-		CurrentChapterNo  int
-		Analytics         template.HTML
-		PathAppJS         string
-		PathFontAwesomeJS string
-		PathMainCSS       string
+		CurrentChapterNo int
+		Analytics        template.HTML
+		PathAppJS        string
+		PathMainCSS      string
 	}{
-		Chapter:           chapter,
-		CurrentChapterNo:  currNo,
-		Analytics:         googleAnalytics,
-		PathAppJS:         pathAppJS,
-		PathFontAwesomeJS: pathFontAwesomeJS,
-		PathMainCSS:       pathMainCSS,
+		Chapter:          chapter,
+		CurrentChapterNo: currNo,
+		Analytics:        googleAnalytics,
+		PathAppJS:        pathAppJS,
+		PathMainCSS:      pathMainCSS,
 	}
 	execTemplateToFileSilentMaybeMust("chapter.tmpl.html", d, path)
 
@@ -233,17 +220,15 @@ func genBook(book *Book) {
 
 	path := filepath.Join(book.destDir, "index.html")
 	d := struct {
-		Book              *Book
-		Analytics         template.HTML
-		PathAppJS         string
-		PathFontAwesomeJS string
-		PathMainCSS       string
+		Book        *Book
+		Analytics   template.HTML
+		PathAppJS   string
+		PathMainCSS string
 	}{
-		Book:              book,
-		Analytics:         googleAnalytics,
-		PathAppJS:         pathAppJS,
-		PathFontAwesomeJS: pathFontAwesomeJS,
-		PathMainCSS:       pathMainCSS,
+		Book:        book,
+		Analytics:   googleAnalytics,
+		PathAppJS:   pathAppJS,
+		PathMainCSS: pathMainCSS,
 	}
 
 	execTemplateToFileSilentMaybeMust("book_index.tmpl.html", d, path)
