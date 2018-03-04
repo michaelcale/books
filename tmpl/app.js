@@ -364,7 +364,7 @@ function buildResultsHTML(results, selectedIdx) {
 
     var opt = {
       id: "search-result-no-" + i,
-      classes: ["search-result"],
+      classes: ["search-result"]
     };
     if (i == selectedIdx) {
       opt.classes.push("search-result-selected");
@@ -458,12 +458,13 @@ function notExpandedSvg() {
   return '<svg class="arrow"><use xlink:href="#arrow-not-expanded"></use></svg>';
 }
 
-function genTocExpanded(tocItem, level, isCurrent) {
+function genTocExpanded(tocItem, tocItemIdx, level, isCurrent) {
   var titleHTML = escapeHTML(tocItemTitle(tocItem));
   var uri = tocItemURL(tocItem);
   var divInner = expandedSvg() + a(uri, titleHTML, "toc-link");
   var opt = {
-    classes: ["toc-item", "lvl" + level]
+    classes: ["toc-item", "lvl" + level],
+    id: "ti-" + tocItemIdx
   };
   if (isCurrent) {
     opt.classes.push("bold");
@@ -472,20 +473,22 @@ function genTocExpanded(tocItem, level, isCurrent) {
   return html;
 }
 
-function genTocNotExpanded(tocItem, level) {
+function genTocNotExpanded(tocItem, tocItemIdx, level) {
   var titleHTML = escapeHTML(tocItemTitle(tocItem));
   var uri = tocItemURL(tocItem);
   var divInner = notExpandedSvg() + a(uri, titleHTML, "toc-link");
   var opt = {
-    classes: ["toc-item", "lvl" + level]
+    classes: ["toc-item", "lvl" + level],
+    id: "ti-" + tocItemIdx
   };
   var html = div(divInner, opt);
   return html;
 }
 
-function genTocNoChildren(tocItem, level, isCurrent) {
+function genTocNoChildren(tocItem, tocItemIdx, level, isCurrent) {
   var opt = {
-    classes: ["toc-item", "lvl" + level]
+    classes: ["toc-item", "lvl" + level],
+    id: "ti-" + tocItemIdx
   };
   var titleHTML = escapeHTML(tocItemTitle(tocItem));
   if (isCurrent) {
@@ -493,7 +496,7 @@ function genTocNoChildren(tocItem, level, isCurrent) {
     return div(titleHTML, opt);
   }
   var uri = tocItemURL(tocItem);
-  var divInner = a(uri, titleHTML);
+  var divInner = a(uri, titleHTML, "toc-link");
   var html = div(divInner, opt);
   return html;
 }
@@ -514,14 +517,14 @@ function buildTOCHTMLLevel(level, parentIdx) {
     tocItem = gBookToc[tocItemIdx];
 
     var uri = tocItemURL(tocItem);
-    var isCurrent = (currURI === uri);
+    var isCurrent = currURI === uri;
     if (!tocItemHasChildren(tocItem)) {
-      el = genTocNoChildren(tocItem, level, isCurrent);
+      el = genTocNoChildren(tocItem, tocItemIdx, level, isCurrent);
     } else {
       if (tocItemIsExpanded(tocItem)) {
-        el = genTocExpanded(tocItem, level, isCurrent);
+        el = genTocExpanded(tocItem, tocItemIdx, level, isCurrent);
       } else {
-        el = genTocNotExpanded(tocItem, level);
+        el = genTocNotExpanded(tocItem, tocItemIdx, level);
       }
     }
     html += el;
@@ -777,6 +780,13 @@ function makeDebouncer(timeInMs) {
 // and do addEventListener("input", debounce(onSearchInputChanged, 250, false))
 var searchInputDebouncer = makeDebouncer(250);
 
+function extractIntID(id) {
+  var parts = id.split("-");
+  var nStr = parts[parts.length - 1];
+  var n = parseInt(nStr, 10);
+  return isNaN(n) ? -1 : n;
+}
+
 function getIdxFromSearchResultElementId(id) {
   if (!id) {
     return -1;
@@ -784,21 +794,25 @@ function getIdxFromSearchResultElementId(id) {
   if (!id.startsWith("search-result-no-")) {
     return -1;
   }
-  var parts = id.split("-");
-  var nStr = parts[parts.length - 1];
-  var n = parseInt(nStr, 10);
-  return isNaN(n) ? -1 : n;
+  return extractIntID(id);
 }
 
-function findEnclosingResultNode(el) {
-  while (el) {
-    var idx = getIdxFromSearchResultElementId(el.id);
-    if (idx >= 0) {
-      return idx;
-    }
-    el = el.parentNode;
+function toggleTocItem(idx) {
+  console.log("toggleTocItem:", idx);
+  var tocItem = gBookToc[idx];
+  var isExpanded = tocItemIsExpanded(tocItem);
+  tocItemSetIsExpanded(tocItem, !isExpanded);
+  recreateTOC();
+}
+
+function getTocItemFromElementId(id) {
+  if (!id) {
+    return -1;
   }
-  return -1;
+  if (!id.startsWith("ti-")) {
+    return -1;
+  }
+  return extractIntID(id);
 }
 
 // if search result item is
@@ -810,24 +824,45 @@ function onClick(ev) {
     return;
   }
 
-  var idx = findEnclosingResultNode(el);
-  // console.log("el:", el, "idx:", idx);
-  if (idx < 0) {
-    setState({
-      selectedSearchResultIdx: -1
-    });
-    return;
+  /*
+  We want to detect 2 kinds of clicks:
+    - on search results
+    - on toc item
+  Since a child element might be clicked, we need to
+  traverse up until we find desired parent or top
+  of document
+  */
+
+  while (el) {
+    var idx = getIdxFromSearchResultElementId(el.id);
+    if (idx >= 0) {
+      navigateToSearchResult(idx);
+      ev.stopPropagation();
+      return;
+    }
+    idx = getTocItemFromElementId(el.id);
+    if (idx >= 0) {
+      toggleTocItem(idx);
+      ev.stopPropagation();
+      return;
+    }
+    el = el.parentNode;
   }
-  navigateToSearchResult(idx);
-  ev.stopPropagation();
+  // possibly dismiss search results
+  setState({
+    selectedSearchResultIdx: -1
+  });
 }
 
 function dismissSearch() {
   clearSearchResults();
-  setState({
-    selectedSearchResultIdx: -1,
-    searchInputFocused: false,
-  }, true);
+  setState(
+    {
+      selectedSearchResultIdx: -1,
+      searchInputFocused: false
+    },
+    true
+  );
 }
 
 // when we're over elements with id "search-result-no-${id}", set this one
@@ -840,7 +875,7 @@ function onMouseMove(ev) {
   }
   //console.log("ev.target:", el, "id:", el.id, "idx:", idx);
   setState({
-      selectedSearchResultIdx: idx
+    selectedSearchResultIdx: idx
   });
   ev.stopPropagation();
 }
@@ -913,14 +948,14 @@ function onSearchInputChanged(ev) {
 
 function onSearchInputFocus(ev) {
   setState({
-      searchInputFocused: true,
+    searchInputFocused: true
   });
   ev.preventDefault();
 }
 
 function onSearchInputBlur(ev) {
   setState({
-      searchInputFocused: false,
+    searchInputFocused: false
   });
   ev.preventDefault();
 }
@@ -949,12 +984,8 @@ function start() {
 }
 
 // we don't want to run javascript on about etc. pages
-function isAppPage() {
-  var loc = window.location.pathname;
-  return loc.indexOf("essential/") != -1;
-}
-
-if (isAppPage()) {
+var isAppPage = window.location.pathname.indexOf("essential/") != -1;
+if (isAppPage) {
   // we don't want this in e.g. about page
   document.addEventListener("DOMContentLoaded", start);
 }

@@ -99,18 +99,6 @@ body {
   line-height: 1.3em;
 }
 
-#toc a {
-  color: #646464;
-  color: #686868;
-  color: #686868c9;
-}
-
-#toc div {
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow-x: hidden;
-}
-
 .article {
   max-width: 660px;
   padding-top: 8px;
@@ -658,6 +646,10 @@ pre.chroma {
 }
 
 .arrow {
+  /* kind of a hack because it got squished if the link
+     is long in .toc-item. probably could fix with
+     rigth flexbox attributes */
+  min-width: 16px;
   width: 16px;
   height: 16px;
   align-self: center;
@@ -671,11 +663,20 @@ pre.chroma {
 .toc-item {
   display: flex;
 }
+
 .toc-item:hover {
   background-color: #eaeaea;
 }
+
 .toc-link {
   align-self: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  overflow-x: hidden;
+  color: #646464;
+  color: #686868;
+  color: #686868c9;
 }
 
 /*
