@@ -2,118 +2,118 @@
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="referrer" content="always">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="always">
 
-    <meta name="twitter:card" value="summary">
-    <meta name="twitter:site" content="@kjk">
-    <meta name="twitter:title" content="{{.Book.TitleLong}}">
-    <!-- do something else for description -->
-    <meta name="twitter:description" content="{{.Book.TitleLong}}">
-    <meta name="twitter:creator" content="@kjk">
-    <meta name="twitter:image" content="{{.Book.CoverTwitterFullURL}}">
-    <!-- do something else for title -->
-    <meta property="og:title" content="{{.Book.TitleLong}}">
-    <meta property="og:type" content="article" />
-    <meta property="og:url" content="{{.Book.CanonnicalURL}}" />
-    <!-- do something else for description -->
-    <meta property="og:description" content="{{.Book.TitleLong}}">
-    <meta property="og:image" content="{{.Book.CoverTwitterFullURL}}">
+  <meta name="twitter:card" value="summary">
+  <meta name="twitter:site" content="@kjk">
+  <meta name="twitter:title" content="{{.Book.TitleLong}}">
+  <!-- do something else for description -->
+  <meta name="twitter:description" content="{{.Book.TitleLong}}">
+  <meta name="twitter:creator" content="@kjk">
+  <meta name="twitter:image" content="{{.Book.CoverTwitterFullURL}}">
+  <!-- do something else for title -->
+  <meta property="og:title" content="{{.Book.TitleLong}}">
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="{{.Book.CanonnicalURL}}" />
+  <!-- do something else for description -->
+  <meta property="og:description" content="{{.Book.TitleLong}}">
+  <meta property="og:image" content="{{.Book.CoverTwitterFullURL}}">
 
-    <title>{{.Book.TitleLong}} - a free {{.Book.Title}} programming book</title>
-    <meta name="description" content="'{{.Book.TitleLong}}' is a free programming book about {{.Book.Title}}">
+  <title>{{.Book.TitleLong}} - a free {{.Book.Title}} programming book</title>
+  <meta name="description" content="'{{.Book.TitleLong}}' is a free programming book about {{.Book.Title}}">
 
-    <link href="{{.PathMainCSS}}" rel="stylesheet"> {{ .Analytics }}
-    <script src="{{.PathFontAwesomeJS}}" defer></script>
-    <script src="{{.Book.TocSearchJSURL}}" defer></script>
-    <script src="{{.PathAppJS}}" defer></script>
+  <link href="{{.PathMainCSS}}" rel="stylesheet"> {{ .Analytics }}
+  <script src="{{.PathFontAwesomeJS}}" defer></script>
+  <script src="{{.Book.TocSearchJSURL}}" defer></script>
+  <script src="{{.PathAppJS}}" defer></script>
 
 </head>
 
 <body class="page">
-    <header class="page__header">
-        <div class="page__header__left">
-            <a href="/">
-                <i class="fas fa-home"></i> Essential Books</a>
-        </div>
-        <div class="page__header__center">
-            <input id="search-input" placeholder="Search {{.Book.TitleLong}}. Tip: press '/'.">
-        </div>
-        <div class="page__header__right">
-            <!-- Right Side-->
-        </div>
-    </header>
+  <header class="page__header">
+    <div class="page__header__left">
+      <a href="/">
+        <i class="fas fa-home"></i> Essential Books</a>
+    </div>
+    <div class="page__header__center">
+      <input id="search-input" placeholder="Search {{.Book.TitleLong}}. Tip: press '/'.">
+    </div>
+    <div class="page__header__right">
+      <!-- Right Side-->
+    </div>
+  </header>
 
-    <div id="toc" style="display:none">
+  <div id="toc" style="display:none">
+  </div>
+
+  <div class="content">
+    <div class="book-body">
+      <div class="book-img-cover-wrapper">
+        <img class="book-img-cover" src="{{.Book.CoverURL}}">
+      </div>
+
+      <div class="toc-header">Chapters</div>
+      <div class="chapters-toc">
+        {{range .Book.Chapters}}
+        <div class="chapters-toc-item">
+          <span class="chap-no">{{.No}}</span>
+          <a href="{{.URL}}">{{.Title}}</a>
+        </div>
+        {{end}}
+      </div>
+
+      <div class="toc-header">Table Of Contents</div>
+
+      <div>
+        {{range .Book.Chapters}}
+        <div id="chap-{{.No}}">
+          <!-- <span class="chap-no">{{.No}}.</span> -->
+          <a href="{{.URL}}">{{.Title}}</a>
+        </div>
+        <div>
+          {{range .Articles}}
+          <div class="toc-article">
+            <!-- <span class="chap-no">{{.No}}.</span> -->
+            <a href="{{.URL}}">{{.Title}}</a>
+          </div>
+          {{end}}
+        </div>
+        {{end}}
+      </div>
+    </div>
+  </div>
+
+  <footer class="page__footer">
+    <div class="page__footer__left">
+      Maintained by
+      <a href="https://blog.kowalczyk.info" target="_blank">Krzysztof Kowalczyk</a>
     </div>
 
-    <div class="content">
-        <div class="book-body">
-            <div class="book-img-cover-wrapper">
-                <img class="book-img-cover" src="{{.Book.CoverURL}}">
-            </div>
-
-            <div class="toc-header">Chapters</div>
-            <div class="chapters-toc">
-                {{range .Book.Chapters}}
-                <div class="chapters-toc-item">
-                    <span class="chap-no">{{.No}}</span>
-                    <a href="{{.URL}}">{{.Title}}</a>
-                </div>
-                {{end}}
-            </div>
-
-            <div class="toc-header">Table Of Contents</div>
-
-            <div>
-                {{range .Book.Chapters}}
-                <div id="chap-{{.No}}">
-                    <!-- <span class="chap-no">{{.No}}.</span> -->
-                    <a href="{{.URL}}">{{.Title}}</a>
-                </div>
-                <div>
-                    {{range .Articles}}
-                    <div class="toc-article">
-                        <!-- <span class="chap-no">{{.No}}.</span> -->
-                        <a href="{{.URL}}">{{.Title}}</a>
-                    </div>
-                    {{end}}
-                </div>
-                {{end}}
-            </div>
-        </div>
+    <div class="share-me">
+      <a href="https://twitter.com/intent/tweet?text={{.Book.ShareOnTwitterText}}&url={{.Book.CanonnicalURL}}&via=kjk">Share
+        <b>{{.Book.TitleLong}}</b> on
+        <i class="fab fa-twitter"></i>
+      </a>
     </div>
 
-    <footer class="page__footer">
-        <div class="page__footer__left">
-            Maintained by
-            <a href="https://blog.kowalczyk.info" target="_blank">Krzysztof Kowalczyk</a>
-        </div>
-
-        <div class="share-me">
-            <a href="https://twitter.com/intent/tweet?text={{.Book.ShareOnTwitterText}}&url={{.Book.CanonnicalURL}}&via=kjk">Share
-                <b>{{.Book.TitleLong}}</b> on
-                <i class="fab fa-twitter"></i>
-            </a>
-        </div>
-
-        <div class="page__footer__right">
-            <a href="{{.Book.GitHubURL}}" target="_blank">
-                <i class="fab fa-github"></i>
-                {{.Book.GitHubText}}</a>
-        </div>
-    </footer>
-
-    <!-- aboslutely positioned elements -->
-    <div id="search-results-window">
-        <div id="search-results">
-        </div>
-        <div id="search-results-help">
-            &nbsp;&nbsp;&uarr; &darr; to navigate &nbsp;&nbsp;&nbsp; &crarr; to select &nbsp;&nbsp;&nbsp; Esc to close
-        </div>
+    <div class="page__footer__right">
+      <a href="{{.Book.GitHubURL}}" target="_blank">
+        <i class="fab fa-github"></i>
+        {{.Book.GitHubText}}</a>
     </div>
-    <div id="blur-overlay"></div>
+  </footer>
+
+  <!-- aboslutely positioned elements -->
+  <div id="search-results-window">
+    <div id="search-results">
+    </div>
+    <div id="search-results-help">
+      &nbsp;&nbsp;&uarr; &darr; to navigate &nbsp;&nbsp;&nbsp; &crarr; to select &nbsp;&nbsp;&nbsp; Esc to close
+    </div>
+  </div>
+  <div id="blur-overlay"></div>
 
 </body>
 
