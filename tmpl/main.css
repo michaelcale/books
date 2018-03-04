@@ -662,6 +662,10 @@ pre.chroma {
 
 .toc-item {
   display: flex;
+
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow-x: hidden;
 }
 
 .toc-item:hover {
