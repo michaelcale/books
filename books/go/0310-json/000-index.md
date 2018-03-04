@@ -32,7 +32,7 @@ Passing a pointer is more efficient becase passing by value creates unnecessary 
 
 `json.MarshallIndent` allows for pretty-printing of nested structures. It's less efficient but the result is easier for humans to read.
 
-## Parse JSON into a Go struct
+## Parse JSON into a struct
 
 @file json_deserialize.go output sha1:1adbbe8fa6abf4c08bf821b2b3e7db1c82ace85d goplayground:CllMvV6twjM
 

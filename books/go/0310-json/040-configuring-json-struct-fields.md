@@ -12,7 +12,7 @@ type Company struct {
 }
 ```
 
-## Hide/Skip Certain Fields
+## Hide/skip certain fields
 
 To export `Revenue` and `Sales`, but hide them from encoding/decoding, use `json:"-"` or rename the variable to begin with a lowercase letter. Note that this prevents the variable from being visible outside the package.
 
@@ -25,7 +25,7 @@ type Company struct {
 }
 ```
 
-## Ignore Empty Fields
+## Ignore empty fields
 
 To prevent `Location` from being included in the JSON when it is set to its zero value, add `,omitempty` to the `json` tag.
 
