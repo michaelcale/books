@@ -636,12 +636,6 @@ pre.chroma {
   color: black;
 }
 
-.code-box-playground:hover,
-.code-box-github:hover {
-  background-color: #e5e5e5;
-  color: black;
-}
-
 .code-box-github,
 .code-box-playground {
   display: inline-block;
@@ -649,7 +643,15 @@ pre.chroma {
   padding: 4px 8px;
   background: white;
   border: 1px solid #e5e5e5;
+  transition: box-shadow .3s ease-in-out;
   box-shadow: 0 1px 3px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.04)
+}
+
+.code-box-playground:hover,
+.code-box-github:hover {
+  /* background-color: #e5e5e5; */
+  color: black;
+  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.04);
 }
 
 .code-box-playground {
