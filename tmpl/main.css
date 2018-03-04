@@ -111,10 +111,6 @@ body {
   overflow-x: hidden;
 }
 
-#toc div:hover {
-  background-color:#e5e5e5;
-}
-
 .article {
   max-width: 660px;
   padding-top: 8px;
@@ -286,15 +282,15 @@ body {
 }
 
 #toc .lvl1 {
-  padding-left: 1em;
+  padding-left: 18px;
 }
 
 #toc .lvl2 {
-  padding-left: 2em;
+  padding-left: 36px;
 }
 
   #toc .lvl3 {
-  padding-left: 3em;
+  padding-left: 54px;
 }
 
 /*
@@ -590,16 +586,6 @@ hr.toc-sep {
   max-width: fit-content;
 }
 
-/* From Vsiual Studio Code */
-.toc-item-with-children.expanded .content:before {
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23646465' d='M11 10H5.344L11 4.414V10z'/%3E%3C/svg%3E")
-}
-
-.toc-item-with-children .content:before {
-  display: inline-block;
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%23646465' d='M6 4v8l4-4-4-4zm1 2.414L8.586 8 7 9.586V6.414z'/%3E%3C/svg%3E")
-}
-
 /* dim toc on a book chapter page, to de-emphasize it visually, until user
    hovers over the element */
 .chapter-toc-wrapper {
@@ -669,6 +655,27 @@ pre.chroma {
 
 .code-box-playground {
   margin-right: 8px;
+}
+
+.arrow {
+  width: 16px;
+  height: 16px;
+  align-self: center;
+  transform: translateY(-1px);
+  padding-right: 2px;
+}
+.arrow:hover {
+  background-color: #b3b3b3;
+}
+
+.toc-item {
+  display: flex;
+}
+.toc-item:hover {
+  background-color: #eaeaea;
+}
+.toc-link {
+  align-self: center;
 }
 
 /*

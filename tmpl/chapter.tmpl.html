@@ -31,6 +31,16 @@
 </head>
 
 <body class="page">
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+        <symbol id="arrow-expanded" viewbox="0 0 16 16">
+            <path fill="%23646465" d="M11 10H5.344L11 4.414V10z" />
+        </symbol>
+
+        <symbol id="arrow-not-expanded" viewbox="0 0 16 16">
+            <path fill="%23646465" d="M6 4v8l4-4-4-4zm1 2.414L8.586 8 7 9.586V6.414z" />
+        </symbol>
+    </svg>
+
     {{$currChapterNo:=.CurrentChapterNo}}
     <header class="page__header">
         <div class="page__header__left">

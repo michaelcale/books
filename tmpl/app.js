@@ -189,6 +189,14 @@ function div(html, opt) {
   return inTag("div", html, cls, opt && opt.id);
 }
 
+function a(uri, txt, cls) {
+  txt = escapeHTML(txt);
+  if (cls) {
+    return '<a href="' + uri + '" class="' + cls + '">' + txt + "</a>";
+  }
+  return '<a href="' + uri + '">' + txt + "</a>";
+}
+
 var rebuildUITimer = null;
 function triggerUIRebuild() {
   rebuildUITimer = null;
@@ -442,9 +450,57 @@ function getItemsIdxForParent(parentIdx) {
   return res;
 }
 
+function expandedSvg() {
+  return '<svg class="arrow"><use xlink:href="#arrow-expanded"></use></svg>';
+}
+
+function notExpandedSvg() {
+  return '<svg class="arrow"><use xlink:href="#arrow-not-expanded"></use></svg>';
+}
+
+function genTocExpanded(tocItem, level, isCurrent) {
+  var titleHTML = escapeHTML(tocItemTitle(tocItem));
+  var uri = tocItemURL(tocItem);
+  var divInner = expandedSvg() + a(uri, titleHTML, "toc-link");
+  var opt = {
+    classes: ["toc-item", "lvl" + level]
+  };
+  if (isCurrent) {
+    opt.classes.push("bold");
+  }
+  var html = div(divInner, opt);
+  return html;
+}
+
+function genTocNotExpanded(tocItem, level) {
+  var titleHTML = escapeHTML(tocItemTitle(tocItem));
+  var uri = tocItemURL(tocItem);
+  var divInner = notExpandedSvg() + a(uri, titleHTML, "toc-link");
+  var opt = {
+    classes: ["toc-item", "lvl" + level]
+  };
+  var html = div(divInner, opt);
+  return html;
+}
+
+function genTocNoChildren(tocItem, level, isCurrent) {
+  var opt = {
+    classes: ["toc-item", "lvl" + level]
+  };
+  var titleHTML = escapeHTML(tocItemTitle(tocItem));
+  if (isCurrent) {
+    opt.classes.push("bold");
+    return div(titleHTML, opt);
+  }
+  var uri = tocItemURL(tocItem);
+  var divInner = a(uri, titleHTML);
+  var html = div(divInner, opt);
+  return html;
+}
+
 function buildTOCHTMLLevel(level, parentIdx) {
   var opt = {};
-  var opt, tocItemIdx, tocItem, parent;
+  var tocItemIdx, tocItem, el;
   var itemsIdx = getItemsIdxForParent(parentIdx);
   if (itemsIdx.length == 0) {
     return "";
@@ -456,35 +512,18 @@ function buildTOCHTMLLevel(level, parentIdx) {
   for (var i = 0; i < n; i++) {
     tocItemIdx = itemsIdx[i];
     tocItem = gBookToc[tocItemIdx];
-    opt.classes = ["lvl" + level];
-    var title = tocItemTitle(tocItem);
+
     var uri = tocItemURL(tocItem);
-
-    // var arrow = "&#x25B8; "; // http://graphemica.com/%E2%96%B8
-    var arrow = "&#x25BA; ";
-    if (tocItemIsExpanded(tocItem)) {
-      //arrow = "&#x25BE; "; // http://graphemica.com/%E2%96%BE
-      arrow = "&#x25BC; ";
-    }
-
+    var isCurrent = (currURI === uri);
     if (!tocItemHasChildren(tocItem)) {
-      arrow = "";
-    }
-
-    if (tocItemIsExpanded(tocItem)) {
-      opt.classes.push("bold");
-    }
-    var el = '<a href="' + uri + '">' + arrow + title + "</a>";
-    el = div(el, opt);
-
-    // console.log("uri:", uri);
-
-    if (currURI === uri) {
-      if (!tocItemHasChildren(tocItem)) {
-        el = div(escapeHTML(title), opt);
+      el = genTocNoChildren(tocItem, level, isCurrent);
+    } else {
+      if (tocItemIsExpanded(tocItem)) {
+        el = genTocExpanded(tocItem, level, isCurrent);
+      } else {
+        el = genTocNotExpanded(tocItem, level);
       }
     }
-
     html += el;
 
     if (tocItemIsExpanded(tocItem)) {
