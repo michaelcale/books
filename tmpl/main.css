@@ -164,6 +164,11 @@ body {
   z-index: 25;
 }
 
+div.lang-text pre.chroma {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
 #search-input:hover {
   border-color: #a0a0a0;
 }
@@ -587,7 +592,7 @@ hr.toc-sep {
 /* this allows to position child absolutely */
 .code-box {
   font-size: 85%;
-  background-color: #fafafa;
+  /*background-color: #fafafa;*/
   /* color: #657b83; */
   /* border: 1px solid #e5e5e5; */
   /*
@@ -607,38 +612,44 @@ pre.chroma {
 
 /* box that potentially displays file name linking to github and 'run' button for playground */
 .code-box {
-  padding-bottom: 2px;
   margin-bottom: 1em;
+  /* padding-bottom: 4px; */
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .code-box-nav {
+  font-size: 85%;
   display: inline-block;
-  background-color: #fafafa;
-  transform: translateY(3px);
+  /* background-color: #fafafa; */
+  /* transform: translateY(1px); */
 }
 
-.code-box-nav a {
+.code-box-github a,
+.code-box-playground a {
   color: gray;
   text-decoration: none;
 }
 
-.code-box-nav a:hover {
-  text-decoration: none;
-  color: white;
+.code-box-github:hover a,
+.code-box-playground:hover a {
+  color: black;
 }
 
 .code-box-playground:hover,
 .code-box-github:hover {
-  background-color: black;
-  color: white;
+  background-color: #e5e5e5;
+  color: black;
 }
 
 .code-box-github,
 .code-box-playground {
   display: inline-block;
   margin: 0;
-  padding: 0px 8px;
+  padding: 4px 8px;
   background: white;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 1px 3px 0 rgba(0,0,0,0.16), 0 0 0 1px rgba(0,0,0,0.04)
 }
 
 .code-box-playground {
@@ -688,7 +699,7 @@ Source higligh from chroma https://github.com/alecthomas/chroma
 */
 .chroma {
   color: #272822;
-  background-color: #fafafa;
+  /* background-color: #fafafa; */
 }
 .chroma .err {
   color: #960050;

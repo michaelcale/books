@@ -94,7 +94,6 @@ func trimEmptyLines(lines []string) []string {
 
 func extractCodeSnippets(path string) ([]string, error) {
 	//fmt.Printf("extractCodeSnippets: %s\n", path)
-
 	fc, err := loadFileCached(path)
 	if err != nil {
 		return nil, err
