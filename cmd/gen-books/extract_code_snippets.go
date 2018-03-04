@@ -86,10 +86,23 @@ func trimEmptyLines(lines []string) []string {
 	for len(lines) > 0 && len(lines[0]) == 0 {
 		lines = lines[1:]
 	}
+
 	for len(lines) > 0 && len(lines[len(lines)-1]) == 0 {
 		lines = lines[:len(lines)-1]
 	}
-	return lines
+
+	n := len(lines)
+	res := make([]string, 0, n)
+	prevWasEmpty := false
+	for i := 0; i < n; i++ {
+		l := lines[i]
+		shouldAppend := l != "" || !prevWasEmpty
+		prevWasEmpty = l == ""
+		if shouldAppend {
+			res = append(res, l)
+		}
+	}
+	return res
 }
 
 func extractCodeSnippets(path string) ([]string, error) {
