@@ -30,14 +30,14 @@ Using [`strings.Contains`](https://golang.org/pkg/strings/#Contains):
 
 @file finding_strings4.go output sha1:6615c90c15775f6f402a176ae0d6209f494cea77 goplayground:BSLr-qaYPvJ
 
-## Check if a string starts with a certain string
+## Check if a string starts with another string
 
 Using [`strings.HasPrefix`](https://golang.org/pkg/strings/#HasPrefix):
 
 @file finding_strings5.go output sha1:babb86fb2fbae4369e20ccc5239230d606280d66 goplayground:WgVWyWBQ_gu
 
-## Check if a string ends with a certain string
+## Check if a string ends with another string
 
 Using [`strings.HasSuffix`](https://golang.org/pkg/strings/#HasSuffix):
 
-@file finding_strings5.go output sha1:babb86fb2fbae4369e20ccc5239230d606280d66 goplayground:WgVWyWBQ_gu
+@file finding_strings6.go output sha1:d183ea2089b304e519b217fbe51f5e4af1d8f6be goplayground:bZWDWmkNklX
