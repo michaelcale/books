@@ -29,7 +29,7 @@ func copyToWwwStaticMaybeMust(srcName string) {
 	d, err := ioutil.ReadFile(src)
 	u.PanicIfErr(err)
 
-	if isCSS {
+	if doMinifiy && isCSS {
 		d2, err := minifier.Bytes("text/css", d)
 		maybePanicIfErr(err)
 		if err == nil {

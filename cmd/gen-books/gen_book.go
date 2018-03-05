@@ -1,8 +1,10 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"html/template"
+	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
@@ -16,9 +18,11 @@ const (
 )
 
 var ( // directory where generated .html files for books are
-	destEssentialDir = filepath.Join(destDir, "essential")
-	pathAppJS        = "/s/app.js"
-	pathMainCSS      = "/s/main.css"
+	destEssentialDir       = filepath.Join(destDir, "essential")
+	pathAppJS              = "/s/app.js"
+	pathMainCSS            = "/s/main.css"
+	totalHTMLBytes         int
+	totalHTMLBytesMinified int
 )
 
 var (
@@ -80,10 +84,21 @@ func execTemplateToFileSilentMaybeMust(name string, data interface{}, path strin
 	if tmpl == nil {
 		return
 	}
-	f, err := os.Create(path)
+	var buf bytes.Buffer
+	err := tmpl.Execute(&buf, data)
 	maybePanicIfErr(err)
-	defer f.Close()
-	err = tmpl.Execute(f, data)
+
+	d := buf.Bytes()
+	if doMinifiy {
+		d2, err := minifier.Bytes("text/html", d)
+		maybePanicIfErr(err)
+		if err == nil {
+			totalHTMLBytes += len(d)
+			totalHTMLBytesMinified += len(d2)
+			d = d2
+		}
+	}
+	err = ioutil.WriteFile(path, d, 0644)
 	maybePanicIfErr(err)
 }
 

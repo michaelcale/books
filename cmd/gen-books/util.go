@@ -31,9 +31,12 @@ func maybePanicIfErr(err error) {
 
 func clearErrors() {
 	errors = nil
+	totalHTMLBytes = 0
+	totalHTMLBytesMinified = 0
 }
 
 func printAndClearErrors() {
+	fmt.Printf("HTML: optimized %d => %d (saved %d bytes)\n", totalHTMLBytes, totalHTMLBytesMinified, totalHTMLBytes-totalHTMLBytesMinified)
 	if len(errors) == 0 {
 		return
 	}

@@ -25,8 +25,8 @@ var (
 	allBookDirs           []string
 	soUserIDToNameMap     map[int]string
 	googleAnalytics       template.HTML
-
-	minifier *minify.M
+	doMinifiy             bool
+	minifier              *minify.M
 )
 
 const (
@@ -274,7 +274,11 @@ func main() {
 	updateGoDeps()
 	cacheFilesInDir("books")
 
+	doMinifiy = !flgPreview
+
+	clearErrors()
 	genAllBooks()
+	printAndClearErrors()
 	if flgPreview {
 		startPreview()
 	}
