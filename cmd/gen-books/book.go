@@ -2,8 +2,11 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"path/filepath"
 	"sync"
+
+	"github.com/kjk/u"
 )
 
 // SoContributor describes a StackOverflow contributor
@@ -27,6 +30,11 @@ type Book struct {
 	cachedArticlesCount int
 	defaultLang         string // default programming language for programming examples
 	knownUrls           []string
+
+	// generated toc javascript data
+	tocData []byte
+	// url of combined tocData and app.js
+	AppJSURL string
 
 	// for concurrency
 	sem chan bool
@@ -68,11 +76,6 @@ func (b *Book) ShareOnTwitterText() string {
 	return fmt.Sprintf(`"Essential %s" - a free programming book`, b.Title)
 }
 
-// TocSearchJSURL returns data for searching titles of chapters/articles
-func (b *Book) TocSearchJSURL() string {
-	return b.URL() + "toc_search.js"
-}
-
 // CoverURL returns url to cover image
 func (b *Book) CoverURL() string {
 	coverName := langToCover[b.titleSafe]
@@ -109,4 +112,25 @@ func (b *Book) ArticlesCount() int {
 // ChaptersCount returns number of chapters
 func (b *Book) ChaptersCount() int {
 	return len(b.Chapters)
+}
+
+func updateBookAppJS(book *Book) {
+	path := filepath.Join("tmpl", "app.js")
+	dApp, err := ioutil.ReadFile(path)
+	maybePanicIfErr(err)
+	if err != nil {
+		return
+	}
+	d := append(book.tocData, dApp...)
+	sha1Hex := u.Sha1HexOfBytes(d)
+	srcName := fmt.Sprintf("app-%s.js", book.titleSafe)
+	name := nameToSha1Name(srcName, sha1Hex)
+	dst := filepath.Join("www", "s", name)
+	err = ioutil.WriteFile(dst, d, 0644)
+	maybePanicIfErr(err)
+	if err != nil {
+		return
+	}
+	book.AppJSURL = "/s/" + name
+	fmt.Printf("Created %sn", dst)
 }

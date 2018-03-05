@@ -2,9 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
-	"io/ioutil"
-	"path/filepath"
 	"strings"
 
 	"github.com/kjk/u"
@@ -92,13 +89,10 @@ func genBookTOCSearchMust(book *Book) {
 		}
 	}
 
-	d, err := json.MarshalIndent(toc, "", "  ")
+	d, err := json.Marshal(toc)
 	u.PanicIfErr(err)
 	s := "gBookToc = " + string(d) + ";"
-	d = []byte(s)
-	path := filepath.Join(destEssentialDir, book.FileNameBase, "toc_search.js")
-	u.CreateDirForFile(path)
-	err = ioutil.WriteFile(path, d, 0644)
-	u.PanicIfErr(err)
-	fmt.Printf("%s\n", path)
+	book.tocData = []byte(s)
+
+	updateBookAppJS(book)
 }

@@ -164,13 +164,11 @@ func genArticle(article *Article, currChapNo int) {
 		*Article
 		CurrentChapterNo int
 		Analytics        template.HTML
-		PathAppJS        string
 		PathMainCSS      string
 	}{
 		Article:          article,
 		CurrentChapterNo: currChapNo,
 		Analytics:        googleAnalytics,
-		PathAppJS:        pathAppJS,
 		PathMainCSS:      pathMainCSS,
 	}
 
@@ -189,13 +187,11 @@ func genChapter(chapter *Chapter, currNo int) {
 		*Chapter
 		CurrentChapterNo int
 		Analytics        template.HTML
-		PathAppJS        string
 		PathMainCSS      string
 	}{
 		Chapter:          chapter,
 		CurrentChapterNo: currNo,
 		Analytics:        googleAnalytics,
-		PathAppJS:        pathAppJS,
 		PathMainCSS:      pathMainCSS,
 	}
 	execTemplateToFileSilentMaybeMust("chapter.tmpl.html", d, path)
@@ -211,6 +207,8 @@ func genBook(book *Book) {
 	fmt.Printf("Started genering book %s\n", book.Title)
 	timeStart := time.Now()
 
+	genBookTOCSearchMust(book)
+
 	// generate index.html for the book
 	err := os.MkdirAll(book.destDir, 0755)
 	maybePanicIfErr(err)
@@ -222,12 +220,10 @@ func genBook(book *Book) {
 	d := struct {
 		Book        *Book
 		Analytics   template.HTML
-		PathAppJS   string
 		PathMainCSS string
 	}{
 		Book:        book,
 		Analytics:   googleAnalytics,
-		PathAppJS:   pathAppJS,
 		PathMainCSS: pathMainCSS,
 	}
 
@@ -244,7 +240,6 @@ func genBook(book *Book) {
 			<-book.sem
 		}(i+1, chapter)
 	}
-	genBookTOCSearchMust(book)
 	book.wg.Wait()
 
 	fmt.Printf("Generated %s, %d chapters, %d articles in %s\n", book.Title, len(book.Chapters), book.ArticlesCount(), time.Since(timeStart))

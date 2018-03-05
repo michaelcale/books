@@ -67,7 +67,7 @@ func handleFileChange(path string) {
 
 	name := filepath.Base(path)
 	switch name {
-	case "main.css", "app.js":
+	case "main.css":
 		clearErrors()
 		copyToWwwStaticMaybeMust(name)
 		printAndClearErrors()
@@ -77,7 +77,7 @@ func handleFileChange(path string) {
 	defer muRegen.Unlock()
 
 	nextRegenSeq++
-	if strings.HasPrefix(path, "tmpl") {
+	if name == "app.js" || strings.HasPrefix(path, "tmpl") {
 		regenAllBooks = true
 	} else {
 		// we assume it's either .md file change or a directory rename
