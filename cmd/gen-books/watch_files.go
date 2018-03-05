@@ -15,9 +15,11 @@ import (
 
 func copyToWwwStaticMaybeMust(srcName string) {
 	var dstPtr *string
+	var isCSS bool
 	switch srcName {
 	case "main.css":
 		dstPtr = &pathMainCSS
+		isCSS = true
 	case "app.js":
 		dstPtr = &pathAppJS
 	default:
@@ -26,6 +28,16 @@ func copyToWwwStaticMaybeMust(srcName string) {
 	src := filepath.Join("tmpl", srcName)
 	d, err := ioutil.ReadFile(src)
 	u.PanicIfErr(err)
+
+	if isCSS {
+		d2, err := minifier.Bytes("text/css", d)
+		maybePanicIfErr(err)
+		if err == nil {
+			fmt.Printf("Compressed %s from %d => %d (saved %d)\n", srcName, len(d), len(d2), len(d)-len(d2))
+			d = d2
+		}
+	}
+
 	sha1Hex := u.Sha1HexOfBytes(d)
 	name := nameToSha1Name(srcName, sha1Hex)
 	dst := filepath.Join("www", "s", name)

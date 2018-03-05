@@ -13,6 +13,9 @@ import (
 
 	"github.com/essentialbooks/books/pkg/common"
 	"github.com/kjk/u"
+	"github.com/tdewolff/minify"
+	"github.com/tdewolff/minify/css"
+	"github.com/tdewolff/minify/html"
 )
 
 var (
@@ -22,6 +25,8 @@ var (
 	allBookDirs           []string
 	soUserIDToNameMap     map[int]string
 	googleAnalytics       template.HTML
+
+	minifier *minify.M
 )
 
 const (
@@ -227,6 +232,7 @@ func loadSOUserMappingsMust() {
 }
 
 func main() {
+
 	parseFlags()
 
 	if false {
@@ -248,6 +254,10 @@ func main() {
 		updateGoPlaygroundLinks(goBookDir)
 		os.Exit(0)
 	}
+
+	minifier = minify.New()
+	minifier.AddFunc("text/css", css.Minify)
+	minifier.AddFunc("text/html", html.Minify)
 
 	booksToImport := getBooksToImport(getBookDirs())
 	for _, bookInfo := range booksToImport {
