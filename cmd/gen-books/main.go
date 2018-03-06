@@ -258,6 +258,12 @@ func main() {
 	minifier = minify.New()
 	minifier.AddFunc("text/css", css.Minify)
 	minifier.AddFunc("text/html", html.Minify)
+	// less aggresive minification because html validators
+	// report this as html errors
+	minifier.Add("text/html", &html.Minifier{
+		KeepDocumentTags: true,
+		KeepEndTags:      true,
+	})
 
 	booksToImport := getBooksToImport(getBookDirs())
 	for _, bookInfo := range booksToImport {
