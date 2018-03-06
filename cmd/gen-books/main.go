@@ -317,6 +317,8 @@ func gitRemoveCachedOutputFiles() {
 
 		}*/
 	os.RemoveAll(dir)
+	err := os.MkdirAll(dir, 0755)
+	u.PanicIfErr(err)
 }
 
 func gitCheckinCachedOutputFiles() {
