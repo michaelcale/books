@@ -1,0 +1,5 @@
+Name of executable: '/var/folders/2k/p2_4052s70vd5_cfdm0k0l740000gn/T/go-build158313665/b001/exe/raw_cmd_line_args'
+Arg 0, value: '-echo'
+Arg 1, value: 'echo-arg'
+Arg 2, value: 'additional'
+Arg 3, value: 'arg'

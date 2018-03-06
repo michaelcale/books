@@ -332,7 +332,7 @@ func gitCheckinCachedOutputFiles() {
 		cmd := exec.Command("git", "add", fi.Name())
 		cmd.Dir = dir
 		out, err := cmd.CombinedOutput()
-		cmdStr := strings.Join(cmd.Args[1:], " ")
+		cmdStr := strings.Join(cmd.Args, " ")
 		fmt.Printf("%s\n", cmdStr)
 		if err != nil {
 			fmt.Printf("'%s' failed with '%s'. Out:\n%s\n", cmdStr, err, string(out))

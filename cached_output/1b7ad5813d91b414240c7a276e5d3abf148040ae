@@ -1,0 +1,11 @@
+Key 'four' exists and maps to 4
+Key 'five' doesn't exists
+
+Value for non-existing key: 0
+
+All keys and their values:
+three => 3
+four => 4
+
+Before deletion: len(m)=2
+After deletion: len(m)=1

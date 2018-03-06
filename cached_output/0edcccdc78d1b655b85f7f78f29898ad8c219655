@@ -1,0 +1,2 @@
+Person struct parsed from JSON: main.Person{Name:(*string)(0xc42000e250), Age:24, City:"ny", Occupation:""}
+Name: "Jane"

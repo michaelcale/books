@@ -1,0 +1,7 @@
+Person in compact XML: <Person><Name>John</Name><age>37</age><city>SF</city></Person>
+Person in pretty-printed XML:
+<Person>
+  <Name>John</Name>
+  <age>37</age>
+  <city>SF</city>
+</Person>

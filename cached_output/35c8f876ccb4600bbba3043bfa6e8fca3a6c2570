@@ -1,0 +1,8 @@
+http.Post() returned statuts code 200, truncated text:
+{
+  "args": {}, 
+  "data": "text we send", 
+  "files": {}, 
+  "form": {}, 
+  "headers": {
+   ...

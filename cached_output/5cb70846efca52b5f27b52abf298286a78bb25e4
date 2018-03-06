@@ -1,0 +1,8 @@
+panic: interface conversion: interface {} is string, not int
+
+goroutine 1 [running]:
+main.panicOnInvalidConversion(0x10a0300, 0x10d3240)
+	/books/go/0120-empty-interface/type_assertion2.go:9 +0xc7
+main.main()
+	/books/go/0120-empty-interface/type_assertion2.go:14 +0x39
+exit status 2

@@ -1,0 +1,3 @@
+flag -echo: 'echo-arg'
+Remainig arg: 'additional'
+Remainig arg: 'arg'

@@ -1,0 +1,10 @@
+Exiting foo
+Exiting main
+panic: bar
+
+goroutine 1 [running]:
+main.foo()
+	/books/go/0200-panic-and-recover/panic.go:8 +0x95
+main.main()
+	/books/go/0200-panic-and-recover/panic.go:13 +0x7e
+exit status 2

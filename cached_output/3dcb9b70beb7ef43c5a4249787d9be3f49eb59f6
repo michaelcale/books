@@ -1,0 +1,2 @@
+doc: map[string]interface {}{"name":"Jane", "age":24, "city":"ny"}
+name: "Jane"

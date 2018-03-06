@@ -1,0 +1,7 @@
+Person in compact JSON: {"Name":"John","age":37,"city":"SF"}
+Person in pretty-printed JSON:
+{
+  "Name": "John",
+  "age": 37,
+  "city": "SF"
+}

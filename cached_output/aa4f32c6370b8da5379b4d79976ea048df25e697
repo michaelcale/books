@@ -1,0 +1,4 @@
+Standard time JSON: {"What":"earthquake","When":"2018-03-05T18:41:53.999108409-08:00"}
+
+Custom time JSON: {"What":"earthquake","When":"2018-05-03"}
+Decoded custom time: "2018-05-03"

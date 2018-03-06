@@ -1,0 +1,6 @@
+panic: send on closed channel
+
+goroutine 1 [running]:
+main.main()
+	/books/go/0220-channels-select/close5.go:7 +0x63
+exit status 2

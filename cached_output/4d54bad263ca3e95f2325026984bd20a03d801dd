@@ -1,0 +1,9 @@
+sum of string: string
+literal
+with	escape charactersraw string literal
+	which doesn't recgonize escape characters like \n
+	
+s1 is not equal to s2
+substring of s1: in
+byte (character) at position 3 in s1: 105
+s: 1 + 3.000000 = 4

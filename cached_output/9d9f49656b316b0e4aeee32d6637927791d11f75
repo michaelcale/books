@@ -1,0 +1,3 @@
+# command-line-arguments
+./verify_type_implements_interface.go:13:5: cannot use MyReadCloser literal (type *MyReadCloser) as type io.ReadCloser in assignment:
+	*MyReadCloser does not implement io.ReadCloser (missing Close method)

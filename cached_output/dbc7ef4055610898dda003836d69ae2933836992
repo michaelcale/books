@@ -1,0 +1,2 @@
+File 'file_exists.go' exists: true
+File 'non-existent-file.txt' exists: false

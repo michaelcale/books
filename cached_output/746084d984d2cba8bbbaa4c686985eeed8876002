@@ -1,0 +1,10 @@
+First main statement
+Num 3
+Num 2
+Num 1
+panic: panic occurred
+
+goroutine 1 [running]:
+main.main()
+	/books/go/0190-defer/defer_basics2.go:15 +0xf0
+exit status 2
