@@ -289,6 +289,7 @@ func main() {
 	cacheFilesInDir("books")
 
 	doMinify = !flgPreview
+	doMinify = true
 
 	if flgUpdateOutput || flgRecreateOutput {
 		gitRemoveCachedOutputFiles()

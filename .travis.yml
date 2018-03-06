@@ -6,18 +6,10 @@ branches:
   only:
     - master
 
-# https://github.com/GoogleCloudPlatform/golang-samples/blob/master/.travis.yml
-before_cache:
-  - rm -rf $GOPATH/src/github.com/essentialbooks
-  - rm -rf $GOPATH/pkg/**/github.com/essentialbooks
-
-cache:
-  directories:
-    - $GOPATH/src
-    - $GOPATH/pkg
-
+# this downloads and unpacks netlifyctl
 before_install:
-  - pushd $GOPATH/pkg; wget https://github.com/netlify/netlifyctl/releases/download/v0.3.2/netlifyctl-linux-amd64-0.3.2.tar.gz; tar -xvf netlifyctl-linux-amd64-0.3.2.tar.gz; popd
+  - wget https://github.com/netlify/netlifyctl/releases/download/v0.3.2/netlifyctl-linux-amd64-0.3.2.tar.gz
+  - tar -xvf netlifyctl-linux-amd64-0.3.2.tar.gz
 
 install:
   - ./s/travis_install.sh
