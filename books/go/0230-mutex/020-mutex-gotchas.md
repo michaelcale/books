@@ -3,13 +3,13 @@ Title: Mutex gotchas
 Search: Mutex pitfalls
 Id: 801000u9
 ---
-## Don't copy a mutex
+## Don't copy mutexes
 
-A copy of `sync.Mutex` variable starts with the same state as original mutex but is not the same mutex.
+A copy of `sync.Mutex` variable starts with the same state as original mutex but it is not the same mutex.
 
 It's almost always a mistake to copy a `sync.Mutex` e.g. by passing it to another function or embedding it in a struct and making a copy of that struct.
 
-If you want to share a mutex variable, pass it around as a pointer.
+If you want to share a mutex variable, pass it as a pointer `*sync.Mutex`.
 
 ## Mutex is not recursive
 
