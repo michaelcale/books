@@ -6,6 +6,7 @@ import (
 	"html/template"
 	"io/ioutil"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"runtime"
 	"strings"
@@ -23,6 +24,7 @@ var (
 	flgAnalytics          string
 	flgPreview            bool
 	flgUpdateGoPlayground bool
+	flgUpdateOutput       bool
 	allBookDirs           []string
 	soUserIDToNameMap     map[int]string
 	googleAnalytics       template.HTML
@@ -58,6 +60,7 @@ func parseFlags() {
 	flag.StringVar(&flgAnalytics, "analytics", "", "google analytics code")
 	flag.BoolVar(&flgPreview, "preview", false, "if true will start watching for file changes and re-build everything")
 	flag.BoolVar(&flgUpdateGoPlayground, "update-go-playground", false, "if true will upgrade links to go playground")
+	flag.BoolVar(&flgUpdateOutput, "update-output", false, "if true, will update ouput files in cached_output")
 	flag.Parse()
 
 	if flgAnalytics != "" {
@@ -284,10 +287,54 @@ func main() {
 
 	doMinify = !flgPreview
 
+	if flgUpdateOutput {
+		gitRemoveCachedOutputFiles()
+	}
+
 	clearErrors()
 	genAllBooks()
 	printAndClearErrors()
+
+	if flgUpdateOutput {
+		gitCheckinCachedOutputFiles()
+		return
+	}
+
 	if flgPreview {
 		startPreview()
+	}
+}
+
+func gitRemoveCachedOutputFiles() {
+	dir := "cached_output"
+	/*
+		fileInfos, err := ioutil.ReadDir(dir)
+		if os.IsNotExist(err) {
+			return
+		}
+		u.PanicIfErr(err)
+		for _, fi := range fileInfos {
+
+		}*/
+	os.RemoveAll(dir)
+}
+
+func gitCheckinCachedOutputFiles() {
+	dir := "cached_output"
+	fileInfos, err := ioutil.ReadDir(dir)
+	u.PanicIfErr(err)
+	for _, fi := range fileInfos {
+		if fi.IsDir() {
+			continue
+		}
+		cmd := exec.Command("git", "add", fi.Name())
+		cmd.Dir = dir
+		out, err := cmd.CombinedOutput()
+		cmdStr := strings.Join(cmd.Args[1:], " ")
+		fmt.Printf("%s\n", cmdStr)
+		if err != nil {
+			fmt.Printf("'%s' failed with '%s'. Out:\n%s\n", cmdStr, err, string(out))
+			u.PanicIfErr(err)
+		}
 	}
 }
