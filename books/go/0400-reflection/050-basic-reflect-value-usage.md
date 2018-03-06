@@ -1,7 +1,6 @@
 ---
 Title: Basic reflect.Value Usage
 Id: 6070
-Score: -1
 ---
 ```go
 import "reflect"
