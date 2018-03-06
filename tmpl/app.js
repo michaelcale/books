@@ -375,28 +375,46 @@ function buildResultsHTML(results, selectedIdx) {
   return a.join("\n");
 }
 
-// https://stackoverflow.com/questions/6215779/scroll-if-element-is-not-visible
-// TODO: improve on scroll up
-function scrollIntoViewIfOutOfView(el) {
-  var parent = el.parentElement;
-  var topOfPage = parent.scrollTop;
-  var heightOfPage = parent.clientHeight;
-  var elY = 0;
-  var elH = 0;
-  if (document.layers) {
-    // NS4
-    elY = el.y;
-    elH = el.height;
-  } else {
-    for (var p = el; p && p.tagName != "BODY"; p = p.offsetParent) {
-      elY += p.offsetTop;
-    }
-    elH = el.offsetHeight;
+// https://github.com/Treora/scroll-into-view/blob/master/polyfill.js
+// TODO: passing options = { center: true } doesn't work
+function scrollElementIntoView(el, options) {
+  // Use traditional scrollIntoView when traditional argument is given.
+  if (options === undefined || options === true || options === false) {
+    el.scrollIntoView(el, arguments);
+    return;
   }
-  if (topOfPage + heightOfPage < elY + elH) {
-    el.scrollIntoView(false);
-  } else if (elY < topOfPage) {
-    el.scrollIntoView(true);
+
+  var win = el.ownerDocument.defaultView;
+
+  // Read options.
+  if (options === undefined)  options = {};
+  if (options.center === true) {
+    options.vertical = 0.5;
+    options.horizontal = 0.5;
+  }
+  else {
+    if (options.block === "start")  options.vertical = 0.0;
+    else if (options.block === "end")  options.vertical = 0.0;
+    else if (options.vertical === undefined)  options.vertical = 0.0;
+
+    if (options.horizontal === undefined)  options.horizontal = 0.0;
+  }
+
+  // Fetch positional information.
+  var rect = el.getBoundingClientRect();
+
+  // Determine location to scroll to.
+  var targetY = win.scrollY + rect.top - (win.innerHeight - el.offsetHeight) * options.vertical;
+  var targetX = win.scrollX + rect.left - (win.innerWidth - el.offsetWidth) * options.horizontal;
+
+  // Scroll.
+  win.scroll(targetX, targetY);
+
+  // If window is inside a frame, center that frame in the parent window. Recursively.
+  if (win.parent !== win) {
+    // We are inside a scrollable element.
+    var frame = win.frameElement;
+    scrollIntoView.call(frame, options);
   }
 }
 
@@ -434,7 +452,7 @@ function rebuildSearchResultsUI() {
     }
     var id = "search-result-no-" + selectedIdx;
     var el = document.getElementById(id);
-    scrollIntoViewIfOutOfView(el);
+    scrollElementIntoView(el, true);
   });
 }
 
@@ -501,6 +519,8 @@ function genTocNoChildren(tocItem, tocItemIdx, level, isCurrent) {
   return html;
 }
 
+var selectedTocItemIdx = -1;
+
 function buildTOCHTMLLevel(level, parentIdx) {
   var opt = {};
   var tocItemIdx, tocItem, el;
@@ -518,6 +538,9 @@ function buildTOCHTMLLevel(level, parentIdx) {
 
     var uri = tocItemURL(tocItem);
     var isCurrent = currURI === uri;
+    if (isCurrent) {
+      selectedTocItemIdx = tocItemIdx;
+    }
     if (!tocItemHasChildren(tocItem)) {
       el = genTocNoChildren(tocItem, tocItemIdx, level, isCurrent);
     } else {
@@ -580,10 +603,16 @@ function locationHashChanged(e) {
   recreateTOC();
 }
 
+// returns id of selected toc item or ""
 function createTOC() {
+  selectedTocItemIdx = -1;
   var el = document.getElementById("toc");
   var html = buildTOCHTML();
   el.innerHTML = html;
+  if (selectedTocItemIdx === -1) {
+    return ""
+  }
+  return "ti-" + selectedTocItemIdx
 }
 
 function recreateTOC() {
@@ -973,14 +1002,28 @@ function start() {
   document.addEventListener("mousemove", onMouseMove, true);
   document.addEventListener("click", onClick, false);
 
-  // if this is chapter or article, we generate toc
   var uri = getLocationLastElement();
-  if (isChapterOrArticleURL(uri)) {
-    window.onhashchange = locationHashChanged;
-    tocUnexpandAll();
-    setTocExpandedForCurrentURL();
-    createTOC();
+  if (!isChapterOrArticleURL(uri)) {
+    return;
   }
+  // if this is chapter or article, we generate toc
+  window.onhashchange = locationHashChanged;
+  tocUnexpandAll();
+  setTocExpandedForCurrentURL();
+  var tocItemElementID = createTOC();
+  // ensure that the slected toc item is visible
+  if (tocItemElementID === "") {
+    return;
+  }
+  function makeTocVisible() {
+    var el = document.getElementById(tocItemElementID);
+    if (el) {
+      scrollElementIntoView(el, true);
+    } else {
+      console.log("tried to scroll toc item to non-existent element with id: '"+tocItemElementID+"'");
+    }
+  }
+  window.requestAnimationFrame(makeTocVisible);
 }
 
 // we don't want to run javascript on about etc. pages
