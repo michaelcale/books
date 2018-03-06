@@ -115,15 +115,24 @@ func (b *Book) ChaptersCount() int {
 }
 
 func updateBookAppJS(book *Book) {
+	srcName := fmt.Sprintf("app-%s.js", book.titleSafe)
 	path := filepath.Join("tmpl", "app.js")
-	dApp, err := ioutil.ReadFile(path)
+	d, err := ioutil.ReadFile(path)
 	maybePanicIfErr(err)
 	if err != nil {
 		return
 	}
-	d := append(book.tocData, dApp...)
+	if doMinify {
+		d2, err := minifier.Bytes("text/javascript", d)
+		maybePanicIfErr(err)
+		if err == nil {
+			fmt.Printf("Minified %s from %d => %d (saved %d)\n", srcName, len(d), len(d2), len(d)-len(d2))
+			d = d2
+		}
+	}
+
+	d = append(book.tocData, d...)
 	sha1Hex := u.Sha1HexOfBytes(d)
-	srcName := fmt.Sprintf("app-%s.js", book.titleSafe)
 	name := nameToSha1Name(srcName, sha1Hex)
 	dst := filepath.Join("www", "s", name)
 	err = ioutil.WriteFile(dst, d, 0644)
@@ -132,5 +141,5 @@ func updateBookAppJS(book *Book) {
 		return
 	}
 	book.AppJSURL = "/s/" + name
-	fmt.Printf("Created %sn", dst)
+	fmt.Printf("Created %sn\n", dst)
 }

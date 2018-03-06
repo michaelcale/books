@@ -15,13 +15,14 @@ import (
 
 func copyToWwwStaticMaybeMust(srcName string) {
 	var dstPtr *string
-	var isCSS bool
+	minifyType := ""
 	switch srcName {
 	case "main.css":
 		dstPtr = &pathMainCSS
-		isCSS = true
+		minifyType = "text/css"
 	case "app.js":
 		dstPtr = &pathAppJS
+		minifyType = "text/javascript"
 	default:
 		u.PanicIf(true, "unknown srcName '%s'", srcName)
 	}
@@ -29,8 +30,8 @@ func copyToWwwStaticMaybeMust(srcName string) {
 	d, err := ioutil.ReadFile(src)
 	u.PanicIfErr(err)
 
-	if doMinifiy && isCSS {
-		d2, err := minifier.Bytes("text/css", d)
+	if doMinify && minifyType != "" {
+		d2, err := minifier.Bytes(minifyType, d)
 		maybePanicIfErr(err)
 		if err == nil {
 			fmt.Printf("Compressed %s from %d => %d (saved %d)\n", srcName, len(d), len(d2), len(d)-len(d2))

@@ -16,6 +16,7 @@ import (
 	"github.com/tdewolff/minify"
 	"github.com/tdewolff/minify/css"
 	"github.com/tdewolff/minify/html"
+	"github.com/tdewolff/minify/js"
 )
 
 var (
@@ -25,7 +26,7 @@ var (
 	allBookDirs           []string
 	soUserIDToNameMap     map[int]string
 	googleAnalytics       template.HTML
-	doMinifiy             bool
+	doMinify              bool
 	minifier              *minify.M
 )
 
@@ -258,6 +259,7 @@ func main() {
 	minifier = minify.New()
 	minifier.AddFunc("text/css", css.Minify)
 	minifier.AddFunc("text/html", html.Minify)
+	minifier.AddFunc("text/javascript", js.Minify)
 	// less aggresive minification because html validators
 	// report this as html errors
 	minifier.Add("text/html", &html.Minifier{
@@ -280,7 +282,7 @@ func main() {
 	updateGoDeps()
 	cacheFilesInDir("books")
 
-	doMinifiy = !flgPreview
+	doMinify = !flgPreview
 
 	clearErrors()
 	genAllBooks()

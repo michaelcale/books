@@ -89,7 +89,7 @@ func execTemplateToFileSilentMaybeMust(name string, data interface{}, path strin
 	maybePanicIfErr(err)
 
 	d := buf.Bytes()
-	if doMinifiy {
+	if doMinify {
 		d2, err := minifier.Bytes("text/html", d)
 		maybePanicIfErr(err)
 		if err == nil {
