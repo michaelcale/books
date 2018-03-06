@@ -25,6 +25,8 @@ var (
 	flgPreview            bool
 	flgUpdateGoPlayground bool
 	flgUpdateOutput       bool
+	flgRecreateOutput     bool
+	flgForce              bool
 	allBookDirs           []string
 	soUserIDToNameMap     map[int]string
 	googleAnalytics       template.HTML
@@ -51,7 +53,7 @@ const (
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', '%s');
+        gtag('config', '%s')
     </script>
 `
 )
@@ -61,6 +63,7 @@ func parseFlags() {
 	flag.BoolVar(&flgPreview, "preview", false, "if true will start watching for file changes and re-build everything")
 	flag.BoolVar(&flgUpdateGoPlayground, "update-go-playground", false, "if true will upgrade links to go playground")
 	flag.BoolVar(&flgUpdateOutput, "update-output", false, "if true, will update ouput files in cached_output")
+	flag.BoolVar(&flgRecreateOutput, "recreate-output", false, "if true, recreates ouput files in cached_output")
 	flag.Parse()
 
 	if flgAnalytics != "" {
@@ -287,7 +290,7 @@ func main() {
 
 	doMinify = !flgPreview
 
-	if flgUpdateOutput {
+	if flgUpdateOutput || flgRecreateOutput {
 		gitRemoveCachedOutputFiles()
 	}
 
@@ -295,8 +298,8 @@ func main() {
 	genAllBooks()
 	printAndClearErrors()
 
-	if flgUpdateOutput {
-		gitCheckinCachedOutputFiles()
+	if flgUpdateOutput || flgRecreateOutput {
+		gitAddachedOutputFiles()
 		return
 	}
 
@@ -307,21 +310,14 @@ func main() {
 
 func gitRemoveCachedOutputFiles() {
 	dir := "cached_output"
-	/*
-		fileInfos, err := ioutil.ReadDir(dir)
-		if os.IsNotExist(err) {
-			return
-		}
-		u.PanicIfErr(err)
-		for _, fi := range fileInfos {
-
-		}*/
-	os.RemoveAll(dir)
+	if flgRecreateOutput {
+		os.RemoveAll(dir)
+	}
 	err := os.MkdirAll(dir, 0755)
 	u.PanicIfErr(err)
 }
 
-func gitCheckinCachedOutputFiles() {
+func gitAddachedOutputFiles() {
 	dir := "cached_output"
 	fileInfos, err := ioutil.ReadDir(dir)
 	u.PanicIfErr(err)
@@ -338,5 +334,13 @@ func gitCheckinCachedOutputFiles() {
 			fmt.Printf("'%s' failed with '%s'. Out:\n%s\n", cmdStr, err, string(out))
 			u.PanicIfErr(err)
 		}
+	}
+	cmd := exec.Command("git", "commit", "-am", "update output files")
+	cmd.Dir = dir
+	out, err := cmd.CombinedOutput()
+	cmdStr := strings.Join(cmd.Args, " ")
+	fmt.Printf("%s\n", cmdStr)
+	if err != nil {
+		fmt.Printf("'%s' failed with '%s'. Out:\n%s\n", cmdStr, err, string(out))
 	}
 }
