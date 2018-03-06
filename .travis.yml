@@ -16,6 +16,9 @@ cache:
     - $GOPATH/src
     - $GOPATH/pkg
 
+before_install:
+  - cd $GOPATH/pkg; wget https://github.com/netlify/netlifyctl/releases/download/v0.3.2/netlifyctl-linux-amd64-0.3.2.tar.gz; tar -xvf netlifyctl-linux-amd64-0.3.2.tar.gz
+
 install:
   - ./s/travis_install.sh
 
