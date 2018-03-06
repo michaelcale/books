@@ -12,6 +12,6 @@ func main() {
 	var reflectVal reflect.Value = reflect.ValueOf(v)
 
 	var typ reflect.Type = reflectVal.Type()
-	fmt.Printf("Type '%s', its size: %d bytes\n", typ.Name(), typ.Size())
+	fmt.Printf("Type '%s' of size: %d bytes\n", typ.Name(), typ.Size())
 	// :show end
 }
