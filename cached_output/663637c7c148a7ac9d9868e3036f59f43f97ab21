@@ -1,6 +1,6 @@
 iv is of type string and has value 'string'
 iv is of type int and has value '5'
-iv is of type *int and has value '%!s(*int=0xc420014090)'
+iv is of type *int and has value '%!s(*int=0xc420018090)'
 panic: interface conversion: interface {} is string, not int
 
 goroutine 1 [running]:

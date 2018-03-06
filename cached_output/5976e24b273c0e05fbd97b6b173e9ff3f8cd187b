@@ -1,2 +1,2 @@
-2018/03/05 18:41:53 second cmd.CombintedOutput() failed with 'exec: Stdout already set'
+2018/03/05 18:43:04 second cmd.CombintedOutput() failed with 'exec: Stdout already set'
 exit status 1

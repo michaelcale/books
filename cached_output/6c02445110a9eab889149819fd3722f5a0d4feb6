@@ -1,3 +1,3 @@
-address of p:                         0xc42000a080
-PrintFullNamePointer: p is            0xc42000a080
-PrintFullNameValue:   address of p is 0xc42000a0a0
+address of p:                         0xc4200a2040
+PrintFullNamePointer: p is            0xc4200a2040
+PrintFullNameValue:   address of p is 0xc4200a2060

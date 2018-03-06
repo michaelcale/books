@@ -1,3 +1,3 @@
-2018/03/05 18:41:53 http.DefaultClient.Do() failed with:
-'Get https://httpbin.org/delay/3: dial tcp 50.17.234.140:443: i/o timeout'
+2018/03/05 18:43:04 http.DefaultClient.Do() failed with:
+'Get https://httpbin.org/delay/3: context deadline exceeded'
 exit status 1

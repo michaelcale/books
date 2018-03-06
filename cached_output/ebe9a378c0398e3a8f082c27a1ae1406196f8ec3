@@ -1,6 +1,6 @@
 ==================
 WARNING: DATA RACE
-Read at 0x0000011d9318 by goroutine 9:
+Read at 0x0000011d9318 by goroutine 7:
   main.main.func1()
       /books/go/0230-mutex/data_race.go:25 +0x6d
 
@@ -8,7 +8,7 @@ Previous write at 0x0000011d9318 by goroutine 6:
   main.main.func1()
       /books/go/0230-mutex/data_race.go:25 +0x89
 
-Goroutine 9 (running) created at:
+Goroutine 7 (running) created at:
   main.main()
       /books/go/0230-mutex/data_race.go:22 +0xcf
 
@@ -16,6 +16,24 @@ Goroutine 6 (running) created at:
   main.main()
       /books/go/0230-mutex/data_race.go:22 +0xcf
 ==================
-n is: 619, expected: 800
-Found 1 data race(s)
+==================
+WARNING: DATA RACE
+Read at 0x0000011d9318 by goroutine 8:
+  main.main.func1()
+      /books/go/0230-mutex/data_race.go:25 +0x6d
+
+Previous write at 0x0000011d9318 by goroutine 6:
+  main.main.func1()
+      /books/go/0230-mutex/data_race.go:25 +0x89
+
+Goroutine 8 (running) created at:
+  main.main()
+      /books/go/0230-mutex/data_race.go:22 +0xcf
+
+Goroutine 6 (running) created at:
+  main.main()
+      /books/go/0230-mutex/data_race.go:22 +0xcf
+==================
+n is: 559, expected: 800
+Found 2 data race(s)
 exit status 66
