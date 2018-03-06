@@ -719,9 +719,11 @@ pre.chroma {
   text-overflow: ellipsis;
 
   overflow-x: hidden;
-  color: #646464;
-  color: #686868;
   color: #686868c9;
+}
+
+.bold .toc-link {
+  color: black;
 }
 
 /*
