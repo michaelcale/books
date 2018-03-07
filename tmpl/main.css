@@ -720,7 +720,7 @@ pre.chroma {
   text-overflow: ellipsis;
 
   overflow-x: hidden;
-  color: #686868c9;
+  color: rgba(150, 150, 150, 201);
 }
 
 .bold .toc-link {

@@ -980,7 +980,7 @@ function onUpDown(ev) {
 }
 
 function onKeyDown(ev) {
-  console.log(ev);
+  // console.log(ev);
   if (ev.key == "/") {
     onKeySlash(ev);
     return;
