@@ -79,6 +79,12 @@ func ReadFileAsLines(path string) ([]string, error) {
 	return res, nil
 }
 
+// ReadFileNormalized reads the file and normalized newlines
+func ReadFileNormalized(path string) ([]byte, error) {
+	d, err := ioutil.ReadFile(path)
+	return NormalizeNewlines(d), err
+}
+
 // GetDirs returns all sub-directories in a dir
 func GetDirs(dir string) ([]string, error) {
 	fileInfos, err := ioutil.ReadDir(dir)

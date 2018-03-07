@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -38,11 +37,10 @@ var (
 )
 
 func cacheFile(path string, info os.FileInfo) (*FileContent, error) {
-	d, err := ioutil.ReadFile(path)
+	d, err := common.ReadFileNormalized(path)
 	if err != nil {
 		return nil, err
 	}
-	d = common.NormalizeNewlines(d)
 	s := string(d)
 	lines := strings.Split(s, "\n")
 	fc := &FileContent{

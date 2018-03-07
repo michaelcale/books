@@ -10,6 +10,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/essentialbooks/books/pkg/common"
 	"github.com/kjk/u"
 )
 
@@ -65,7 +66,7 @@ func dataToLines(d []byte) []string {
 }
 
 func readFilteredSourceFile(path string) ([]string, error) {
-	d, err := ioutil.ReadFile(path)
+	d, err := common.ReadFileNormalized(path)
 	if err != nil {
 		return nil, err
 	}
@@ -134,7 +135,7 @@ func loadMarkdownFiles(dir string) []GoMarkdownFile {
 		if ext != ".md" {
 			return nil
 		}
-		d, err := ioutil.ReadFile(path)
+		d, err := common.ReadFileNormalized(path)
 		u.PanicIfErr(err)
 		if !bytes.Contains(d, []byte("@file ")) {
 			return nil
@@ -177,7 +178,7 @@ func getGoPlaygroundShareID(d []byte) (string, error) {
 
 func testGetGoPlaygroundShareIDAndExit() {
 	path := "books/go/0230-mutex/rwlock.go"
-	d, err := ioutil.ReadFile(path)
+	d, err := common.ReadFileNormalized(path)
 	u.PanicIfErr(err)
 	shareID, err := getGoPlaygroundShareID(d)
 	u.PanicIfErr(err)
