@@ -44,16 +44,14 @@ function tocItemSetIsExpanded(item, isExpanded) {
 }
 
 function tocItemURL(item) {
-  while (true) {
+  while (item) {
     var uri = item[itemIdxURL];
     if (uri != "") {
       return uri;
     }
     item = tocItemParent(item);
-    if (!item) {
-      return "";
-    }
   }
+  return "";
 }
 
 function tocItemFirstChildIdx(item) {
@@ -62,6 +60,29 @@ function tocItemFirstChildIdx(item) {
 
 function tocItemHasChildren(item) {
   return tocItemFirstChildIdx(item) != -1;
+}
+
+// returns true if has children and some of them articles
+// (as opposed to children that are headers within articles)
+function tocItemHasArticleChildren(item) {
+  var idx = tocItemFirstChildIdx(item)
+  if (idx == -1) {
+    return false
+  }
+  var item = gBookToc[idx];
+  var parentIdx = item[itemIdxParent];
+  while (idx < gBookToc.length) {
+    item = gBookToc[idx];
+    if (parentIdx != item[itemIdxParent]) {
+      return false;
+    }
+    var uri = item[itemIdxURL];
+    if (uri.indexOf("#") === -1) {
+      return true;
+    }
+    idx += 1
+  }
+  return false;
 }
 
 function tocItemParent(item) {
@@ -504,6 +525,18 @@ function genTocNotExpanded(tocItem, tocItemIdx, level) {
 }
 
 function genTocNoChildren(tocItem, tocItemIdx, level, isCurrent) {
+  var uri = tocItemURL(tocItem);
+  // TODO: tweak this logic some more
+  if (uri.indexOf("#") != -1) {
+    var parent = tocItemParent(tocItem);
+    var isChapter = tocItemIsRoot(parent);
+    var hasChildren = tocItemHasChildren(parent);
+    var onlyArticleChildren = tocItemHasArticleChildren(parent);
+    if (isChapter && hasChildren && onlyArticleChildren) {
+      level += 1;
+    }
+  }
+
   var opt = {
     classes: ["toc-item", "lvl" + level],
     id: "ti-" + tocItemIdx
@@ -513,7 +546,6 @@ function genTocNoChildren(tocItem, tocItemIdx, level, isCurrent) {
     opt.classes.push("bold");
     return div(titleHTML, opt);
   }
-  var uri = tocItemURL(tocItem);
   var divInner = a(uri, titleHTML, "toc-link");
   var html = div(divInner, opt);
   return html;
