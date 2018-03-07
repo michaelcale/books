@@ -1,32 +1,27 @@
 ---
 Title: Structs
 Id: 6071
-Score: 0
 ---
-```go
-import "reflect"
+## List fields of a struct
+Using reflection we can list all fields of a struct.
 
-type S struct {
-    A int
-    b string
-}
+@file enum_struct_fields_simple.go output
 
-func (s *S) String() { return s.b }
+Using reflection we can only access values (`v.Interface{}`) of exported fields.
 
-s := &S{
-    A: 5,
-    b: "example",
-}
+Exported fields are fields with names starting with upper case (`FirstName` and `Age` are exported, `lastName` is not).
 
-indirect := reflect.ValueOf(s) // effectively a pointer to an S
-value := indirect.Elem()       // this is addressable, since we've derefed a pointer
+Field is exported if `reflect.StructField.PkgPath == ""`.
 
-value.FieldByName("A").Interface() // 5
-value.Field(2).Interface()         // "example"
 
-value.NumMethod()    // 0, since String takes a pointer receiver
-indirect.NumMethod() // 1
+## List fields of a struct recursively
 
-indirect.Method(0).Call([]reflect.Value{})              // "example"
-indirect.MethodByName("String").Call([]reflect.Value{}) // "example"
-```
+Inspecting a struct is inherently recursive process.
+
+You have to chase pointers and recurse into embedded structures.
+
+In real programs inspecting structures using reflections would be recursive.
+
+@file enum_struct_fields.go output
+
+We can access not only

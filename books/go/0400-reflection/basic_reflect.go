@@ -1,4 +1,3 @@
-// :run go run -race $file
 package main
 
 import (
@@ -13,5 +12,8 @@ func main() {
 
 	var typ reflect.Type = reflectVal.Type()
 	fmt.Printf("Type '%s' of size: %d bytes\n", typ.Name(), typ.Size())
+	if typ.Kind() == reflect.Int {
+		fmt.Printf("v contains value of type int\n")
+	}
 	// :show end
 }
