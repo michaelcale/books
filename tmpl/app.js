@@ -962,7 +962,8 @@ function onEscape(ev) {
 }
 
 function onUpDown(ev) {
-  var dir = ev.key == "ArrowUp" ? -1 : 1;
+  // "Down" is Edge, "ArrowUp" is Chrome
+  var dir = (ev.key == "ArrowUp" || ev.key == "Up") ? -1 : 1;
   var results = currentState.searchResults;
   var n = results.length;
   var selIdx = currentState.selectedSearchResultIdx;
@@ -979,13 +980,14 @@ function onUpDown(ev) {
 }
 
 function onKeyDown(ev) {
-  // console.log(ev);
+  console.log(ev);
   if (ev.key == "/") {
     onKeySlash(ev);
     return;
   }
 
-  if (ev.key == "Escape") {
+  // Esc is Edge
+  if (ev.key == "Escape" || ev.key == "Esc") {
     onEscape(ev);
     return;
   }
@@ -995,7 +997,7 @@ function onKeyDown(ev) {
     return;
   }
 
-  if (ev.key == "ArrowUp" || ev.key == "ArrowDown") {
+  if (ev.key == "ArrowUp" || ev.key == "ArrowDown" || ev.key == "Up" || ev.key == "Down") {
     onUpDown(ev);
     return;
   }
