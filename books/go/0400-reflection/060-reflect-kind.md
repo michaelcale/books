@@ -1,5 +1,5 @@
 ---
-Title: All reflection types
+Title: reflect.Kind
 Id: rd6000hd
 ---
 Function `Kind()` on `reflect.Value` returns `reflect.Kind` type describing type of the value.
