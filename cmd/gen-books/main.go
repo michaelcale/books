@@ -255,7 +255,7 @@ func genNetlifyRedirects() {
 	s := `
 /essential/go/* /essential/go/404.html 404
 `
-	path := filepath.Join("www", "_headers")
+	path := filepath.Join("www", "_redirects")
 	err := ioutil.WriteFile(path, []byte(s), 0644)
 	u.PanicIfErr(err)
 }
