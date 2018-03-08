@@ -14,6 +14,9 @@ import (
 const (
 	showStartLine = "// :show start"
 	showEndLine   = "// :show end"
+	// if false, we separate code snippet and output
+	// with **Output** paragraph
+	compactOutput = true
 )
 
 func isShowStart(s string) bool {
@@ -335,10 +338,15 @@ func extractCodeSnippetsAsMarkdownLines(baseDir string, line string) ([]string, 
 		return res, err
 	}
 
-	res = append(res, "")
-	res = append(res, "**Output**:")
-	res = append(res, "")
-	res = append(res, "```text")
+	if compactOutput {
+		res = append(res, "")
+		res = append(res, "```output")
+	} else {
+		res = append(res, "")
+		res = append(res, "**Output**:")
+		res = append(res, "")
+		res = append(res, "```text")
+	}
 	lines = strings.Split(out, "\n")
 	lines = trimEmptyLines(lines)
 	res = append(res, lines...)

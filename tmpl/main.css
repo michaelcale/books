@@ -620,14 +620,6 @@ hr.toc-sep {
   overflow-x: visible;
 }
 
-pre.chroma {
-  display: block;
-  overflow-x: visible;
-  tab-size: 2;
-  margin: 0px;
-  padding: 0.5em;
-}
-
 /* box that potentially displays file name linking to github and 'run' button for playground */
 .code-box {
   margin-bottom: 1em;
@@ -675,6 +667,20 @@ pre.chroma {
 .code-box-playground {
   margin-right: 8px;
 }
+
+.lang-output {
+  border-top: 0px;
+  margin-top: -1em;
+}
+
+pre.chroma {
+  display: block;
+  overflow-x: visible;
+  tab-size: 2;
+  margin: 0px;
+  padding: 0.5em;
+}
+
 
 .arrow {
   /* kind of a hack because it got squished if the link
