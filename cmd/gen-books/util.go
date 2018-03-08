@@ -51,10 +51,11 @@ func createDirForFileMaybeMust(path string) {
 	maybePanicIfErr(err)
 }
 
-func copyFileMaybeMust(dst, src string) {
+func copyFileMaybeMust(dst, src string) error {
 	createDirForFileMaybeMust(dst)
 	err := copyFile(dst, src)
 	maybePanicIfErr(err)
+	return err
 }
 
 // "foo.js" => "foo-${sha1}.js"

@@ -21,6 +21,7 @@ var ( // directory where generated .html files for books are
 	destEssentialDir       = filepath.Join(destDir, "essential")
 	pathAppJS              = "/s/app.js"
 	pathMainCSS            = "/s/main.css"
+	pathFaviconICO         = "/s/favicon.ico"
 	totalHTMLBytes         int
 	totalHTMLBytesMinified int
 )
@@ -106,21 +107,34 @@ func execTemplateToFileMaybeMust(name string, data interface{}, path string) {
 	execTemplateToFileSilentMaybeMust(name, data, path)
 }
 
+// PageCommon is a common information for most pages
+type PageCommon struct {
+	Analytics      template.HTML
+	PathAppJS      string
+	PathMainCSS    string
+	PathFaviconICO string
+}
+
+func getPageCommon() PageCommon {
+	return PageCommon{
+		Analytics:      googleAnalytics,
+		PathAppJS:      pathAppJS,
+		PathMainCSS:    pathMainCSS,
+		PathFaviconICO: pathFaviconICO,
+	}
+}
+
 func genIndex(books []*Book) {
 	d := struct {
-		Books       []*Book
-		GitHubText  string
-		GitHubURL   string
-		Analytics   template.HTML
-		PathAppJS   string
-		PathMainCSS string
+		PageCommon
+		Books      []*Book
+		GitHubText string
+		GitHubURL  string
 	}{
-		Books:       books,
-		GitHubText:  "GitHub",
-		GitHubURL:   gitHubBaseURL,
-		Analytics:   googleAnalytics,
-		PathAppJS:   pathAppJS,
-		PathMainCSS: pathMainCSS,
+		PageCommon: getPageCommon(),
+		Books:      books,
+		GitHubText: "GitHub",
+		GitHubURL:  gitHubBaseURL,
 	}
 	path := filepath.Join(destDir, "index.html")
 	execTemplateToFileMaybeMust("index.tmpl.html", d, path)
@@ -128,45 +142,25 @@ func genIndex(books []*Book) {
 
 func genIndexGrid(books []*Book) {
 	d := struct {
-		Books       []*Book
-		Analytics   template.HTML
-		PathAppJS   string
-		PathMainCSS string
+		PageCommon
+		Books []*Book
 	}{
-		Books:       books,
-		Analytics:   googleAnalytics,
-		PathAppJS:   pathAppJS,
-		PathMainCSS: pathMainCSS,
+		PageCommon: getPageCommon(),
+		Books:      books,
 	}
 	path := filepath.Join(destDir, "index-grid.html")
 	execTemplateToFileMaybeMust("index-grid.tmpl.html", d, path)
 }
 
 func genFeedback() {
-	d := struct {
-		Analytics   template.HTML
-		PathAppJS   string
-		PathMainCSS string
-	}{
-		Analytics:   googleAnalytics,
-		PathAppJS:   pathAppJS,
-		PathMainCSS: pathMainCSS,
-	}
+	d := getPageCommon()
 	fmt.Printf("writing feedback.html\n")
 	path := filepath.Join(destDir, "feedback.html")
 	execTemplateToFileMaybeMust("feedback.tmpl.html", d, path)
 }
 
 func genAbout() {
-	d := struct {
-		Analytics   template.HTML
-		PathAppJS   string
-		PathMainCSS string
-	}{
-		Analytics:   googleAnalytics,
-		PathAppJS:   pathAppJS,
-		PathMainCSS: pathMainCSS,
-	}
+	d := getPageCommon()
 	fmt.Printf("writing about.html\n")
 	path := filepath.Join(destDir, "about.html")
 	execTemplateToFileMaybeMust("about.tmpl.html", d, path)
@@ -176,15 +170,13 @@ func genArticle(article *Article, currChapNo int) {
 	addSitemapURL(article.CanonnicalURL())
 
 	d := struct {
+		PageCommon
 		*Article
 		CurrentChapterNo int
-		Analytics        template.HTML
-		PathMainCSS      string
 	}{
+		PageCommon:       getPageCommon(),
 		Article:          article,
 		CurrentChapterNo: currChapNo,
-		Analytics:        googleAnalytics,
-		PathMainCSS:      pathMainCSS,
 	}
 
 	path := article.destFilePath()
@@ -199,15 +191,13 @@ func genChapter(chapter *Chapter, currNo int) {
 
 	path := chapter.destFilePath()
 	d := struct {
+		PageCommon
 		*Chapter
 		CurrentChapterNo int
-		Analytics        template.HTML
-		PathMainCSS      string
 	}{
+		PageCommon:       getPageCommon(),
 		Chapter:          chapter,
 		CurrentChapterNo: currNo,
-		Analytics:        googleAnalytics,
-		PathMainCSS:      pathMainCSS,
 	}
 	execTemplateToFileSilentMaybeMust("chapter.tmpl.html", d, path)
 
@@ -233,17 +223,14 @@ func genBook(book *Book) {
 
 	path := filepath.Join(book.destDir, "index.html")
 	d := struct {
-		Book        *Book
-		Analytics   template.HTML
-		PathMainCSS string
+		PageCommon
+		Book *Book
 	}{
-		Book:        book,
-		Analytics:   googleAnalytics,
-		PathMainCSS: pathMainCSS,
+		PageCommon: getPageCommon(),
+		Book:       book,
 	}
 
 	execTemplateToFileSilentMaybeMust("book_index.tmpl.html", d, path)
-
 	addSitemapURL(book.CanonnicalURL())
 
 	for i, chapter := range book.Chapters {

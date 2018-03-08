@@ -13,7 +13,9 @@ import (
 	"github.com/kjk/u"
 )
 
-func copyToWwwStaticMaybeMust(srcName string) {
+// copy from tmpl to www, optimize if possible, add
+// sha1 of the content as part of the name
+func copyToWwwAsSha1MaybeMust(srcName string) {
 	var dstPtr *string
 	minifyType := ""
 	switch srcName {
@@ -23,6 +25,8 @@ func copyToWwwStaticMaybeMust(srcName string) {
 	case "app.js":
 		dstPtr = &pathAppJS
 		minifyType = "text/javascript"
+	case "favicon.ico":
+		dstPtr = &pathFaviconICO
 	default:
 		u.PanicIf(true, "unknown srcName '%s'", srcName)
 	}
@@ -82,7 +86,7 @@ func handleFileChange(path string) {
 	switch name {
 	case "main.css":
 		clearErrors()
-		copyToWwwStaticMaybeMust(name)
+		copyToWwwAsSha1MaybeMust(name)
 		printAndClearErrors()
 	}
 

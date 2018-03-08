@@ -27,6 +27,7 @@ var (
 	flgUpdateOutput       bool
 	flgRecreateOutput     bool
 	flgForce              bool
+	flgUpdateGoDeps       bool
 	allBookDirs           []string
 	soUserIDToNameMap     map[int]string
 	googleAnalytics       template.HTML
@@ -64,6 +65,7 @@ func parseFlags() {
 	flag.BoolVar(&flgUpdateGoPlayground, "update-go-playground", false, "if true will upgrade links to go playground")
 	flag.BoolVar(&flgUpdateOutput, "update-output", false, "if true, will update ouput files in cached_output")
 	flag.BoolVar(&flgRecreateOutput, "recreate-output", false, "if true, recreates ouput files in cached_output")
+	flag.BoolVar(&flgUpdateGoDeps, "update-go-deps", false, "if true, updates go libraries references in go snippets")
 	flag.Parse()
 
 	if flgAnalytics != "" {
@@ -186,8 +188,9 @@ func genSelectedBooks(bookDirs []string) {
 	}
 	fmt.Printf("Parsed books in %s\n", time.Since(timeStart))
 
-	copyToWwwStaticMaybeMust("main.css")
-	copyToWwwStaticMaybeMust("app.js")
+	copyToWwwAsSha1MaybeMust("main.css")
+	copyToWwwAsSha1MaybeMust("app.js")
+	copyToWwwAsSha1MaybeMust("favicon.ico")
 	genIndex(books)
 	genIndexGrid(books)
 	genAbout()
@@ -218,8 +221,9 @@ func genAllBooks() {
 	}
 	fmt.Printf("Parsed books in %s\n", time.Since(timeStart))
 
-	copyToWwwStaticMaybeMust("main.css")
-	copyToWwwStaticMaybeMust("app.js")
+	copyToWwwAsSha1MaybeMust("main.css")
+	copyToWwwAsSha1MaybeMust("app.js")
+	copyToWwwAsSha1MaybeMust("favicon.ico")
 	genIndex(books)
 	genIndexGrid(books)
 	genAbout()
@@ -241,12 +245,6 @@ func loadSOUserMappingsMust() {
 func main() {
 
 	parseFlags()
-
-	if false {
-		updateGoDeps()
-		//updateGoDepsInFile("books/go/0250-time-date/strftime.go")
-		os.Exit(0)
-	}
 
 	if false {
 		genTwitterImagesAndExit()
@@ -285,7 +283,10 @@ func main() {
 	err := ioutil.WriteFile(path, []byte(netlifyHeaders), 0644)
 	u.PanicIfErr(err)
 
-	updateGoDeps()
+	if flgUpdateGoDeps {
+		updateGoDeps()
+	}
+
 	cacheFilesInDir("books")
 
 	doMinify = !flgPreview
