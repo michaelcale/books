@@ -8,7 +8,7 @@ Let's see what kind of operations we can do on primitive types like `int` or `st
 
 @file get_type.go output
 
-In real code you would handle [all the types](a-rd6000hd) you care about.
+In real code you would handle [all the types](rd6000hd) you care about.
 
 ## Get the value
 

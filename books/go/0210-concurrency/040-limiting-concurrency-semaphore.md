@@ -18,7 +18,7 @@ Here's an example of using a channel acting as a semaphore to limit number of go
 
 @file limit_with_semaphore.go output sha1:04794d86e54ca971a32e096a6b1ad936f3566d29 goplayground:HLtenC1w2yO
 
-We use technique described in [waiting for goroutines to finish](a-2490) to wait for all tasks to finish.
+We use technique described in [waiting for goroutines to finish](2490) to wait for all tasks to finish.
 
 Often the right amount of concurrent tasks is equal to number of CPUs, which can be obtained with [`runtime.NumCPU()`](https://golang.org/pkg/runtime/#NumCPU).
 

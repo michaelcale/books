@@ -6,7 +6,7 @@ Go has pointers, like C++. A pointer to a variable is the address of that variab
 
 Unlike C++, Go doesn't have pointer arithmetic i.e. you can't add or substract from pointers.
 
-A [zero value](a-6069) of a pointer is `nil`.
+A [zero value](6069) of a pointer is `nil`.
 
 Basics of pointers:
 

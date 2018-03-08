@@ -41,5 +41,5 @@ One example of such error from standard library is `io.EOF` although usually the
 To indicate there was no error, return nil.
 
 
-Finally, you can [create custom error type](a-2706).
+Finally, you can [create custom error type](2706).
 

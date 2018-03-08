@@ -7,7 +7,7 @@ Go has floating point numbers corresponding to the IEEE 754 standard:
 * `float32` is a 4 byte floating-point number (known as `float` in C)
 * `float64` is a 8 byte floating-point number (known as `double` in C)
 
-[Zero value](a-6069) of `float32` and `float64` is 0.0.
+[Zero value](6069) of `float32` and `float64` is 0.0.
 
 ## Convert floats to strings with `FormatFloat`
 

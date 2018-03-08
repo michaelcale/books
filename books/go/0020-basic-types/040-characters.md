@@ -7,7 +7,7 @@ Go has 2 types of characters:
 * `byte` is a 1 byte value, an alias for `uint8` type
 * `rune` is a 4 byte Unicode code-point, an alias for `int32` type
 
-[Zero value](a-6069) of a `byte` and `rune` is 0.
+[Zero value](6069) of a `byte` and `rune` is 0.
 
 ## Iterate over string using bytes
 

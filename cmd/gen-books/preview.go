@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"io"
+	"io/ioutil"
 	"net/http"
 	"os"
 	"os/signal"
@@ -35,8 +37,19 @@ func handleIndex(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("uri: '%s'\n", uri)
 	path := fileForURI(uriLocal)
 	if path == "" {
+		path := filepath.Join("www", "404.html")
+		str404 := ""
+		d, err := ioutil.ReadFile(path)
+		if err == nil {
+			str404 = string(d)
+		} else {
+			str404 = fmt.Sprintf("URL '%s' not found!", uri)
+		}
 		fmt.Printf("Didn't find file for '%s'\n", uriLocal)
-		http.NotFound(w, r)
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+		w.Header().Set("X-Content-Type-Options", "nosniff")
+		w.WriteHeader(http.StatusNotFound)
+		io.WriteString(w, str404)
 		return
 	}
 	http.ServeFile(w, r, path)

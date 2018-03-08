@@ -70,7 +70,7 @@ func parseArticle(path string) (*Article, error) {
 		}
 	}
 
-	article.FileNameBase = fmt.Sprintf("a-%s-%s", article.ID, titleSafe)
+	article.FileNameBase = fmt.Sprintf("%s-%s", article.ID, titleSafe)
 	article.BodyMarkdown, err = doc.GetValue("Body")
 	if err == nil {
 		return article, nil
@@ -161,7 +161,7 @@ func parseChapter(chapter *Chapter) error {
 	}
 
 	titleSafe := common.MakeURLSafe(chapter.Title)
-	chapter.FileNameBase = fmt.Sprintf("a-%s-%s", chapter.ID, titleSafe)
+	chapter.FileNameBase = fmt.Sprintf("%s-%s", chapter.ID, titleSafe)
 	fileInfos, err := ioutil.ReadDir(dir)
 	var articles []*Article
 	for _, fi := range fileInfos {
@@ -262,7 +262,7 @@ func genContributorsChapter(book *Book) *Chapter {
 		Book:         book,
 		indexDoc:     doc,
 		Title:        "Contributors",
-		FileNameBase: "a-contributors",
+		FileNameBase: "contributors",
 		No:           999,
 	}
 	return ch

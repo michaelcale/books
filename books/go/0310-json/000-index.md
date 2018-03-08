@@ -8,7 +8,7 @@ Package [`encoding/json`]((https://godoc.org/encoding/xml)) in Go standard libra
 
 @file json_serialize.go output sha1:a91894315e1a06003e4862d5fbc12003cfcd20fd goplayground:T6_VXCMeO3r
 
-Both `json.Marshal` and `json.MarshalIndent` take [`interface{}`](a-der300hf) as first argument. We can pass any Go value, it'll be wrapped into `interface{}` with their type.
+Both `json.Marshal` and `json.MarshalIndent` take [`interface{}`](der300hf) as first argument. We can pass any Go value, it'll be wrapped into `interface{}` with their type.
 
 Marshaller will use reflection to to inspect passed value and encode it as JSON strings.
 
@@ -63,4 +63,4 @@ By using a pointer to a string we know that `nil` means there was no value.
 | dictionary | struct |
 | null   | nil   |
 
-See more in [type mappings](a-g32600tb).
+See more in [type mappings](g32600tb).

@@ -48,7 +48,7 @@ func (b *Book) ContributorCount() int {
 
 // ContributorsURL returns url of the chapter that lists contributors
 func (b *Book) ContributorsURL() string {
-	return b.URL() + "/a-contributors"
+	return b.URL() + "/contributors"
 }
 
 // GitHubText returns text we show in GitHub link

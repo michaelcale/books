@@ -8,6 +8,6 @@ Channel basics:
 
 @file channels.go sha1:16306d0f4b79999c56ec3baa460985815e0de594 goplayground:IDU3P_smmjl
 
-[Zero value](a-6069) of a channel is nil.
+[Zero value](6069) of a channel is nil.
 
-Learn more about [channels](a-1263).
+Learn more about [channels](1263).

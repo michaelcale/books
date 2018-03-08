@@ -30,4 +30,4 @@ The bin directory where `go install` and `go get` will place binaries after buil
 
 This is the location of your Go installation. It is used to find the standard libraries. It is very rare to have to set this variable as Go embeds the build path into the toolchain. Setting `GOROOT` is needed if the installation directory differs from the build directory (or the value set when building).
 
-See [go env](a-28737) for a full list of environment variables.
+See [go env](28737) for a full list of environment variables.

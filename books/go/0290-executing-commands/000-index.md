@@ -24,4 +24,4 @@ We capture stdout and stderr of the process by setting `cmd.Stdout` and `cmd.Std
 
 `cmd.Start()`starts command as new OS process. It executes concurrently with our code, as OS processes do.
 
-We need to call `cmd.Wait()` to wait for the process to finish. To prevent waiting infinitely, you might want to add a [timeout](a-3521).
+We need to call `cmd.Wait()` to wait for the process to finish. To prevent waiting infinitely, you might want to add a [timeout](3521).

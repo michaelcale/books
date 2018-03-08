@@ -19,7 +19,7 @@ func foo() {
 }
 ```
 
-In the above example, `defer f.Close()` ensures that `f.Close()` will be called before we exit `foo`, even in the presence of a [panic](a-4350).
+In the above example, `defer f.Close()` ensures that `f.Close()` will be called before we exit `foo`, even in the presence of a [panic](4350).
 
 Placing `f.Close()` right after `os.Open()` makes it easier to audit the code and ensure `Close` is always called, even if there are multiple exit points in the function.
 

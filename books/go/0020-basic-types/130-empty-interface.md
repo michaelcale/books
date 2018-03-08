@@ -4,7 +4,7 @@ Id: 90100072
 ---
 Type `interface{}` is called an empty interface.
 
-By definition it's an [interface](a-9010008c) with no methods defined.
+By definition it's an [interface](9010008c) with no methods defined.
 
 That means that every type conforms to an empty interface.
 
@@ -14,6 +14,6 @@ It's similar to an object in C# or Java because it combines a type and a value i
 
 Empty interface is also how you implement a union type in Go.
 
-[Zero value](a-6069) of empty interface is nil.
+[Zero value](6069) of empty interface is nil.
 
-Learn more about [empty interfaces](a-der300hf).
+Learn more about [empty interfaces](der300hf).

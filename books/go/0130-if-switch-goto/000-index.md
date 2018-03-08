@@ -12,4 +12,4 @@ Basics of `switch`:
 
 Notice that unlike in C++, `case` statement doesn't fall throught to the next `case`, so you don't have to put `break` at the end of each `case`.
 
-Switch is also used as a [type switch](a-14736).
+Switch is also used as a [type switch](14736).

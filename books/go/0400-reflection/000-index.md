@@ -16,7 +16,7 @@ Package [`reflect`](https://golang.org/pkg/reflect/) in standard library allows 
 * set the value
 * create new values at runtime
 
-Related language-level functionality for inspecting type of an interface value at runtime is a [type switch](a-14736) and a [type assertion](a-25362).
+Related language-level functionality for inspecting type of an interface value at runtime is a [type switch](14736) and a [type assertion](25362).
 
 @file basic_reflect.go output
 

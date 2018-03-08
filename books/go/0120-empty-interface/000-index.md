@@ -3,7 +3,7 @@ Title: Empty interface
 Search: dynamic type
 Id: der300hf
 ---
-Technically speaking, an empty interface (`interface{}`) is an [interface](a-1221) with no methods.
+Technically speaking, an empty interface (`interface{}`) is an [interface](1221) with no methods.
 
 What follows from that is that every type conforms to `interface{}`.
 
@@ -18,10 +18,10 @@ Since every type conforms to `interface{}`, you can assign any value to a variab
 At that point, you can no longer tell what is the real type at compile time.
 
 You can query the type at runtime using:
-* [type assertion](a-25362)
-* [type switch](a-14736)
+* [type assertion](25362)
+* [type switch](14736)
 
-[Zero value](a-6069) of empty interface is nil.
+[Zero value](6069) of empty interface is nil.
 
 Basic example:
 

@@ -89,7 +89,13 @@ func genBookTOCSearchMust(book *Book) {
 		}
 	}
 
-	d, err := json.Marshal(toc)
+	var d []byte
+	var err error
+	if doMinify {
+		d, err = json.Marshal(toc)
+	} else {
+		d, err = json.MarshalIndent(toc, "", "  ")
+	}
 	u.PanicIfErr(err)
 	s := "gBookToc = " + string(d) + ";"
 	book.tocData = []byte(s)

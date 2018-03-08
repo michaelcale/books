@@ -2,7 +2,7 @@
 Title: Mac OS setup
 Id: rd600058
 ---
-After installing the compiler you need to configure [`GOPATH`](a-14406) environment variable.
+After installing the compiler you need to configure [`GOPATH`](14406) environment variable.
 
 Since Go 1.8, the `GOPATH` environment variable has the default value of `$HOME/go`, so you can skip setting it.
 
@@ -37,4 +37,4 @@ That way a `cdgo` will cd to a directory with my Go source code is.
 
 You need to change `github.com/kjk` for your github account.
 
-You should understand the [effect of GOPATH](a-14406).
+You should understand the [effect of GOPATH](14406).

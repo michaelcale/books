@@ -54,4 +54,4 @@ const (
 )
 ```
 
-What if you prefer `strftime` style of formatting time? That's [available too](a-80100032).
+What if you prefer `strftime` style of formatting time? That's [available too](80100032).

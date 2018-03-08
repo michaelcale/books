@@ -14,7 +14,7 @@ type Reader interface {
 
 The smaller the interface, the better.
 
-[Zero value](a-6069) of interace is nil
+[Zero value](6069) of interace is nil
 
-Learn more about [interfaces](a-1221).
+Learn more about [interfaces](1221).
 

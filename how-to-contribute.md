@@ -15,7 +15,7 @@ For general ideas on how to improve the books, the project etc., use [issue trac
 
 If you plan to make more than a small change, it's good to do it locally.
 
-Toolchain for building the books (i.e. converting markdown sources and source files into HTML) are written in go, so you'll need to [install Go](http://localhost:8080/essential/go/a-20381-installing-go-compiler).
+Toolchain for building the books (i.e. converting markdown sources and source files into HTML) are written in go, so you'll need to [install Go](http://localhost:8080/essential/go/20381-installing-go-compiler).
 
 For cross-platform portability, helper scripts are written in PowerShell, so if you're not on Windows, you'll have to [install it too](https://github.com/PowerShell/PowerShell). Or you can write equivalent bash or what not script. They are trivial.
 

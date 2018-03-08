@@ -51,5 +51,5 @@ The big features missing from `flag` package:
 * no support for short alternatives e.g. `-n` being synonym with `--name`
 
 Your options are:
-* [raw access to cmd-line arguments](a-14047)
-* use a [third party library](a-14046)
+* [raw access to cmd-line arguments](14047)
+* use a [third party library](14046)

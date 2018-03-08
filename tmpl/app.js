@@ -257,7 +257,9 @@ function setState(newState, now = false) {
 }
 
 function isChapterOrArticleURL(s) {
-  return s.startsWith("a-");
+  var isChapterOrArticle = s.indexOf("#") === -1;
+  console.log("uri:", s, isChapterOrArticle);
+  return isChapterOrArticle;
 }
 
 function getLocationLastElement() {

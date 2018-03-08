@@ -17,7 +17,7 @@ type Article struct {
 	Chapter        *Chapter // reference to containing chapter
 	Title          string   // used in book_index.tmpl.html
 	SearchSynonyms []string // from Search:
-	FileNameBase   string   // base for both filename and url, format: a-${ID}-${Title}
+	FileNameBase   string   // base for both filename and url, format: ${ID}-${Title}
 	BodyMarkdown   string
 	// TODO: we should convert all HTML content to markdown
 	BodyHTML template.HTML
@@ -62,7 +62,7 @@ func (a *Article) Headings() []HeadingInfo {
 func (a *Article) URL() string {
 	chap := a.Chapter
 	book := chap.Book
-	// /essential/go/a-14047-flags
+	// /essential/go/14047-flags
 	return fmt.Sprintf("/essential/%s/%s", book.FileNameBase, a.FileNameBase)
 }
 

@@ -56,10 +56,6 @@ func htmlHighlight(w io.Writer, source, lang string) error {
 	return htmlFormatter.Format(w, highlightStyle, it)
 }
 
-func isArticleOrChapterLink(s string) bool {
-	return strings.HasPrefix(s, "a-")
-}
-
 var didPrint = false
 
 func printKnownURLS(a []string) {
@@ -73,9 +69,10 @@ func printKnownURLS(a []string) {
 	}
 }
 
-// turn partial url like "a-20381" into a full url like "a-20381-installing"
+// turn partial url like "20381" into a full url like "20381-installing"
 func fixupURL(uri string, knownURLS []string) string {
-	if !isArticleOrChapterLink(uri) {
+	// skip uris that are not article/chapter uris
+	if strings.Contains(uri, "/") {
 		return uri
 	}
 	for _, known := range knownURLS {
@@ -182,7 +179,7 @@ func fixupHTMLCodeBlock(htmlCode string, info *CodeBlockInfo) string {
 	return html
 }
 
-// knownUrls is a list of chapter/article urls in the form "a-20381-installing"
+// knownUrls is a list of chapter/article urls in the form "20381-installing"
 func makeRenderHookCodeBlock(defaultLang string, book *Book) mdhtml.RenderNodeFunc {
 	return func(w io.Writer, node ast.Node, entering bool) (ast.WalkStatus, bool) {
 

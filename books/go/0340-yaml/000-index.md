@@ -16,7 +16,7 @@ There is no package in Go standard library for hanlding YAML format but there ar
 
 @file yaml_deserialize.go output noplayground
 
-YAML decoding is very similar to [JSON decoding](a-994).
+YAML decoding is very similar to [JSON decoding](994).
 
 If you know the structure of YAML file, you can define structs that mirror this structure and pass a pointer to a struct describing top-level structure to `yaml.Decoder.Decode()` function (or `yaml.Unmarshal()` if decoding from `[]byte` slice).
 

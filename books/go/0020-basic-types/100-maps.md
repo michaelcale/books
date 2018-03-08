@@ -11,8 +11,8 @@ Map basics:
 
 @file maps.go output sha1:d856c54b8ee856e6d63c797206d3daa74267fb9d goplayground:3M18bUT8XvP
 
-[Zero value](a-6069) of map is nil.
+[Zero value](6069) of map is nil.
 
-Learn more about [maps](a-732).
+Learn more about [maps](732).
 
 
