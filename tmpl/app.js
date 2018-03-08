@@ -411,12 +411,17 @@ function isMatchSynonym(tocItem, term) {
 }
 
 function getParentTitle(tocItem) {
-  var parentIdx = tocItemParentIdx(tocItem);
-  if (parentIdx == -1) {
-    return null;
+  var res = "";
+  var parent = tocItemParent(tocItem);
+  while (parent) {
+    var s = tocItemTitle(parent);
+    if (res) {
+      s = s + " / ";
+    }
+    res = s + res;
+    parent = tocItemParent(parent);
   }
-  var parent = gBookToc[parentIdx];
-  return tocItemTitle(parent);
+  return res;
 }
 
 // if search matched synonym returns "${chapterTitle} / ${articleTitle}"
