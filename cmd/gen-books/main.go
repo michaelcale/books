@@ -302,18 +302,10 @@ func gitAddachedOutputFiles() {
 }
 
 var intIDS = make(map[int]bool)
-var strIDS = make(map[string]bool)
 
 func rememberID(id string) {
 	intID, err := strconv.Atoi(id)
-	if err != nil {
-		if strIDS[id] {
-			fmt.Printf("duplicate id: %s\n", id)
-			os.Exit(1)
-		}
-		strIDS[id] = true
-		return
-	}
+	u.PanicIfErr(err, "'%s' id is not an int", id)
 	if intIDS[intID] {
 		fmt.Printf("duplicate id: %d\n", intID)
 		os.Exit(1)
@@ -338,14 +330,19 @@ func genID() {
 	}
 	sort.Ints(idArr)
 	n := len(idArr)
-	newID := idArr[n-1] + 1
-	fmt.Printf("%v\n", idArr)
+	lastID := idArr[n-1]
+	newID := lastID + 1
+	//fmt.Printf("%v\n", idArr)
 	fmt.Printf("id: %d\n", newID)
 }
 
 func main() {
 
 	parseFlags()
+
+	if false {
+		regenIDSAndExit()
+	}
 
 	if false {
 		genTwitterImagesAndExit()

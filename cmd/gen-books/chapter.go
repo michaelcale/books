@@ -82,7 +82,7 @@ func (c *Chapter) HTML() template.HTML {
 	if c.cachedHTML != "" {
 		return c.cachedHTML
 	}
-	s, err := c.indexDoc.GetValue("Body")
+	s, err := c.indexDoc.Get("Body")
 	if err != nil {
 		return template.HTML("")
 	}
@@ -96,7 +96,7 @@ func (c *Chapter) Headings() []HeadingInfo {
 	if c.cachedHeadings != nil {
 		return c.cachedHeadings
 	}
-	s, err := c.indexDoc.GetValue("Body")
+	s, err := c.indexDoc.Get("Body")
 	if err != nil {
 		return nil
 	}
@@ -109,7 +109,7 @@ func (c *Chapter) Headings() []HeadingInfo {
 
 // VersionsHTML returns html version of versions
 func (c *Chapter) VersionsHTML() template.HTML {
-	s, err := c.indexDoc.GetValue("VersionsHtml")
+	s, err := c.indexDoc.Get("VersionsHtml")
 	if err != nil {
 		s = ""
 	}
@@ -118,7 +118,7 @@ func (c *Chapter) VersionsHTML() template.HTML {
 
 // IntroductionHTML retruns html version of Introduction:
 func (c *Chapter) IntroductionHTML() template.HTML {
-	s, err := c.indexDoc.GetValue("Introduction")
+	s, err := c.indexDoc.Get("Introduction")
 	if err != nil {
 		return template.HTML("")
 	}
@@ -128,7 +128,7 @@ func (c *Chapter) IntroductionHTML() template.HTML {
 
 // SyntaxHTML retruns html version of Syntax:
 func (c *Chapter) SyntaxHTML() template.HTML {
-	s, err := c.indexDoc.GetValue("Syntax")
+	s, err := c.indexDoc.Get("Syntax")
 	if err != nil {
 		return template.HTML("")
 	}
@@ -138,7 +138,7 @@ func (c *Chapter) SyntaxHTML() template.HTML {
 
 // RemarksHTML retruns html version of Remarks:
 func (c *Chapter) RemarksHTML() template.HTML {
-	s, err := c.indexDoc.GetValue("Remarks")
+	s, err := c.indexDoc.Get("Remarks")
 	if err != nil {
 		return template.HTML("")
 	}
@@ -148,7 +148,7 @@ func (c *Chapter) RemarksHTML() template.HTML {
 
 // ContributorsHTML retruns html version of Contributors:
 func (c *Chapter) ContributorsHTML() template.HTML {
-	s, err := c.indexDoc.GetValue("Contributors")
+	s, err := c.indexDoc.Get("Contributors")
 	if err != nil {
 		return template.HTML("")
 	}

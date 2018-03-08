@@ -43,7 +43,7 @@ func parseArticle(path string) (*Article, error) {
 	article := &Article{
 		sourceFilePath: path,
 	}
-	article.ID, err = doc.GetValue("Id")
+	article.ID, err = doc.Get("Id")
 	if err != nil {
 		return nil, fmt.Errorf("parseArticle('%s'), err: '%s'", path, err)
 	}
@@ -51,14 +51,14 @@ func parseArticle(path string) (*Article, error) {
 		return nil, fmt.Errorf("parseArticle('%s'), res.ID = '%s' has space in it", path, article.ID)
 	}
 
-	article.Title = doc.GetValueSilent("Title", defTitle)
+	article.Title = doc.GetSilent("Title", defTitle)
 	if article.Title == defTitle {
 		fmt.Printf("parseArticle: no title for %s\n", path)
 	}
 	titleSafe := common.MakeURLSafe(article.Title)
 
 	// handle search synonyms
-	synonyms := doc.GetValueSilent("Search", "")
+	synonyms := doc.GetSilent("Search", "")
 	synonyms = strings.TrimSpace(synonyms)
 	if len(synonyms) > 0 {
 		parts := strings.Split(synonyms, ",")
@@ -71,11 +71,11 @@ func parseArticle(path string) (*Article, error) {
 	}
 
 	article.FileNameBase = fmt.Sprintf("%s-%s", article.ID, titleSafe)
-	article.BodyMarkdown, err = doc.GetValue("Body")
+	article.BodyMarkdown, err = doc.Get("Body")
 	if err == nil {
 		return article, nil
 	}
-	s, err := doc.GetValue("BodyHtml")
+	s, err := doc.Get("BodyHtml")
 	article.BodyHTML = template.HTML(s)
 	if err != nil {
 		dumpKV(doc)
@@ -147,11 +147,11 @@ func parseChapter(chapter *Chapter) error {
 	}
 
 	chapter.indexDoc = doc
-	chapter.Title, err = doc.GetValue("Title")
+	chapter.Title, err = doc.Get("Title")
 	if err != nil {
 		return fmt.Errorf("parseChapter('%s'), missing Title, err: '%s'", path, err)
 	}
-	chapter.ID, err = doc.GetValue("Id")
+	chapter.ID, err = doc.Get("Id")
 	if err != nil {
 		return fmt.Errorf("parseChapter('%s'), missing Id, err: '%s'", path, err)
 	}

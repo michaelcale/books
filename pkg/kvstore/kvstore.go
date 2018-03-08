@@ -24,8 +24,8 @@ type KeyValue struct {
 // Doc is a series of KeyValue pairs
 type Doc []KeyValue
 
-// GetValue finds value by key, returns an error if didn't find
-func (d Doc) GetValue(key string) (string, error) {
+// Get finds value by key, returns an error if didn't find
+func (d Doc) Get(key string) (string, error) {
 	for _, kv := range d {
 		if kv.Key == key {
 			return kv.Value, nil
@@ -34,14 +34,29 @@ func (d Doc) GetValue(key string) (string, error) {
 	return "", fmt.Errorf("key '%s' not found", key)
 }
 
-// GetValueSilent finds value by key. Returns def string if didn't find
-func (d Doc) GetValueSilent(key string, defValue string) string {
+// GetSilent finds value by key. Returns def string if didn't find
+func (d Doc) GetSilent(key string, defValue string) string {
 	for _, kv := range d {
 		if kv.Key == key {
 			return kv.Value
 		}
 	}
 	return defValue
+}
+
+// ReplaceOrAppend appends key/value to doc and returns a potentially new doc
+func ReplaceOrAppend(doc Doc, key, value string) Doc {
+	for _, kv := range doc {
+		if kv.Key == key {
+			kv.Value = value
+			return doc
+		}
+	}
+	el := KeyValue{
+		Key:   key,
+		Value: value,
+	}
+	return append(doc, el)
 }
 
 func extractMultiLineValue(lines []string) ([]string, string, error) {
@@ -211,4 +226,42 @@ func SerializeLong(k, v string) string {
 	}
 	u.PanicIf(strings.Contains(v, recordSeparator), "v contains RecordSeparator")
 	return fmt.Sprintf("%s:\n%s\n%s\n", k, v, recordSeparator)
+}
+
+// SerializeDoc serializes the doc in the new format where
+// header contains all metadata information and the rest is Body
+/*
+---
+Id: 3
+Title: My title
+---
+Body
+*/
+func SerializeDoc(doc Doc) (string, error) {
+	var lines = []string{"---"}
+	var body string
+	hasBody := false
+	for _, kv := range doc {
+		if kv.Key == "Body" {
+			body = kv.Value
+			hasBody = true
+			continue
+		}
+		v := strings.TrimSpace(kv.Value)
+		if strings.Contains(v, "\n") {
+			return "", fmt.Errorf("key: '%s' value '%s' contains \\n", kv.Key, v)
+		}
+		if len(v) > 256 {
+			return "", fmt.Errorf("key: '%s', value is %d bytes (> 256)", kv.Key, v)
+		}
+		s := fmt.Sprintf("%s: %s", kv.Key, v)
+		lines = append(lines, s)
+	}
+	if !hasBody {
+		id := doc.GetSilent("Id", "")
+		return "", fmt.Errorf("Doc with id '%s' has no body", id)
+	}
+	lines = append(lines, "---")
+	lines = append(lines, body)
+	return strings.Join(lines, "\n"), nil
 }
