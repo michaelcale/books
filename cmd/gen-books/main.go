@@ -193,7 +193,7 @@ func genSelectedBooks(bookDirs []string) {
 	copyToWwwAsSha1MaybeMust("favicon.ico")
 	genIndex(books)
 	genIndexGrid(books)
-	gen404(books)
+	gen404TopLevel()
 	genAbout()
 	genFeedback()
 
@@ -226,7 +226,7 @@ func genAllBooks() {
 	copyToWwwAsSha1MaybeMust("app.js")
 	copyToWwwAsSha1MaybeMust("favicon.ico")
 	genIndex(books)
-	gen404(books)
+	gen404TopLevel()
 	genIndexGrid(books)
 	genAbout()
 	genFeedback()
@@ -241,6 +241,22 @@ func genAllBooks() {
 func loadSOUserMappingsMust() {
 	path := filepath.Join("stack-overflow-docs-dump", "users.json.gz")
 	err := common.JSONDecodeGzipped(path, &soUserIDToNameMap)
+	u.PanicIfErr(err)
+}
+
+func genNetlifyHeaders() {
+	path := filepath.Join("www", "_headers")
+	err := ioutil.WriteFile(path, []byte(netlifyHeaders), 0644)
+	u.PanicIfErr(err)
+}
+
+func genNetlifyRedirects() {
+	// TODO: should be generated from []*Book list
+	s := `
+/essential/go/* /essential/go/404.html 404
+`
+	path := filepath.Join("www", "_headers")
+	err := ioutil.WriteFile(path, []byte(s), 0644)
 	u.PanicIfErr(err)
 }
 
@@ -281,9 +297,8 @@ func main() {
 
 	os.RemoveAll("www")
 	createDirMust(filepath.Join("www", "s"))
-	path := filepath.Join("www", "_headers")
-	err := ioutil.WriteFile(path, []byte(netlifyHeaders), 0644)
-	u.PanicIfErr(err)
+	genNetlifyHeaders()
+	genNetlifyRedirects()
 
 	if flgUpdateGoDeps {
 		updateGoDeps()

@@ -65,9 +65,9 @@ function tocItemHasChildren(item) {
 // returns true if has children and some of them articles
 // (as opposed to children that are headers within articles)
 function tocItemHasArticleChildren(item) {
-  var idx = tocItemFirstChildIdx(item)
+  var idx = tocItemFirstChildIdx(item);
   if (idx == -1) {
-    return false
+    return false;
   }
   var item = gBookToc[idx];
   var parentIdx = item[itemIdxParent];
@@ -80,7 +80,7 @@ function tocItemHasArticleChildren(item) {
     if (uri.indexOf("#") === -1) {
       return true;
     }
-    idx += 1
+    idx += 1;
   }
   return false;
 }
@@ -258,7 +258,6 @@ function setState(newState, now = false) {
 
 function isChapterOrArticleURL(s) {
   var isChapterOrArticle = s.indexOf("#") === -1;
-  console.log("uri:", s, isChapterOrArticle);
   return isChapterOrArticle;
 }
 
@@ -410,25 +409,30 @@ function scrollElementIntoView(el, options) {
   var win = el.ownerDocument.defaultView;
 
   // Read options.
-  if (options === undefined)  options = {};
+  if (options === undefined) options = {};
   if (options.center === true) {
     options.vertical = 0.5;
     options.horizontal = 0.5;
-  }
-  else {
-    if (options.block === "start")  options.vertical = 0.0;
-    else if (options.block === "end")  options.vertical = 0.0;
-    else if (options.vertical === undefined)  options.vertical = 0.0;
+  } else {
+    if (options.block === "start") options.vertical = 0.0;
+    else if (options.block === "end") options.vertical = 0.0;
+    else if (options.vertical === undefined) options.vertical = 0.0;
 
-    if (options.horizontal === undefined)  options.horizontal = 0.0;
+    if (options.horizontal === undefined) options.horizontal = 0.0;
   }
 
   // Fetch positional information.
   var rect = el.getBoundingClientRect();
 
   // Determine location to scroll to.
-  var targetY = win.scrollY + rect.top - (win.innerHeight - el.offsetHeight) * options.vertical;
-  var targetX = win.scrollX + rect.left - (win.innerWidth - el.offsetWidth) * options.horizontal;
+  var targetY =
+    win.scrollY +
+    rect.top -
+    (win.innerHeight - el.offsetHeight) * options.vertical;
+  var targetX =
+    win.scrollX +
+    rect.left -
+    (win.innerWidth - el.offsetWidth) * options.horizontal;
 
   // Scroll.
   win.scroll(targetX, targetY);
@@ -644,9 +648,9 @@ function createTOC() {
   var html = buildTOCHTML();
   el.innerHTML = html;
   if (selectedTocItemIdx === -1) {
-    return ""
+    return "";
   }
-  return "ti-" + selectedTocItemIdx
+  return "ti-" + selectedTocItemIdx;
 }
 
 function recreateTOC() {
@@ -965,7 +969,7 @@ function onEscape(ev) {
 
 function onUpDown(ev) {
   // "Down" is Edge, "ArrowUp" is Chrome
-  var dir = (ev.key == "ArrowUp" || ev.key == "Up") ? -1 : 1;
+  var dir = ev.key == "ArrowUp" || ev.key == "Up" ? -1 : 1;
   var results = currentState.searchResults;
   var n = results.length;
   var selIdx = currentState.selectedSearchResultIdx;
@@ -999,7 +1003,12 @@ function onKeyDown(ev) {
     return;
   }
 
-  if (ev.key == "ArrowUp" || ev.key == "ArrowDown" || ev.key == "Up" || ev.key == "Down") {
+  if (
+    ev.key == "ArrowUp" ||
+    ev.key == "ArrowDown" ||
+    ev.key == "Up" ||
+    ev.key == "Down"
+  ) {
     onUpDown(ev);
     return;
   }
@@ -1056,15 +1065,51 @@ function start() {
     if (el) {
       scrollElementIntoView(el, true);
     } else {
-      console.log("tried to scroll toc item to non-existent element with id: '"+tocItemElementID+"'");
+      console.log(
+        "tried to scroll toc item to non-existent element with id: '" +
+          tocItemElementID +
+          "'"
+      );
     }
   }
   window.requestAnimationFrame(makeTocVisible);
 }
 
-// we don't want to run javascript on about etc. pages
-var isAppPage = window.location.pathname.indexOf("essential/") != -1;
-if (isAppPage) {
-  // we don't want this in e.g. about page
-  document.addEventListener("DOMContentLoaded", start);
+function findURLWithPrefix(prefix) {
+  var n = gBookToc.length;
+  for (var i = 0; i < n; i++) {
+    var tocItem = gBookToc[i];
+    var uri = tocItemURL(tocItem);
+    if (uri.startsWith(prefix)) {
+      return uri;
+    }
+  }
+  return "";
+}
+
+function do404() {
+  var loc = window.location.pathname;
+  var locParts = loc.split("/");
+  var lastIdx = locParts.length - 1;
+  var uri = locParts[lastIdx];
+  // redirect 376-${garbage} => 376-${correct url}
+  var parts = uri.split("-");
+  var prefix = parts[0] + "-";
+  var fullURL = findURLWithPrefix(prefix);
+  if (fullURL != "") {
+    locParts[lastIdx] = fullURL
+    var loc = locParts.join("/");
+    window.location.pathname = loc;
+  }
+}
+
+if (window.g_is_404) {
+  do404();
+} else {
+  // we don't want to run javascript on about etc. pages
+  var isAppPage = window.location.pathname.indexOf("essential/") != -1;
+  if (isAppPage) {
+    // we don't want this in e.g. about page
+    document.addEventListener("DOMContentLoaded", start);
+  }
 }

@@ -125,15 +125,12 @@ func getPageCommon() PageCommon {
 	}
 }
 
-func gen404(books []*Book) {
+func gen404TopLevel() {
 	d := struct {
 		PageCommon
-		GitHubText string
-		GitHubURL  string
+		Book *Book
 	}{
 		PageCommon: getPageCommon(),
-		GitHubText: "GitHub",
-		GitHubURL:  gitHubBaseURL,
 	}
 	path := filepath.Join(destDir, "404.html")
 	execTemplateToFileMaybeMust("404.tmpl.html", d, path)
@@ -236,7 +233,6 @@ func genBook(book *Book) {
 		return
 	}
 
-	path := filepath.Join(book.destDir, "index.html")
 	d := struct {
 		PageCommon
 		Book *Book
@@ -245,7 +241,12 @@ func genBook(book *Book) {
 		Book:       book,
 	}
 
+	path := filepath.Join(book.destDir, "index.html")
 	execTemplateToFileSilentMaybeMust("book_index.tmpl.html", d, path)
+
+	path = filepath.Join(book.destDir, "404.html")
+	execTemplateToFileSilentMaybeMust("404.tmpl.html", d, path)
+
 	addSitemapURL(book.CanonnicalURL())
 
 	for i, chapter := range book.Chapters {

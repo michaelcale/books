@@ -10,7 +10,14 @@
 
     <link rel="icon" href="{{.PathFaviconICO}}">
     <link href="{{.PathMainCSS}}" rel="stylesheet"> {{ .Analytics }}
-    <script src="{{.PathAppJS}}" defer></script>
+    <script>
+        // let app.js know we're in 404
+        window.g_is_404 = true;
+    </script>
+    {{if .Book}}
+    <script src="{{.Book.AppJSURL}}" defer></script>
+    {{end}}
+
     <style>
         body {
             background-color: #f4f6f6;
