@@ -9,6 +9,8 @@ import (
 	"os/exec"
 	"path/filepath"
 	"runtime"
+	"sort"
+	"strconv"
 	"strings"
 	"time"
 
@@ -28,6 +30,7 @@ var (
 	flgRecreateOutput     bool
 	flgForce              bool
 	flgUpdateGoDeps       bool
+	flgGenID              bool
 	allBookDirs           []string
 	soUserIDToNameMap     map[int]string
 	googleAnalytics       template.HTML
@@ -66,6 +69,7 @@ func parseFlags() {
 	flag.BoolVar(&flgUpdateOutput, "update-output", false, "if true, will update ouput files in cached_output")
 	flag.BoolVar(&flgRecreateOutput, "recreate-output", false, "if true, recreates ouput files in cached_output")
 	flag.BoolVar(&flgUpdateGoDeps, "update-go-deps", false, "if true, updates go libraries references in go snippets")
+	flag.BoolVar(&flgGenID, "gen-id", false, "if true, generate unique id")
 	flag.Parse()
 
 	if flgAnalytics != "" {
@@ -260,6 +264,85 @@ func genNetlifyRedirects() {
 	u.PanicIfErr(err)
 }
 
+func gitRemoveCachedOutputFiles() {
+	dir := "cached_output"
+	if flgRecreateOutput {
+		os.RemoveAll(dir)
+	}
+	err := os.MkdirAll(dir, 0755)
+	u.PanicIfErr(err)
+}
+
+func gitAddachedOutputFiles() {
+	dir := "cached_output"
+	fileInfos, err := ioutil.ReadDir(dir)
+	u.PanicIfErr(err)
+	for _, fi := range fileInfos {
+		if fi.IsDir() {
+			continue
+		}
+		cmd := exec.Command("git", "add", fi.Name())
+		cmd.Dir = dir
+		out, err := cmd.CombinedOutput()
+		cmdStr := strings.Join(cmd.Args, " ")
+		fmt.Printf("%s\n", cmdStr)
+		if err != nil {
+			fmt.Printf("'%s' failed with '%s'. Out:\n%s\n", cmdStr, err, string(out))
+			u.PanicIfErr(err)
+		}
+	}
+	cmd := exec.Command("git", "commit", "-am", "update output files")
+	cmd.Dir = dir
+	out, err := cmd.CombinedOutput()
+	cmdStr := strings.Join(cmd.Args, " ")
+	fmt.Printf("%s\n", cmdStr)
+	if err != nil {
+		fmt.Printf("'%s' failed with '%s'. Out:\n%s\n", cmdStr, err, string(out))
+	}
+}
+
+var intIDS = make(map[int]bool)
+var strIDS = make(map[string]bool)
+
+func rememberID(id string) {
+	intID, err := strconv.Atoi(id)
+	if err != nil {
+		if strIDS[id] {
+			fmt.Printf("duplicate id: %s\n", id)
+			os.Exit(1)
+		}
+		strIDS[id] = true
+		return
+	}
+	if intIDS[intID] {
+		fmt.Printf("duplicate id: %d\n", intID)
+		os.Exit(1)
+	}
+	intIDS[intID] = true
+}
+
+func genID() {
+	for _, bookName := range allBookDirs {
+		book, err := parseBook(bookName)
+		u.PanicIfErr(err)
+		for _, chapter := range book.Chapters {
+			rememberID(chapter.ID)
+			for _, article := range chapter.Articles {
+				rememberID(article.ID)
+			}
+		}
+	}
+	var idArr []int
+	for id := range intIDS {
+		idArr = append(idArr, id)
+	}
+	sort.Ints(idArr)
+	n := len(idArr)
+	newID := idArr[n-1] + 1
+	fmt.Printf("%v\n", idArr)
+	fmt.Printf("id: %d\n", newID)
+}
+
 func main() {
 
 	parseFlags()
@@ -295,6 +378,11 @@ func main() {
 	}
 	loadSOUserMappingsMust()
 
+	if flgGenID {
+		genID()
+		os.Exit(0)
+	}
+
 	os.RemoveAll("www")
 	createDirMust(filepath.Join("www", "s"))
 	genNetlifyHeaders()
@@ -323,42 +411,5 @@ func main() {
 
 	if flgPreview {
 		startPreview()
-	}
-}
-
-func gitRemoveCachedOutputFiles() {
-	dir := "cached_output"
-	if flgRecreateOutput {
-		os.RemoveAll(dir)
-	}
-	err := os.MkdirAll(dir, 0755)
-	u.PanicIfErr(err)
-}
-
-func gitAddachedOutputFiles() {
-	dir := "cached_output"
-	fileInfos, err := ioutil.ReadDir(dir)
-	u.PanicIfErr(err)
-	for _, fi := range fileInfos {
-		if fi.IsDir() {
-			continue
-		}
-		cmd := exec.Command("git", "add", fi.Name())
-		cmd.Dir = dir
-		out, err := cmd.CombinedOutput()
-		cmdStr := strings.Join(cmd.Args, " ")
-		fmt.Printf("%s\n", cmdStr)
-		if err != nil {
-			fmt.Printf("'%s' failed with '%s'. Out:\n%s\n", cmdStr, err, string(out))
-			u.PanicIfErr(err)
-		}
-	}
-	cmd := exec.Command("git", "commit", "-am", "update output files")
-	cmd.Dir = dir
-	out, err := cmd.CombinedOutput()
-	cmdStr := strings.Join(cmd.Args, " ")
-	fmt.Printf("%s\n", cmdStr)
-	if err != nil {
-		fmt.Printf("'%s' failed with '%s'. Out:\n%s\n", cmdStr, err, string(out))
 	}
 }

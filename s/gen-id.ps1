@@ -3,8 +3,12 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 function exitIfFailed { if ($LASTEXITCODE -ne 0) { exit } }
 
-# Each chapter and article should have a unique id
-# Run this script to generate a random unique id that has a reasonably compact
-# string representation
+Remove-Item -Force -ErrorAction SilentlyContinue ./cmd/gen-books/gen-books
 
-go run ./cmd/gen-id/genid.go
+Set-Location -Path cmd/gen-books
+go build -o gen-id.exe
+Set-Location -Path ../..
+exitIfFailed
+
+./cmd/gen-books/gen-id -gen-id
+Remove-Item -Force -ErrorAction SilentlyContinue ./cmd/gen-books/gen-id.exe
