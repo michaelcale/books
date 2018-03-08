@@ -24,10 +24,10 @@ func zeroptr(iptr *int) {
 func main() {
 	// :show start
 	i := 1
-	fmt.Println("initial:", i) // initial: 1
+	fmt.Println("initial:", i)
 
 	zeroval(i)
-	fmt.Println("zeroval:", i) // zeroval: 1
+	fmt.Println("zeroval:", i)
 	// `i` is still equal to 1 because `zeroval` edited
 	// a "copy" of `i`, not the original.
 
@@ -35,9 +35,9 @@ func main() {
 	// i.e. a pointer to `i`. When calling `zeroptr`,
 	// it will edit the "original" `i`.
 	zeroptr(&i)
-	fmt.Println("zeroptr:", i) // zeroptr: 0
+	fmt.Println("zeroptr:", i)
 
 	// Pointers can be printed too.
-	fmt.Println("pointer:", &i) // pointer: 0x10434114
+	fmt.Println("pointer:", &i)
 	// :show end
 }
