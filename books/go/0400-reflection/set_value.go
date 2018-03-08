@@ -18,13 +18,13 @@ func setIntPtr() {
 
 func setStructFieldDirect() {
 	var s S
-	reflect.ValueOf(&s.N).Elem().SetInt(4)
+	reflect.ValueOf(&s.N).Elem().SetInt(5)
 	fmt.Printf("setStructFieldDirect: n=%d\n", s.N)
 }
 
 func setStructPtrField() {
 	var s S
-	reflect.ValueOf(&s).Elem().Field(0).SetInt(4)
+	reflect.ValueOf(&s).Elem().Field(0).SetInt(6)
 	fmt.Printf("setStructPtrField: s.N: %d\n", s.N)
 }
 
