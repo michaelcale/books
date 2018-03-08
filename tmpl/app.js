@@ -24,6 +24,50 @@ if (!Object.is) {
   };
 }
 
+function storeSet(key, val) {
+  if (window.localStorage) {
+    window.localStorage.setItem(key, val);
+  }
+}
+
+function storeClear(key) {
+  if (window.localStorage) {
+    window.localStorage.removeItem(key);
+  }
+}
+
+function storeGet(key) {
+  if (window.localStorage) {
+    return window.localStorage.getItem(key);
+  }
+  return "";
+}
+
+var keyScrollPos = "scrollPos";
+var keyIndexView = "indexView";
+
+function scrollPosSet(pos) {
+  storeSet(keyScrollPos, pos);
+}
+
+function scrollPosGet(pos) {
+  return storeGet(keyScrollPos);
+}
+
+function scrollPosClear() {
+  storeClear(keyScrollPos);
+}
+
+// nav = navigateToURL, we want this to be short
+// because it's used in
+function nav(ev) {
+  //console.log("nav:", ev);
+  var el = document.getElementById("toc");
+  //console.log("el:", el);
+  //console.log("scrollTop:", el.scrollTop);
+  scrollPosSet(el.scrollTop);
+}
+
 // accessor functions for items in gBookToc array:
 // 	[${chapter or aticle url}, ${parentIdx}, ${title}, ${synonim 1}, ${synonim 2}, ...],
 // as generated in gen_book_toc_search.go and stored in books/${book}/toc_search.js
@@ -190,6 +234,9 @@ function tagOpen(name, opt) {
   }
   if (opt.href) {
     attrs.push(attr("href", opt.href));
+  }
+  if (opt.onclick) {
+    attrs.push(attr("onclick", opt.onclick));
   }
   if (attrs.length > 0) {
     s += " " + attrs.join(" ");
@@ -515,12 +562,16 @@ function notExpandedSvg() {
   return '<svg class="arrow"><use xlink:href="#arrow-not-expanded"></use></svg>';
 }
 
+var aOpt = {
+  cls: "toc-link",
+  onclick: "nav(this)",
+};
+
 function genTocExpanded(tocItem, tocItemIdx, level, isCurrent) {
   var titleHTML = escapeHTML(tocItemTitle(tocItem));
   var uri = tocItemURL(tocItem);
-  var opt = {cls: "toc-link" };
-  var divInner = expandedSvg() + a(uri, titleHTML, opt);
-  opt = {
+  var divInner = expandedSvg() + a(uri, titleHTML, aOpt);
+  var opt = {
     classes: ["toc-item", "lvl" + level],
     id: "ti-" + tocItemIdx
   };
@@ -534,7 +585,7 @@ function genTocExpanded(tocItem, tocItemIdx, level, isCurrent) {
 function genTocNotExpanded(tocItem, tocItemIdx, level) {
   var titleHTML = escapeHTML(tocItemTitle(tocItem));
   var uri = tocItemURL(tocItem);
-  var divInner = notExpandedSvg() + a(uri, titleHTML, {cls: "toc-link"});
+  var divInner = notExpandedSvg() + a(uri, titleHTML, aOpt);
   var opt = {
     classes: ["toc-item", "lvl" + level],
     id: "ti-" + tocItemIdx
@@ -545,7 +596,6 @@ function genTocNotExpanded(tocItem, tocItemIdx, level) {
 
 function genTocNoChildren(tocItem, tocItemIdx, level, isCurrent) {
   var uri = tocItemURL(tocItem);
-  // TODO: tweak this logic some more
   if (uri.indexOf("#") != -1) {
     var parent = tocItemParent(tocItem);
     var isChapter = tocItemIsRoot(parent);
@@ -565,7 +615,7 @@ function genTocNoChildren(tocItem, tocItemIdx, level, isCurrent) {
     opt.classes.push("bold");
     return div(titleHTML, opt);
   }
-  var divInner = a(uri, titleHTML, {cls: "toc-link"});
+  var divInner = a(uri, titleHTML, aOpt);
   var html = div(divInner, opt);
   return html;
 }
@@ -1071,6 +1121,14 @@ function start() {
   var tocItemElementID = createTOC();
   // ensure that the slected toc item is visible
   if (tocItemElementID === "") {
+    return;
+  }
+  var scrollTop = scrollPosGet() || -1;
+  if (scrollTop >= 0) {
+    console.log("scrollTop:", scrollTop);
+    var el = document.getElementById("toc");
+    el.scrollTop = scrollTop;
+    scrollPosClear();
     return;
   }
   function makeTocVisible() {
