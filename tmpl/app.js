@@ -170,13 +170,29 @@ function splitStringAt(s, idx) {
   return res;
 }
 
-function tagOpen(name, cls, id) {
-  var s = "<" + name;
-  if (cls) {
-    s += " " + attr("class", cls);
+function tagOpen(name, opt) {
+  var classes = opt.classes || [];
+  if (opt.cls) {
+    classes.push(opt.cls);
   }
-  if (id) {
-    s += " " + attr("id", id);
+  var cls = classes.join(" ");
+
+  var s = "<" + name;
+  var attrs = [];
+  if (cls) {
+    attrs.push(attr("class", cls));
+  }
+  if (opt.id) {
+    attrs.push(attr("id", opt.id));
+  }
+  if (opt.title) {
+    attrs.push(attr("title", opt.title));
+  }
+  if (opt.href) {
+    attrs.push(attr("href", opt.href));
+  }
+  if (attrs.length > 0) {
+    s += " " + attrs.join(" ");
   }
   return s + ">";
 }
@@ -185,37 +201,33 @@ function tagClose(tagName) {
   return "</" + tagName + ">";
 }
 
-function inTag(tagName, contentHTML, cls, id) {
-  return tagOpen(tagName, cls, id) + contentHTML + tagClose(tagName);
+function inTag(tagName, contentHTML, opt) {
+  return tagOpen(tagName, opt) + contentHTML + tagClose(tagName);
 }
 
-function inTagRaw(tagName, content, cls, id) {
+function inTagRaw(tagName, content, opt) {
   var contentHTML = escapeHTML(content);
-  return tagOpen(tagName, cls, id) + contentHTML + tagClose(tagName);
+  return tagOpen(tagName, opt) + contentHTML + tagClose(tagName);
 }
+
 function attr(name, val) {
+  val = val.replace("'", "");
   return name + "='" + val + "'";
 }
 
-function span(s, cls) {
-  return inTagRaw("span", s, cls);
+function span(s, opt) {
+  return inTagRaw("span", s, opt);
 }
 
 function div(html, opt) {
-  var classes = opt.classes || [];
-  if (opt.cls) {
-    classes.push(cls);
-  }
-  var cls = classes.join(" ");
-  return inTag("div", html, cls, opt && opt.id);
+  return inTag("div", html, opt);
 }
 
-function a(uri, txt, cls) {
+function a(uri, txt, opt) {
   txt = escapeHTML(txt);
-  if (cls) {
-    return '<a href="' + uri + '" class="' + cls + '">' + txt + "</a>";
-  }
-  return '<a href="' + uri + '">' + txt + "</a>";
+  opt.href = uri;
+  opt.title = txt.replace('"', "");
+  return inTag("a", txt, opt);
 }
 
 var rebuildUITimer = null;
@@ -313,7 +325,7 @@ function hilightSearchResult(txt, matches) {
       res += span(s);
     }
     s = txt.substring(idx, idx + len);
-    res += span(s, "hili");
+    res += span(s, {cls: "hili"});
     prevIdx = idx + len;
   }
   var txtLen = txt.length;
@@ -506,8 +518,9 @@ function notExpandedSvg() {
 function genTocExpanded(tocItem, tocItemIdx, level, isCurrent) {
   var titleHTML = escapeHTML(tocItemTitle(tocItem));
   var uri = tocItemURL(tocItem);
-  var divInner = expandedSvg() + a(uri, titleHTML, "toc-link");
-  var opt = {
+  var opt = {cls: "toc-link" };
+  var divInner = expandedSvg() + a(uri, titleHTML, opt);
+  opt = {
     classes: ["toc-item", "lvl" + level],
     id: "ti-" + tocItemIdx
   };
@@ -521,7 +534,7 @@ function genTocExpanded(tocItem, tocItemIdx, level, isCurrent) {
 function genTocNotExpanded(tocItem, tocItemIdx, level) {
   var titleHTML = escapeHTML(tocItemTitle(tocItem));
   var uri = tocItemURL(tocItem);
-  var divInner = notExpandedSvg() + a(uri, titleHTML, "toc-link");
+  var divInner = notExpandedSvg() + a(uri, titleHTML, {cls: "toc-link"});
   var opt = {
     classes: ["toc-item", "lvl" + level],
     id: "ti-" + tocItemIdx
@@ -552,7 +565,7 @@ function genTocNoChildren(tocItem, tocItemIdx, level, isCurrent) {
     opt.classes.push("bold");
     return div(titleHTML, opt);
   }
-  var divInner = a(uri, titleHTML, "toc-link");
+  var divInner = a(uri, titleHTML, {cls: "toc-link"});
   var html = div(divInner, opt);
   return html;
 }
@@ -866,7 +879,7 @@ function getIdxFromSearchResultElementId(id) {
 }
 
 function toggleTocItem(idx) {
-  console.log("toggleTocItem:", idx);
+  //console.log("toggleTocItem:", idx);
   var tocItem = gBookToc[idx];
   var isExpanded = tocItemIsExpanded(tocItem);
   tocItemSetIsExpanded(tocItem, !isExpanded);
