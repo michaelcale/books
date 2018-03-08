@@ -267,7 +267,7 @@ func SerializeDoc(doc Doc) (string, error) {
 	lines = append(lines, body)
 	sep := "\n"
 	if runtime.GOOS == "windows" {
-		sep := "\r\n"
+		sep = "\r\n"
 	}
-	return strings.Join(lines, "\n"), nil
+	return strings.Join(lines, sep), nil
 }
