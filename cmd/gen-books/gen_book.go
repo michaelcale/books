@@ -35,6 +35,7 @@ var (
 		"article.tmpl.html",
 		"about.tmpl.html",
 		"feedback.tmpl.html",
+		"404.tmpl.html",
 	}
 	templates = make([]*template.Template, len(templateNames))
 
@@ -122,6 +123,20 @@ func getPageCommon() PageCommon {
 		PathMainCSS:    pathMainCSS,
 		PathFaviconICO: pathFaviconICO,
 	}
+}
+
+func gen404(books []*Book) {
+	d := struct {
+		PageCommon
+		GitHubText string
+		GitHubURL  string
+	}{
+		PageCommon: getPageCommon(),
+		GitHubText: "GitHub",
+		GitHubURL:  gitHubBaseURL,
+	}
+	path := filepath.Join(destDir, "404.html")
+	execTemplateToFileMaybeMust("404.tmpl.html", d, path)
 }
 
 func genIndex(books []*Book) {

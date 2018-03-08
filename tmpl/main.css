@@ -585,6 +585,15 @@ hr.toc-sep {
   }
 }
 
+.page-404 {
+  background: #eee;
+  padding: 40px 60px;
+  border-radius: 6px;
+  width: 40em;
+  margin: 50px auto;
+  max-width: 100%;
+}
+
 .breadcrumbs__item:after {
   content: "\2192";
   font-family: Lucida Grande, Lucida Sans Unicode, Arial, Helvetica, sans-serif;

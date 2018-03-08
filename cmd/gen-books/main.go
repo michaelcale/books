@@ -193,6 +193,7 @@ func genSelectedBooks(bookDirs []string) {
 	copyToWwwAsSha1MaybeMust("favicon.ico")
 	genIndex(books)
 	genIndexGrid(books)
+	gen404(books)
 	genAbout()
 	genFeedback()
 
@@ -225,6 +226,7 @@ func genAllBooks() {
 	copyToWwwAsSha1MaybeMust("app.js")
 	copyToWwwAsSha1MaybeMust("favicon.ico")
 	genIndex(books)
+	gen404(books)
 	genIndexGrid(books)
 	genAbout()
 	genFeedback()
