@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"runtime"
 	"strings"
 
 	"github.com/essentialbooks/books/pkg/common"
@@ -46,7 +47,8 @@ func (d Doc) GetSilent(key string, defValue string) string {
 
 // ReplaceOrAppend appends key/value to doc and returns a potentially new doc
 func ReplaceOrAppend(doc Doc, key, value string) Doc {
-	for _, kv := range doc {
+	for idx := range doc {
+		kv := &doc[idx]
 		if kv.Key == key {
 			kv.Value = value
 			return doc
@@ -263,5 +265,9 @@ func SerializeDoc(doc Doc) (string, error) {
 	}
 	lines = append(lines, "---")
 	lines = append(lines, body)
+	sep := "\n"
+	if runtime.GOOS == "windows" {
+		sep := "\r\n"
+	}
 	return strings.Join(lines, "\n"), nil
 }

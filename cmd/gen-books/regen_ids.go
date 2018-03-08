@@ -27,7 +27,8 @@ func regenIDSAndExit() {
 			currID++
 
 			path := chapter.indexFilePath
-			doc := chapter.indexDoc
+			doc, err := kvstore.ParseKVFile(path)
+			u.PanicIfErr(err)
 			saveDocWithNewID(path, doc, currID)
 
 			for _, article := range chapter.Articles {
