@@ -433,6 +433,10 @@ function getArticlePath(tocItem, term) {
   return parentTitle + " / " + title;
 }
 
+var searchInOpt = {
+  cls: "in",
+}
+
 /* results is array of items:
 {
   tocItem: [],
@@ -450,16 +454,13 @@ function buildResultsHTML(results, selectedIdx) {
     var matches = r.match;
 
     var html = hilightSearchResult(term, matches);
-    var articlePath = getArticlePath(tocItem, term);
-    if (articlePath) {
-      var s = "in: " + articlePath;
-      html += " " + inTagRaw("span", s, "search-result-in");
-    } else {
-      var parentTitle = getParentTitle(tocItem);
-      if (parentTitle) {
-        var s = "in: " + parentTitle;
-        html += " " + inTagRaw("span", s, "search-result-in");
-      }
+    // TODO: get multi-level path (e.g. for 'json' where in Refelection / Uses for reflection chapter)
+    var inTxt = getArticlePath(tocItem, term);
+    if (!inTxt) {
+      inTxt = getParentTitle(tocItem);
+    }
+    if (inTxt) {
+      html += " " + inTagRaw("span", inTxt, searchInOpt);
     }
 
     var opt = {
