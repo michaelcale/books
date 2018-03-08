@@ -58,14 +58,32 @@ function scrollPosClear() {
   storeClear(keyScrollPos);
 }
 
+function viewSet(view) {
+  storeSet(keyIndexView, view);
+}
+
+function viewGet() {
+  return storeGet(keyIndexView);
+}
+
+function viewClear() {
+  storeClear(keyIndexView);
+}
+
 // nav = navigateToURL, we want this to be short
 // because it's used in
-function nav(ev) {
-  //console.log("nav:", ev);
+function nav(targetEl) {
+  //console.log("nav:", targetEl);
   var el = document.getElementById("toc");
   //console.log("el:", el);
   //console.log("scrollTop:", el.scrollTop);
   scrollPosSet(el.scrollTop);
+}
+
+// rv = rememberView but short because it's part of url
+function rv(view) {
+  console.log("rv:", view);
+  viewSet(view);
 }
 
 // accessor functions for items in gBookToc array:
@@ -215,6 +233,7 @@ function splitStringAt(s, idx) {
 }
 
 function tagOpen(name, opt) {
+  opt = opt || {};
   var classes = opt.classes || [];
   if (opt.cls) {
     classes.push(opt.cls);
@@ -1158,6 +1177,28 @@ function findURLWithPrefix(prefix) {
   return "";
 }
 
+function updateLinkHome() {
+  var view = viewGet();
+  if (!view) {
+    return;
+  }
+  var uri = "/";
+  if (view === "list") {
+    // do nothing
+  } else if (view == "grid") {
+    uri = "/index-grid";
+  } else {
+    console.log("unknown view:", view);
+    viewClear();
+  }
+  var el = document.getElementById("link-home");
+  if (el && el.href) {
+    //console.log("update home url to:", uri);
+    el.href= uri;
+  }
+}
+
+
 function do404() {
   var loc = window.location.pathname;
   var locParts = loc.split("/");
@@ -1174,13 +1215,41 @@ function do404() {
   }
 }
 
-if (window.g_is_404) {
-  do404();
-} else {
-  // we don't want to run javascript on about etc. pages
-  var isAppPage = window.location.pathname.indexOf("essential/") != -1;
-  if (isAppPage) {
-    // we don't want this in e.g. about page
-    document.addEventListener("DOMContentLoaded", start);
+function doAppPage() {
+  // we don't want this in e.g. about page
+  document.addEventListener("DOMContentLoaded", start);
+}
+
+function doIndexPage() {
+  var view = viewGet();
+  var loc = window.location.pathname;
+  //console.log("doIndexPage(): view:", view, "loc:", loc);
+  if (!view) {
+    return;
+  }
+  if (view === "list") {
+    if (loc === "/index-grid") {
+      window.location = "/";
+    }
+  } else if (view === "grid") {
+    if (loc === "/") {
+      window.location = "/index-grid";
+    }
+  } else {
+    console.log("Unknown view:", view);
   }
 }
+
+// we don't want to run javascript on about etc. pages
+var loc = window.location.pathname;
+var isAppPage = loc.indexOf("essential/") != -1;
+var isIndexPage = (loc === "/") || (loc === "/index-grid");
+
+if (window.g_is_404) {
+  do404();
+} else if (isIndexPage) {
+  doIndexPage();
+} else if (isAppPage) {
+  doAppPage();
+}
+updateLinkHome();
