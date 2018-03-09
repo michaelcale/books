@@ -318,6 +318,9 @@ func genID() {
 		book, err := parseBook(bookName)
 		u.PanicIfErr(err)
 		for _, chapter := range book.Chapters {
+			if chapter.FileNameBase == "contributors" {
+				continue
+			}
 			rememberID(chapter.ID)
 			for _, article := range chapter.Articles {
 				rememberID(article.ID)
