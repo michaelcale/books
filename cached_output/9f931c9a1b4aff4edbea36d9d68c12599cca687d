@@ -1,1 +1,0 @@
-Decoded YAML dependencies: []main.Dependency{main.Dependency{Name:"apache", Version:"1.2.3", RepositoryURL:"http://example.com/charts"}, main.Dependency{Name:"mysql", Version:"3.2.1", RepositoryURL:"http://another.example.com/charts"}}

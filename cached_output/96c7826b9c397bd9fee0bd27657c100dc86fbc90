@@ -1,2 +1,0 @@
-Person struct parsed from XML: main.Person{Name:(*string)(0xc42000e330), Age:37, City:"", Occupation:""}
-Name: "John"

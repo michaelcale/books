@@ -1,6 +1,0 @@
-setIntPtr: n=4
-setStructFieldDirect: n=5
-setStructPtrField: s.N: 6
-setInt panicked with 'reflect: call of reflect.Value.Elem on int Value'
-setStructField panicked with 'reflect: call of reflect.Value.Elem on struct Value'
-setIntPtrWithString panicked with 'reflect: call of reflect.Value.SetString on int Value'

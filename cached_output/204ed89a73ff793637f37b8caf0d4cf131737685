@@ -1,3 +1,0 @@
-name: 'FirstName',	type: 'string', value: John,	tag: 'my_tag:"first-name"',	json tag: ''
-name: 'lastName',	type: 'string',	value: not accessible
-name: 'Age',	type: 'int', value: 27,	tag: 'json:"age",xml:"AgeXml',	json tag: 'age'

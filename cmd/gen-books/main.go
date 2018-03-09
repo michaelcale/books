@@ -238,6 +238,7 @@ func genAllBooks() {
 		genBook(book)
 	}
 	writeSitemap()
+	saveCachedOutputFiles()
 	fmt.Printf("Used %d procs, finished generating all books in %s\n", nProcs, time.Since(timeStart))
 }
 
@@ -333,6 +334,9 @@ func main() {
 		KeepDocumentTags: true,
 		KeepEndTags:      true,
 	})
+	doMinify = !flgPreview
+
+	reloadCachedOutputFilesMust()
 
 	booksToImport := getBooksToImport(getBookDirs())
 	for _, bookInfo := range booksToImport {
@@ -355,8 +359,6 @@ func main() {
 	}
 
 	cacheFilesInDir("books")
-
-	doMinify = !flgPreview
 
 	if flgUpdateOutput || flgRecreateOutput {
 		gitRemoveCachedOutputFiles()

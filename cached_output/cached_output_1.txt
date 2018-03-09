@@ -1,0 +1,1155 @@
+03ed766a1f67638ffe2cf94ead362f031365e29e:
+'hey' is in greetings
+
+|======|
+054df6223c6765bbf594cade498ca06a94da4560:
+key: john, value: 30
+key: jane, value: 29
+key: mark, value: 11
+
+|======|
+073b9baaf272070a3b24f8df5f3239c52f7d12ec:
+total tasks         : 32
+max concurrent tasks: 4
+
+|======|
+073f6e32bb8d01fdb862707962cd9b28fcca7e80:
+KB: 1024
+
+|======|
+08b55761d6ef8babf30a852e475c72d149b24543:
+First main statement
+Num 4
+Num 2
+Num 1
+
+|======|
+092a152cfbe48e09413077a8da4717f7969aa5eb:
+'hello' is in s starting at position 6
+Index of non-existent substring is: -1
+
+|======|
+0a525b800e415f0d3c781d4db2180d514f717cd8:
+'this is string' starts with 'this'
+
+|======|
+0ae4b354db52c3dcd0c154b4d9807981e37909f3:
+Before if
+Ater if
+inside if
+
+|======|
+0b54f42e82271ce3b342ef79977c3b409f899360:
+u: main.User{FirstName:"", LastName:"", Email:"", Age:0, userID:0}
+
+*pu: main.User{FirstName:"", LastName:"", Email:"", Age:33, userID:0}
+*pu: main.User{FirstName:"", LastName:"", Email:"", Age:18, userID:0}
+pu.FullName(): Jane Doe
+
+|======|
+0c48f39abb83bc4f9914d9a0d519d21c825c2c85:
+panic: send on closed channel
+
+goroutine 1 [running]:
+main.main()
+	/books/go/0220-channels-select/close5.go:7 +0x63
+exit status 2
+
+|======|
+0eb59d7fcb7a0e57751071ae8cfa281441e03dc2:
+src: []int{1, 2, 3}
+dst: []int{1, 2, 3}
+
+|======|
+0edcccdc78d1b655b85f7f78f29898ad8c219655:
+Person struct parsed from JSON: main.Person{Name:(*string)(0xc42008a230), Age:24, City:"ny", Occupation:""}
+Name: "Jane"
+
+|======|
+0f045979b35b7f07677173506a4e8c905592adc4:
+Exiting foo
+Exiting main
+panic: bar
+
+goroutine 1 [running]:
+main.foo()
+	/books/go/0200-panic-and-recover/panic.go:8 +0x95
+main.main()
+	/books/go/0200-panic-and-recover/panic.go:13 +0x7e
+exit status 2
+
+|======|
+0f07d9089d8d2b71532099d2524664c3399ae357:
+Hello, 世界
+
+|======|
+103bc756ef6bba6be9cfab216017ae450df2197e:
+total: 30
+total: 30
+
+|======|
+12b56d94694ebc470fdbab3a82273554bb5e4c7f:
+a: 0, b: 2
+
+|======|
+133cb538d497460bc278d4772cb6d78583ad93f5:
+Low: 0
+Medium: 1
+High: 2
+
+|======|
+13f2d5701a48bb1e85a42763f6644adbe00b6aa7:
+i5: 0
+i5: 2
+i5: 4
+
+|======|
+147770295987255d31a88468f5848ec758def480:
+dog
+cat
+fish
+
+|======|
+169850825fd409c180fd2da0721cbc5c08a5296d:
+struct S, 5 field(s), size: 40 bytes
+  name: 'Inner' type: 'struct Inner', offset: 0, 1 field(s), size: 8 bytes, embedded: true
+     name: 'N' type: 'int', value: '0', offset: 0, size: 8
+  name: 'NamedInner' type: 'struct Inner', offset: 8, 1 field(s), size: 8 bytes, embedded: false
+     name: 'N' type: 'int', value: '0', offset: 0, size: 8
+  pointer
+   name: 'unexported' type: 'int', value: '0', offset: 24, size: 8
+   name: 'N' type: 'int8', value: '0', offset: 32, size: 1
+
+|======|
+1b0809fa3e95b6b18e7b8f24c7aafc62d587accc:
+Response status code: 200, text:
+{
+  "user-agent": "Special Agent v 1.0.16"
+}
+
+
+|======|
+1b7ad5813d91b414240c7a276e5d3abf148040ae:
+Key 'four' exists and maps to 4
+Key 'five' doesn't exists
+
+Value for non-existing key: 0
+
+All keys and their values:
+three => 3
+four => 4
+
+Before deletion: len(m)=2
+After deletion: len(m)=1
+
+|======|
+1e8a6ac64787b507444aeaaab33338d286d4538d:
+Hex: 01ff3acd
+
+|======|
+1e904b60e405106847a29cbcfb49fa4655ba71f8:
+2017-09-04 03:38:45
+
+|======|
+1effd55ec572bcd74c9cfc514e353c46c24944eb:
+3
+
+|======|
+1f4c043ec90d65a6cf7bc1fc537160ebbd0c5672:
+Top 10 most recently active StackOverflow posts:
+Score Link
+0 https://stackoverflow.com/q/49189560
+2 https://stackoverflow.com/q/23843329
+0 https://stackoverflow.com/a/49189697
+0 https://stackoverflow.com/a/49189696
+1 https://stackoverflow.com/q/49189079
+0 https://stackoverflow.com/q/49189695
+1 https://stackoverflow.com/q/49188898
+0 https://stackoverflow.com/q/35025270
+0 https://stackoverflow.com/a/49189631
+0 https://stackoverflow.com/q/49189317
+
+|======|
+204ed89a73ff793637f37b8caf0d4cf131737685:
+name: 'FirstName',	type: 'string', value: John,	tag: 'my_tag:"first-name"',	json tag: ''
+name: 'lastName',	type: 'string',	value: not accessible
+name: 'Age',	type: 'int', value: 27,	tag: 'json:"age",xml:"AgeXml',	json tag: 'age'
+
+|======|
+222951dfcd630ed214dafb48301b6ea736f09961:
+[[1 2 3] [4 5 6]]
+[1 2 3]
+2
+
+|======|
+22a33e214aa0407e033f397e487f28f2c5035e62:
+    1 +     3 =     4, overflowed: false
+
+65550 + 10000 =  9984, overflowed: true
+
+|======|
+24006fb030f7c7fd3c25659bbc79527716059704:
+1
+2
+3
+4
+5
+6
+
+|======|
+241398057d65797cae16ae8d3ad3075f978028b1:
+2017-04-09 03:38:45.000 UTC
+2017-04-9 03am
+Sep 17 Mon 4 09
+September 6 Mon 4 9
+Month: Sep '9', '09',  4
+
+|======|
+246a7fc2685076fc30e0042e9fa7444f5e7eac07:
+*main.User: John
+main.MyInt: 5
+
+|======|
+26d3b14e64d541fd523eed8f7c46f802626d2573:
+1
+0
+
+|======|
+282f9e0599d041bfab20c1607e3deb8637d7e41d:
+2018/03/09 00:42:44 http.DefaultClient.Do() failed with:
+'Get https://httpbin.org/delay/3: context deadline exceeded'
+exit status 1
+
+|======|
+28e0f0c36375e990398d6cc171fc23dc207c88b0:
+User: &main.User{Name:"John", IsLoggedIn:false}
+
+|======|
+2972d8ef930280fd617bbb6eafa87aa359f53a4c:
+Unbuffered version took 54.719231ms
+Buffered version took 35.392007ms
+
+|======|
+29c5a20fa545822aea8223c3f8b7fc396eab8f06:
+array1: [1 2 3 4 5 6]
+array2: [1 2 3 4 5 6]
+array3: [1 2 3 4 5 6]
+zeroes: [0 0 0 0 0 0 0 0]
+ptrs: [<nil> <nil> <nil> <nil> <nil> <nil> <nil> <nil>]
+emptystr: [       ]
+structs: [{0 } {0 } {0 } {0 } {0 } {0 } {0 } {0 }]
+
+|======|
+2b77c2d6fece3602815cbd5dd2c20b20693905d1:
+intOp(2, 3) = 5
+intOp(2, 3) = 6
+
+|======|
+31590acc21855e9bdf07f6110e7530335b61e349:
+i3: 0
+i3: 2
+i3: 4
+i3: 6
+
+|======|
+35c8f876ccb4600bbba3043bfa6e8fca3a6c2570:
+http.Post() returned statuts code 200, truncated text:
+{
+  "args": {}, 
+  "data": "text we send", 
+  "files": {}, 
+  "form": {}, 
+  "headers": {
+   ...
+
+|======|
+36a753077ca070cb9ec6f4f7eca2e87eecac0d27:
+Hex: 01ff3acd
+
+|======|
+37d9fe5f880349cad833e011cd1e77d20910fa37:
+p: { }
+
+p: {John Doe}
+
+p.FullName(): John Doe
+
+|======|
+3abdfa118c0e5526b00ecc965e9999d26c19a846:
+setIntPtr: n=4
+setStructFieldDirect: n=5
+setStructPtrField: s.N: 6
+setInt panicked with 'reflect: call of reflect.Value.Elem on int Value'
+setStructField panicked with 'reflect: call of reflect.Value.Elem on struct Value'
+setIntPtrWithString panicked with 'reflect: call of reflect.Value.SetString on int Value'
+
+|======|
+3c7e0a860a20eca837644bb2e33103661abee529:
+f: 1.234100
+
+|======|
+3dcb9b70beb7ef43c5a4249787d9be3f49eb59f6:
+doc: map[string]interface {}{"name":"Jane", "age":24, "city":"ny"}
+name: "Jane"
+
+|======|
+3dde71755e9f5c1b567b97ebd4a5fdf2e3511525:
+sqrtWorker started
+Got sqrt: 4
+Got sqrt: 16
+sqrtWorker finished
+sqrtWorker started
+sqrtWorker finished
+
+|======|
+45a0940e7ae315dd74e55b91c35fcd4dfcf5fb9e:
+err: Original error
+main.wrappedError
+	/books/go/0180-error-handling/add_callstack.go:16
+main.main
+	/books/go/0180-error-handling/add_callstack.go:21
+runtime.main
+	/usr/local/Cellar/go/1.10/libexec/src/runtime/proc.go:198
+runtime.goexit
+	/usr/local/Cellar/go/1.10/libexec/src/runtime/asm_amd64.s:2361
+
+err: error created with pkg/errors
+main.main
+	/books/go/0180-error-handling/add_callstack.go:24
+runtime.main
+	/usr/local/Cellar/go/1.10/libexec/src/runtime/proc.go:198
+runtime.goexit
+	/usr/local/Cellar/go/1.10/libexec/src/runtime/asm_amd64.s:2361
+
+|======|
+45c18a40927f2ecaa7bf1642ce48d40dcefa75e3:
+year: 2017, month: 9, day: 4
+
+|======|
+46afc79d2c07ce316bbc6122f6c5602a416f593e:
+f is: '1.540000'
+
+|======|
+46afd167c461baec625d05b0ff509e6bbdef1da0:
+Secure: 0x1 (0b001)
+Authn: 0x2 (0b010)
+ConnState: 0x3 (0b011)
+
+|======|
+46b5040617028d8ab095b4ca231aea15e669668a:
+1
+2
+channel is now closed
+
+|======|
+46c3d5e89430894405e9cd53542da0664af5bdc6:
+sum of strings: 'string
+literal
+with	escape charactersraw string literal
+	which doesnt't recgonize escape characters like \n
+	'
+
+|======|
+4a679e52b4f1347d5b26a1bdbf86f8051bedc970:
+v is of type 'string'
+v is of type 'int'
+v is of type 'int32'
+
+|======|
+4a803dddae31ecf1c92dee8c7198fe90d37da2b8:
+File index.go has 31 lines
+
+|======|
+4aa4ea214a639d0076ed429286a6bcff955ea64d:
+f32: 1.3E+00
+f64: 8.1234e+00
+
+|======|
+4c937840feff21cd227fe44666adb4122a4b35af:
+value of number3 is 3
+key 'number4' doesn't exist in map m
+
+|======|
+4d54bad263ca3e95f2325026984bd20a03d801dd:
+sum of string: string
+literal
+with	escape charactersraw string literal
+	which doesn't recgonize escape characters like \n
+	
+s1 is not equal to s2
+substring of s1: in
+byte (character) at position 3 in s1: 105
+s: 1 + 3.000000 = 4
+
+|======|
+4fa53a3288ae45d449cca99c0b36d8c0e68d0347:
+b is: 'true'
+b is: 'false'
+
+|======|
+50a45cde76cfb34331c600651e9c6ac59d675e0b:
+Channel is empty
+Received 8 from a channel
+
+|======|
+516f7a902a8dc33758d59145269d32b7d25bb1d9:
+Hello, John Doe!
+You are 35
+|======|
+52ef5d6bf9bb944f7c51c3277067be7e02d1919b:
+constant
+10
+n=10 is of type int
+4.3
+-0.5440211108893699
+
+|======|
+554c3ccd332e9fc3f56ae1e916790872f8fb8aa5:
+1 * 2 = 2
+3 * 4 = 12
+
+|======|
+57a5fd323648d2d2646e6812c008c1fc07ee244b:
+<nil>: null
+int: 5
+float64: 8.23
+string: "john"
+[]int: [5,4,18]
+[]interface {}: [4,"string"]
+map[string]interface {}: {"i":5,"s":"foo"}
+struct { Name string; Age int }: {"Name":"John","Age":37}
+
+|======|
+5847893f8a8ef13e6a145715b2ce3d4cf332b299:
+Got value 3
+Signalled on quit channel. Finishing
+
+|======|
+5976e24b273c0e05fbd97b6b173e9ff3f8cd187b:
+2018/03/09 00:42:38 second cmd.CombintedOutput() failed with 'exec: Stdout already set'
+exit status 1
+
+|======|
+5accc1b6a782a8bd67016d9deb4f7868b2b3027d:
+inverse(5)=0.20
+
+|======|
+5cb70846efca52b5f27b52abf298286a78bb25e4:
+panic: interface conversion: interface {} is string, not int
+
+goroutine 1 [running]:
+main.panicOnInvalidConversion(0x10a0300, 0x10d3240)
+	/books/go/0120-empty-interface/type_assertion2.go:9 +0xc7
+main.main()
+	/books/go/0120-empty-interface/type_assertion2.go:14 +0x39
+exit status 2
+
+|======|
+5d3a28f0bd5321af8c01c888f81ea44ec0b9e75c:
+Hello!
+
+|======|
+6206bbcf7390faebc7c06a85b94c708618173e12:
+s: 'Hello World'
+2 + 3.000000 = 5
+
+|======|
+65b721a57a0c1c0d0116bea11925e08a8a846786:
+Output:
+go version go1.10 darwin/amd64
+
+
+|======|
+663637c7c148a7ac9d9868e3036f59f43f97ab21:
+iv is of type string and has value 'string'
+iv is of type int and has value '5'
+iv is of type *int and has value '%!s(*int=0xc420016090)'
+panic: interface conversion: interface {} is string, not int
+
+goroutine 1 [running]:
+main.panicOnInvalidConversion()
+	/books/go/0120-empty-interface/type_assertion.go:26 +0x45
+main.main()
+	/books/go/0120-empty-interface/type_assertion.go:39 +0xb8
+exit status 2
+
+|======|
+6830fa384e4bc53e7dcc4c7e54ada32b4e36550e:
+sqrt of 16.000000 is 4.000000
+sqrt of -16.000000 returned error 'invalid argument '-16.000000', must be >= 0'
+
+|======|
+684d575766ae8cc52403b5f89c7983c2dc050066:
+File read_lines.go has 40 lines
+
+|======|
+6c02445110a9eab889149819fd3722f5a0d4feb6:
+address of p:                         0xc42000a080
+PrintFullNamePointer: p is            0xc42000a080
+PrintFullNameValue:   address of p is 0xc42000a0a0
+
+|======|
+6f3f79d1476bc43e2f39545fdf1568ad65af5826:
+Timed out before worker finished
+
+|======|
+712eaad4e60f90e896339486ad4ffd71e7f852a4:
+total: 30
+total: 30
+
+|======|
+746084d984d2cba8bbbaa4c686985eeed8876002:
+First main statement
+Num 3
+Num 2
+Num 1
+panic: panic occurred
+
+goroutine 1 [running]:
+main.main()
+	/books/go/0190-defer/defer_basics2.go:15 +0xf0
+exit status 2
+
+|======|
+7934f1adf4c4c3690e9e24863c8541243e20413c:
+intOp(2, 3) = 5
+intOp(2, 3) = 6
+
+|======|
+7b8bf6f19e6aa17502b2eeb7f30cbef26cb9f369:
+a is equal to b
+ok is true, n: %d
+5
+|======|
+801d3da35f922113e507bc622e5aeb693a429ccb:
+Output:
+go version go1.10 darwin/amd64
+
+
+|======|
+806d84763a5d7cf902ece119115d83497ff50fe2:
+File file_size.go is 483 bytes in size
+
+|======|
+814e7fc9e6d3eda38fb538b6a4b71ac3e2cba9d5:
+Response status code: 200, text:
+{
+  "args": {}, 
+  "data": "{\"Name\":\"John Doe\",\"Email\":\"johndoe@example.com\"}", 
+  "files": {}, 
+  "form": {}, 
+  "headers": {
+    "Accept-Encoding": "gzip", 
+    "Connection": "close", 
+    "Content-Length": "49", 
+    "Content-Type": "application/json; charset=utf-8", 
+    "Host": "httpbin.org", 
+    "User-Agent": "Go-http-client/1.1"
+  }, 
+  "json": {
+    "Email": "johndoe@example.com", 
+    "Name": "John Doe"
+  }, 
+  "origin": "24.5.174.236", 
+  "url": "https://httpbin.org/put"
+}
+
+
+|======|
+83139b79c1db6c3c00fa90847764a89ddf0011cd:
+There are 32 lines in 'read_file_as_lines.go'
+
+|======|
+8658f09506fe5122efcbac642e2cce8dcb4b1054:
+Called longMathOp() with 200ms timeout. res; 4955, err: <nil>
+Called longMathOp() with 10ms timeout. res: 0, err: context deadline exceeded
+
+|======|
+8b25b88d5aa670effe9d3638f7b29aa77fb95fad:
+i2: 0
+i2: 2
+i2: 4
+
+|======|
+8c51769293a8a7af877419fe5a72c79bf3163959:
+2018/03/09 00:42:35 Logging
+2018/03/09 00:42:35 Second line
+
+|======|
+8dba6a8b0cc75e954cca3765a0c8ed8e584115aa:
+{Total:1 Links:{Next:https://api.twitch.tv/kraken/channels/foo/subscriptions?direction=ASC&limit=25&offset=25} Subs:[{Created:2011-11-23T02:53:17Z User:{Name:bar ID:123456}}]}
+|======|
+8effcc1e99e636972bd83ef111c19f57ca78f597:
+Student: John Doe, standard: 4
+Student: Peter Parker, standard: 11
+Student: Bilbo Baggins, standard: 150
+
+|======|
+8f9d7b7016e673552ad6e02e8f915f58d22d21ef:
+i4: 0
+i4: 2
+i4: 4
+
+|======|
+9014a1bc28c48e144d6b904b4abffbe085b9e609:
+a[2]: 0
+size of array a: 3
+size of array a2: 3
+
+|======|
+93ece64bd475611a844a340daa1d864982796813:
+idx: 0,rune: 115
+idx: 1,rune: 116
+idx: 2,rune: 114
+
+|======|
+94bfa695491c01ceebb6c5f31d2f23e8ebe697ab:
+2018/03/09 00:42:40 http.Get() failed with 'Get https://httpbin.org/delay/3: net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)'
+exit status 1
+
+|======|
+94fdd09bd90d60940999d1f69c2a3837667de0b5:
+Int value is: 3
+Int value is: 4
+panic: reflect: call of reflect.Value.Int on string Value
+
+goroutine 1 [running]:
+reflect.Value.Int(0x10a0360, 0x10d32b0, 0x98, 0x10d32b0)
+	/usr/local/Cellar/go/1.10/libexec/src/reflect/value.go:931 +0x127
+main.getIntValue(0x10a0360, 0x10d32b0)
+	/books/go/0400-reflection/get_value.go:12 +0x5b
+main.main()
+	/books/go/0400-reflection/get_value.go:22 +0x7b
+exit status 2
+
+|======|
+950eb09f9979573a476236bbe179c2aaef2858d0:
+Record: []string{"date", "open", "high", "low", "close", "volume", "Name"}
+Record: []string{"2013-02-08", "15.07", "15.12", "14.63", "14.75", "8407500", "AAL"}
+Record: []string{"2013-02-11", "14.89", "15.01", "14.26", "14.46", "8882000", "AAL"}
+Record: []string{"2013-02-12", "14.45", "14.51", "14.1", "14.27", "8126000", "AAL"}
+Read 25 records
+
+|======|
+95f73ce725e0af5ddf5229268ed3aab15936dd87:
+idx: 0, value: 1
+idx: 1, value: 3
+idx: 2, value: 5
+
+|======|
+96c7826b9c397bd9fee0bd27657c100dc86fbc90:
+Person struct parsed from XML: main.Person{Name:(*string)(0xc42000e330), Age:37, City:"", Occupation:""}
+Name: "John"
+
+|======|
+981f8a091f23b5f8cffb5fb88f4ed99a27e75590:
+My name is Slim Shady
+
+|======|
+982e63ff0f45c6d606b67676f4525a126d692e1f:
+i1: 0
+i1: 2
+i1: 4
+
+|======|
+98c8c5824e004bce35ce375630197ff892888925:
+size of bool is: 1
+
+|======|
+993f5eb31d58abb4bbc252455546651db1bab070:
+[]int{2, 4}
+
+|======|
+9d9f49656b316b0e4aeee32d6637927791d11f75:
+# command-line-arguments
+./verify_type_implements_interface.go:13:5: cannot use MyReadCloser literal (type *MyReadCloser) as type io.ReadCloser in assignment:
+	*MyReadCloser does not implement io.ReadCloser (missing Close method)
+
+|======|
+9e1a0622d69738f839ad9d048f7f6d23292d0d99:
+Entering main
+Recovered with message bar
+Exiting main the normal way
+
+|======|
+9f931c9a1b4aff4edbea36d9d68c12599cca687d:
+Decoded YAML dependencies: []main.Dependency{main.Dependency{Name:"apache", Version:"1.2.3", RepositoryURL:"http://example.com/charts"}, main.Dependency{Name:"mysql", Version:"3.2.1", RepositoryURL:"http://another.example.com/charts"}}
+
+|======|
+9f93422bb75b53c03532b386f1c32e7214669872:
+Value: 3. Type: 'int' i.e. 'int'.
+
+Value: 4. Type: 'pointer to int' i.e. '*int'.
+
+Value: 5. Type: 'pointer to pointer to int' i.e. '**int'.
+
+
+|======|
+a0ae0ab967ab9b8335775d8599f603788bc33765:
+m["foo"] = 
+ok: false
+panic: assignment to entry in nil map
+
+goroutine 1 [running]:
+main.main()
+	/books/go/0090-maps/zero_value2.go:15 +0x189
+exit status 2
+
+|======|
+a21ee48190c2dc1f3b8031a09bc8d71851422228:
+m == nil ? true
+len(m) = 0
+
+|======|
+a2344b6d7ab26efdf9a005e659dbe282e605a2cd:
+length of slice is: 3
+capacity of slice is: 5
+
+|======|
+a3369c518d77e07be666c58b816fca622dc28ea7:
+Receive from closed channel immediately returns zero value of the type: ""
+
+|======|
+a3f3e96321f499ded7e81080da2b96e3a31bf5ea:
+Hex: 01ff3acd
+3824 in hex is 0xef0
+
+|======|
+a50812228af5f368b290adbed744dac86f693451:
+bit0: 1, mask0: 0x0
+bit3: 8, mask3: 0x7
+
+|======|
+a62ac608ca0b4990665e54c5df034db906fe359a:
+Person in compact JSON: {"Name":"John","age":37,"city":"SF"}
+Person in pretty-printed JSON:
+{
+  "Name": "John",
+  "age": 37,
+  "city": "SF"
+}
+
+|======|
+a7ef1624f8c6a6d40b71c4a11d89592b8c34b074:
+key: john
+key: jane
+key: mark
+
+|======|
+a87494d028e1b4bef9b7963a9c6e80bdf4a57127:
+Path: 000-index.md, is dir: false, size: 210 bytes
+Path: 010-reading-files.md, is dir: false, size: 753 bytes
+Path: 020-writing-files.md, is dir: false, size: 2913 bytes
+Path: 030-file-operations.md, is dir: false, size: 2583 bytes
+
+|======|
+aa4f32c6370b8da5379b4d79976ea048df25e697:
+Standard time JSON: {"What":"earthquake","When":"2018-03-09T00:42:39.322107883-08:00"}
+
+Custom time JSON: {"What":"earthquake","When":"2018-09-03"}
+Decoded custom time: "2018-09-03"
+
+|======|
+ab5806a62c7c182226aa01eb457aac7d4c067db4:
+custom error type
+
+|======|
+abe10a0fa3ac5132f94e9bcd07030d8793647029:
+received from channel: foo
+range loop finished because ch was closed
+
+|======|
+acbd4158c0709417f2ab81c6d3dae3a8d29e5780:
+'gone' is equal 'GoNe' when ignoring case
+
+|======|
+aee080990dce122a8dc598e3bc2839ba247f6b6d:
+zeroBool: false
+zeroInt: 0
+zeroF32: 0
+zeroStr: ""
+zeroPtr: <nil>
+zeroSlice: []uint32(nil)
+zeroMap: map[string]int(nil)
+zeroInterface: <nil>
+zeroChan: <nil>
+zeroArray: [0 0 0 0 0]
+zeroStruct: main.struc{a:0, b:""}
+zeroFunc: <nil>
+
+|======|
+b037835061f4ad66b60a1f9fb92647922ff86d45:
+flag -echo: 'echo-arg'
+Remainig arg: 'additional'
+Remainig arg: 'arg'
+
+|======|
+b133fc6270bbcb1bf0c4c8d63e8bb1dab9cb8baf:
+s1 is not equal to s2
+s1 is equal to s1
+s1 is not > than s2
+s1 is < than s2
+
+|======|
+b2406ce2338c905c5c5eff32b4b2e5e74b905287:
+Type 'int' of size: 8 bytes
+v contains value of type int
+
+|======|
+b2640fe7bbfaeb37332cb9374f8b09ff447a4591:
+routine 9 finished
+routine 4 finished
+routine 0 finished
+routine 3 finished
+routine 1 finished
+routine 2 finished
+routine 5 finished
+routine 6 finished
+routine 7 finished
+routine 8 finished
+main finished
+
+|======|
+b4aa364324a7f056bc1b577be84ae3cfdfe1ae5e:
+found 'is' at position 6
+found 'is' at position 17
+found 'is' at position 27
+
+|======|
+b4afb3c2b09c25395199d174965b92b57fd8e48c:
+John Doe
+|======|
+b5112cf333bd40f9e156a35973075e8cd1cbf77e:
+there was an error
+panic: there was an error
+
+goroutine 1 [running]:
+main.panicWithMsg(0x10c3387, 0x12, 0x0, 0x0, 0x0)
+	/books/go/0180-error-handling/errors_in_short_programs.go:28 +0x13e
+main.PanicIfErr(0x10d3a20, 0xc42000e1e0, 0x0, 0x0, 0x0)
+	/books/go/0180-error-handling/errors_in_short_programs.go:44 +0x6c
+main.main()
+	/books/go/0180-error-handling/errors_in_short_programs.go:49 +0x92
+exit status 2
+
+|======|
+b8ae995dc86d69cf3e306896be5387ae1610b236:
+PostForm() sent 'email=john%40gmail.com&name=John'. Response status code: 200
+
+|======|
+b979bb93bc2a211bbd0b3dacc3cd1a510ca05e99:
+panic: close of closed channel
+
+goroutine 1 [running]:
+main.main()
+	/books/go/0220-channels-select/close4.go:7 +0x57
+exit status 2
+
+|======|
+ba1aeddc717e5e5cc4429567cb82dea7a68d0242:
+received 1, is channel closed: true
+received 0, is channel closed: false
+
+|======|
+ba6d27201efbf520328b59929ce88bffa518acfc:
+Base64: Af86zQ==
+
+|======|
+bb0a53a18dace5a9b13578a76d6ac8da730ed8d0:
+[1 2 3 4 5 6]
+[6 2 3 4 5 6]
+[6 5 3 4 5 6]
+[6 5 4 4 5 6]
+[6 5 4 3 5 6]
+[6 5 4 3 2 6]
+[6 5 4 3 2 1]
+
+|======|
+bf907308ab176717a1f06939384d0cc6151783c2:
+v is of type 'int32'. Size: 4 bytes
+v is of type 'string'. Size: 16 bytes
+v is of type 'pointer'. Size: 8 bytes
+
+|======|
+c1730bbf7974132ed61326cc46a93bc14a2fc9dc:
+v: 5, pv: 0xc420016090
+v: 4
+pv: 0xc420016090, pv2: 0xc420016090
+
+|======|
+c4cb0ff0e0cf28070bb008ef05f573d842a0ed36:
+didTimeout: true, err: signal: killed
+
+|======|
+c6c63f9f9651117620fbe5571702f08e04a6c1e4:
+f: 1.234100
+
+|======|
+c7d30cd3e5e39a0960f050eccbcb76579d588867:
+[]string{"!", "Hello", "world"}
+
+|======|
+c931e8238f14c5fb517bdbc6c019b608517cf444:
+Size of a1: 2.
+Size of a2: 3
+
+|======|
+c93241c36a27a41b14acc3e905ceb2c438950d09:
+'is hello there?' contains 'hello'
+
+|======|
+cbb243f7a9920d4cdd348c50bee16e2532409bec:
+2
+2
+
+|======|
+cd88fae66b137115974609078ab23681e519f3ae:
+2
+
+|======|
+cde97106b07ef39f2c7606bd196c6099fda2b3f2:
+(*p).Bar is 0
+(*p).Bar is 0
+(*p).Bar is 0
+(*p).Bar is 0
+
+|======|
+d34829e9206538637670821f915965ed806c180a:
+value: 30
+value: 29
+value: 11
+
+|======|
+d4182d9bf812096cda6d8036b3ce68f37e1d37cb:
+Path: ., is dir: true, size: 640 bytes
+Path: 000-index.md, is dir: false, size: 210 bytes
+Path: 010-reading-files.md, is dir: false, size: 753 bytes
+Path: 020-writing-files.md, is dir: false, size: 2913 bytes
+Path: 030-file-operations.md, is dir: false, size: 2583 bytes
+
+|======|
+d7d9c671f9eead4c6664ec3613c091077a077b9f:
+'this is string' ends with 'string'
+
+|======|
+d84c9db9d3a6907c644523d741b826a4f6eaf459:
+date,price,name
+2013-02-08,"15,07",GOOG
+2013-02-09,"15,09",GOOG
+
+
+|======|
+da72683a18e6698c532d3dd9bd2c73e3d4dde426:
+when searching from end, 'hello' is in s at position 17
+
+|======|
+da7cb4aad552bde781c797a2c592eb7fa8a69637:
+First main statement
+Last main statement
+Function main returned
+
+|======|
+dbc50260bce77105a278dceefa29375ee34d7580:
+5 is odd
+18 is even
+
+|======|
+dbc7ef4055610898dda003836d69ae2933836992:
+File 'file_exists.go' exists: true
+File 'non-existent-file.txt' exists: false
+
+|======|
+dc8b8d3e0c63c428ab2279b89346f1c724dab455:
+Hello!
+
+|======|
+dcc541e78b63aeedb2c83ff6c2ff2fd2f7116de4:
+Person in YAML:
+name: John
+age: 37
+city: SF
+
+
+|======|
+dd90689d6bfca070035ee92fbe2e9da6e5649c62:
+Name: file_info.go
+Size: 344
+IsDir: false
+Mode: 1091c40
+ModTime: 2018-02-25 23:52:31.004823169 -0800 PST
+OS info: *syscall.Stat_t
+
+|======|
+de5a50d1e40366e2cfb547ba0afcd4af9472740b:
+f.Bar is 0
+f.Bar is 1
+f.Bar is 0
+f.Bar is 1
+
+|======|
+dfde90edaa963e7a5fd38bf2a04786015f8d65cb:
+http.Get() returned content of type 'text/html; charset=utf-8' and size 3741 bytes.
+Status code: 200
+
+http.Get() returned content of type 'text/html' and size 3741 bytes.
+Status code: 404
+
+http.Get() failed with: 'Get http://website.not-exists.as/index.html: dial tcp: lookup website.not-exists.as: no such host'
+resp: <nil>
+
+|======|
+e089c2605a40582577073581771e4256581a4666:
+stmt ('if') is either 'if' or 'for'
+
+|======|
+e1ed65d07fa3f1fa3bbb910455a39dc13c1aa722:
+a is not equal to b
+
+|======|
+e3b95c08d0a1c4e247e8e7b593b99aa366a50c31:
+Hello!
+
+|======|
+e5710a828850894e96c58365695212bdc5b2390e:
+x: 1, y: 2
+w: 3, z: 4
+
+|======|
+e5f54b98cf41241ca36d9c3ecba92ba22f8828fc:
+Name of executable: '/var/folders/2k/p2_4052s70vd5_cfdm0k0l740000gn/T/go-build386456375/b001/exe/raw_cmd_line_args'
+Arg 0, value: '-echo'
+Arg 1, value: 'echo-arg'
+Arg 2, value: 'additional'
+Arg 3, value: 'arg'
+
+|======|
+e98713dc4f931d97f0e3860e25972e0ba7ddd81c:
+0: Hello
+1: Goodbye
+
+0: Str1
+1: Str2
+2: Str3
+
+0: a
+1: b
+
+
+|======|
+ebe9a378c0398e3a8f082c27a1ae1406196f8ec3:
+==================
+WARNING: DATA RACE
+Read at 0x0000011d9318 by goroutine 15:
+  main.main.func1()
+      /books/go/0230-mutex/data_race.go:25 +0x6d
+
+Previous write at 0x0000011d9318 by goroutine 6:
+  main.main.func1()
+      /books/go/0230-mutex/data_race.go:25 +0x89
+
+Goroutine 15 (running) created at:
+  main.main()
+      /books/go/0230-mutex/data_race.go:22 +0xcf
+
+Goroutine 6 (running) created at:
+  main.main()
+      /books/go/0230-mutex/data_race.go:22 +0xcf
+==================
+==================
+WARNING: DATA RACE
+Read at 0x0000011d9318 by goroutine 14:
+  main.main.func1()
+      /books/go/0230-mutex/data_race.go:25 +0x6d
+
+Previous write at 0x0000011d9318 by goroutine 6:
+  main.main.func1()
+      /books/go/0230-mutex/data_race.go:25 +0x89
+
+Goroutine 14 (running) created at:
+  main.main()
+      /books/go/0230-mutex/data_race.go:22 +0xcf
+
+Goroutine 6 (running) created at:
+  main.main()
+      /books/go/0230-mutex/data_race.go:22 +0xcf
+==================
+n is: 628, expected: 800
+Found 2 data race(s)
+exit status 66
+
+|======|
+ec4733fd2f93027b3a5de4acb7246bda94dd1a66:
+Person in compact JSON: {"Uuid":"uid-john","Name":"John"}
+
+|======|
+ec9ca7723ab1302134a6d700927688fa44020d21:
+Address of a variable in memory is 0xc420016090. Its value is: 4
+
+|======|
+eeb5f0aa5105c68cb1e3a43ecde16e9f01804162:
+base64: Af86zQ==
+
+|======|
+f1b3ce91d1df9b85b7c032c93561df4411caa781:
+Person in compact XML: <Person><Name>John</Name><age>37</age><city>SF</city></Person>
+Person in pretty-printed XML:
+<Person>
+  <Name>John</Name>
+  <age>37</age>
+  <city>SF</city>
+</Person>
+
+|======|
+f28f9ff30671fba68b7601fde02b37de6477a11a:
+Catherine
+Daniel
+Daniel
+Daniel
+Ines
+
+|======|
+f33b0df6fa4c0fdbcc8ed8647c0b419dc534c459:
+initial: 1
+zeroval: 1
+zeroptr: 0
+pointer: 0xc420016090
+
+|======|
+f497e3fc4afab690cf6d1a232d15be99ec667af8:
+data: {Number:42 Text:Hello world!}
+
+|======|
+f5e6e0df71e733d8b863db50b7fd40e3d257b14b:
+Rune at byte position 0 is U+65E5 '日'
+Rune at byte position 3 is U+672C '本'
+Rune at byte position 6 is U+8A9E '語'
+
+|======|
+f8a58521aaec782779c738559a8c640e41ab7b2a:
+n: 81
+n: 887
+
+|======|
+f8bf382df6f83442fcba1eee7240a081532a93a1:
+msg='Hello World', ok='true'
+
+|======|
+f94b339e4d0603d62712a1e78cf4ddcffd4dcd8c:
+Byte at index 0 is s (0x73)
+Byte at index 1 is t (0x74)
+Byte at index 2 is r (0x72)
+
+|======|
+fa1d134788406e223925632843459dac66305b8b:
+5+8=13, 5*8=40
+6+12=18
+
+|======|
+fd3f29f8fbad04761c5e772209d01e5280acde64:
+base64: Af86zQ==
+
+|======|
+ffb6160c85a4ba422ec261d4abaafb38329122f4:
+a: 1, b: 2, c: 3, d: 8
+
+|======|

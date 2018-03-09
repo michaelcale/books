@@ -1,5 +1,0 @@
-u: main.User{FirstName:"", LastName:"", Email:"", Age:0, userID:0}
-
-*pu: main.User{FirstName:"", LastName:"", Email:"", Age:33, userID:0}
-*pu: main.User{FirstName:"", LastName:"", Email:"", Age:18, userID:0}
-pu.FullName(): Jane Doe

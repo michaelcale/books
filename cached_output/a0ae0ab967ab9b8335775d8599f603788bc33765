@@ -1,8 +1,0 @@
-m["foo"] = 
-ok: false
-panic: assignment to entry in nil map
-
-goroutine 1 [running]:
-main.main()
-	/books/go/0090-maps/zero_value2.go:15 +0x189
-exit status 2

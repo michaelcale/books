@@ -1,6 +1,0 @@
-panic: close of closed channel
-
-goroutine 1 [running]:
-main.main()
-	/books/go/0220-channels-select/close4.go:7 +0x57
-exit status 2

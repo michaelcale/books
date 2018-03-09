@@ -1,8 +1,0 @@
-http.Get() returned content of type 'text/html; charset=utf-8' and size 3741 bytes.
-Status code: 200
-
-http.Get() returned content of type 'text/html' and size 3741 bytes.
-Status code: 404
-
-http.Get() failed with: 'Get http://website.not-exists.as/index.html: dial tcp: lookup website.not-exists.as: no such host'
-resp: <nil>

@@ -1,1 +1,0 @@
-User: &main.User{Name:"John", IsLoggedIn:false}

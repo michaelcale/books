@@ -1,5 +1,0 @@
-p: { }
-
-p: {John Doe}
-
-p.FullName(): John Doe

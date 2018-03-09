@@ -1,2 +1,0 @@
-m == nil ? true
-len(m) = 0
