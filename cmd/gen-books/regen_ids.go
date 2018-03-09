@@ -3,6 +3,7 @@ package main
 import (
 	"io/ioutil"
 	"os"
+	"sort"
 	"strconv"
 	"strings"
 
@@ -68,28 +69,56 @@ func regenIDSAndExit() {
 		idMap[soID] = newID
 	}
 
-	for _, mdoc := range docs {
-		doc := mdoc.doc
-		body := doc.GetSilent("Body", "")
-		if body == "" {
-			continue
+	// update links in the body
+	var old []string
+	for k := range idMap {
+		old = append(old, k)
+	}
+	sort.Slice(old, func(i, j int) bool {
+		s1 := old[i]
+		i1, err1 := strconv.Atoi(s1)
+		s2 := old[j]
+		i2, err2 := strconv.Atoi(s2)
+
+		// both are integers
+		if err1 == nil && err2 == nil {
+			return i1 < i2
 		}
-		body = fixLinks(body, idMap)
-		doc = kvstore.ReplaceOrAppend(doc, "Body", body)
-		err := saveDoc(mdoc.path, doc)
+		// both are string
+		if err1 != nil && err2 != nil {
+			return s1 < s2
+		}
+		if err1 != nil {
+			// first value is string so bigger than second value
+			return false
+		}
+		return true
+	})
+
+	//fmt.Printf("%v\n", old)
+	//os.Exit(0)
+
+	// fix links (${oldID}) => (${newID})
+	for _, oldID := range old {
+		newID := idMap[oldID]
+		oldIDStr := "(" + oldID + ")"
+		newIDStr := "(" + newID + ")"
+		for _, mdoc := range docs {
+			doc := mdoc.doc
+			body := doc.GetSilent("Body", "")
+			if body == "" {
+				continue
+			}
+			body = strings.Replace(body, oldIDStr, newIDStr, -1)
+			doc = kvstore.ReplaceOrAppend(doc, "Body", body)
+		}
+	}
+
+	for _, mdoc := range docs {
+		err := saveDoc(mdoc.path, mdoc.doc)
 		u.PanicIfErr(err)
 	}
 	os.Exit(0)
-}
-
-// fix links (${oldID}) => (${newID})
-func fixLinks(s string, idMap map[string]string) string {
-	for k, v := range idMap {
-		old := "(" + k + ")"
-		new := "(" + v + ")"
-		s = strings.Replace(s, old, new, -1)
-	}
-	return s
 }
 
 func saveDoc(path string, doc kvstore.Doc) error {
