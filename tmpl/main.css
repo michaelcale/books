@@ -272,9 +272,10 @@ span.in {
     right: 5vw;
   }
 
-  /* leave space for a on-screen keyboard */
+  /* leave space for a on-screen keyboard. Tested on
+     Android Pixel device */
   #search-results {
-    max-height: 60vh;
+    max-height: 70vh;
   }
 
   /* it shows keyboard help which is not usefule on mobile */
@@ -698,7 +699,6 @@ pre.chroma {
   margin: 0px;
   padding: 0.5em;
 }
-
 
 .arrow {
   /* kind of a hack because it got squished if the link
