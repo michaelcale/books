@@ -66,7 +66,7 @@ func regenIDSAndExit() {
 		u.PanicIfErr(err)
 		doc = kvstore.ReplaceOrAppend(doc, "SOId", soID)
 		newID := strconv.Itoa(id + 1)
-		doc = kvstore.ReplaceOrAppend(doc, "Id", newID)
+		mdoc.doc = kvstore.ReplaceOrAppend(doc, "Id", newID)
 		idMap[soID] = newID
 	}
 
@@ -107,12 +107,11 @@ func regenIDSAndExit() {
 			doc := mdoc.doc
 			body := doc.GetSilent("Body", "")
 			newBody := strings.Replace(body, oldIDLink, newIDLink, -1)
-			doc = kvstore.ReplaceOrAppend(doc, "Body", newBody)
+			mdoc.doc = kvstore.ReplaceOrAppend(doc, "Body", newBody)
 		}
 	}
 
 	for _, mdoc := range docs {
-
 		err := saveDoc(mdoc.path, mdoc.doc)
 		u.PanicIfErr(err)
 	}
