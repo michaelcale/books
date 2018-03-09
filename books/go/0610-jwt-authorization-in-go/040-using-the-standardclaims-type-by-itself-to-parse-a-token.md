@@ -1,7 +1,8 @@
 ---
 Title: Using the StandardClaims type by itself to parse a token
-Id: 31139
+Id: 312
 Score: 0
+SOId: 31139
 ---
 The `StandardClaims` type is designed to be embedded into your custom types to provide standard validation features. You can use it alone, but there's no way to retrieve other fields after parsing. See the custom claims example for intended usage.
 

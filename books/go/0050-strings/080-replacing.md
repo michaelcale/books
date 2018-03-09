@@ -1,7 +1,8 @@
 ---
 Title: Replace strings
 Search: Replace substring
-Id: 5eq100h1
+Id: 48
+SOId: 5eq100h1
 ---
 
 TODO: example for string replace, using regular expressions.

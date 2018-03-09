@@ -1,6 +1,7 @@
 ---
 Title: Installing packages locally with go get
-Id: 80100042
+Id: 154
+SOId: 80100042
 ---
 
 In order to to import a package in your program you must first download the package locally.

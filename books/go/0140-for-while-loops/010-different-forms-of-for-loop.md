@@ -1,7 +1,8 @@
 ---
 Title: Different forms of for loop
-Id: 7956
+Id: 102
 Score: 3
+SOId: 7956
 ---
 **Simple form using one variable:**
 

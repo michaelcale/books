@@ -1,6 +1,7 @@
 ---
 Title: Type casting
-Id: 80100098
+Id: 31
+SOId: 80100098
 ---
 Unlike a language like C, Go doesn't do implicit casting between types.
 

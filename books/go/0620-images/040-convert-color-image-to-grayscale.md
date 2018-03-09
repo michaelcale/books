@@ -1,7 +1,8 @@
 ---
 Title: Convert color image to grayscale
-Id: 31693
+Id: 319
 Score: 0
+SOId: 31693
 ---
 Some digital image processing algorithm such as edge detection, information carried by the image intensity (i.e. grayscale value) is sufficient. Using color information (`R, G, B` channel) may provides slightly better result, but the algorithm complexity will be increased. Thus, in this case, we need to convert the color image to grayscale image prior to applying such algorithm.
 

@@ -1,6 +1,7 @@
 ---
 Title: Recover
-Id: 17010
+Id: 133
+SOId: 17010
 ---
 Recover attempts to recover from a `panic`.
 

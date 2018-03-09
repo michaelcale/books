@@ -1,7 +1,8 @@
 ---
 Title: Variadic functions
-Id: 1266
+Id: 113
 Score: 3
+SOId: 1266
 ---
 A variadic function can be called with any number of **trailing** arguments. Those elements are stored in a slice.
 

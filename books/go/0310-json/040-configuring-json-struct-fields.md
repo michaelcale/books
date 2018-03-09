@@ -1,7 +1,8 @@
 ---
 Title: Configuring JSON struct fields
-Id: 14157
+Id: 186
 Score: 1
+SOId: 14157
 ---
 Consider the following example:
 

@@ -1,6 +1,7 @@
 ---
 Title: Variables
-Id: 674
+Id: 32
+SOId: 674
 ---
 Variable declaration follows **variable-name** **variable-type** format.
 

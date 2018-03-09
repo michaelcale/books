@@ -1,6 +1,7 @@
 ---
 Title: Set User-Agent
-Id: 8010007c
+Id: 204
+SOId: 8010007c
 ---
 An HTTP requests includes `User-Agent` header.
 

@@ -1,7 +1,8 @@
 ---
 Title: Remove white space, characters, substrings
 Search: Trimming white space
-Id: 5eq100da
+Id: 44
+SOId: 5eq100da
 ---
 
 TODO:

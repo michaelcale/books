@@ -1,6 +1,7 @@
 ---
 Title: Handling an error
-Id: 2708
+Id: 124
+SOId: 2708
 ---
 In Go errors can be returned from a function call. The convention is that if a method can fail, the last returned argument is an `error`.
 

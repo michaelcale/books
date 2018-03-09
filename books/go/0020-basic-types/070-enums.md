@@ -1,8 +1,9 @@
 ---
 Title: Enums
 Search: enumarations
-Id: 801000rd
+Id: 19
+SOId: 801000rd
 ---
 Go doesn't have a syntax for defining enumerations.
 
-You can [emulate enums](801000c4) using [constants](1047) and a consistent naming scheme.
+You can [emulate enums](39) using [constants](36) and a consistent naming scheme.

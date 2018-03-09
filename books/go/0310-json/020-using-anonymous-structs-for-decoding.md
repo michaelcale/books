@@ -1,6 +1,7 @@
 ---
 Title: Decoding into anonymous structs
-Id: 7911
+Id: 184
+SOId: 7911
 ---
 When parsing into a struct we can avoid declaring struct types by using anonymous structs.
 

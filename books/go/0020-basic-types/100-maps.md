@@ -1,7 +1,8 @@
 ---
 Title: Maps
 Search: dictionary, dictionaries, hash table, hash tables
-Id: rd600050
+Id: 22
+SOId: rd600050
 ---
 A map is a mapping from a value of one type to a value of another type.
 
@@ -11,8 +12,8 @@ Map basics:
 
 @file maps.go output sha1:d856c54b8ee856e6d63c797206d3daa74267fb9d goplayground:3M18bUT8XvP
 
-[Zero value](6069) of map is nil.
+[Zero value](29) of map is nil.
 
-Learn more about [maps](732).
+Learn more about [maps](68).
 
 

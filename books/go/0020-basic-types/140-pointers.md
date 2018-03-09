@@ -1,6 +1,7 @@
 ---
 Title: Pointers
-Id: 801000gd
+Id: 26
+SOId: 801000gd
 ---
 
 A pointer to a type is the address of the value of that type in memory.
@@ -11,6 +12,6 @@ Pointer basics:
 
 @file pointers.go output sha1:102111b2ade42bb8c5942d838195a7ab483e2179 goplayground:EfKNIL0I1d6
 
-[Zero value](6069) of a pointer is nil.
+[Zero value](29) of a pointer is nil.
 
-Learn more about [pointers](1239).
+Learn more about [pointers](51).

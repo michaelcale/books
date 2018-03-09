@@ -1,6 +1,7 @@
 ---
 Title: Interfaces
-Id: 1221
+Id: 90
+SOId: 1221
 ---
 An interface describes a set of methods on a type.
 
@@ -26,7 +27,7 @@ Unlike most other languages, interfaces are satisfied implicitly.
 
 We don't have to explicitly declare that `struct User` implements interface `Stringer`.
 
-Interfaces can only contain methods, not data. You can use [struct embedding](1256) if you want to re-use both methods and data.
+Interfaces can only contain methods, not data. You can use [struct embedding](84) if you want to re-use both methods and data.
 
 You can only define methods on types defined in the same package. We had to define type alias `MyInt` because we can't add methods to built-int type `int`.
 

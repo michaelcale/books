@@ -1,6 +1,7 @@
 ---
 Title: Getting started
-Id: 198
+Id: 1
+SOId: 198
 ---
 [Go](https://golang.org/) is a general-purpose programming language with the following characteristics:
 * [open-source](https://github.com/golang/go)

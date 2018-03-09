@@ -1,6 +1,7 @@
 ---
 Title: Emulating enums
-Id: 801000c4
+Id: 39
+SOId: 801000c4
 ---
 Go doesn't have a syntax for enumerations, but you can emulate it with constants and a naming scheme.
 

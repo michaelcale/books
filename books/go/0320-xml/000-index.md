@@ -1,6 +1,7 @@
 ---
 Title: XML
-Id: 1846
+Id: 189
+SOId: 1846
 ---
 Package [`encoding/xml`](https://godoc.org/encoding/xml) in Go standard library provides functionality for serializing data as XML and parsing XML.
 
@@ -8,7 +9,7 @@ Package [`encoding/xml`](https://godoc.org/encoding/xml) in Go standard library 
 
 @file index.go output sha1:b79884448d22013646eb2c6a46097d188c9ac10c goplayground:Klo84laKIF0
 
-Both `xml.Marshal` and `xml.MarshalIndent` take [`interface{}`](der300hf) as first argument. We can pass any Go value and it'll be wrapped into `interface{}` with their type.
+Both `xml.Marshal` and `xml.MarshalIndent` take [`interface{}`](94) as first argument. We can pass any Go value and it'll be wrapped into `interface{}` with their type.
 
 Marshaller will use reflection to to inspect passed value and encode it as XML strings.
 

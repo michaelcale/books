@@ -1,6 +1,7 @@
 ---
 Title: Developing for Multiple Platforms with Conditional Compiling
-Id: 8599
+Id: 264
+SOId: 8599
 ---
 Platform based conditional compiling comes in two forms in Go, one is with file suffixes and the other is with build tags.
 

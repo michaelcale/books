@@ -1,7 +1,8 @@
 ---
 Title: Methods
-Id: 27427
+Id: 283
 Score: 1
+SOId: 27427
 ---
 In Go a method is
 

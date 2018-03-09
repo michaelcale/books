@@ -1,6 +1,7 @@
 ---
 Title: Context is a tree of values
-Id: 9229
+Id: 234
+SOId: 9229
 ---
 Context is created by wrapping existing immutable context and adding additional information.
 

@@ -1,6 +1,7 @@
 ---
 Title: Read text file line by line
-Id: 5eq100ld
+Id: 49
+SOId: 5eq100ld
 ---
 Often we need to read a file line by line.
 

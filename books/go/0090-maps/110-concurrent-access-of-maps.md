@@ -1,6 +1,7 @@
 ---
 Title: Concurrent access of maps
-Id: 3423
+Id: 79
+SOId: 3423
 ---
 Maps in Go are not safe for concurrency. You must take a lock to read and write to them if you will be accessing them concurrently. Usually the best option is to use `sync.RWMutex` because you can have read and write locks. However, a `sync.Mutex` could also be used.
 

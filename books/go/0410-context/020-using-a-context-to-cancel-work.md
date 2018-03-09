@@ -1,6 +1,7 @@
 ---
 Title: Writing cancellable functions
-Id: 10386
+Id: 233
+SOId: 10386
 ---
 Using existing functions that accept cancellable context is easy.
 

@@ -1,6 +1,7 @@
 ---
 Title: Unions
-Id: 80100004
+Id: 27
+SOId: 80100004
 ---
 Go doesn't have a union type like C.
 

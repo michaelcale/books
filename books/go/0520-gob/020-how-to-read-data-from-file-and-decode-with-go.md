@@ -1,7 +1,8 @@
 ---
 Title: How to read data from file and decode with go?
-Id: 27480
+Id: 278
 Score: 1
+SOId: 27480
 ---
 ```go
 package main

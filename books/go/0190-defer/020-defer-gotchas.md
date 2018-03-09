@@ -1,7 +1,8 @@
 ---
 Title: Defer gotchas
 Search: Defer pitfalls
-Id: rd6000ub
+Id: 130
+SOId: rd6000ub
 ---
 
 When using `defer` keep the following in mind.
@@ -35,7 +36,7 @@ fmt.Printf("%d\n", i)
 
 It's clear that at this point `i` is `2`, which is why we print `2` twice.
 
-We can fix by using a [closure](9226) to capture the variable:
+We can fix by using a [closure](118) to capture the variable:
 
 @file defer_gotcha3.go output sha1:debd2f22d4a3be8fbf97c4d3dbf049cbae4a1cfb goplayground:zTCIuDzpXS9
 

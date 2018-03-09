@@ -1,6 +1,7 @@
 ---
 Title: Basic declaration
-Id: 1254
+Id: 81
+SOId: 1254
 ---
 A basic struct is declared as follows:
 

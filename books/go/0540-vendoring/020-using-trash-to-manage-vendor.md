@@ -1,7 +1,8 @@
 ---
 Title: Using trash to manage ./vendor
-Id: 26497
+Id: 289
 Score: 2
+SOId: 26497
 ---
 [`trash`](https://github.com/rancher/trash) is a minimalistic vendoring tool that you configure with `vendor.conf` file. This example is for `trash` itself:
 

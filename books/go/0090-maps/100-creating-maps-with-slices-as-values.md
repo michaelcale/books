@@ -1,6 +1,7 @@
 ---
 Title: Maps with slices as values
-Id: 3910
+Id: 78
+SOId: 3910
 ---
     m := make(map[string][]int)
 

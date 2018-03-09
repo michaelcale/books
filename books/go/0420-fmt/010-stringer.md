@@ -1,7 +1,8 @@
 ---
 Title: Stringer
-Id: 9983
+Id: 237
 Score: 0
+SOId: 9983
 ---
 The `fmt.Stringer` interface requires a single method, `String() string` to be satisfied. The string method defines the "native" string format for that value, and is the default representation if the value is provided to any of the `fmt` packages formatting or printing routines.
 

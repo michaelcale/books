@@ -1,7 +1,8 @@
 ---
 Title: View code coverage in HTML format
-Id: 18608
+Id: 251
 Score: 1
+SOId: 18608
 ---
 Run `go test` as normal, yet with the `coverprofile` flag. Then use `go tool` to view the results as HTML.
 

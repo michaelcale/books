@@ -1,7 +1,8 @@
 ---
 Title: How to encode data and write to file with gob?
-Id: 27479
+Id: 277
 Score: 1
+SOId: 27479
 ---
 
 ```go

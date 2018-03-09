@@ -1,6 +1,7 @@
 ---
 Title: Type aliases
-Id: 901000v5
+Id: 30
+SOId: 901000v5
 ---
 Type aliases were introduced in Go 1.9 to make [code refactoring](https://talks.golang.org/2016/refactor.article) easier.
 

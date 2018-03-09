@@ -1,6 +1,7 @@
 ---
 Title: Wait for goroutines to finish
-Id: 2490
+Id: 139
+SOId: 2490
 ---
 
 [Go programs end when the `main` function ends](http://golang.org/ref/spec#Program_execution), therefore it is common practice to wait for all goroutines to finish.

@@ -1,6 +1,7 @@
 ---
 Title: go get
-Id: 28395
+Id: 327
+SOId: 28395
 ---
 `go get` downloads the packages named by the import paths, along with their
 dependencies. It then installs the named packages, like 'go install'. Get also accepts build flags to control the installation.

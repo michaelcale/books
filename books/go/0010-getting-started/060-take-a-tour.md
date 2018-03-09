@@ -1,6 +1,7 @@
 ---
 Title: Take a guided tour
-Id: rd6000e2
+Id: 7
+SOId: rd6000e2
 ---
 If you're new to the language, take the official [guided tour](https://tour.golang.org/welcome/1).
 

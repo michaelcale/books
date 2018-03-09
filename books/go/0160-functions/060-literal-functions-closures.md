@@ -1,6 +1,7 @@
 ---
 Title: Literal functions
-Id: 1265
+Id: 117
+SOId: 1265
 ---
 A simple literal function, printing `Hello!` to stdout:
 

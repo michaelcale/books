@@ -1,11 +1,12 @@
 ---
 Title: Slices
-Id: 733
+Id: 59
+SOId: 733
 ---
 
 Slices in Go are used where most languages would use arrays as they are a growable sequence of values of the same type.
 
-Memory used by slice is provided by an [fixed size array](390). A slice is a view into that array.
+Memory used by slice is provided by an [fixed size array](55). A slice is a view into that array.
 
 Slice has a length and capacity.
 
@@ -15,7 +16,7 @@ Length is the current number of elements in the slice.
 
 The difference between capacity and length is how many elements we can append to a slice before we have to re-allocate underlying array.
 
-[Zero value of a slice](6807) is nil.
+[Zero value of a slice](62) is nil.
 
 Basic of slices:
 

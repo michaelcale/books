@@ -1,6 +1,7 @@
 ---
 Title: Closures
-Id: 9226
+Id: 118
+SOId: 9226
 ---
 
 A *closure* is a function taken together with an environment. The function is typically an anonymous function defined inside another function. The environment is the lexical scope of the enclosing function (very basic idea of a lexical scope of a function would be the scope that exists between the function's braces.)

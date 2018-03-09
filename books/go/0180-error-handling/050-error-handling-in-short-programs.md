@@ -1,6 +1,7 @@
 ---
 Title: Handling errors in short programs
-Id: k1k100qf
+Id: 125
+SOId: k1k100qf
 ---
 Propagating errors up to the callers is tedious. You end up with many lines looking like:
 

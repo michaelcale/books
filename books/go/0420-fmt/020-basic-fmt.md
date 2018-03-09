@@ -1,7 +1,8 @@
 ---
 Title: Basic fmt
-Id: 23178
+Id: 238
 Score: 0
+SOId: 23178
 ---
 Package fmt implements formatted I/O using format *verbs*:
 

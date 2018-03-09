@@ -1,7 +1,8 @@
 ---
 Title: Using Benchmarks to Create Profile
-Id: 25548
+Id: 260
 Score: 1
+SOId: 25548
 ---
 For a non-main packages as well as main, **instead of adding flags inside the code**, write **benchmarks** in the test package , for example:
 

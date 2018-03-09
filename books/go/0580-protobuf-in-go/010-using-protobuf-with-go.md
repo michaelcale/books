@@ -1,7 +1,8 @@
 ---
 Title: Using Protobuf with Go
-Id: 29998
+Id: 303
 Score: 2
+SOId: 29998
 ---
 The message you want to serialize and send that you can include into a file **test.proto**, containing
 

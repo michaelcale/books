@@ -1,6 +1,7 @@
 ---
 Title: go clean
-Id: 17007
+Id: 326
+SOId: 17007
 ---
 `go clean` will delete temporary files created when running `go build`.
 

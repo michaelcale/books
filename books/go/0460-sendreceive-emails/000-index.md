@@ -1,6 +1,7 @@
 ---
 Title: Send/receive emails
-Id: 5912
+Id: 252
+SOId: 5912
 ---
 ## Syntax
 - func PlainAuth(identity, username, password, host string) Auth

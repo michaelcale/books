@@ -1,6 +1,7 @@
 ---
 Title: Compare time and date
-Id: 32577
+Id: 170
+SOId: 32577
 ---
 Sometime you will need to know, with 2 dates objects, if there are corresponding to the same date, or find which date is after the other.
 

@@ -1,6 +1,7 @@
 ---
 Title: go run
-Id: 17005
+Id: 324
+SOId: 17005
 ---
 `go run` will run a program without creating an executable file. Mostly useful for development. `run` will only execute packages whose *package name* is **main**.
 

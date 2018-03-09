@@ -1,6 +1,7 @@
 ---
 Title: Defer
-Id: 2795
+Id: 128
+SOId: 2795
 ---
 
 In a complicated function, it's easy to miss releasing a resource (e.g. file handle) or to forgot to unlock a mutex.
@@ -19,7 +20,7 @@ func foo() {
 }
 ```
 
-In the above example, `defer f.Close()` ensures that `f.Close()` will be called before we exit `foo`, even in the presence of a [panic](4350).
+In the above example, `defer f.Close()` ensures that `f.Close()` will be called before we exit `foo`, even in the presence of a [panic](131).
 
 Placing `f.Close()` right after `os.Open()` makes it easier to audit the code and ensure `Close` is always called, even if there are multiple exit points in the function.
 

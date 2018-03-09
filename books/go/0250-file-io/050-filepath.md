@@ -1,6 +1,7 @@
 ---
 Title: Portable file path operations
-Id: rd6000ld
+Id: 164
+SOId: rd6000ld
 ---
 Unfortunately different operating systems have different rules about the format of file paths.
 

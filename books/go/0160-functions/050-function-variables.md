@@ -1,6 +1,7 @@
 ---
 Title: Variables of function type
-Id: 801000g3
+Id: 116
+SOId: 801000g3
 ---
 
 Functions are first-class values in Go.

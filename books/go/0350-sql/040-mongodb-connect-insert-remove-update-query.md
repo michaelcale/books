@@ -1,7 +1,8 @@
 ---
 Title: MongoDB: connect & insert & remove & update & query
-Id: 29663
+Id: 198
 Score: 0
+SOId: 29663
 ---
 ```go
 package main

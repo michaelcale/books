@@ -1,7 +1,8 @@
 ---
 Title: Defining and using a plugin
-Id: 28409
+Id: 295
 Score: 1
+SOId: 28409
 ---
 
 ```go

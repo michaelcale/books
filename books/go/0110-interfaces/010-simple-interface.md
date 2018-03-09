@@ -1,6 +1,7 @@
 ---
 Title: Simple interface
-Id: 4001
+Id: 91
+SOId: 4001
 ---
 In Go, an interface is just a set of methods. We use an interface to specify a behavior of a given object.
 

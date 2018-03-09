@@ -1,6 +1,7 @@
 ---
 Title: Length and capacity
-Id: 3561
+Id: 61
+SOId: 3561
 ---
 Slices have both length and capacity.  The length of a slice is the number of elements *currently* in the slice, while the capacity is the number of elements the slice *can hold* before needing to be reallocated.
 

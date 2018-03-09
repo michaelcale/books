@@ -1,7 +1,8 @@
 ---
 Title: Integers
 Search: ints
-Id: rd6000kf
+Id: 14
+SOId: rd6000kf
 ---
 Go has fixed-size signed and unsigned integers:
 * `int8`, `uint8`
@@ -14,4 +15,4 @@ It also has architecture-dependent integers:
 * `int` is `int32` on 32-bit processors and `int64` on 64-bit processors
 * `uint` is `uint32` on 32-bit processors and `uint64` on 64-bit processors
 
-[Zero value](6069) of an integer is 0.
+[Zero value](29) of an integer is 0.

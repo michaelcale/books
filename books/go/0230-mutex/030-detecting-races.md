@@ -1,6 +1,7 @@
 ---
 Title: Detecting races
-Id: rd6000p1
+Id: 152
+SOId: rd6000p1
 ---
 When you don't use `sync.Mutex` to ensure exclusive access to data between goroutines or forget to lock in parts of the program, you'll get data races.
 

@@ -1,7 +1,8 @@
 ---
 Title: Use golang/dep
-Id: 29860
+Id: 290
 Score: 2
+SOId: 29860
 ---
 [golang/dep](https://github.com/golang/dep) is a prototype dependency management tool. Soon to be an official versioning tool. Current status **Alpha**.
 

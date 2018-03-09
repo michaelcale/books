@@ -1,6 +1,7 @@
 ---
 Title: goto statements
-Id: 18834
+Id: 100
+SOId: 18834
 ---
 A `goto` statement transfers control to the statement with the corresponding label within the same function.
 

@@ -1,6 +1,7 @@
 ---
 Title: Read-Write mutes (RWMutex)
-Id: 8652
+Id: 150
+SOId: 8652
 ---
 In a `sync.Mutex` `Lock()` always takes an exclusive lock.
 

@@ -1,6 +1,7 @@
 ---
 Title: Recovering from panic
-Id: 22031
+Id: 134
+SOId: 22031
 ---
 A common mistake is to declare a slice and start requesting indexes from it without initializing it, which leads to an "index out of range" panic.
 

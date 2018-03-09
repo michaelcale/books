@@ -1,6 +1,7 @@
 ---
 Title: Format time
-Id: 801000j5
+Id: 167
+SOId: 801000j5
 ---
 
 Most languages inherited time formatting method from `strftime` function C library which uses somewhat cryptic format strings like `%Y-%m-%d`.
@@ -54,4 +55,4 @@ const (
 )
 ```
 
-What if you prefer `strftime` style of formatting time? That's [available too](80100032).
+What if you prefer `strftime` style of formatting time? That's [available too](169).

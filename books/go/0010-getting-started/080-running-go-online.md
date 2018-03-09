@@ -1,6 +1,7 @@
 ---
 Title: Run Go in online playground
-Id: 27470
+Id: 9
+SOId: 27470
 ---
 To test small snippets of Go code, you can use [The Go Playground](https://play.golang.org) or nicer [The Go Play Space](https://goplay.space/).
 

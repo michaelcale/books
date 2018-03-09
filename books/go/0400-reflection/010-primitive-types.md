@@ -1,6 +1,7 @@
 ---
 Title: Primitive types
-Id: 6070
+Id: 225
+SOId: 6070
 ---
 Let's see what kind of operations we can do on primitive types like `int` or `string`.
 
@@ -8,7 +9,7 @@ Let's see what kind of operations we can do on primitive types like `int` or `st
 
 @file get_type.go output
 
-In real code you would handle [all the types](rd6000hd) you care about.
+In real code you would handle [all the types](229) you care about.
 
 ## Get the value
 

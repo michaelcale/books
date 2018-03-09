@@ -1,6 +1,7 @@
 ---
 Title: context.TODO() vs. context.Background()
-Id: 901000a2
+Id: 235
+SOId: 901000a2
 ---
 You can create new, empty context using [`context.TODO()`](https://golang.org/pkg/context/#TODO) and [`context.Background()`](https://golang.org/pkg/context/#Background).
 

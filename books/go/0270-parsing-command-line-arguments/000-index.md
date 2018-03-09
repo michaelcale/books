@@ -1,7 +1,8 @@
 ---
 Title: Parse command line arguments
 Search: flags
-Id: 4023
+Id: 171
+SOId: 4023
 ---
 Go standard library has a [`flag`](https://golang.org/pkg/flag/) package for parsing cmd-line arguments:
 
@@ -51,5 +52,5 @@ The big features missing from `flag` package:
 * no support for short alternatives e.g. `-n` being synonym with `--name`
 
 Your options are:
-* [raw access to cmd-line arguments](14047)
-* use a [third party library](14046)
+* [raw access to cmd-line arguments](172)
+* use a [third party library](173)

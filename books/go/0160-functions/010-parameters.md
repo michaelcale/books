@@ -1,6 +1,7 @@
 ---
 Title: Parameters
-Id: 1251
+Id: 112
+SOId: 1251
 ---
 A function can optionally declare a set of parameters:
 

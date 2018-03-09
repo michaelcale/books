@@ -1,7 +1,8 @@
 ---
 Title: Creating a token using a custom claims type
-Id: 31137
+Id: 310
 Score: 0
+SOId: 31137
 ---
 The `StandardClaim` is embedded in the custom type to allow for easy encoding, parsing and validation of standard claims.
 

@@ -1,7 +1,8 @@
 ---
 Title: Example
-Id: 27707
+Id: 293
 Score: 4
+SOId: 27707
 ---
 ```go
 package main

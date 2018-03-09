@@ -1,6 +1,7 @@
 ---
 Title: Create goroutines
-Id: 1258
+Id: 138
+SOId: 1258
 ---
 Any function can be invoked as a goroutine by prefixing its invocation with the keyword `go`:
 

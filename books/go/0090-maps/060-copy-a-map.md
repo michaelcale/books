@@ -1,6 +1,7 @@
 ---
 Title: Copy a map
-Id: 9834
+Id: 74
+SOId: 9834
 ---
 In Go all values are passed by copy.
 

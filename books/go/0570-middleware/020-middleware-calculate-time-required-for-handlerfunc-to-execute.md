@@ -1,7 +1,8 @@
 ---
 Title: Middleware Calculate time required for handlerFunc to execute
-Id: 28936
+Id: 298
 Score: 0
+SOId: 28936
 ---
 ```go
 // logger middlerware that logs time taken to process each request

@@ -1,7 +1,8 @@
 ---
 Title: Parsing and validating a token using the HMAC signing method
-Id: 31136
+Id: 309
 Score: 0
+SOId: 31136
 ---
 ```go
 // sample token string taken from the New example

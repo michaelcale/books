@@ -1,6 +1,7 @@
 ---
 Title: hex, base64 encoding
-Id: 4492
+Id: 179
+SOId: 4492
 ---
 Sometimes you need to encode bytes into a text.
 

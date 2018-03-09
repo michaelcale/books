@@ -1,7 +1,8 @@
 ---
 Title: Simple Example: Compile helloworld.go for arm architecture on Linux machine
-Id: 31164
+Id: 272
 Score: 0
+SOId: 31164
 ---
 **Prepare** helloworld.go (find below)
 

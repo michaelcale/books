@@ -1,6 +1,7 @@
 ---
 Title: Logging
-Id: 3724
+Id: 174
+SOId: 3724
 ---
 Logging is a very deep subject because different programs have different logging requirements.
 

@@ -1,6 +1,7 @@
 ---
 Title: Array indexes
-Id: 32352
+Id: 57
+SOId: 32352
 ---
 Array values should be accessed using a number specifying the location of the desired value in the array. This number is called the Index.
 

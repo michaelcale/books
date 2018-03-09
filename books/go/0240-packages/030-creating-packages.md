@@ -1,6 +1,7 @@
 ---
 Title: Creating a package
-Id: 801000h5
+Id: 156
+SOId: 801000h5
 ---
 So you want to create a Go package.
 

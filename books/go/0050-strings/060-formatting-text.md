@@ -1,6 +1,7 @@
 ---
 Title: Format text
-Id: 29829
+Id: 46
+SOId: 29829
 ---
 
 Go's standard library implements C-style string formatting in the [`fmt`](https://golang.org/pkg/fmt/) package.

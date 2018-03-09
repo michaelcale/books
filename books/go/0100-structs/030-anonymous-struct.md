@@ -1,6 +1,7 @@
 ---
 Title: Anonymous structs
-Id: 1299
+Id: 83
+SOId: 1299
 ---
 You can create anonymous structs:
 

@@ -1,7 +1,8 @@
 ---
 Title: How to decode an interface with gob?
-Id: 27482
+Id: 280
 Score: 0
+SOId: 27482
 ---
 ```go
 package main

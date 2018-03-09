@@ -1,7 +1,8 @@
 ---
 Title: Sending Email with smtp.SendMail()
-Id: 20761
+Id: 253
 Score: 2
+SOId: 20761
 ---
 Sending email is pretty simple in Go. It helps to understand the RFC 822, which specifies the style an email need to be in, the code below sends a RFC 822 compliant email.
 

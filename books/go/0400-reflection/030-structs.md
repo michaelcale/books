@@ -1,6 +1,7 @@
 ---
 Title: Structs
-Id: 6071
+Id: 227
+SOId: 6071
 ---
 ## List fields of a struct
 Using reflection we can list all fields of a struct.

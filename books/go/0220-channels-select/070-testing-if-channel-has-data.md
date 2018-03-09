@@ -1,6 +1,7 @@
 ---
 Title: Checking if channel has data available
-Id: 801000tb
+Id: 148
+SOId: 801000tb
 ---
 
 Receiving on a channel blocks if there is no data in the channel
@@ -15,4 +16,4 @@ For one, it couldn't possibly work correctly.
 
 Between the time you check for availability and the time you do a receive, some other goroutine could have picked up the value.
 
-If you want to avoid infinite waiting, you can add a [timeout](6050) or do a [non-blocking wait](80100096) by using `select`.
+If you want to avoid infinite waiting, you can add a [timeout](143) or do a [non-blocking wait](146) by using `select`.

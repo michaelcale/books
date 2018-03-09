@@ -1,7 +1,8 @@
 ---
 Title: Wire C and Go code in all directions
-Id: 28985
+Id: 257
 Score: 1
+SOId: 28985
 ---
 **Calling C code from Go**
 

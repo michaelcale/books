@@ -1,7 +1,8 @@
 ---
 Title: Optimize implementations based on architecture
-Id: 8608
+Id: 275
 Score: 2
+SOId: 8608
 ---
 We can optimize a simple xor function for only architectures that support unaligned reads/writes by creating two files that define the function and prefixing them with a build constraint (for an actual example of the xor code which is out of scope here, see `crypto/cipher/xor.go` in the standard library):
 

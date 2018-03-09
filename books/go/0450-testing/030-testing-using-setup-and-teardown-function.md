@@ -1,7 +1,8 @@
 ---
 Title: Testing using setUp and tearDown function
-Id: 15183
+Id: 246
 Score: 4
+SOId: 15183
 ---
 You can set a setUp and tearDown function.
 

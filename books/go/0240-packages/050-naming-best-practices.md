@@ -1,6 +1,7 @@
 ---
 Title: Package naming best practices
-Id: 6680
+Id: 158
+SOId: 6680
 ---
 
 It's best if package name is the same as the name of last path element of import path.

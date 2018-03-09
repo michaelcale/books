@@ -1,6 +1,7 @@
 ---
 Title: Get value by key
-Id: 4650
+Id: 71
+SOId: 4650
 ---
 To get a value from the map, you just have to do something like:00
 

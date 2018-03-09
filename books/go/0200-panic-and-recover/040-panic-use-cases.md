@@ -1,6 +1,7 @@
 ---
 Title: Panic use cases
-Id: rd6000v3
+Id: 135
+SOId: rd6000v3
 ---
 
 Using of `panic` in Go should be extremely rare.

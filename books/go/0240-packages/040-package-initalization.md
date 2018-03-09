@@ -1,6 +1,7 @@
 ---
 Title: Package initalization
-Id: 6074
+Id: 157
+SOId: 6074
 ---
 Package can have one or more `init` methods.
 

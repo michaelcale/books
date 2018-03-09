@@ -1,7 +1,8 @@
 ---
 Title: Return values
-Id: 1252
+Id: 114
 Score: 1
+SOId: 1252
 ---
 A function can return one or more values to the caller:
 

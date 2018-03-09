@@ -1,6 +1,7 @@
 ---
 Title: Pointers
-Id: 6073
+Id: 226
+SOId: 6073
 ---
 A pointer to X is a distinct type from X.
 

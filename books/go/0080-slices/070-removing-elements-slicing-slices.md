@@ -1,6 +1,7 @@
 ---
 Title: Remove elements from slice
-Id: 3420
+Id: 66
+SOId: 3420
 ---
 If you need to remove one or more elements from a slice, or if you need to work with a sub-slice of an existing slice; you can use the following method.
 

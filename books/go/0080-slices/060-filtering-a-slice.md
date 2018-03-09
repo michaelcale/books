@@ -1,6 +1,7 @@
 ---
 Title: Filter a slice
-Id: 6786
+Id: 65
+SOId: 6786
 ---
 
 To filter a slice without allocating a new underlying array:

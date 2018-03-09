@@ -1,7 +1,8 @@
 ---
 Title: Getting token from HTTP Authorization header
-Id: 31141
+Id: 314
 Score: 0
+SOId: 31141
 ---
 ```go
 type contextKey string

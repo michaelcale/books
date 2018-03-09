@@ -1,7 +1,8 @@
 ---
 Title: Pointer Vs Value receiver
-Id: 27428
+Id: 286
 Score: 0
+SOId: 27428
 ---
 the receiver of a method is usually a pointer for performance reason because we wouldn't make a copy of the instance, as it would be the case in value receiver, this is especially true if the receiver type is a struct. anoter reason to make the receiver type a pointer would be so we could modify the data the receiver points to.
 

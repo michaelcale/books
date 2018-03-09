@@ -1,6 +1,7 @@
 ---
 Title: Add callstack to error messages
-Id: k1k100ea
+Id: 126
+SOId: k1k100ea
 ---
 
 If you come from languages like Java, C# or Python, you might be used to the fact that exceptions include call stack for the location that created the exception.

@@ -1,6 +1,7 @@
 ---
 Title: Use map as a set
-Id: 14398
+Id: 77
+SOId: 14398
 ---
 
 Some languages have a native structure for sets. To make a set in Go, it's best practice to use a map from the value type of the set to an empty struct (`map[Type]struct{}`).

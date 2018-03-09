@@ -1,7 +1,8 @@
 ---
 Title: Read input from console
-Id: 30034
+Id: 305
 Score: 3
+SOId: 30034
 ---
 Using `scanf`
 

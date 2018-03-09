@@ -1,7 +1,8 @@
 ---
 Title: Structs
-Id: 27425
+Id: 282
 Score: 1
+SOId: 27425
 ---
 Go supports user defined types in the form of structs and type aliases. structs are composite types, the component pieces of data that constitute the struct type are called *fields*. a field has a type and a name which must be unqiue.
 

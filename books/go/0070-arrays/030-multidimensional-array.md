@@ -1,7 +1,8 @@
 ---
 Title: Multidimensional array
-Id: 7303
+Id: 58
 Score: -2
+SOId: 7303
 ---
 Multidimensional arrays are basically arrays containing other arrays as elements.
 It is represented like `[sizeDim1][sizeDim2]..[sizeLastDim]type`, replacing `sizeDim` by numbers corresponding to the length of the dimension, and `type` by the type of data in the multidimensional array.

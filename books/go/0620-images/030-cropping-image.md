@@ -1,7 +1,8 @@
 ---
 Title: Cropping image
-Id: 31687
+Id: 318
 Score: 0
+SOId: 31687
 ---
 Most of image type in [image](https://golang.org/pkg/image/) package having `SubImage(r Rectangle) Image` method, except `image.Uniform`. Based on this fact, We can implement a function to crop an arbitrary image as follows
 

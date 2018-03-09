@@ -1,8 +1,9 @@
 ---
 Title: Parsing arbitrary JSON documents
-Id: 4113
+Id: 183
+SOId: 4113
 ---
-Parsing [into a struct](994) is very convenient but sometimes you don't know the structure of JSON document upfront.
+Parsing [into a struct](182) is very convenient but sometimes you don't know the structure of JSON document upfront.
 
 For arbitrary JSON documents we can decode into a `map[string]interface{}`, which can represent all valid JSON documents.
 

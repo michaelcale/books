@@ -1,15 +1,16 @@
 ---
 Title: Structs
-Id: 374
+Id: 80
+SOId: 374
 ---
 
 A struct groups related variables into a single entity.
 
 Additionally, structs can have methods, similar to classes in C++ or Java.
 
-Unlike classes in C++ or Java, structs don't implement inheritance. You can achieve some of the code re-use with [struct embedding](1256).
+Unlike classes in C++ or Java, structs don't implement inheritance. You can achieve some of the code re-use with [struct embedding](84).
 
-[Zero value](6069) of `struct` is a struct whose fields are set to their respective zero values.
+[Zero value](29) of `struct` is a struct whose fields are set to their respective zero values.
 
 Basics of structs:
 

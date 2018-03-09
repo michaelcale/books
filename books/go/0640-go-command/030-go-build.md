@@ -1,6 +1,7 @@
 ---
 Title: go build
-Id: 17006
+Id: 325
+SOId: 17006
 ---
 `go build` will compile a program into an executable file.
 

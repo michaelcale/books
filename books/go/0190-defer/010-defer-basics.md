@@ -1,6 +1,7 @@
 ---
 Title: Defer basics
-Id: 9429
+Id: 129
+SOId: 9429
 ---
 `defer` statements marks a function to be executed at a later time.
 

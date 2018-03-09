@@ -1,6 +1,7 @@
 ---
 Title: HTTP Client
-Id: 1422
+Id: 199
+SOId: 1422
 ---
 
 Package [`net/http`](https://golang.org/pkg/net/http/) in Go standard library provides functionality to make HTTP network requests.

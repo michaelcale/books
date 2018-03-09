@@ -1,6 +1,7 @@
 ---
 Title: Methods
-Id: 3890
+Id: 119
+SOId: 3890
 ---
 
 A method is a function tied to a type, most commonly a struct.

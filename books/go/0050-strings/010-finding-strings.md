@@ -1,7 +1,8 @@
 ---
 Title: Find string in another string
 Search: searching for strings
-Id: 30331
+Id: 41
+SOId: 30331
 ---
 
 ## Find the position of a string within another string

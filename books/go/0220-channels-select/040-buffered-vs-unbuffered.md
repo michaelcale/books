@@ -1,6 +1,7 @@
 ---
 Title: Buffered vs. unbuffered channels
-Id: 20762
+Id: 145
+SOId: 20762
 ---
 By default channels are unbuffered.
 

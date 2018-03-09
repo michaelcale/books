@@ -1,7 +1,8 @@
 ---
 Title: Single item template
-Id: 13457
+Id: 218
 Score: 0
+SOId: 13457
 ---
 Note the use of `{{.}}` to output the item within the template.
 

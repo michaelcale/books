@@ -1,7 +1,8 @@
 ---
 Title: Multiple item template
-Id: 13458
+Id: 219
 Score: 0
+SOId: 13458
 ---
 Note the use of `{{range .}}` and `{{end}}` to cycle over the collection.
 

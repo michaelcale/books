@@ -1,7 +1,8 @@
 ---
 Title: Templates with custom logic
-Id: 13459
+Id: 220
 Score: 0
+SOId: 13459
 ---
 In this example, a function map named `funcMap` is supplied to the template via the `Funcs()` method and then invoked inside the template. Here, the function `increment()` is used to get around the lack of a less than or equal function in the templating language. Note in the output how the final item in the collection is handled.
 

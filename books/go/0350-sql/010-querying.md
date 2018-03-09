@@ -1,7 +1,8 @@
 ---
 Title: Querying
-Id: 4169
+Id: 195
 Score: 0
+SOId: 4169
 ---
 This example is showing how to query a database with `database/sql`, taking as example a MySql database.
 

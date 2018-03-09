@@ -1,6 +1,7 @@
 ---
 Title: Writing files
-Id: 3332
+Id: 161
+SOId: 3332
 ---
 
 ## Write the whole file

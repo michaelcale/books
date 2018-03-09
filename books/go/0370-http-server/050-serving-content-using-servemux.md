@@ -1,7 +1,8 @@
 ---
 Title: Serving content using ServeMux
-Id: 8164
+Id: 211
 Score: 1
+SOId: 8164
 ---
 A simple static file server would look like this:
 

@@ -1,6 +1,7 @@
 ---
 Title: Templates
-Id: 1402
+Id: 214
+SOId: 1402
 ---
 ## Syntax
 - t, err := template.Parse(`{{.MyName .MyAge}}`)

@@ -1,6 +1,7 @@
 ---
 Title: iota
-Id: 80100036
+Id: 38
+SOId: 80100036
 ---
 `iota` makes it easy to declare number constants whose values grow.
 

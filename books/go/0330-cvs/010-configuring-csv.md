@@ -1,6 +1,7 @@
 ---
 Title: Configuring CSV parsing and writing
-Id: 20508
+Id: 192
+SOId: 20508
 ---
 CSV is somewhat ad-hoc format. It doesn't have a specification and there are many variants.
 

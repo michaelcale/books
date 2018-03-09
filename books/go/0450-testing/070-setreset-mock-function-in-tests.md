@@ -1,7 +1,8 @@
 ---
 Title: Set/Reset Mock Function In Tests
-Id: 12204
+Id: 250
 Score: 1
+SOId: 12204
 ---
 This example shows how to mock out a function call that is irrelevant to our unit test, and then use the `defer` statement to re-assign the mocked function call back to its original function.
 

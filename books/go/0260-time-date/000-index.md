@@ -1,6 +1,7 @@
 ---
 Title: Time and date
-Id: 8860
+Id: 166
+SOId: 8860
 ---
 The Go [`time`](https://golang.org/pkg/time/) package provides functionality for handling time and date.
 

@@ -1,7 +1,8 @@
 ---
 Title: Compile all architectures using a Makefile
-Id: 3298
+Id: 270
 Score: 12
+SOId: 3298
 ---
 This Makefile will cross compile and zip up executables for Windows, Mac and Linux (ARM and x86).
 

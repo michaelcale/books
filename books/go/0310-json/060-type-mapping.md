@@ -1,6 +1,7 @@
 ---
 Title: Go <-> JSON type mappings
-Id: g32600tb
+Id: 188
+SOId: g32600tb
 ---
 
 This is the mapping between Go types and JSON types:

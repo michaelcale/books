@@ -1,6 +1,7 @@
 ---
 Title: Reflection
-Id: 1854
+Id: 224
+SOId: 1854
 ---
 Go is a statically typed language. In most cases the type of a variable is known at compilation time.
 
@@ -16,7 +17,7 @@ Package [`reflect`](https://golang.org/pkg/reflect/) in standard library allows 
 * set the value
 * create new values at runtime
 
-Related language-level functionality for inspecting type of an interface value at runtime is a [type switch](14736) and a [type assertion](25362).
+Related language-level functionality for inspecting type of an interface value at runtime is a [type switch](96) and a [type assertion](95).
 
 @file basic_reflect.go output
 
@@ -25,4 +26,4 @@ Basics of reflections are:
 * use `reflect.ValueOf(v interface{})` to get `reflect.Value` which represents information about the value
 * use `reflect.Value` to check the type of value, test if the value is `nil`, set the value
 
-Reflection has [several practical uses](23400)
+Reflection has [several practical uses](230)

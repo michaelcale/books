@@ -1,6 +1,7 @@
 ---
 Title: Decoding JSON from a file
-Id: 6628
+Id: 185
+SOId: 6628
 ---
 We can decode JSON data from a file on disk or, more broadly, any `io.Reader`, like a network connection.
 

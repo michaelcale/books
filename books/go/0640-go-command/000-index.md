@@ -1,6 +1,7 @@
 ---
 Title: The Go Command
-Id: 4828
+Id: 322
+SOId: 4828
 ---
 The `go` command is a command-line program that allows for the management of Go development.
 

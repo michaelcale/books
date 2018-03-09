@@ -1,7 +1,8 @@
 ---
 Title: Separate integration tests
-Id: 8607
+Id: 274
 Score: 2
+SOId: 8607
 ---
 Build constraints are commonly used to separate normal unit tests from integration tests that require external resources, like a database or network access. To do this, add a custom build constraint to the top of the test file:
 

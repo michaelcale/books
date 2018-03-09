@@ -1,7 +1,8 @@
 ---
 Title: Opening a database
-Id: 28214
+Id: 197
 Score: 0
+SOId: 28214
 ---
 Opening a database is database specific, here there are examples for some databases.
 

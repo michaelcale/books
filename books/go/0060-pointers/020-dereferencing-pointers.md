@@ -1,6 +1,7 @@
 ---
 Title: Dereferencing pointers
-Id: 23157
+Id: 53
+SOId: 23157
 ---
 Pointers can be dereferenced by adding an asterisk `*` before a pointer.
 

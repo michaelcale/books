@@ -1,6 +1,7 @@
 ---
 Title: while loop
-Id: rd600078
+Id: 104
+SOId: rd600078
 ---
 Go doesn't have `while` loops.
 

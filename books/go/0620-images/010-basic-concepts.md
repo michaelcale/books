@@ -1,7 +1,8 @@
 ---
 Title: Basic concepts
-Id: 31685
+Id: 316
 Score: 0
+SOId: 31685
 ---
 An image represents a rectangular grid of picture elements (*pixel*). In the [image](https://golang.org/pkg/image/) package, the pixel is represented as one of the color defined in [image/color](https://golang.org/pkg/image/color/) package. The 2-D geometry of the image is represented as [`image.Rectangle`](https://golang.org/pkg/image/#Rectangle), while [`image.Point`](https://golang.org/pkg/image/#Point) denotes a position on the grid.
 

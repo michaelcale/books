@@ -1,7 +1,8 @@
 ---
 Title: Maps
 Search: dictionary, dictionaries, hash tables
-Id: 732
+Id: 68
+SOId: 732
 ---
 
 Map is an unordered collection of key-value pairs.

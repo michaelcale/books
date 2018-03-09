@@ -1,7 +1,8 @@
 ---
 Title: Defining functions for calling from template
-Id: 13535
+Id: 216
 Score: 2
+SOId: 13535
 ---
 
 ```go

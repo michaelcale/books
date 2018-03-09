@@ -1,6 +1,7 @@
 ---
 Title: CSV
-Id: 5818
+Id: 191
+SOId: 5818
 ---
 Package [`encoding/csv`](https://golang.org/pkg/encoding/csv/) in Go standard library provides functionality for reading and writing CSV files.
 

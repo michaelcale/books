@@ -1,6 +1,7 @@
 ---
 Title: Protobuf in Go
-Id: 9729
+Id: 302
+SOId: 9729
 ---
 ## Introduction
 

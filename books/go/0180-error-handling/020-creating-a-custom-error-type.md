@@ -1,6 +1,7 @@
 ---
 Title: Create custom error type
-Id: 2706
+Id: 122
+SOId: 2706
 ---
 
 In Go any type that implements built-in `error` interface (i.e.

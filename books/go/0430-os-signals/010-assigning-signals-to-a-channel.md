@@ -1,7 +1,8 @@
 ---
 Title: Assigning signals to a channel
-Id: 15744
+Id: 240
 Score: 1
+SOId: 15744
 ---
 Often times you will have reason to catch when your program is being told to stop by the OS and take some actions to preserve the state, or clean up your application. To accomplish this you can use the `os/signal` package from the standard library. Below is a simple example of assigning all signals from the system to a channel, and then how to react to those signals.
 

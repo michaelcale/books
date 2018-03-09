@@ -1,6 +1,7 @@
 ---
 Title: Named return values
-Id: 1253
+Id: 115
+SOId: 1253
 ---
 Return values can be assigned to a local variable.
 

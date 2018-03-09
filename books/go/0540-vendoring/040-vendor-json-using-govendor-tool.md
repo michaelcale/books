@@ -1,7 +1,8 @@
 ---
 Title: vendor.json using Govendor tool
-Id: 30033
+Id: 291
 Score: 2
+SOId: 30033
 ---
 
 ```sh

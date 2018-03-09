@@ -1,7 +1,8 @@
 ---
 Title: Defining separate behaviours in different platforms
-Id: 26889
+Id: 267
 Score: 0
+SOId: 26889
 ---
 Different platforms can have separate implementations of the same method. This example also illustrates how build tags and file suffixes can be used together.
 

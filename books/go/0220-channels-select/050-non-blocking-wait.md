@@ -1,6 +1,7 @@
 ---
 Title: Non-blocking receive with select
-Id: 80100096
+Id: 146
+SOId: 80100096
 ---
 You can use `default` part of `select` statement to do a non-blocking wait.
 

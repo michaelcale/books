@@ -1,7 +1,8 @@
 ---
 Title: Auth Middleware
-Id: 28938
+Id: 300
 Score: 0
+SOId: 28938
 ---
 ```go
 func Authenticate(h http.Handler) http.Handler {

@@ -1,10 +1,11 @@
 ---
 Title: Zero value of slice
-Id: 6807
+Id: 62
+SOId: 6807
 ---
-[Zero value](6069) of slice is `nil`.
+[Zero value](29) of slice is `nil`.
 
-A `nil` slice has [length and capacity](3561) of 0.
+A `nil` slice has [length and capacity](61) of 0.
 
 A `nil` slice has no underlying array.
 

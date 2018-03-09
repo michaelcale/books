@@ -1,7 +1,8 @@
 ---
 Title: How to encode an interface with gob?
-Id: 27481
+Id: 279
 Score: 1
+SOId: 27481
 ---
 ```go
 package main

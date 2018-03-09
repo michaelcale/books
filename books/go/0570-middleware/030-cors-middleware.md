@@ -1,7 +1,8 @@
 ---
 Title: CORS Middleware
-Id: 28937
+Id: 299
 Score: 0
+SOId: 28937
 ---
 ```go
 func CORS(h http.Handler) http.Handler {

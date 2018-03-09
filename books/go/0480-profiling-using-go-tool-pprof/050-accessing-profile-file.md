@@ -1,7 +1,8 @@
 ---
 Title: Accessing Profile File
-Id: 25549
+Id: 263
 Score: 0
+SOId: 25549
 ---
 once a prof file has been generated, one can access the prof file using **go tools**:
 

@@ -1,6 +1,7 @@
 ---
 Title: Format time like strftime
-Id: 80100032
+Id: 169
+SOId: 80100032
 ---
 
 If you prefer `strftime` style of formatting time values (as used in Python or Ruby) or porting code that uses that style, you can use one of [several libraries](https://godoc.org/?q=strftime).

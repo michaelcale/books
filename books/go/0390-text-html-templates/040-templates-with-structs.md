@@ -1,7 +1,8 @@
 ---
 Title: Templates with structs
-Id: 13460
+Id: 221
 Score: 0
+SOId: 13460
 ---
 Note how field values are obtained using `{{.FieldName}}`.
 

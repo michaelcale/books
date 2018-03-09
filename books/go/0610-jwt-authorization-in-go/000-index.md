@@ -1,6 +1,7 @@
 ---
 Title: JWT Authorization in Go
-Id: 10161
+Id: 308
+SOId: 10161
 ---
 ## Introduction
 JSON Web Tokens (JWTs) are a popular method for representing claims securely between two parties. Understanding how to work with them is important when developing web applications or application programming interfaces.

@@ -1,7 +1,8 @@
 ---
 Title: Simple cross compilation with go build
-Id: 3299
+Id: 269
 Score: 24
+SOId: 3299
 ---
 From your project directory, run the `go build` command and specify the operating system and architecture target with the `GOOS` and `GOARCH` environment variables:
 

@@ -1,7 +1,8 @@
 ---
 Title: Basic cpu and memory profiling
-Id: 25406
+Id: 259
 Score: 1
+SOId: 25406
 ---
 Add the following code in you main program.
 ```go

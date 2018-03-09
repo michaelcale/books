@@ -1,6 +1,7 @@
 ---
 Title: Using range to read from a channel
-Id: 4134
+Id: 142
+SOId: 4134
 ---
 When reading multiple values from a channel, using `range` is a common pattern:
 

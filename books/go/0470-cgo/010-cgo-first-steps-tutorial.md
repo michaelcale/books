@@ -1,7 +1,8 @@
 ---
 Title: Cgo: First steps tutorial
-Id: 21315
+Id: 255
 Score: 1
+SOId: 21315
 ---
 Some examples to understand the workflow of using Go C Bindings
 

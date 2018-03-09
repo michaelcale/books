@@ -1,6 +1,7 @@
 ---
 Title: OS Signals
-Id: 4497
+Id: 239
+SOId: 4497
 ---
 ## Syntax
 - func Notify(c chan<- os.Signal, sig ...os.Signal)

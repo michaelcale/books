@@ -1,6 +1,7 @@
 ---
 Title: Tags
-Id: 3531
+Id: 86
+SOId: 3531
 ---
 Struct fields can have tags associated with them. These tags can be read by the `reflect` package to get custom information specified about a field by the developer.
 

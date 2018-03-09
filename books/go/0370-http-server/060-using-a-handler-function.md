@@ -1,7 +1,8 @@
 ---
 Title: Using a handler function
-Id: 2704
+Id: 212
 Score: 0
+SOId: 2704
 ---
 [`HandleFunc`](https://golang.org/pkg/net/http/#ListenAndServe) registers the handler function for the given pattern in the server mux (router).
 

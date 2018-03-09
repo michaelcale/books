@@ -1,6 +1,7 @@
 ---
 Title: Timout reading from channel with select
-Id: 6050
+Id: 143
+SOId: 6050
 ---
 Receiving froma channel with `<- chan` or `for range` loop blocks.
 

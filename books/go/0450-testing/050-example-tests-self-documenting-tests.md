@@ -1,7 +1,8 @@
 ---
 Title: Example tests (self documenting tests)
-Id: 4042
+Id: 248
 Score: 1
+SOId: 4042
 ---
 This type of tests make sure that your code compiles properly and will appear in the generated documentation for your project. In addition to that, the example tests can assert that your test produces proper output.
 

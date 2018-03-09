@@ -1,6 +1,7 @@
 ---
 Title: Strings
-Id: 9666
+Id: 40
+SOId: 9666
 ---
 
 Strings in Go are immutable sequences of bytes.

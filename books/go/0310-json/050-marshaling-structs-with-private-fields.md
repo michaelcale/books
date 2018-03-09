@@ -1,6 +1,7 @@
 ---
 Title: Custom JSON marshaling
-Id: 14194
+Id: 187
+SOId: 14194
 ---
 
 ## Writing custom JSON marshalling

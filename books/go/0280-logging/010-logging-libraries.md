@@ -1,6 +1,7 @@
 ---
 Title: Logging libraries
-Id: 12872
+Id: 175
+SOId: 12872
 ---
 Logging is a rich subject and standard library covers only the basic functionality.
 

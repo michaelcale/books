@@ -1,6 +1,7 @@
 ---
 Title: Blank identifier
-Id: 29103
+Id: 35
+SOId: 29103
 ---
 To help avoid mistakes, the Go compiler doesn't allow unused variables.
 

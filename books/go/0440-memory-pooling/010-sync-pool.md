@@ -1,7 +1,8 @@
 ---
 Title: sync.Pool
-Id: 16314
+Id: 242
 Score: 1
+SOId: 16314
 ---
 Using [`sync.Pool`](https://golang.org/pkg/sync/#Pool) structure we can pool objects and reuse them.
 

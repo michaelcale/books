@@ -1,6 +1,7 @@
 ---
 Title: 3 ways of doing HTTP requests
-Id: 801000d0
+Id: 205
+SOId: 801000d0
 ---
 Package `net/http` has a layered design where each layer is a convenience wrapper on top of a lower layer.
 

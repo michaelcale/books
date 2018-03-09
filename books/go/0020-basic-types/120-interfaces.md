@@ -1,6 +1,7 @@
 ---
 Title: Interfaces
-Id: 9010008c
+Id: 24
+SOId: 9010008c
 ---
 An interface defines a set of methods on a struct.
 
@@ -14,7 +15,7 @@ type Reader interface {
 
 The smaller the interface, the better.
 
-[Zero value](6069) of interace is nil
+[Zero value](29) of interace is nil
 
-Learn more about [interfaces](1221).
+Learn more about [interfaces](90).
 

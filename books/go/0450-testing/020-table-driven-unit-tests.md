@@ -1,7 +1,8 @@
 ---
 Title: Table-driven unit tests
-Id: 4041
+Id: 245
 Score: 6
+SOId: 4041
 ---
 This type of testing is popular technique for testing with predefined input and output values.
 

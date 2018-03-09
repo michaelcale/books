@@ -1,7 +1,8 @@
 ---
 Title: Disabling inline expansion
-Id: 9094
+Id: 321
 Score: 1
+SOId: 9094
 ---
 Inline expansion can be disabled with the `go:noinline` pragma. For example, if we build the following simple program:
 

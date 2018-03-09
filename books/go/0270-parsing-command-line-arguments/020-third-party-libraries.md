@@ -1,6 +1,7 @@
 ---
 Title: Libraries for advanced parsing of command-line arguments
-Id: 14046
+Id: 173
+SOId: 14046
 ---
 Functionaly provided by standard library package [`flag`](https://golang.org/pkg/flag/) is limited.
 

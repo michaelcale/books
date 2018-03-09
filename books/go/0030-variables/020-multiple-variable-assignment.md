@@ -1,6 +1,7 @@
 ---
 Title: Multiple variable assignment
-Id: 2193
+Id: 34
+SOId: 2193
 ---
 In Go, you can declare multiple variables at the same time.
 

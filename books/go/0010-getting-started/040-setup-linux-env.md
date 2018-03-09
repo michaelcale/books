@@ -1,8 +1,9 @@
 ---
 Title: Linux setup
-Id: rd6000f2
+Id: 5
+SOId: rd6000f2
 ---
-After installing the compiler you need to configure [`GOPATH`](14406) environment variable.
+After installing the compiler you need to configure [`GOPATH`](10) environment variable.
 
 Since Go 1.8, the `GOPATH` environment variable has the default value of `$HOME/go`, so you can skip setting it.
 
@@ -21,4 +22,4 @@ $ source ~/.bashrc
 
 Test the setup by running `go version`.
 
-You should understand the [effect of GOPATH](14406).
+You should understand the [effect of GOPATH](10).

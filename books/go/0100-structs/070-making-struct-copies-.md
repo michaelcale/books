@@ -1,6 +1,7 @@
 ---
 Title: Duplicate a struct (make a copy)
-Id: 5352
+Id: 87
+SOId: 5352
 ---
 A struct can simply be copied using assignment.
 

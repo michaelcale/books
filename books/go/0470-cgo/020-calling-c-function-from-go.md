@@ -1,7 +1,8 @@
 ---
 Title: Calling C Function From Go
-Id: 22191
+Id: 256
 Score: 3
+SOId: 22191
 ---
 Cgo enables the creation of Go packages that call C code.
 To use `cgo` write normal Go code that imports a pseudo-package "C". The Go code can then refer to types such as `C.int`, or functions such as `C.Add`.

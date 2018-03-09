@@ -1,7 +1,8 @@
 ---
 Title: Recovery Handler to prevent server from crashing
-Id: 28939
+Id: 301
 Score: 0
+SOId: 28939
 ---
 ```go
 func Recovery(h http.Handler) http.Handler {

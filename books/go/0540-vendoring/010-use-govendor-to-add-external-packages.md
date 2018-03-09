@@ -1,7 +1,8 @@
 ---
 Title: Use govendor to add external packages
-Id: 3183
+Id: 288
 Score: 7
+SOId: 3183
 ---
 [Govendor](https://github.com/kardianos/govendor) is a tool that is used to import 3rd party packages into your code repository in a way that is compatible with golang's vendoring.
 

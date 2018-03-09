@@ -1,6 +1,7 @@
 ---
 Title: Creating errors
-Id: 2705
+Id: 121
+SOId: 2705
 ---
 
 There are several ways to create an error value.
@@ -41,5 +42,5 @@ One example of such error from standard library is `io.EOF` although usually the
 To indicate there was no error, return nil.
 
 
-Finally, you can [create custom error type](2706).
+Finally, you can [create custom error type](122).
 

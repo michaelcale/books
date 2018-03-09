@@ -1,7 +1,8 @@
 ---
 Title: Creating, signing, and encoding a JWT token using the HMAC signing method
-Id: 31138
+Id: 311
 Score: 0
+SOId: 31138
 ---
 ```go
 // Create a new token object, specifying signing method and the claims

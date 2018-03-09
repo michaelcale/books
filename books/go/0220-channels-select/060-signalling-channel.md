@@ -1,6 +1,7 @@
 ---
 Title: Signaling channel with chan struct{}
-Id: 801000u5
+Id: 147
+SOId: 801000u5
 ---
 Sometimes you don't want to send a value over a channel but use it only as a way to signal an event.
 

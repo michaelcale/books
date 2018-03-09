@@ -1,7 +1,8 @@
 ---
 Title: Basic decoding / unmarshalling of nested elements with data
-Id: 6046
+Id: 190
 Score: 1
+SOId: 6046
 ---
 XML elements often nest, have data in attributes and/or as character data. The way to capture this data is by using `,attr` and `,chardata` respectively for those cases.
 

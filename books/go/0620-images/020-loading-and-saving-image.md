@@ -1,7 +1,8 @@
 ---
 Title: Loading and saving image
-Id: 31686
+Id: 317
 Score: 0
+SOId: 31686
 ---
 In memory, an image can be seen as a matrix of pixel (color). However, when an image being stored in a permanent storage, it may be stored as is (RAW format), [Bitmap](https://en.wikipedia.org/wiki/Bitmap) or other image formats with particular compression algorithm for saving storage space, e.g. PNG, JPEG, GIF, etc. When loading an image with particular format, the image must be *decoded* to `image.Image` with corresponding algorithm. An [`image.Decode`](https://golang.org/pkg/image/#Decode) function declared as
 

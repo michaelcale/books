@@ -1,12 +1,13 @@
 ---
 Title: Pointers
-Id: 1239
+Id: 51
+SOId: 1239
 ---
 Go has pointers, like C++. A pointer to a variable is the address of that variable in memory.
 
 Unlike C++, Go doesn't allow pointer arithmetic i.e. you can't add or substract from pointers.
 
-A [zero value](6069) of a pointer is `nil`.
+A [zero value](29) of a pointer is `nil`.
 
 Basics of pointers:
 

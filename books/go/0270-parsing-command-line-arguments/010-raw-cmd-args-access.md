@@ -1,8 +1,9 @@
 ---
 Title: Raw access to command line arguments
-Id: 14047
+Id: 172
+SOId: 14047
 ---
-To parse command-line arguments, you can use package [`flag`](https://golang.org/pkg/flag/) in stndard library, use a library like [cobra](14046).
+To parse command-line arguments, you can use package [`flag`](https://golang.org/pkg/flag/) in stndard library, use a library like [cobra](173).
 
 You can also parse the arguments yourself.
 

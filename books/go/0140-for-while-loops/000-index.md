@@ -1,6 +1,7 @@
 ---
 Title: for, while loops
-Id: 975
+Id: 101
+SOId: 975
 ---
 
 Go has only one looping construct: `for` loop.

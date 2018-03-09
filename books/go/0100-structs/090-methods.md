@@ -1,6 +1,7 @@
 ---
 Title: Methods
-Id: 1257
+Id: 89
+SOId: 1257
 ---
 Struct methods are functions attached to structs:
 

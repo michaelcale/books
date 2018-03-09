@@ -1,6 +1,7 @@
 ---
 Title: Split and join strings
-Id: 5eq100s7
+Id: 45
+SOId: 5eq100s7
 ---
 
 ## Split a string using `strings.Split`

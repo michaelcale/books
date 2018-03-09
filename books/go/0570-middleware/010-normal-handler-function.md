@@ -1,7 +1,8 @@
 ---
 Title: Normal Handler Function
-Id: 28935
+Id: 297
 Score: 0
+SOId: 28935
 ---
 ```go
 func loginHandler(w http.ResponseWriter, r *http.Request) {

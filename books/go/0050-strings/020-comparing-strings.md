@@ -1,6 +1,7 @@
 ---
 Title: Compare strings
-Id: 29828
+Id: 42
+SOId: 29828
 ---
 
 ## Compare strings with ==, > and <

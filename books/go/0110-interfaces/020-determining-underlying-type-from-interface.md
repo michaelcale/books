@@ -1,6 +1,7 @@
 ---
 Title: Determining underlying type from interface
-Id: 6081
+Id: 92
+SOId: 6081
 ---
 In go it can sometimes be useful to know which underlying type you have been passed. This can be done with a type switch. This assumes we have two structs:
 ```go

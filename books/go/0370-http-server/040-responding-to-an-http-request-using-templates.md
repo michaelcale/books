@@ -1,11 +1,12 @@
 ---
 Title: Responding to an HTTP Request using Templates
-Id: 6822
+Id: 210
 Score: 1
+SOId: 6822
 ---
 Responses can be written to a `http.ResponseWriter` using templates in Go. This proves as a handy tool if you wish to create dynamic pages.
 
-(To learn how Templates work in Go, please visit the [Go Templates Documentation](1402) page.)
+(To learn how Templates work in Go, please visit the [Go Templates Documentation](214) page.)
 
 Continuing with a simple example to utilise the `html/template` to respond to an HTTP Request:
 

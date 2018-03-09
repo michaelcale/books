@@ -1,6 +1,7 @@
 ---
 Title: Uses for reflection
-Id: 23400
+Id: 230
+SOId: 23400
 ---
 ## Serialization to JSON, XML, SQL, protobufs etc.
 

@@ -1,6 +1,7 @@
 ---
 Title: Create a slice
-Id: 4807
+Id: 60
+SOId: 4807
 ---
 Slices are the typical way Go programmers store lists of data.
 

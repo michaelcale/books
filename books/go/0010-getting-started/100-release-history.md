@@ -1,6 +1,7 @@
 ---
 Title: Release history
-Id: rd6000p3
+Id: 11
+SOId: rd6000p3
 ---
 Full release history can be found [here](https://golang.org/doc/devel/release.html).
 

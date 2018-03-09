@@ -1,7 +1,8 @@
 ---
 Title: break and continue
-Id: 23401
+Id: 103
 Score: 0
+SOId: 23401
 ---
 The break statement, on execution makes the current loop to force exit
 

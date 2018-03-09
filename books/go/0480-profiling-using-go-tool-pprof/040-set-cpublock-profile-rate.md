@@ -1,7 +1,8 @@
 ---
 Title: Set CPU/Block profile rate
-Id: 25408
+Id: 262
 Score: 0
+SOId: 25408
 ---
 ```go
 // Sets the CPU profiling rate to hz samples per second

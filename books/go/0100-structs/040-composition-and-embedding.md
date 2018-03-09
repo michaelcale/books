@@ -1,6 +1,7 @@
 ---
 Title: Composition and embedding
-Id: 1256
+Id: 84
+SOId: 1256
 ---
 Composition provides an alternative to inheritance. A struct may include another type by name in its declaration:
 

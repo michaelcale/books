@@ -1,7 +1,8 @@
 ---
 Title: Output values of struct variable to stdout using a text template
-Id: 4575
+Id: 215
 Score: 2
+SOId: 4575
 ---
 
 ```go

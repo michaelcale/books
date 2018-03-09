@@ -1,6 +1,7 @@
 ---
 Title: Concurrency
-Id: 376
+Id: 136
+SOId: 376
 ---
 Go uses goroutines for concurrency. Simplifying, they are like threads.
 
@@ -40,7 +41,7 @@ There's one more complication. Unless we close `chOut`, the `for sqrt := range c
 
 To stop the loop, we need to `close(chOut)` but when to do it?
 
-We can't do it in `sqrtWorker` because there are many of them and calling `close` on an already closed channel will [panic](4350).
+We can't do it in `sqrtWorker` because there are many of them and calling `close` on an already closed channel will [panic](131).
 
 `sync.WaitGroup` is a thread-safe counter that can be incremented / decremented and allows for waiting until the counter reaches 0.
 

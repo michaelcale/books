@@ -1,6 +1,7 @@
 ---
 Title: go env
-Id: 28737
+Id: 328
+SOId: 28737
 ---
 `go env [var ...]` prints information about environment variables that affect the behavior of Go tools.
 

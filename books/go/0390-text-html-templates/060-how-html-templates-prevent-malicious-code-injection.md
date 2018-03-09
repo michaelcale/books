@@ -1,7 +1,8 @@
 ---
 Title: How HTML templates prevent malicious code injection
-Id: 13462
+Id: 223
 Score: 0
+SOId: 13462
 ---
 First, here's what can happen when `text/template` is used for HTML. Note Harry's `FirstName` property).
 

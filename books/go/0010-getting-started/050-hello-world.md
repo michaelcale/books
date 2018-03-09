@@ -1,6 +1,7 @@
 ---
 Title: Hello, World!
-Id: 833
+Id: 6
+SOId: 833
 ---
 Create the file `hello_world.go` and run it with `go run hello_world.go`.
 

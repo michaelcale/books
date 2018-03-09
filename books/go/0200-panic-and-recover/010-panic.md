@@ -1,6 +1,7 @@
 ---
 Title: Panic
-Id: 17009
+Id: 132
+SOId: 17009
 ---
 A panic halts normal execution flow and exits the current function.
 

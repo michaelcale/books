@@ -1,7 +1,8 @@
 ---
 Title: Encryption and decryption
-Id: 30884
+Id: 307
 Score: 2
+SOId: 30884
 ---
 # Foreword
 This is a detailed example about how to encrypt and decrypt data with Go. The uses code is shorten, e.g. the error handling is not mentioned. The full working project with error handling and user interface could be found on Github [here][1].

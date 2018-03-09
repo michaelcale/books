@@ -1,7 +1,8 @@
 ---
 Title: Cross compilation by using gox
-Id: 30867
+Id: 271
 Score: 2
+SOId: 30867
 ---
 Another convenient solution for cross compilation is the usage of `gox`: https://github.com/mitchellh/gox
 

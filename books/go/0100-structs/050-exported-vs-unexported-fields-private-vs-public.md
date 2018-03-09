@@ -1,6 +1,7 @@
 ---
 Title: Exported vs. unexported fields (private vs public)
-Id: 1255
+Id: 85
+SOId: 1255
 ---
 Struct fields whose names begin with an uppercase letter are exported. All other names are unexported.
 

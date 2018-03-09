@@ -1,7 +1,8 @@
 ---
 Title: Convert string to lower case or upper case
 Search: covert to title
-Id: 5eq1005a
+Id: 43
+SOId: 5eq1005a
 ---
 
 * [`strings.ToLower`](https://golang.org/pkg/strings/#ToLower)

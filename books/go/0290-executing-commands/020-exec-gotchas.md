@@ -1,6 +1,7 @@
 ---
 Title: os.Exec gotchas
-Id: 23356
+Id: 178
+SOId: 23356
 ---
 
 ## `exec.Cmd` cannot be reused

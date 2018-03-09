@@ -1,7 +1,8 @@
 ---
 Title: Parsing the error types using bitfield checks
-Id: 31140
+Id: 313
 Score: 0
+SOId: 31140
 ---
 ```go
 // Token from another example.  This token is expired

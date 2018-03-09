@@ -1,6 +1,7 @@
 ---
 Title: Empty struct
-Id: 20546
+Id: 88
+SOId: 20546
 ---
 A struct is a sequence of named elements, called fields, each of which has a name and a type. Empty struct has no fields, like this anonymous empty struct:
 

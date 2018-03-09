@@ -1,6 +1,7 @@
 ---
 Title: Context
-Id: 2743
+Id: 231
+SOId: 2743
 ---
 Package `context` in standard library provides type `Context` which is hard to explain because it has multiple uses.
 
@@ -13,7 +14,7 @@ Here are the most common uses of `context.Context`:
 
 In most cases you'll be calling existing API that requires `context.Context`.
 
-If you don't have one, use `context.TODO()` or `context.Background()` functions to create it. Read about [the difference](901000a2).
+If you don't have one, use `context.TODO()` or `context.Background()` functions to create it. Read about [the difference](235).
 
 `context.Context` is an immutable (read-only) value so you can't modify it.
 
@@ -27,7 +28,7 @@ There is no performance issue because those functions return shared, global vari
 
 ## Using context with timeout to set timeout for HTTP requests
 
-Repeating an example from [HTTP client article](12209) here's a way to create a context with timeout to ensure HTTP GET request doesn't hang forever:
+Repeating an example from [HTTP client article](202) here's a way to create a context with timeout to ensure HTTP GET request doesn't hang forever:
 
 @file ../0360-http-client/http_timeout.go output allow_error noplayground
 

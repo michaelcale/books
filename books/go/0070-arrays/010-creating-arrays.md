@@ -1,6 +1,7 @@
 ---
 Title: Create array
-Id: 1295
+Id: 56
+SOId: 1295
 ---
 An array in Go is an ordered collection of same-type elements.
 
