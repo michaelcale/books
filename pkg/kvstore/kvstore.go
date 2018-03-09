@@ -4,7 +4,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"runtime"
 	"strings"
 
 	"github.com/essentialbooks/books/pkg/common"
@@ -265,9 +264,5 @@ func SerializeDoc(doc Doc) (string, error) {
 	}
 	lines = append(lines, "---")
 	lines = append(lines, body)
-	sep := "\n"
-	if runtime.GOOS == "windows" {
-		sep = "\r\n"
-	}
-	return strings.Join(lines, sep), nil
+	return strings.Join(lines, "\n"), nil
 }
