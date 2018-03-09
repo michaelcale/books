@@ -69,14 +69,14 @@ func regenIDSAndExit() {
 	}
 
 	for _, mdoc := range docs {
-		doc = mdoc.doc
+		doc := mdoc.doc
 		body := doc.GetSilent("Body", "")
 		if body == "" {
 			continue
 		}
 		body = fixLinks(body, idMap)
 		doc = kvstore.ReplaceOrAppend(doc, "Body", body)
-		err = saveDoc(mdoc.path, doc)
+		err := saveDoc(mdoc.path, doc)
 		u.PanicIfErr(err)
 	}
 	os.Exit(0)
