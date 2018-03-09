@@ -1,0 +1,8 @@
+struct S, 5 field(s), size: 40 bytes
+  name: 'Inner' type: 'struct Inner', offset: 0, 1 field(s), size: 8 bytes, embedded: true
+     name: 'N' type: 'int', value: '0', offset: 0, size: 8
+  name: 'NamedInner' type: 'struct Inner', offset: 8, 1 field(s), size: 8 bytes, embedded: false
+     name: 'N' type: 'int', value: '0', offset: 0, size: 8
+  pointer
+   name: 'unexported' type: 'int', value: '0', offset: 24, size: 8
+   name: 'N' type: 'int8', value: '0', offset: 32, size: 1

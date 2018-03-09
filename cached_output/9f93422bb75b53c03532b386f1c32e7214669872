@@ -1,0 +1,6 @@
+Value: 3. Type: 'int' i.e. 'int'.
+
+Value: 4. Type: 'pointer to int' i.e. '*int'.
+
+Value: 5. Type: 'pointer to pointer to int' i.e. '**int'.
+
