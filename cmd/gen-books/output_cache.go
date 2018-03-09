@@ -4,7 +4,11 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"os/exec"
 	"path/filepath"
+	"strings"
+
+	"github.com/kjk/u"
 )
 
 func init() {
@@ -50,4 +54,41 @@ func getCachedOutput(path string, allowError bool) (string, error) {
 		return "", err
 	}
 	return s, nil
+}
+
+func gitRemoveCachedOutputFiles() {
+	dir := "cached_output"
+	if flgRecreateOutput {
+		os.RemoveAll(dir)
+	}
+	err := os.MkdirAll(dir, 0755)
+	u.PanicIfErr(err)
+}
+
+func gitAddachedOutputFiles() {
+	dir := "cached_output"
+	fileInfos, err := ioutil.ReadDir(dir)
+	u.PanicIfErr(err)
+	for _, fi := range fileInfos {
+		if fi.IsDir() {
+			continue
+		}
+		cmd := exec.Command("git", "add", fi.Name())
+		cmd.Dir = dir
+		out, err := cmd.CombinedOutput()
+		cmdStr := strings.Join(cmd.Args, " ")
+		fmt.Printf("%s\n", cmdStr)
+		if err != nil {
+			fmt.Printf("'%s' failed with '%s'. Out:\n%s\n", cmdStr, err, string(out))
+			u.PanicIfErr(err)
+		}
+	}
+	cmd := exec.Command("git", "commit", "-am", "update output files")
+	cmd.Dir = dir
+	out, err := cmd.CombinedOutput()
+	cmdStr := strings.Join(cmd.Args, " ")
+	fmt.Printf("%s\n", cmdStr)
+	if err != nil {
+		fmt.Printf("'%s' failed with '%s'. Out:\n%s\n", cmdStr, err, string(out))
+	}
 }

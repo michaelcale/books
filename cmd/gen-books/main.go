@@ -6,7 +6,6 @@ import (
 	"html/template"
 	"io/ioutil"
 	"os"
-	"os/exec"
 	"path/filepath"
 	"runtime"
 	"sort"
@@ -262,43 +261,6 @@ func genNetlifyRedirects() {
 	path := filepath.Join("www", "_redirects")
 	err := ioutil.WriteFile(path, []byte(s), 0644)
 	u.PanicIfErr(err)
-}
-
-func gitRemoveCachedOutputFiles() {
-	dir := "cached_output"
-	if flgRecreateOutput {
-		os.RemoveAll(dir)
-	}
-	err := os.MkdirAll(dir, 0755)
-	u.PanicIfErr(err)
-}
-
-func gitAddachedOutputFiles() {
-	dir := "cached_output"
-	fileInfos, err := ioutil.ReadDir(dir)
-	u.PanicIfErr(err)
-	for _, fi := range fileInfos {
-		if fi.IsDir() {
-			continue
-		}
-		cmd := exec.Command("git", "add", fi.Name())
-		cmd.Dir = dir
-		out, err := cmd.CombinedOutput()
-		cmdStr := strings.Join(cmd.Args, " ")
-		fmt.Printf("%s\n", cmdStr)
-		if err != nil {
-			fmt.Printf("'%s' failed with '%s'. Out:\n%s\n", cmdStr, err, string(out))
-			u.PanicIfErr(err)
-		}
-	}
-	cmd := exec.Command("git", "commit", "-am", "update output files")
-	cmd.Dir = dir
-	out, err := cmd.CombinedOutput()
-	cmdStr := strings.Join(cmd.Args, " ")
-	fmt.Printf("%s\n", cmdStr)
-	if err != nil {
-		fmt.Printf("'%s' failed with '%s'. Out:\n%s\n", cmdStr, err, string(out))
-	}
 }
 
 var intIDS = make(map[int]bool)
