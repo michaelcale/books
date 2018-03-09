@@ -340,7 +340,7 @@ func main() {
 
 	parseFlags()
 
-	if false {
+	if true {
 		regenIDSAndExit()
 	}
 
