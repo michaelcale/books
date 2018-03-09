@@ -141,5 +141,5 @@ func updateBookAppJS(book *Book) {
 		return
 	}
 	book.AppJSURL = "/s/" + name
-	fmt.Printf("Created %sn\n", dst)
+	fmt.Printf("Created %s\n", dst)
 }
