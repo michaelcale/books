@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"os"
 	"sort"
@@ -101,15 +102,16 @@ func regenIDSAndExit() {
 	// fix links (${oldID}) => (${newID})
 	for _, oldID := range old {
 		newID := idMap[oldID]
-		oldIDStr := "(" + oldID + ")"
-		newIDStr := "(" + newID + ")"
+		fmt.Printf("%s => %s\n", oldID, newID)
+		oldIDLink := "(" + oldID + ")"
+		newIDLink := "(" + newID + ")"
 		for _, mdoc := range docs {
 			doc := mdoc.doc
 			body := doc.GetSilent("Body", "")
 			if body == "" {
 				continue
 			}
-			body = strings.Replace(body, oldIDStr, newIDStr, -1)
+			body = strings.Replace(body, oldIDLink, newIDLink, -1)
 			doc = kvstore.ReplaceOrAppend(doc, "Body", body)
 		}
 	}
