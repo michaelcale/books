@@ -272,8 +272,14 @@ span.in {
     right: 5vw;
   }
 
+  /* leave space for a on-screen keyboard */
   #search-results {
-    max-height: 80vh;
+    max-height: 60vh;
+  }
+
+  /* it shows keyboard help which is not usefule on mobile */
+  #search-results-help {
+    display: none;
   }
 }
 
