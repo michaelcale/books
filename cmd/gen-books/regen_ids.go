@@ -96,27 +96,23 @@ func regenIDSAndExit() {
 		return true
 	})
 
-	//fmt.Printf("%v\n", old)
-	//os.Exit(0)
-
 	// fix links (${oldID}) => (${newID})
 	for _, oldID := range old {
 		newID := idMap[oldID]
 		fmt.Printf("%s => %s\n", oldID, newID)
 		oldIDLink := "(" + oldID + ")"
 		newIDLink := "(" + newID + ")"
+
 		for _, mdoc := range docs {
 			doc := mdoc.doc
 			body := doc.GetSilent("Body", "")
-			if body == "" {
-				continue
-			}
-			body = strings.Replace(body, oldIDLink, newIDLink, -1)
-			doc = kvstore.ReplaceOrAppend(doc, "Body", body)
+			newBody := strings.Replace(body, oldIDLink, newIDLink, -1)
+			doc = kvstore.ReplaceOrAppend(doc, "Body", newBody)
 		}
 	}
 
 	for _, mdoc := range docs {
+
 		err := saveDoc(mdoc.path, mdoc.doc)
 		u.PanicIfErr(err)
 	}
