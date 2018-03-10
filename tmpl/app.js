@@ -1251,6 +1251,18 @@ var loc = window.location.pathname;
 var isAppPage = loc.indexOf("essential/") != -1;
 var isIndexPage = (loc === "/") || (loc === "/index-grid");
 
+function httpsRedirect() {
+  if (window.location.protocol !== "http:") {
+    return;
+  }
+  if (window.location.hostname !== "www.programming-books.io") {
+    return;
+  }
+  var uri = window.location.toString();
+  uri = uri.replace("http://", "https://");
+  window.location = uri;
+}
+
 if (window.g_is_404) {
   do404();
 } else if (isIndexPage) {
@@ -1259,3 +1271,4 @@ if (window.g_is_404) {
   doAppPage();
 }
 updateLinkHome();
+httpsRedirect();
