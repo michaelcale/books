@@ -263,6 +263,8 @@ func SerializeDoc(doc Doc) (string, error) {
 		return "", fmt.Errorf("Doc with id '%s' has no body", id)
 	}
 	lines = append(lines, "---")
+	lines = append(lines, "") // for readability
 	lines = append(lines, body)
+	// TODO: remove duplicate empty lines
 	return strings.Join(lines, "\n"), nil
 }
