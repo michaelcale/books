@@ -134,13 +134,11 @@ span.in {
   font-weight: bold;
 }
 
-/* TODO: setup forum */
 .forum-link {
   color: gray;
   font-size: 0.8em;
   padding-bottom: 16px;
   display: block;
-  display: none; /* disabled for now */
 }
 
 @media screen and (max-width: 780px) {

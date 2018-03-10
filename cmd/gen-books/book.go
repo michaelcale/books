@@ -71,6 +71,12 @@ func (b *Book) CanonnicalURL() string {
 	return urlJoin(siteBaseURL, b.URL())
 }
 
+func (b *Book) ForumURL() string {
+	uri := "https://forum.programming-books.io/c/essential-"
+	uri += b.titleSafe
+	return uri
+}
+
 // ShareOnTwitterText returns text for sharing on twitter
 func (b *Book) ShareOnTwitterText() string {
 	return fmt.Sprintf(`"Essential %s" - a free programming book`, b.Title)
