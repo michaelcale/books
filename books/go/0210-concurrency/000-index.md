@@ -3,9 +3,14 @@ Title: Concurrency
 Id: 136
 SOId: 376
 ---
+
 Go uses goroutines for concurrency. Simplifying, they are like threads.
 
-Gorutines execute independently but they share memory space. In other words, they all see global variables.
+Gorutines execute independently and share memory space.
+
+Since they can write to the same memory, care needs to be taken when writing to the same global variables from multiple goroutines.
+
+<!-- TODO: article discussing atomics vs. mutexes vs. channels and link to it from the above paragraph -->
 
 To coordinate work between goroutines Go provides channels, which are thread-safe queues.
 
@@ -17,7 +22,7 @@ There's a lot to unpack here.
 
 We launch 2 workers with `go sqrtWorker(chIn, chOut)`.
 
- Each `sqrtWorker` function is running independently and concurrently with all other code.
+Each `sqrtWorker` function is running independently and concurrently with all other code.
 
 We use a single channel of int values to queue work items to be processed by worker goroutines using `<-` send operation on a channel.
 
@@ -56,4 +61,3 @@ It has to happen in its own goroutine to avoid blocking.
 Why go to all this trouble to calculate a simple value?
 
 This is just an example. In a real programs worker goroutine would perform longer jobs like downloading a file from the internet or resizing a large image.
-
