@@ -10,12 +10,12 @@ function exitIfFailed { if ($LASTEXITCODE -ne 0) { exit } }
 # spaced by 10 again.
 # If they are already evenly spaced, it does nothing.
 
-Remove-Item -Force -ErrorAction SilentlyContinue ./cmd/rename/rename
+Remove-Item -Force -ErrorAction SilentlyContinue ./cmd/rename/rename.exe
 
 Set-Location -Path cmd/rename
-go build -o rename
+go build -o rename.exe
 Set-Location -Path ../..
 exitIfFailed
 
-./cmd/rename/rename
-Remove-Item -Force -ErrorAction SilentlyContinue ./cmd/rename/rename
+./cmd/rename/rename.exe
+Remove-Item -Force -ErrorAction SilentlyContinue ./cmd/rename/rename.exe

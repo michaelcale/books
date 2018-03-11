@@ -105,7 +105,7 @@ func reloadCachedOutputFilesMust() {
 		n2 := cachedOutputFiles[j].no
 		return n1 < n2
 	})
-	fmt.Printf("%#v\n", cachedOutputFiles)
+	//fmt.Printf("%#v\n", cachedOutputFiles)
 	for _, cfo := range cachedOutputFiles {
 		for _, kv := range cfo.doc {
 			sha1 := kv.Key

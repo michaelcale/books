@@ -37,6 +37,6 @@ To serialize field as XML comment, use `xml:",comment"`. Value can't contain `--
 
 @file show_comment.go output sha1:b85d695eb368302658bf7794fa05d0641499a5f0 goplayground:opaTt0hcMmh
 
-`xml:"a>b>str"` nests XML element.
+`xml:"a>b>str"` nests XML element. This also influences parsing.
 
 @file show_nesting.go output sha1:97020fd14c7a33f08ab6134419c21d6ff46539a2 goplayground:G83Dsp9VIXG

@@ -8,7 +8,6 @@ import (
 
 // :show start
 
-// `xml:"a>b>str"` nests the element
 type ShowNesting struct {
 	Str string `xml:"a>b>str"`
 }
