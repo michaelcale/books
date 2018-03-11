@@ -13,8 +13,9 @@ The first argument to `fmt.Sprintf` is a formatting string which defines how to 
 `fmt.Sprintf` creates a formatted string.
 
 For convenience, there's also:
+
 * `fmt.Fprintf(w io.Writer, string format, args... interface{})`, which will write a formatted string to a given writer
-* `fmt.Pritnf(format string, args.. interface{})` which writes a formatted string to `os.Stdout`.
+* `fmt.Printf(format string, args.. interface{})` which writes a formatted string to `os.Stdout`.
 
 <!-- TODO: more examples for goal-oriented -->
 

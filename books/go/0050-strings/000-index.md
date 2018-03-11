@@ -19,6 +19,7 @@ Basic string usage:
 @file index.go output sha1:643856e224099ead3e2fc62a2e3c19ee17f62374 goplayground:RgP9gvhvXqF
 
 Important standard library packages for working on strings:
+
 * [strings](https://golang.org/pkg/strings/) implements string searching, splitting, case conversions
 * [bytes](https://golang.org/pkg/bytes/) has the same functionality as `strings` package but operates on `[]byte` byte slices
 * [strconv](https://golang.org/pkg/strconv/) for conversion between strings and integer and float numbers

@@ -1,12 +1,9 @@
 ---
-Title: Remove white space, characters, substrings
-Search: Trimming white space
+Title: Trim strings
 Id: 44
 SOId: 5eq100da
 ---
 
-<!-- TODO: write me -->
+Trimming the string.
 
-* [`strings.TrimSpace`](https://golang.org/pkg/strings/#TrimSpace)
-
-      fmt.Println(strings.TrimSpace("  foobar  ")) // foobar
+@file trim.go output

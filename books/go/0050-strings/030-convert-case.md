@@ -1,16 +1,10 @@
 ---
-Title: Convert string to lower case or upper case
-Search: covert to title
+Title: Convert to lower case or upper case
+Search: string convert to lower, upper, title case
 Id: 43
 SOId: 5eq1005a
 ---
 
-* [`strings.ToLower`](https://golang.org/pkg/strings/#ToLower)
+Converting string to lower, upper and title case:
 
-      fmt.Println(strings.ToLower("FOOBAR")) // foobar
-
-* [`strings.ToUpper`](https://golang.org/pkg/strings/#ToUpper)
-
-      fmt.Println(strings.ToUpper("foobar")) // FOOBAR
-
-<!-- TODO: write examples -->
+@file convert_case.go output

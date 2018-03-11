@@ -1,8 +1,9 @@
 ---
-Title: Read text file line by line
+Title: Read file line by line
 Id: 49
 SOId: 5eq100ld
 ---
+
 Often we need to read a file line by line.
 
 ## Read file into memory and split into lines
@@ -34,4 +35,3 @@ func IterLinesInFile(filePath string) error {
 ```
 
 <!-- version that uses a callback -->
-

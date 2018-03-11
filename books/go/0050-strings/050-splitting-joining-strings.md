@@ -4,21 +4,8 @@ Id: 45
 SOId: 5eq100s7
 ---
 
-## Split a string using `strings.Split`
+You can split a string into a `[]string` slice and join it back into a string.
 
-<!-- TODO: write me -->
+@file split_join.go output
 
-## Join a string using `strings.Join`
-
-<!-- TODO: write me -->
-
-* [`strings.Split`](https://golang.org/pkg/strings/#Split)
-
-      s := "foo, bar, bar"
-      fmt.Println(strings.Split(s, ", ")) // [foo bar baz]
-
-* [`strings.Join`](https://golang.org/pkg/strings/#Join)
-
-      ss := []string{"foo", "bar", "bar"}
-      fmt.Println(strings.Join(ss, ", ")) // foo, bar, baz
-
+Joining a slice of strings is faster that using `+`.
