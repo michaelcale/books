@@ -56,6 +56,11 @@ Student: Peter Parker, standard: 11
 Student: Bilbo Baggins, standard: 150
 
 |======|
+0b3640d0d64a2725b73bb27a7af99e1b50edb185:
+value: 3
+value: 5
+
+|======|
 0b54f42e82271ce3b342ef79977c3b409f899360:
 u: main.User{FirstName:"", LastName:"", Email:"", Age:0, userID:0}
 
@@ -158,6 +163,12 @@ four => 4
 
 Before deletion: len(m)=2
 After deletion: len(m)=1
+
+|======|
+1e54cc4fad7b728448bc6162cf9d8a3b7abe8ffd:
+idx: 0, element: 3
+idx: 1, element: 15
+idx: 2, element: 8
 
 |======|
 1e8a6ac64787b507444aeaaab33338d286d4538d:
@@ -501,6 +512,12 @@ s: 'Hello World'
 2 + 3.000000 = 5
 
 |======|
+6504f19d5f5b360731cb8c3a4e8c3e8896606688:
+element: 3
+element: 15
+element: 8
+
+|======|
 6537a720d57200eede9d917d95b4dc7757c54cef:
 a: []string{"this", "is", "a", "string"}
 s2: "this,is,a,string"
@@ -533,6 +550,12 @@ a: []string{"foo"}
 6830fa384e4bc53e7dcc4c7e54ada32b4e36550e:
 sqrt of 16.000000 is 4.000000
 sqrt of -16.000000 returned error 'invalid argument '-16.000000', must be >= 0'
+
+|======|
+683c19ee7f6b942f4756ca90fd409e4d275320f5:
+idx: 0
+idx: 1
+idx: 2
 
 |======|
 684d575766ae8cc52403b5f89c7983c2dc050066:
@@ -594,6 +617,12 @@ intOp(2, 3) = 6
 a is equal to b
 ok is true, n: %d
 5
+|======|
+7cc0c76791ba49db400832642fdb9d64b5c4ea1f:
+v: 3
+v: 4
+v: 5
+
 |======|
 801d3da35f922113e507bc622e5aeb693a429ccb:
 Output:
@@ -742,6 +771,15 @@ i1: 2
 i1: 4
 
 |======|
+984039aa549d3abc808bec3d1b78ca2526730b95:
+idx: 0, rune: 72
+idx: 1, rune: 101
+idx: 2, rune: 121
+idx: 3, rune: 32
+idx: 4, rune: 19990
+idx: 7, rune: 30028
+
+|======|
 98c8c5824e004bce35ce375630197ff892888925:
 size of bool is: 1
 
@@ -838,6 +876,15 @@ Standard time JSON: {"What":"earthquake","When":"2018-03-09T00:42:39.322107883-0
 
 Custom time JSON: {"What":"earthquake","When":"2018-09-03"}
 Decoded custom time: "2018-09-03"
+
+|======|
+aa97b1a908ccb869d8e2f8f5134af770e51bd720:
+idx: 0, byte: 72
+idx: 1, byte: 101
+idx: 2, byte: 121
+idx: 3, byte: 32
+idx: 4, byte: 228
+idx: 7, byte: 231
 
 |======|
 ab5806a62c7c182226aa01eb457aac7d4c067db4:
@@ -983,6 +1030,11 @@ c4cb0ff0e0cf28070bb008ef05f573d842a0ed36:
 didTimeout: true, err: signal: killed
 
 |======|
+c595aab5e5dd9ed7fa5ceb1581ed1813a093726f:
+key: three, value: 3
+key: five, value: 5
+
+|======|
 c67e95f02eb8850e77bf2e2230fe854b91b9cda9:
 XML: <ShowOmit><name>John</name></ShowOmit>
 
@@ -1005,6 +1057,11 @@ c93241c36a27a41b14acc3e905ceb2c438950d09:
 'is hello there?' contains 'hello'
 
 |======|
+caefdba615d6e54c39e64147fc516235196c1f06:
+key: three
+key: five
+
+|======|
 cbb243f7a9920d4cdd348c50bee16e2532409bec:
 2
 2
@@ -1012,6 +1069,12 @@ cbb243f7a9920d4cdd348c50bee16e2532409bec:
 |======|
 cd88fae66b137115974609078ab23681e519f3ae:
 2
+
+|======|
+cdca29628716342ba030baf06947154df9065c5f:
+v: 3
+v: 4
+v: 5
 
 |======|
 cde97106b07ef39f2c7606bd196c6099fda2b3f2:

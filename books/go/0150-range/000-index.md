@@ -4,6 +4,16 @@ Id: 106
 SOId: 80100076
 ---
 
-Basics of `range`:
+Basics of `range`.
 
-@file index.go output sha1:f342312a6f390408821c56e9be17f77e7a95aefa goplayground:RxpKbQjhB71
+Iterate over a string:
+
+@file range_string.go output
+
+Iterate over a slice:
+
+@file range_slice.go output
+
+Iterage over a map:
+
+@file range_map.go output
