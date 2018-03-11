@@ -8,13 +8,13 @@ SOId: 801000d6
 
 You can iterate over bytes in a string:
 
-@file range_string_bytes.go output
+@file range_string_bytes.go output sha1:95d6eafff1b3286e727ff66e2a5f4ebc0bc122e5 goplayground:GHTXV2IEWlX
 
 ## Iterate over runes
 
 Things are more complicated when you want to iterate over logical characters (runes) in a string:
 
-@file range_string.go output
+@file range_string.go output sha1:6a5fed91b2214daf5e7b76e226739c6081dfe08a goplayground:_PI-Fl1PS9z
 
 In Go strings are immutable sequence of bytes. Think a read-only `[]byte` slice.
 
