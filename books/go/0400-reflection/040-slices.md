@@ -1,25 +1,14 @@
 ---
-Title: Slices
+Title: Slice
 Id: 228
 Score: 0
 SOId: 6072
 ---
-```go
-import "reflect"
 
-s := []int{1, 2, 3}
+## Read a slice using reflection
 
-value := reflect.ValueOf(s)
+@file slice.go output sha1:28825128619df9583742e948032209db8ce8f1c3 goplayground:m2o1gQMmAFD
 
-value.Len()                // 3
-value.Index(0).Interface() // 1
-value.Type().Kind()        // reflect.Slice
-value.Type().Elem().Name() // int
+## Creating a new slice using reflection
 
-value.Index(1).CanAddr()   // true -- slice elements are addressable
-value.Index(1).CanSet()    // true -- and settable
-value.Index(1).Set(5)
-
-typ := reflect.SliceOf(reflect.TypeOf("example"))
-newS := reflect.MakeSlice(typ, 0, 10) // an empty []string{} with capacity 10
-```
+@file create_slice.go output sha1:a7b7352658e7647a8f121187275d47040cbc26bd goplayground:7CzMdhTL-dD

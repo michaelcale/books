@@ -3,6 +3,7 @@ Title: Primitive types
 Id: 225
 SOId: 6070
 ---
+
 Let's see what kind of operations we can do on primitive types like `int` or `string`.
 
 ## Get the type
@@ -24,6 +25,7 @@ Trying to get integer value from value of incompatible type (like `string`) will
 To avoid panic you can first check the type with `Kind()`.
 
 All methods for retrieving the value:
+
 * `Bool() bool`
 * `Int() int64`
 * `UInt() uint64`
@@ -44,6 +46,7 @@ Since `reflect.ValueOf()` creates a `reflect.Value` that represents a pointer to
 Trying to set value of incompatible type will panic.
 
 Methods that set values mirror those that read the values:
+
 * `SetBool(v bool)`
 * `SetInt(v int64)`
 * `SetUInt(v uint64)`

@@ -3,6 +3,7 @@ Title: reflect.Kind
 Id: 229
 SOId: rd6000hd
 ---
+
 Function `Kind()` on `reflect.Value` returns `reflect.Kind` type describing type of the value.
 
 Here are all possible values:

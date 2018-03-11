@@ -3,6 +3,7 @@ Title: Uses for reflection
 Id: 230
 SOId: 23400
 ---
+
 ## Serialization to JSON, XML, SQL, protobufs etc.
 
 Reflection makes it possible to implement generic JSON serialization/deserialization.
