@@ -251,6 +251,11 @@ intOp(2, 3) = 5
 intOp(2, 3) = 6
 
 |======|
+2cc2f8238bc7f32b3c710548bd4629edf9db8707:
+XML: <ShowCharData>str</ShowCharData>
+
+
+|======|
 31590acc21855e9bdf07f6110e7530335b61e349:
 i3: 0
 i3: 2
@@ -306,6 +311,11 @@ Got sqrt: 16
 sqrtWorker finished
 sqrtWorker started
 sqrtWorker finished
+
+|======|
+41c50d55c01d3422f4a9ac501717ce7619bb3263:
+XML: <ShowComment><!--comment--></ShowComment>
+
 
 |======|
 45a0940e7ae315dd74e55b91c35fcd4dfcf5fb9e:
@@ -415,6 +425,11 @@ n=10 is of type int
 3 * 4 = 12
 
 |======|
+565ba928a584f306e8bc4055874413307e087230:
+XML: <ShowInnerXML><s>&lt;foo&gt;&lt;/foo&gt;</s><foo></foo></ShowInnerXML>
+
+
+|======|
 57a5fd323648d2d2646e6812c008c1fc07ee244b:
 <nil>: null
 int: 5
@@ -500,6 +515,11 @@ main.Address{City:"San Francisco", State:"CA"}
 main.Address{City:"Austin", State:"TX"}
 
 |======|
+6d1a83c5b36b075cc9db376bd3ef38d66678616b:
+XML: <data><n>5</n></data>
+
+
+|======|
 6f3f79d1476bc43e2f39545fdf1568ad65af5826:
 Timed out before worker finished
 
@@ -564,6 +584,11 @@ Response status code: 200, text:
   "origin": "24.5.174.236", 
   "url": "https://httpbin.org/put"
 }
+
+
+|======|
+8160c035c4f26e423017a1729ca5e4e3f4495182:
+XML: <ShowNesting><a><b><str>str</str></b></a></ShowNesting>
 
 
 |======|
@@ -909,6 +934,11 @@ c4cb0ff0e0cf28070bb008ef05f573d842a0ed36:
 didTimeout: true, err: signal: killed
 
 |======|
+c67e95f02eb8850e77bf2e2230fe854b91b9cda9:
+XML: <ShowOmit><name>John</name></ShowOmit>
+
+
+|======|
 c6c63f9f9651117620fbe5571702f08e04a6c1e4:
 f: 1.234100
 
@@ -1168,6 +1198,13 @@ Rune at byte position 3 is U+672C '本'
 Rune at byte position 6 is U+8A9E '語'
 
 |======|
+f84577116b5d022c08b86833f2a06800554c3636:
+Standard time JSON: <Event><What>earthquake</What><When>2018-03-10T22:52:18.820904-08:00</When></Event>
+
+Custom time XML: <Event2><What>earthquake</What><When>2018-10-03</When></Event2>
+Decoded custom time: 2018-10-03
+
+|======|
 f8a58521aaec782779c738559a8c640e41ab7b2a:
 n: 81
 n: 887
@@ -1188,8 +1225,23 @@ fa1d134788406e223925632843459dac66305b8b:
 6+12=18
 
 |======|
+fb61c1ff13d40b6bf99e74cb25d0623fe3d4737e:
+XML: <ShowAttr n="true"></ShowAttr>
+
+
+|======|
 fd3f29f8fbad04761c5e772209d01e5280acde64:
 base64: Af86zQ==
+
+|======|
+fe86296ff5706ebe1501d8367156230c4656d8d4:
+XML: <ShowOmitEmpty><NonEmpty>non empty</NonEmpty></ShowOmitEmpty>
+
+
+|======|
+fe9619237b53327901de45b00380e359ba73368a:
+XML: <ShowCData><![CDATA[cdata]]></ShowCData>
+
 
 |======|
 ffb6160c85a4ba422ec261d4abaafb38329122f4:

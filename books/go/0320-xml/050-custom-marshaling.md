@@ -15,7 +15,7 @@ For existing types we can define a new (but compatible) type.
 
 Here's a custom marshalling and unmarshaling for `time.Time` that only serializes year/month/date part:
 
-@file custom_marshal.go output
+@file custom_marshal.go output sha1:5cb8ceb6932fda1a702750ce8b2511aa1a308042 goplayground:_eobj4Tx_vS
 
 Notice that receiver type of `UnmashalXML` is a pointer to the type.
 
