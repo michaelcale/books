@@ -51,7 +51,7 @@ t2 := t.AddDate(years, months, days)
 
 ## Convert time to Unix representation of time
 
-For interopability with existing code you often need to use Unix time, which is defined as number of seconds since January 1, 1970 UTC.
+For interoperability with existing code you often need to use Unix time, which is defined as number of seconds since January 1, 1970 UTC.
 
 `unixTime := t.Unix()`
 
