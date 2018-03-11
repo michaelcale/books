@@ -366,6 +366,21 @@ with	escape charactersraw string literal
 	'
 
 |======|
+4921585d308811f1d58ad75d49db599bf6391d58:
+TrimSpace('  str  '): 'str'
+
+Trim('abacdda', 'ab'): 'cdd'
+
+TrimLeft('abacdda', 'ab'): 'cdda'
+
+TrimRight('abacdda', 'ab'): 'abacdd'
+
+TrimSuffix('abacdda', 'ab'): 'abacdda'
+
+TrimPrefix('abacdda', 'ab'): 'acdda'
+
+
+|======|
 4a679e52b4f1347d5b26a1bdbf86f8051bedc970:
 v is of type 'string'
 v is of type 'int'
@@ -475,6 +490,11 @@ s: 'Hello World'
 2 + 3.000000 = 5
 
 |======|
+6537a720d57200eede9d917d95b4dc7757c54cef:
+a: []string{"this", "is", "a", "string"}
+s2: "this,is,a,string"
+
+|======|
 65b721a57a0c1c0d0116bea11925e08a8a846786:
 Output:
 go version go1.10 darwin/amd64
@@ -502,6 +522,14 @@ sqrt of -16.000000 returned error 'invalid argument '-16.000000', must be >= 0'
 |======|
 684d575766ae8cc52403b5f89c7983c2dc050066:
 File read_lines.go has 40 lines
+
+|======|
+6b5e187c87f9686d35f94900559ff4f86d73688f:
+strconv.Atoi('234'): 234
+strconv.Atoi() failed with: 'strconv.Atoi: parsing "not a number": invalid syntax'
+strconv.ParseInt('234', 64): 234
+strconv.ParseFloat('-3.234', 64): -3.234
+fmt.Sscanf(): -3.234
 
 |======|
 6c02445110a9eab889149819fd3722f5a0d4feb6:
@@ -599,6 +627,12 @@ There are 32 lines in 'read_file_as_lines.go'
 8658f09506fe5122efcbac642e2cce8dcb4b1054:
 Called longMathOp() with 200ms timeout. res; 4955, err: <nil>
 Called longMathOp() with 10ms timeout. res: 0, err: context deadline exceeded
+
+|======|
+881d5f8bf50e454b08eedf65c7fb2568ea64bd4c:
+ToLower(s): 'mixed case'
+ToUpper(s): 'MIXED CASE'
+ToTitle(s): 'MIXED CASE'
 
 |======|
 8b25b88d5aa670effe9d3638f7b29aa77fb95fad:
@@ -970,6 +1004,10 @@ cde97106b07ef39f2c7606bd196c6099fda2b3f2:
 (*p).Bar is 0
 (*p).Bar is 0
 (*p).Bar is 0
+
+|======|
+d126733259bde546087a67d1dcdf1380f619b288:
+s2: 'replaced string replaced'
 
 |======|
 d34829e9206538637670821f915965ed806c180a:
