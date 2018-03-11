@@ -4,9 +4,8 @@ Id: 116
 SOId: 801000g3
 ---
 
-Functions are first-class values in Go.
+Functions are first-class values in Go:
 
-That means:
 * they can be assigned to variables
 * they can be passed as values to functions
 
@@ -25,6 +24,7 @@ During tests a variable points to a function that mocks the functionality.
 @file function_variable2.go output sha1:51cf7bb8e0522a64b1065499f54add242dbe906a goplayground:Da9-TKksC1t
 
 Common uses of passing functions:
+
 * [filepath.Walk](https://golang.org/pkg/path/filepath/#Walk) takes a callback function to be called for every file found
 * [ast.Inspect](https://golang.org/pkg/go/ast/#Inspect) traverses a tree and calls a function for each node
 
