@@ -133,7 +133,7 @@ func handleFileChange(path string) {
 		clearErrors()
 		unloadTemplates() // for reloading of templates from disk
 		if localRegenAllBooks {
-			genAllBooks()
+			genAllBooks(false)
 		} else {
 			genSelectedBooks(localBooksToRegen)
 		}
