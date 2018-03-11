@@ -39,7 +39,7 @@ type Writer interface {
 }
 ```
 
-`io.Writer` is for writing to a sequential streawm of bytes.
+`io.Writer` is for writing to a sequential stream of bytes.
 
 `Write` writes bytes in `p` and returns number of written bytes and an error.
 
@@ -53,7 +53,7 @@ type Closer interface {
 }
 ```
 
-`Closer` describes streams that msut be explicitly closed.
+`Closer` describes streams that must be explicitly closed.
 
 `Close` returns an error because it's required in some real-world cases. For example, when doing buffered writes to a file, `Close` might need to flush remaining buffered data to a file, which might fail.
 
@@ -71,7 +71,7 @@ type ReaderAt interface {
 
 This is possible in files but not in network connections.
 
-## `io.WriterAT`
+## `io.WriterAt`
 
 ```go
 type WriterAt interface {
