@@ -766,6 +766,14 @@ pre.chroma {
   color: black;
 }
 
+/* when #toc is hovered on with mouse, increase the contrast
+   of link color.
+   TODO: not sure about this, flickers when going to another page.
+*/
+#toc:hover .toc-link {
+  color: black;
+}
+
 /*
 Source higligh from chroma https://github.com/alecthomas/chroma
 */

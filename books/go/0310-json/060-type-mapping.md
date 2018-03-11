@@ -1,5 +1,5 @@
 ---
-Title: Go <-> JSON type mappings
+Title: Go to JSON type mappings
 Id: 188
 SOId: g32600tb
 ---
