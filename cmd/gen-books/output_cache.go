@@ -14,7 +14,7 @@ import (
 	"github.com/kjk/u"
 )
 
-const maxOutputFileSize = 1024 * 1024 // 1 MB
+const maxOutputFileSize = 1024 * 128 // 128 kB
 const cachedOutputDir = "cached_output"
 
 type cachedOutputFile struct {
