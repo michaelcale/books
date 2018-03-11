@@ -6,11 +6,11 @@ SOId: 5eq100s7
 
 ## Split a string using `strings.Split`
 
-TODO: write me
+<!-- TODO: write me -->
 
 ## Join a string using `strings.Join`
 
-TODO: write me
+<!-- TODO: write me -->
 
 * [`strings.Split`](https://golang.org/pkg/strings/#Split)
 

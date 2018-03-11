@@ -3,7 +3,8 @@ Title: CSV
 Id: 191
 SOId: 5818
 ---
-Package [`encoding/csv`](https://golang.org/pkg/encoding/csv/) in Go standard library provides functionality for reading and writing CSV files.
+
+Package [`encoding/csv`](https://golang.org/pkg/encoding/csv/) in standard library provides functionality for reading and writing CSV files.
 
 ## Reading records from CSV file
 
@@ -22,6 +23,7 @@ Returning `io.EOF` as an error siginifies successfully reaching end of file.
 ## Reading all records from CSV file
 
 Instead of calling `Read()` in a loop, we could read all records in one call:
+
 ```go
 r := csv.NewReader(f)
 records, err := r.ReadAll()
@@ -46,7 +48,7 @@ Error handling here is not trivial.
 
 We need to remember to `Flush()` at the end of writing, check if `Flush()` failed with `Error()` and also check that `Close()` didn't fail.
 
-The need to check `Close()` errors is why we didn't use a simpler `defer f.Close()`. Correctness and robustness sometimes require more  code.
+The need to check `Close()` errors is why we didn't use a simpler `defer f.Close()`. Correctness and robustness sometimes require more code.
 
 Nalues that had `,` in them were quoted because comman is used as field separator.
 

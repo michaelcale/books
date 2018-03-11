@@ -5,7 +5,7 @@ Id: 44
 SOId: 5eq100da
 ---
 
-TODO:
+<!-- TODO: write me -->
 
 * [`strings.TrimSpace`](https://golang.org/pkg/strings/#TrimSpace)
 

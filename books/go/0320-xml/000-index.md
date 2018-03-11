@@ -1,54 +1,65 @@
 ---
 Title: XML
 Id: 189
-SOId: 1846
 ---
-Package [`encoding/xml`](https://godoc.org/encoding/xml) in Go standard library provides functionality for serializing data as XML and parsing XML.
+
+Package [`encoding/xml`](https://godoc.org/encoding/xml) in standard library provides functionality for serializing data as XML and parsing XML.
+
+## Parse XML into a struct
+
+Parsing XML is similar to parsing JSON. You define structures that map to the structure of XML and unmarshal from `[]byte` slice or `io.Reader` into a struct.
+
+@file unmarshal_simple.go output sha1:32254e64f0145fbc199c82613444ac313a54beae goplayground:1nB6hJ_EuU2
+
+Unlike with serializing, when unmarshalling into a struct, we must pass a pointer to struct. Otherwise `xml.Unmarshal` will receive and modify a copy of the struct, not the struct itself. The copy will be then discarded after returning from `xml.Unmarshal`.
+
+In XML a value can be represented as element (`<state>CA</state>`) or attribute (`<person age="34">`).
+
+In xml struct tags element is the default. To switch to attribute, add `,attr` to struct xml tag as done for `Age`.
+
+All struct fields are optional. When not present in XML text their values will be untouched. When decoding into newly initialized struct their value will be zero value for a given type.
+
+Field `City` shows that XML decoder can automatically decode into a pointer to a value.
+
+This is useful when you need to know if a value was present in XML or not. If we used `string` for `City` field, we wouldn't know if empty string means:
+
+* `city` element was not present in XML
+* element was present but had empty value (`<city></city>`)
+
+By using a pointer to a string we know that `nil` means there was no value.
 
 ## Serialize a struct as XML
 
-@file index.go output sha1:b79884448d22013646eb2c6a46097d188c9ac10c goplayground:Klo84laKIF0
+@file marshal_simple.go output sha1:399c70c8b4462adfef0eb8cdf0a52fe7c2c1e43c goplayground:U3BoXM0mqnI
 
 Both `xml.Marshal` and `xml.MarshalIndent` take [`interface{}`](94) as first argument. We can pass any Go value and it'll be wrapped into `interface{}` with their type.
 
-Marshaller will use reflection to to inspect passed value and encode it as XML strings.
+Marshaller will use [reflection](1854) to inspect passed value and encode it as XML strings.
 
 When serializing structs, only exported fields (whose names start with capital letter) are serialized / deserialized.
 
-In our example, `fullName` is not serialized.
+In our example, `noteSerialized` is not serialized.
 
-Structs are serialized as XML elements. By default element names are the same as struct field names.
+Structs are serialized as XML elements.
 
-Struct field `Name` is serialized under dictionary key `Name`.
+Simple types can be serialized as XML elements or attributes (`Age` field in `Person` struct)
+
+By default name of element / attribute is the same as name of the field.
 
 We can provide custom mappings with struct tags.
 
-We can attach arbitrary struct tags string to struct fields.
+`xml:"city"` tells XML encoder to use name `city` for field `City`.
 
-`xml:"age"` instructs XML encoder / decoder to use name `age` for element name representing field `Age`.
-
-When serializing structs, passing the value and a pointer to it generates the same result.
+When serializing structs, passing the value or a pointer to `xml.Marshal` generates the same result.
 
 Passing a pointer is more efficient becase passing by value creates unnecessary copy.
 
-`xml.MarshallIndent` allows for pretty-printing of nested structures. It's less efficient but the result is easier for humans to read.
+`xml.MarshallIndent` allows for pretty-printing of nested structures. The result takes up more space but is easier to read.
 
-## Parse XML into a Go struct
+`XMLName` allows to control the name of top-level element. In our example, without providing XML element, the data would be serialized based on the struct name:
 
-@file index2.go output sha1:e08744bc021e4d568e1e7ffe83533b4b292039cf goplayground:6TeIISoehvE
-
-Parsing is the opposite of serializing.
-
-Unlike with serializing, when parsing into structs, we must pass a pointer to struct. Otherwise `xml.Unmarshal` will receive and modify a copy of the struct, not the struct itself. The copy will be then discarded after returning from `xml.Unmarshal`.
-
-Notice that XML element `city` was decoded into `City` struct field even though the names don't match and we didn't provide explicit mapping with `xml` struct tag.
-
-That happened because XML decoder has a little bit of smarts when matching dictionary key names to struct field names. It's best to not rely on such smarts and define mappings explicitly.
-
-All struct fields are optional and when not present in XML text their values will be untouched. When decoding into newly initialized struct their value will be zero value for a given type.
-
-Field `Name` shows that XML decoder can also automatically decode into a pointer to a value.
-
-This is useful when you need to know if a value was present in XML or not. If we used `string` for `Name`, we wouldn't know if value of empty string means that XML had `name` key with empty string as a value or is it because the value wasn't there at all.
-
-By using a pointer to a string we know that `nil` means there was no value.
+```xml
+<People>
+    ....
+</People>
+```

@@ -3,13 +3,14 @@ Title: YAML
 Id: 193
 SOId: 2503
 ---
+
 [YAML](http://yaml.org/) is a popular format for serializing data in a human friendly format. Think JSON but easier to read.
 
 Thanks to its expressivness and readability, YAML is popular as a format for configuration files.
 
 It's also used in more complex scenarios like driving [Ansible](https://www.ansible.com/) server automation.
 
-There is no package in Go standard library for hanlding YAML format but there are community libraries including [gopkg.in/yaml.v2](http://gopkg.in/yaml.v2).
+There is no package in standard library for hanlding YAML format but there are community libraries including [gopkg.in/yaml.v2](http://gopkg.in/yaml.v2).
 
 ## Reading YAML file into a Go struct
 
@@ -31,7 +32,7 @@ It's best to create explicit mappings using `yaml` struct tags. I only omitted t
 
 `yaml.Marshal` takes interface{} as an argument. You can pass any Go value, it’ll be wrapped into interface{} with their type.
 
-Marshaller will use reflection to to inspect passed value and encode it as YAML strings.
+Marshaller will use reflection to inspect passed value and encode it as YAML strings.
 
 When serializing structs, only exported fields (whose names start with capital letter) are serialized / deserialized.
 

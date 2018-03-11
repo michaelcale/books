@@ -4,7 +4,7 @@ Id: 199
 SOId: 1422
 ---
 
-Package [`net/http`](https://golang.org/pkg/net/http/) in Go standard library provides functionality to make HTTP network requests.
+Package [`net/http`](https://golang.org/pkg/net/http/) in standard library provides functionality to make HTTP network requests.
 
 In the examples we use [httpbin.org](http://httpbin.org/) which is a clever service that can return specific HTTP responses, which is useful for demonstrating various aspects of HTTP protocol.
 
@@ -19,6 +19,7 @@ This shows how to make HTTP GET request for a URL (HTML page in this case).
 I use `uri` as variable name because there is `net/url` package which means using more natural `url` will lead to naming conflicts when importing `net/url` in the same file.
 
 When there is no error, `http.Get()` returns `*http.Response` with notable fields:
+
 * `Body` is `io.Reader` containing content of the response. If the URL was HTML page, this is HTML data. If the URL was PNG image, this is PNG data
 * `StatusCode` is an `int` describing HTTP status code. 200 means OK. 404 means Not Found etc.
 * `Header` contains response headers. Its type is `map[string][]string` because per HTTP spec it's ok to have multiple headers with the same name
@@ -54,4 +55,3 @@ In this example we send raw text. Most of the time the server expects body to be
 ## Basic HTTP HEAD
 
 Like HTTP GET but use `http.Client.Head(uri string)` method.
-

@@ -4,7 +4,7 @@ Id: 154
 SOId: 80100042
 ---
 
-In order to to import a package in your program you must first download the package locally.
+In order to import a package in your program you must first download the package locally.
 
 `go get -u github.com/gomarkdown/markdown` downloads package files from https://github.com/gomarkdown/markdown/.
 

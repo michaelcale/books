@@ -13,4 +13,4 @@ A [zero value](29) of a pointer is `nil`.
 
 Once these functions are defined, you can do the following:
 
-@file basic_pointers2.go output sha1:1cbdd11710c2a36136fa34fb32b5e3a6c9165fc2 goplayground:KBmkLD8MbUZ
+@file basic_pointers2.go output sha1:adb61e2f5b1f3f924d4762d16e029ed5b1cab40f goplayground:OvIG3y4sPaM

@@ -13,4 +13,4 @@ SOId: 5eq1005a
 
       fmt.Println(strings.ToUpper("foobar")) // FOOBAR
 
-# TODO: write examples
+<!-- TODO: write examples -->

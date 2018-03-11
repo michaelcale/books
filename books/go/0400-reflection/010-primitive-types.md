@@ -7,13 +7,13 @@ Let's see what kind of operations we can do on primitive types like `int` or `st
 
 ## Get the type
 
-@file get_type.go output
+@file get_type.go output sha1:23f2449e0fa7db2890118c495f1d112f8fb35e18 goplayground:E6qpfwZiTEr
 
 In real code you would handle [all the types](229) you care about.
 
 ## Get the value
 
-@file get_value.go output allow_error
+@file get_value.go output allow_error sha1:aebd85272f71d9d6bcbadfca98feb0e7b4cd7ba3 goplayground:KuRi0TBk_5x
 
 To minimize API surface, `Int()` returns `int64` and works on all signed integer values (`int8`, `int16`, `int32`, `int64`).
 
@@ -33,7 +33,7 @@ All methods for retrieving the value:
 
 ## Set the value
 
-@file set_value.go output
+@file set_value.go output sha1:ee2ad75af1ab400651f45ac566b99429e822781c goplayground:O50qUNYUkJ0
 
 As `setInt` and `setStructField` show, you can only change values if you start with a pointer to the value.
 

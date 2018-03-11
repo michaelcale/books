@@ -3,7 +3,8 @@ Title: JSON
 Id: 182
 SOId: 994
 ---
-Package [`encoding/json`]((https://godoc.org/encoding/xml)) in Go standard library provides functionality for serializing data as JSON and parsing JSON into data.
+
+Package [`encoding/json`](<(https://godoc.org/encoding/xml)>) in standard library provides functionality for serializing data as JSON and parsing JSON into data.
 
 ## Serialize a struct as JSON
 
@@ -11,7 +12,7 @@ Package [`encoding/json`]((https://godoc.org/encoding/xml)) in Go standard libra
 
 Both `json.Marshal` and `json.MarshalIndent` take [`interface{}`](94) as first argument. We can pass any Go value, it'll be wrapped into `interface{}` with their type.
 
-Marshaller will use reflection to to inspect passed value and encode it as JSON strings.
+Marshaller will use reflection to inspect passed value and encode it as JSON strings.
 
 When serializing structs, only exported fields (whose names start with capital letter) are serialized / deserialized.
 
@@ -31,7 +32,7 @@ When serializing structs, passing the value and a pointer to it generates the sa
 
 Passing a pointer is more efficient becase passing by value creates unnecessary copy.
 
-`json.MarshallIndent` allows for pretty-printing of nested structures. It's less efficient but the result is easier for humans to read.
+`json.MarshallIndent` allows for pretty-printing of nested structures. The result takes up more space but is easier to read.
 
 ## Parse JSON into a struct
 
@@ -55,13 +56,13 @@ By using a pointer to a string we know that `nil` means there was no value.
 
 ## Go to JSON type mapping
 
-| JSON Type | Go Concrete Type |
-| ------ | ------ |
-| boolean   | bool   |
-| numbers   | float64 or int   |
-| string   | string   |
-| array | slice |
-| dictionary | struct |
-| null   | nil   |
+| JSON Type  | Go Concrete Type |
+| ---------- | ---------------- |
+| boolean    | bool             |
+| numbers    | float64 or int   |
+| string     | string           |
+| array      | slice            |
+| dictionary | struct           |
+| null       | nil              |
 
 See more in [type mappings](188).

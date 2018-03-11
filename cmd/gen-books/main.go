@@ -206,7 +206,7 @@ func genSelectedBooks(bookDirs []string) {
 	fmt.Printf("Used %d procs, finished generating all books in %s\n", getAlmostMaxProcs(), time.Since(timeStart))
 }
 
-func genAllBooks() {
+func genAllBooks(udpateOutputCache bool) {
 	timeStart := time.Now()
 	clearSitemapURLS()
 	copyCoversMust()
@@ -238,7 +238,9 @@ func genAllBooks() {
 		genBook(book)
 	}
 	writeSitemap()
-	saveCachedOutputFiles()
+	if udpateOutputCache {
+		saveCachedOutputFiles()
+	}
 	fmt.Printf("Used %d procs, finished generating all books in %s\n", nProcs, time.Since(timeStart))
 }
 
@@ -360,15 +362,14 @@ func main() {
 
 	cacheFilesInDir("books")
 
-	if flgUpdateOutput || flgRecreateOutput {
+	if flgUpdateOutput {
 		gitRemoveCachedOutputFiles()
 	}
 
 	clearErrors()
-	genAllBooks()
+	genAllBooks(flgUpdateOutput)
 	printAndClearErrors()
-
-	if flgUpdateOutput || flgRecreateOutput {
+	if flgUpdateOutput {
 		gitAddachedOutputFiles()
 		return
 	}

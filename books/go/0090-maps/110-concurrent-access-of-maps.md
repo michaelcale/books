@@ -7,6 +7,6 @@ Maps in Go are not safe for concurrency. You must take a lock to read and write 
 
 @file concurrent_access.go sha1:41dc31b1fd554d4350995ef33153ac361a7085e8 goplayground:wetl0PWoZk_V
 
-TODO: write a better example
+<!-- TODO: write a better example -->
 
-TODO: talk about sync.Map
+<!-- TODO: talk about sync.Map -->
