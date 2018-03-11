@@ -8,6 +8,17 @@ key: jane, value: 29
 key: mark, value: 11
 
 |======|
+06091337ccb856b56117d5464cf4c7f5c34ddd09:
+len(a): 3
+cap(a): 3
+slice kind: 'slice'
+element type: 'int'
+a[0]: 3
+elRef.CanAddr(): true
+elRef.CanSet(): true
+a: [3 5 8]
+
+|======|
 073b9baaf272070a3b24f8df5f3239c52f7d12ec:
 total tasks         : 32
 max concurrent tasks: 4
@@ -513,6 +524,10 @@ main.panicOnInvalidConversion()
 main.main()
 	/books/go/0120-empty-interface/type_assertion.go:39 +0xb8
 exit status 2
+
+|======|
+67458b763690a505b93fe52fa7e816e116eba2e3:
+a: []string{"foo"}
 
 |======|
 6830fa384e4bc53e7dcc4c7e54ada32b4e36550e:
