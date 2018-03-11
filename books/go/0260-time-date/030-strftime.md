@@ -56,4 +56,4 @@ but they both are cgo-wrappers around C libraries, which makes them more finicky
 |%X|Locale’s appropriate time representation.|07:06:05|
 |%%|A literal '%' character.|%|
 
-You can also use http://www.strfti.me/ service to help you build `strfrtime` formatting strings.
+You can also use http://www.strfti.me/ service to help you build `strftime` formatting strings.
