@@ -39,6 +39,12 @@ Ater if
 inside if
 
 |======|
+0aeaaa7a4428d9980224b32758344e3364ebece1:
+Student: John Doe, standard: 4
+Student: Peter Parker, standard: 11
+Student: Bilbo Baggins, standard: 150
+
+|======|
 0b54f42e82271ce3b342ef79977c3b409f899360:
 u: main.User{FirstName:"", LastName:"", Email:"", Age:0, userID:0}
 
@@ -489,6 +495,11 @@ PrintFullNamePointer: p is            0xc42000a080
 PrintFullNameValue:   address of p is 0xc42000a0a0
 
 |======|
+6cdc62c2097f6087f155f6850bcffbcea7405a88:
+main.Address{City:"San Francisco", State:"CA"}
+main.Address{City:"Austin", State:"TX"}
+
+|======|
 6f3f79d1476bc43e2f39545fdf1568ad65af5826:
 Timed out before worker finished
 
@@ -606,6 +617,11 @@ idx: 2,rune: 114
 94bfa695491c01ceebb6c5f31d2f23e8ebe697ab:
 2018/03/09 00:42:40 http.Get() failed with 'Get https://httpbin.org/delay/3: net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)'
 exit status 1
+
+|======|
+94e0dc3fff4d98a7ec14a8d561467031891c89bb:
+&main.People{Person:[]main.Person{main.Person{Age:34, FirstName:"John", Address:main.Address{City:(*string)(0xc42000e3f0), State:"CA"}}, main.Person{Age:23, FirstName:"Julia", Address:main.Address{City:(*string)(nil), State:""}}}}
+
 
 |======|
 94fdd09bd90d60940999d1f69c2a3837667de0b5:
@@ -833,6 +849,18 @@ main.main()
 exit status 2
 
 |======|
+b584a977dccaccb64b580993978b353ccffc5135:
+main.People{Person:[]main.Person{main.Person{Age:34, FirstName:"John", Address:main.Address{City:(*string)(0xc42000e3f0), State:"CA"}}, main.Person{Age:23, FirstName:"Julia", Address:main.Address{City:(*string)(nil), State:""}}}}
+
+
+|======|
+b6f9d56719fb72f8d04baab4b8709dbb109f041d:
+Element: '<person>', attribute 'age' has value '34'
+City: San Francisco
+Comment:  sample comment 
+Element: '<person>', attribute 'age' has value '23'
+
+|======|
 b8ae995dc86d69cf3e306896be5387ae1610b236:
 PostForm() sent 'email=john%40gmail.com&name=John'. Response status code: 200
 
@@ -1004,6 +1032,21 @@ stmt ('if') is either 'if' or 'for'
 |======|
 e1ed65d07fa3f1fa3bbb910455a39dc13c1aa722:
 a is not equal to b
+
+|======|
+e2e154e779d52394609d70b5b09f8781222fe1be:
+Compact XML: <people><person age="34"><first-name>John</first-name><address><city>San Francisco</city><state>CA</state></address></person></people>
+
+Pretty printed XML:
+<people>
+  <person age="34">
+    <first-name>John</first-name>
+    <address>
+      <city>San Francisco</city>
+      <state>CA</state>
+    </address>
+  </person>
+</people>
 
 |======|
 e3b95c08d0a1c4e247e8e7b593b99aa366a50c31:
