@@ -34,7 +34,7 @@ By using a pointer to a string we know that `nil` means there was no value.
 
 Both `xml.Marshal` and `xml.MarshalIndent` take [`interface{}`](94) as first argument. We can pass any Go value and it'll be wrapped into `interface{}` with their type.
 
-Marshaller will use [reflection](1854) to inspect passed value and encode it as XML strings.
+Marshaller will use [reflection](224) to inspect passed value and encode it as XML strings.
 
 When serializing structs, only exported fields (whose names start with capital letter) are serialized / deserialized.
 

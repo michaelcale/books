@@ -1,17 +1,8 @@
 ---
-Title: Configuring JSON struct fields
+Title: Configuring JSON serialization
 Id: 186
-Score: 1
 SOId: 14157
 ---
-Consider the following example:
-
-```go
-type Company struct {
-    Name     string
-    Location string
-}
-```
 
 ## Hide/skip certain fields
 
@@ -36,4 +27,3 @@ type Company struct {
     Location string `json:"location,omitempty"`
 }
 ```
-

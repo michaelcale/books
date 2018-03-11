@@ -6,14 +6,14 @@ SOId: g32600tb
 
 This is the mapping between Go types and JSON types:
 
-| JSON Type | Go Concrete Type |
-| ------ | ------ |
-| boolean   | bool   |
-| numbers   | float64 or int   |
-| string   | string   |
-| array | slice |
-| dictionary | struct |
-| null   | nil   |
+| JSON Type  | Go Concrete Type |
+| ---------- | ---------------- |
+| boolean    | bool             |
+| numbers    | float64 or int   |
+| string     | string           |
+| array      | slice            |
+| dictionary | struct           |
+| null       | nil              |
 
 Here's how they look in practice:
 

@@ -39,7 +39,7 @@ However, since `uuid` in not exported, the `json.Marshal()` skips it.
 
 To marshal private fields without making them public we can use a custom marshaller:
 
-@file marshal_private.go output sha1:aaae4444a438ff81e36995959a675309c03890b2 goplayground:JLd2aY-_5sh
+@file marshal_private.go output sha1:aaae4444a438ff81e36995959a675309c03890b2 goplayground:JLd2aY-\_5sh
 
 ## Custom marshaling behind the scenes
 
