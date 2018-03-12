@@ -317,6 +317,11 @@ http.Post() returned statuts code 200, truncated text:
 Hex: 01ff3acd
 
 |======|
+37413d7dc72c256f5c59e5cd0fbe11066bffbe31:
+Data from a field: '5'
+Data from a method: 'data from a method'
+
+|======|
 37d9fe5f880349cad833e011cd1e77d20910fa37:
 p: { }
 
@@ -520,6 +525,12 @@ exit status 1
 inverse(5)=0.20
 
 |======|
+5bf39be46c7a2cf6e76be6da14aaa95a0734d92d:
+<div onlick="foo"><span>text</span></div>
+
+<div onlick="&#34;foo&#34;">&lt;span&gt;text&lt;/span&gt;</div>
+
+|======|
 5cb70846efca52b5f27b52abf298286a78bb25e4:
 panic: interface conversion: interface {} is string, not int
 
@@ -533,6 +544,14 @@ exit status 2
 |======|
 5d3a28f0bd5321af8c01c888f81ea44ec0b9e75c:
 Hello!
+
+|======|
+5eccc67433128cc67aba3a9735a1df6c99e91a35:
+Escaped:
+<div onlick="&#34;foo&#34;">&lt;span&gt;text&lt;/span&gt;</div>
+
+Unescaped:
+<div onlick="foo"><span>text</span></div>
 
 |======|
 5f922567b55e3b1ffbf941fc013cc32500fa3201:
