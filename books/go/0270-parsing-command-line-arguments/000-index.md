@@ -8,7 +8,7 @@ Go standard library has a [`flag`](https://golang.org/pkg/flag/) package for par
 
 @file index.go output noplayground
 
-Output above is a result of calling `go run $file -echo echo-arg additiona arg`.
+Output above is a result of calling `go run $file -echo echo-arg additional arg`.
 
 ## Defining arguments
 
@@ -27,7 +27,7 @@ Command-line argument naming is different from POSIX standard of `--echo` or Win
 
 For boolean values you can say: `-help` (implicitly true), `-help=true` or `-help=false`.
 
-Saying `-help false` is not what you might expect. Flag `-help` is set to rue and `false` is considered an additional argument.
+Saying `-help false` is not what you might expect. Flag `-help` is set to `true` and `false` is considered an additional argument.
 
 ## Parsing and accessing remaining arguments
 
@@ -35,11 +35,11 @@ After parsing arguments, call `flag.Parse()`.
 
 Parsing can fail if:
 * unknown flag was given
-* a flag didn't parse based on their type (e.g. it was registred as int but the value was not a valid number)
+* a flag didn't parse based on their type (e.g. it was registered as int but the value was not a valid number)
 
-In case of failure, help text describing flags is shown and program exits wiht error code 2.
+In case of failure, help text describing flags is shown and program exits with error code 2.
 
-You can explicitly pring help text using `flag.Usage()`. This is often triggered by `-help` flag.
+You can explicitly print help text using `flag.Usage()`. This is often triggered by `-help` flag.
 
 Help text is based on usage text provided in `flag.IntVar` and others.
 
