@@ -2,10 +2,9 @@ package main
 
 import (
 	"fmt"
-	html_template "html/template"
+	"html/template"
 	"log"
 	"os"
-	text_template "text/template"
 )
 
 // :show start
@@ -16,28 +15,32 @@ const tmplStr = `<div onlick="{{ .JS }}">{{ .HTML }}</div>
 
 func main() {
 	// :show start
-	txt := text_template.Must(text_template.New("text").Parse(tmplStr))
 
-	html := html_template.Must(html_template.New("html").Parse(tmplStr))
+	html := template.Must(template.New("html").Parse(tmplStr))
 
 	data := struct {
 		JS   string
 		HTML string
-		URL  string
 	}{
 		JS:   `foo`,
 		HTML: `<span>text</span>`,
-		URL:  `http://www.programming-books.io`,
 	}
 
-	err := txt.Execute(os.Stdout, data)
+	fmt.Printf("Escaped:\n")
+	err := html.Execute(os.Stdout, data)
 	if err != nil {
 		log.Fatalf("t.Execute() failed with '%s'\n", err)
 	}
 
-	fmt.Println()
-
-	err = html.Execute(os.Stdout, data)
+	fmt.Printf("\nUnescaped:\n")
+	data2 := struct {
+		JS   template.JS
+		HTML template.HTML
+	}{
+		JS:   `foo`,
+		HTML: `<span>text</span>`,
+	}
+	err = html.Execute(os.Stdout, data2)
 	if err != nil {
 		log.Fatalf("t.Execute() failed with '%s'\n", err)
 	}
