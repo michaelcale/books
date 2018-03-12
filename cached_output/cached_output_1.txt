@@ -524,6 +524,10 @@ s: 'Hello World'
 2 + 3.000000 = 5
 
 |======|
+635fc598ea8b121254392572461806c27012ab83:
+Elements of a channel: 0 1 2 
+
+|======|
 6504f19d5f5b360731cb8c3a4e8c3e8896606688:
 element: 3
 element: 15
