@@ -85,6 +85,10 @@ main.main()
 exit status 2
 
 |======|
+0d6c2d06722c404f2bf485611486a30f2156c253:
+5 + 5 = 10
+
+|======|
 0eb59d7fcb7a0e57751071ae8cfa281441e03dc2:
 src: []int{1, 2, 3}
 dst: []int{1, 2, 3}
@@ -156,6 +160,12 @@ Response status code: 200, text:
   "user-agent": "Special Agent v 1.0.16"
 }
 
+
+|======|
+1b4d839dcc48bd6980c42b2afe4bc4e93253e926:
+Elements of map:
+five: 5
+one: 1
 
 |======|
 1b7ad5813d91b414240c7a276e5d3abf148040ae:
@@ -435,6 +445,12 @@ value of number3 is 3
 key 'number4' doesn't exist in map m
 
 |======|
+4cb1a94bd8955095f0f7bd48d21949ef54bf0ea3:
+<div onlick="foo"><span>text</span></div>
+
+<div onlick="&#34;foo&#34;">&lt;span&gt;text&lt;/span&gt;</div>
+
+|======|
 4d54bad263ca3e95f2325026984bd20a03d801dd:
 sum of string: string
 literal
@@ -517,6 +533,12 @@ exit status 2
 |======|
 5d3a28f0bd5321af8c01c888f81ea44ec0b9e75c:
 Hello!
+
+|======|
+5f922567b55e3b1ffbf941fc013cc32500fa3201:
+Slice[0]: first
+SliceNested[1][0]: 2
+Map["key"]: 5
 
 |======|
 6206bbcf7390faebc7c06a85b94c708618173e12:
@@ -1091,6 +1113,12 @@ key: three, value: 3
 key: five, value: 5
 
 |======|
+c6342fd97927f3a87b2e34a4afaf26befe628345:
+Or:  true
+And: false
+Not: true
+
+|======|
 c67e95f02eb8850e77bf2e2230fe854b91b9cda9:
 XML: <ShowOmit><name>John</name></ShowOmit>
 
@@ -1148,6 +1176,13 @@ d34829e9206538637670821f915965ed806c180a:
 value: 30
 value: 29
 value: 11
+
+|======|
+d3c0d6b6f10273f9f166eeb7b156db74f6b4a108:
+len(nil)       : 0
+len(emptySlice): 0
+len(slice)     : 3
+len(map)       : 2
 
 |======|
 d4182d9bf812096cda6d8036b3ce68f37e1d37cb:
@@ -1234,6 +1269,12 @@ stmt ('if') is either 'if' or 'for'
 |======|
 e1ed65d07fa3f1fa3bbb910455a39dc13c1aa722:
 a is not equal to b
+
+|======|
+e2d146f5cdbfec402f7161712fd4c8fc3f5691a5:
+js escape  : function me(s) { return \"foo\"; }
+html escape: &lt;div&gt;text&lt;/div&gt;
+url escape : http%3A%2F%2Fwww.programming-books.io
 
 |======|
 e2e154e779d52394609d70b5b09f8781222fe1be:
@@ -1400,6 +1441,13 @@ fa1d134788406e223925632843459dac66305b8b:
 fb61c1ff13d40b6bf99e74cb25d0623fe3d4737e:
 XML: <ShowAttr n="true"></ShowAttr>
 
+
+|======|
+fc7d45624d0e1d8e6a87fe7971db939e72169337:
+print:   str8
+println: str 8
+
+printf:  str "str" 8
 
 |======|
 fd3f29f8fbad04761c5e772209d01e5280acde64:
