@@ -3,6 +3,7 @@ Title: Context is a tree of values
 Id: 234
 SOId: 9229
 ---
+
 Context is created by wrapping existing immutable context and adding additional information.
 
 Since you can "branch" the same context multiple times, context value can be thought of as tree of values.

@@ -3,9 +3,11 @@ Title: Context
 Id: 231
 SOId: 2743
 ---
+
 Package `context` in standard library provides type `Context` which is hard to explain because it has multiple uses.
 
 Here are the most common uses of `context.Context`:
+
 * context with timeout (deadline) is a generic way to implement timeouts for functions that can possibly take a long time where we want an option to abort them if they exceed the timeout
 * context with cancellation is a generic way to cancel a goroutine
 * context with value is a way to associate arbitrary value with a context

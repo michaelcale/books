@@ -3,6 +3,7 @@ Title: Context with value
 Id: 232
 SOId: 9010008e
 ---
+
 In HTTP server each request is served by a handler function running in its own goroutine.
 
 We often want to have common per-requeste information available in a convenient way.
