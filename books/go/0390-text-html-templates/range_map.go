@@ -17,11 +17,11 @@ func main() {
 	// :show start
 	t := template.Must(template.New("range").Parse(tmplStr))
 
-	m := map[string]int{
+	data := map[string]int{
 		"one":  1,
 		"five": 5,
 	}
-	err := t.Execute(os.Stdout, m)
+	err := t.Execute(os.Stdout, data)
 	if err != nil {
 		log.Fatalf("t.Execute() failed with '%s'\n", err)
 	}

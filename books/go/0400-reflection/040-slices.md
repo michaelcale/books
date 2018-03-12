@@ -1,7 +1,6 @@
 ---
 Title: Slice
 Id: 228
-Score: 0
 SOId: 6072
 ---
 

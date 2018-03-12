@@ -11,7 +11,7 @@ Just as in Go, `range` can iterate over arrays, slices, maps and channels.
 
 ## Range over maps
 
-@file range_map.go output sha1:c12a7e173ef4975fafe7e52879aaf6c3d8f8c2ec goplayground:FaKKTaBP7yA
+@file range_map.go output sha1:4db00b9be6d5930157db14b84be8dcf61b859ff7 goplayground:XwwyoA2b-sD
 
 ## Range over channels
 
