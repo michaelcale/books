@@ -4,7 +4,8 @@ Search: flags
 Id: 171
 SOId: 4023
 ---
-Go standard library has a [`flag`](https://golang.org/pkg/flag/) package for parsing cmd-line arguments:
+
+Pacakge [`flag`](https://golang.org/pkg/flag/) in standard library is for parsing cmd-line arguments:
 
 @file index.go output noplayground
 
@@ -12,30 +13,41 @@ Output above is a result of calling `go run $file -echo echo-arg additional arg`
 
 ## Defining arguments
 
-You register cmd-line arguments to be recognized with `flag.IntVar(parsedValue *int, name string, defaultValue int, usage string)`.
+Let's say your program has an integer `-retries` option.
+
+You register such option with `flag` package using:
+
+```go
+var flgRetries int
+defaultRetries := 0
+usage := "retries specifies number of times to retry the operation"
+flag.IntVar(&flgRetries, "retries", defaultRetries, usage)
+```
 
 There are functions for other common types:
+
 * `flag.BoolVar`
 * `flag.DurationVar`
 * `flag.Float64Var`
 * `flag.IntVar`, `flag.UIntVar`, `flag.Int64Var`, `flag.UInt64Var`
 * `flag.StringVar`
 
-If you register string argument with name `echo`, the way to provide it on cmd-line is `-echo ${value}` or `-echo=${value}`.
+If you register int argument with name `retries`, the way to provide it on cmd-line is `-retries ${value}` or `-retries=${value}`.
 
-Command-line argument naming is different from POSIX standard of `--echo` or Windows standard of `/echo`.
+POSIX variant `--retries` or Windows variant `/retries` are **not** recognized.
 
 For boolean values you can say: `-help` (implicitly true), `-help=true` or `-help=false`.
 
-Saying `-help false` is not what you might expect. Flag `-help` is set to `true` and `false` is considered an additional argument.
+`-help false` is not a valid form for boolean variables.
 
 ## Parsing and accessing remaining arguments
 
 After parsing arguments, call `flag.Parse()`.
 
-Parsing can fail if:
-* unknown flag was given
-* a flag didn't parse based on their type (e.g. it was registered as int but the value was not a valid number)
+Parsing fails if:
+
+* unknown flag was given on command-line
+* a flag didn't parse based on its type (e.g. it was registered as int but the value was not a valid number)
 
 In case of failure, help text describing flags is shown and program exits with error code 2.
 
@@ -47,10 +59,13 @@ Command-line arguments that don't start with `-` are untouched and can be access
 
 ## Limitations
 
-The big features missing from `flag` package:
-* no support of POSIX style `--name`, only `-name`
-* no support for short alternatives e.g. `-n` being synonym with `--name`
+Features missing from `flag` package:
 
-Your options are:
-* [raw access to cmd-line arguments](172)
+* no support for POSIX style `--name`, only `-name` is supported
+* no support for short alternatives e.g. `-n` being synonym with `--name`
+* no suport for Windows style `/name`
+
+If you need those features, your options are:
+
+* access [raw cmd-line arguments](172)
 * use a [third party library](173)
