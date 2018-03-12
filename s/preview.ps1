@@ -6,12 +6,12 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 function exitIfFailed { if ($LASTEXITCODE -ne 0) { exit } }
 
-Remove-Item -Force -ErrorAction SilentlyContinue ./cmd/gen-books/gen-books.exe
+Remove-Item -Force -ErrorAction SilentlyContinue ./cmd/gen-books/preview.exe
 
 Set-Location -Path cmd/gen-books
-go build -o gen-books.exe
+go build -o preview.exe
 Set-Location -Path ../..
 exitIfFailed
 
-./cmd/gen-books/gen-books.exe -preview  -analytics UA-113489735-1 $args
-Remove-Item -Force -ErrorAction SilentlyContinue ./cmd/gen-books/gen-books.exe
+./cmd/gen-books/preview.exe -preview  -analytics UA-113489735-1 $args
+Remove-Item -Force -ErrorAction SilentlyContinue ./cmd/gen-books/preview.exe
