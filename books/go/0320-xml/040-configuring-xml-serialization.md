@@ -3,7 +3,7 @@ Title: Configuring XML parsing and serialization
 Id: 332
 ---
 
-The way a struct is serialized as XML can be mofified with struct tags.
+You can modify how a struct is serialized to XML by annotating fields with tags.
 
 By providing `XMLName`, this will be serialized as `<data>...</data>` and not `<ShowXMLName>..</ShowXMLName>`.
 
