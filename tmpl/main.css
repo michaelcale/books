@@ -696,6 +696,11 @@ pre.chroma {
   tab-size: 2;
   margin: 0px;
   padding: 0.5em;
+
+  /* mimicking font for code snippets in https://sourcegraph.com/github.com/essentialbooks/books/-/blob/books/go/0030-variables/blank_identifier_2.go */
+  font-family: SFMono-Regular,Consolas,Menlo,DejaVu Sans Mono,monospace;
+  font-size: 13px;
+  line-height: 16px;
 }
 
 .arrow {
