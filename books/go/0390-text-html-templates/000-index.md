@@ -10,7 +10,7 @@ Building that HTML string by building smaller strings and concatenating them wit
 
 Packages `text/template` and `html/template` in Go standard library make implement data-driven templates for generating textual output:
 
-@file index.go output
+@file index.go output sha1:d4e591de501a5dca88fc39e911809be7cf71b12e goplayground:MQw9e5pzs4V
 
 Each template has a name. `template.New("tweets")` creates an empty template with name `tweets`.
 
@@ -28,7 +28,7 @@ Current context `.` refers to current scope within the data.
 
 Initial `.` refers to top-level scope:
 
-@file index2.go output
+@file index2.go output sha1:f284d0e9f2084a5966d19449621389ff70556c2f goplayground:7D79SoM0g2t
 
 Values that don't have pre-defined formatting are printed using `Stringer` interface. For custom formatting of your type in a template implement `String() string` method.
 
