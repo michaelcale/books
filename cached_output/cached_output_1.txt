@@ -2,6 +2,13 @@
 'hey' is in greetings
 
 |======|
+04637ae2dbc73dcffb7a221171289a1569307c6b:
+User kjk has 124 tweets.
+Recent tweets:
+Tweet 0 of 2: 'hello'
+Tweet 1 of 2: 'there'
+Most recent tweet: 'hello'
+|======|
 054df6223c6765bbf594cade498ca06a94da4560:
 key: john, value: 30
 key: jane, value: 29
@@ -388,6 +395,11 @@ with	escape charactersraw string literal
 	'
 
 |======|
+48a0bc1548d7b460696ab464e70ebbcbb4a6ee9c:
+'Bridge' is not new
+'Electric battery' is new
+
+|======|
 4921585d308811f1d58ad75d49db599bf6391d58:
 TrimSpace('  str  '): 'str'
 
@@ -562,6 +574,12 @@ idx: 2
 File read_lines.go has 40 lines
 
 |======|
+684dedb4294e19f0229a96357d1ebb7e6524ce3b:
+Elements of map:
+five: 5
+one: 1
+
+|======|
 6b5e187c87f9686d35f94900559ff4f86d73688f:
 strconv.Atoi('234'): 234
 strconv.Atoi() failed with: 'strconv.Atoi: parsing "not a number": invalid syntax'
@@ -624,6 +642,21 @@ v: 4
 v: 5
 
 |======|
+7dd715118132b7e6970d1708c0286bedb7e7a0f9:
+bool false       is: false
+bool true        is: true
+integer 0        is: false
+integer 1        is: true
+float32 0        is: false
+float64 NaN      is: true
+empty string     is: false
+non-empty string is: true
+nil slice        is: false
+empty slice      is: false
+non-empty slice  is: true
+nil pointer      is: false
+
+|======|
 801d3da35f922113e507bc622e5aeb693a429ccb:
 Output:
 go version go1.10 darwin/amd64
@@ -666,6 +699,12 @@ XML: <ShowNesting><a><b><str>str</str></b></a></ShowNesting>
 |======|
 83139b79c1db6c3c00fa90847764a89ddf0011cd:
 There are 32 lines in 'read_file_as_lines.go'
+
+|======|
+85681709ab97dc5842ed9c85cda90bb7aa6d3df8:
+Data: 5
+Data: foo
+Data: {3 hello}
 
 |======|
 8658f09506fe5122efcbac642e2cce8dcb4b1054:
@@ -947,6 +986,14 @@ routine 8 finished
 main finished
 
 |======|
+b356e0b915964a1504f5a83b87095f46a297995e:
+User 'kjk' has no tweets.
+
+User 'masa' has 2 tweets:
+'tweet one'
+'tweet two'
+
+|======|
 b4aa364324a7f056bc1b577be84ae3cfdfe1ae5e:
 found 'is' at position 6
 found 'is' at position 17
@@ -1024,6 +1071,11 @@ c1730bbf7974132ed61326cc46a93bc14a2fc9dc:
 v: 5, pv: 0xc420016090
 v: 4
 pv: 0xc420016090, pv2: 0xc420016090
+
+|======|
+c2e309fb19cfee8d9ae94c885b5fee058cae7c16:
+Elements of arrays or slice: 3 8 
+Elements of arrays or slice: 12 5 
 
 |======|
 c4cb0ff0e0cf28070bb008ef05f573d842a0ed36:
