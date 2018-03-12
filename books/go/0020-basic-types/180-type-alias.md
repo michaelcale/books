@@ -3,6 +3,7 @@ Title: Type aliases
 Id: 30
 SOId: 901000v5
 ---
+
 Type aliases were introduced in Go 1.9 to make [code refactoring](https://talks.golang.org/2016/refactor.article) easier.
 
 Imagine you have package `foo` that exports type `Bar`.
@@ -21,6 +22,7 @@ type Bar = foo.Bar // Bar is now an alias of foo.Bar
 ```
 
 Now you can rename `foo.Bar` to `foo.NewBar` and update the alias:
+
 ```go
 import "foo"
 type Bar = foo.NewBar

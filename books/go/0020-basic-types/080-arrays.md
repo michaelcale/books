@@ -1,9 +1,9 @@
 ---
 Title: Arrays
-Search: array
 Id: 20
 SOId: rd60004c
 ---
+
 Arrays in Go have a fixed sized. They can't grow.
 
 They are used rarely. Instead in most cases we use [slices](21).

@@ -3,6 +3,7 @@ Title: Empty interface
 Id: 25
 SOId: 90100072
 ---
+
 Type `interface{}` is called an empty interface.
 
 By definition it's an [interface](24) with no methods defined.

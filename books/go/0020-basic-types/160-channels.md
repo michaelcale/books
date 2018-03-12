@@ -3,6 +3,7 @@ Title: Channels
 Id: 28
 SOId: 901000c2
 ---
+
 Channels are typed queues used for goroutines to communicate with each other in a thread-safe manner.
 
 Channel basics:

@@ -4,7 +4,9 @@ Search: char, rune
 Id: 16
 SOId: 9010002e
 ---
+
 Go has 2 types of characters:
+
 * `byte` is a 1 byte value, an alias for `uint8` type
 * `rune` is a 4 byte Unicode code-point, an alias for `int32` type
 

@@ -1,9 +1,9 @@
 ---
 Title: Strings
-Search: string
 Id: 17
 SOId: rd6000k1
 ---
+
 String in Go is an immutable sequence of bytes (8-bit `byte` values)
 
 This is different than languages like Python, C#, Java or Swift where strings are Unicode.

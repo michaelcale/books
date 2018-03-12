@@ -3,6 +3,7 @@ Title: Typed vs. untyped constants
 Id: 37
 SOId: 12431
 ---
+
 As explained in [type casting](31), Go doesn't perform implicit type casts between integer types.
 
 Untyped constants make using integer types easier:

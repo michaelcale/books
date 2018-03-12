@@ -3,6 +3,7 @@ Title: iota
 Id: 38
 SOId: 80100036
 ---
+
 `iota` makes it easy to declare number constants whose values grow.
 
 Basics:
@@ -10,7 +11,6 @@ Basics:
 @file iota.go output sha1:a8b1274df4bb37c5d29db536bbf026e89f600e17 goplayground:Hom7xSeu2_V
 
 `iota` sets the value of `Low` to 0 and instructs the compiler that the following constants have increasing numeric values.
-
 
 ## Creating bitmask values with `iota`
 

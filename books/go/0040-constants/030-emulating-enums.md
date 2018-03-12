@@ -3,9 +3,11 @@ Title: Emulating enums
 Id: 39
 SOId: 801000c4
 ---
+
 Go doesn't have a syntax for enumerations, but you can emulate it with constants and a naming scheme.
 
 Consider a C++ enum:
+
 ```c++
 enum {
     tagHtml,
@@ -15,6 +17,7 @@ enum {
 ```
 
 In Go you can do it as:
+
 ```go
 const (
     tagBody = iota,
@@ -28,6 +31,7 @@ const (
 In the above example `tagBody` etc. is an untyped constant so it can be assigned to any number type.
 
 We can define a unique type for our enum:
+
 ```go
 type HTMLTag int
 

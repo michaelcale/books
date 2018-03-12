@@ -1,9 +1,9 @@
 ---
 Title: Structures
-Search: struct
 Id: 23
 SOId: rd600098
 ---
+
 A structure groups multiple values into a single entity.
 
 Struct basics:

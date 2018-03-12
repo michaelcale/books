@@ -3,6 +3,7 @@ Title: Booleans
 Id: 13
 SOId: rd6000m1
 ---
+
 Value of type `bool` can be `true` or `false`.
 
 @file booleans.go output sha1:3cc52f4f2cc3707255c29911b5e9a9b60e1f11fd goplayground:DiDp-lzNhXg

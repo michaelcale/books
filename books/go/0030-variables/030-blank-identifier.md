@@ -3,6 +3,7 @@ Title: Blank identifier
 Id: 35
 SOId: 29103
 ---
+
 To help avoid mistakes, the Go compiler doesn't allow unused variables.
 
 However, there are some situations when you don't need to use a value stored in a variable.
@@ -18,4 +19,3 @@ A blank identifier can be assigned a value of any type, and is most commonly use
 **Using `range`**
 
 @file blank_identifier_2.go output sha1:13781d48412168b4f7f8fbb1c9c0b373bd023c36 goplayground:c9m512EHc2p
-

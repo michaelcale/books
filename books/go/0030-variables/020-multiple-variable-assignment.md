@@ -3,6 +3,7 @@ Title: Multiple variable assignment
 Id: 34
 SOId: 2193
 ---
+
 In Go, you can declare multiple variables at the same time.
 
 @file multiple_variable.go sha1:e22304502badf80b2dcf72114c23ce619fa3238e goplayground:jNBkiVxHYBw

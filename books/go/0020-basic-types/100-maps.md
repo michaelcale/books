@@ -4,6 +4,7 @@ Search: dictionary, dictionaries, hash table, hash tables
 Id: 22
 SOId: rd600050
 ---
+
 A map is a mapping from a value of one type to a value of another type.
 
 Other languages call them dictionaries (Python) or hash tables (C++).
@@ -15,5 +16,3 @@ Map basics:
 [Zero value](29) of map is nil.
 
 Learn more about [maps](68).
-
-
