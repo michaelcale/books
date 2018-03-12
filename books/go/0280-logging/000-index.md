@@ -5,7 +5,7 @@ SOId: 3724
 ---
 Logging is a very deep subject because different programs have different logging requirements.
 
-## Loging with `fmt.Printf` and `fmt.Fprintf`
+## Logging with `fmt.Printf` and `fmt.Fprintf`
 
 The simplest way to log is to write to standard output (stdout):
 
@@ -45,7 +45,7 @@ Log package allows changing where the log output is sent. We can log to a file:
 
 @file log_file.go sha1:0dd5e3acabedd5087ef46852fb9848cb76a8bb71 goplayground:thVsmxVof2c
 
-## Logging to
+## Logging to syslog
 
 When running on Unix, we might log to syslog:
 
