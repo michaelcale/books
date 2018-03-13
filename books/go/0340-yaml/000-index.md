@@ -50,4 +50,4 @@ We can attach arbitrary struct tags string to struct fields.
 
 When serializing structs, passing the value and a pointer to it generates the same result.
 
-Passing a pointer is more efficient becase passing by value creates unnecessary copy.
+Passing a pointer is more efficient because passing by value creates unnecessary copy.
