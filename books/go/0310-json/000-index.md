@@ -4,7 +4,7 @@ Id: 182
 SOId: 994
 ---
 
-Package [`encoding/json`](<(https://godoc.org/encoding/xml)>) in standard library provides functionality for serializing data as JSON and parsing JSON into data.
+Package [`encoding/json`](https://golang.org/pkg/encoding/json/) in standard library provides functionality for serializing data as JSON and parsing JSON into data.
 
 ## Serialize a struct as JSON
 
@@ -30,7 +30,7 @@ We can attach arbitrary struct tags string to struct fields.
 
 When serializing structs, passing the value and a pointer to it generates the same result.
 
-Passing a pointer is more efficient becase passing by value creates unnecessary copy.
+Passing a pointer is more efficient because passing by value creates unnecessary copy.
 
 `json.MarshallIndent` allows for pretty-printing of nested structures. The result takes up more space but is easier to read.
 
