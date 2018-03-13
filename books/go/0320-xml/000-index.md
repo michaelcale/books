@@ -52,7 +52,7 @@ We can provide custom mappings with struct tags.
 
 When serializing structs, passing the value or a pointer to `xml.Marshal` generates the same result.
 
-Passing a pointer is more efficient becase passing by value creates unnecessary copy.
+Passing a pointer is more efficient because passing by value creates unnecessary copy.
 
 `xml.MarshallIndent` allows for pretty-printing of nested structures. The result takes up more space but is easier to read.
 
