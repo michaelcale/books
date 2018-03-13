@@ -18,7 +18,7 @@ As per Go best practices, CSV reader operates on `io.Reader` interface, which al
 
 `Read()` method reads one CSV line at a time and returns `[]string` slice with all fields in that line and an error.
 
-Returning `io.EOF` as an error siginifies successfully reaching end of file.
+Returning `io.EOF` as an error signifies successfully reaching end of file.
 
 ## Reading all records from CSV file
 
