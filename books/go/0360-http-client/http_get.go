@@ -21,7 +21,7 @@ func main() {
 	defer resp.Body.Close()
 	d, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		log.Fatalf("ioutil.ReadAll() failed wiht '%s'\n", err)
+		log.Fatalf("ioutil.ReadAll() failed with '%s'\n", err)
 	}
 
 	contentType := resp.Header.Get("Content-Type")
