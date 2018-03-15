@@ -4,7 +4,7 @@ Id: 207
 Score: 13
 SOId: 2703
 ---
-The typical way to begin writing webservers in golang is to use the standard library `net/http` module.
+The typical way to begin writing webservers in Go is to use the standard library `net/http` module.
 
 There is also a tutorial for it [here](https://golang.org/doc/articles/wiki/).
 
