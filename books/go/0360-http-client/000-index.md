@@ -26,7 +26,7 @@ When there is no error, `http.Get()` returns `*http.Response` with notable field
 
 When no error is returned, it's important to `resp.Body.Close()` or you will leak resources.
 
-Trying to access page that doesn't exist on the server returns a response wiht `StatusCode` 404 (Not Found).
+Trying to access page that doesn't exist on the server returns a response with `StatusCode` 404 (Not Found).
 
 Trying to access non-existent host will fail, in which case response is `nil`.
 
