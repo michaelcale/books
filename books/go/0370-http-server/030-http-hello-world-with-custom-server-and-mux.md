@@ -5,7 +5,7 @@ Score: 4
 SOId: 2570
 ---
 ```go
-    package main
+package main
 
 import (
     "log"
