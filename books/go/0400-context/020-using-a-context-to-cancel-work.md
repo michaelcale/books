@@ -24,6 +24,6 @@ We can expect it to take ~100 ms.
 
 A `select` with `default` clause is non-blocking. If there's nothing in the `ctx.Done()` channel, we don't wait for values and immediately execute `default` part, which is where the logic of the program lives.
 
-We can see in our test that if timeout is greater that 100 ms, the function finishes.
+We can see in our test that if timeout is greater than 100 ms, the function finishes.
 
 If timeout is smaller than 100 ms, `ctx.Done()` channel is signalled, we detect it in `longMathOp` and return `ctx.Err()`.
