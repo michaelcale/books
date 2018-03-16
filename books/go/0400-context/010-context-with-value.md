@@ -6,7 +6,7 @@ SOId: 9010008e
 
 In HTTP server each request is served by a handler function running in its own goroutine.
 
-We often want to have common per-requeste information available in a convenient way.
+We often want to have common per-requested information available in a convenient way.
 
 For example, at the beginning of handling a request we might check a cookie to see if a request is made by a logged in user and we want to have user info available everywhere.
 
