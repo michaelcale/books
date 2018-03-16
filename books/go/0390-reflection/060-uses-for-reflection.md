@@ -8,7 +8,7 @@ SOId: 23400
 
 Reflection makes it possible to implement generic JSON serialization/deserialization.
 
-For generic JSON serialization we can enumerate fields of arbitrary structres, read their fields and create corresponding JSON string.
+For generic JSON serialization we can enumerate fields of arbitrary structures, read their fields and create corresponding JSON string.
 
 For generic JSON deserialization, we can enumerate fields of arbitrary structures and set them based on parsed JSON data.
 
