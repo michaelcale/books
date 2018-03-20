@@ -4,9 +4,9 @@ Id: 286
 Score: 0
 SOId: 27428
 ---
-the receiver of a method is usually a pointer for performance reason because we wouldn't make a copy of the instance, as it would be the case in value receiver, this is especially true if the receiver type is a struct. anoter reason to make the receiver type a pointer would be so we could modify the data the receiver points to.
+the receiver of a method is usually a pointer for performance reason because we wouldn't make a copy of the instance, as it would be the case in value receiver, this is especially true if the receiver type is a struct. another reason to make the receiver type a pointer would be so we could modify the data the receiver points to.
 
-a value receiver is used to avoid modification of the data the receiver contains, a vaule receiver may cause a performance hit if the receiver is a large struct.
+a value receiver is used to avoid modification of the data the receiver contains, a value receiver may cause a performance hit if the receiver is a large struct.
 
 ```go
 package main
