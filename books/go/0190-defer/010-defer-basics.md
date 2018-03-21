@@ -32,7 +32,7 @@ If a function has named return values, a deferred anonymous function within that
 
 @file defer_basics4.go output sha1:25e79d5067349dde1475059fac942d1e34977098 goplayground:FHb-GI09tOV
 
-Finally, a `defer` statement is generally used operations that often occur together. For example:
+Finally, a `defer` statement is generally used for operations that often occur together. For example:
 - open and close a file
 - connect and disconnect
 - lock and unlock a mutex
