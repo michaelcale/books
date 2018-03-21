@@ -27,5 +27,5 @@ Often you want to propagate error value up to the caller until a point in your c
 
 **You should always check for errors.**
 
-You can often see people asking on mailing lists or StackOverflow why their code doesn't and it would be obvious if the code didn't skip error checking.
+You can often see people asking on mailing lists or StackOverflow why their code doesn't work and it would be obvious if the code didn't skip error checking.
 
